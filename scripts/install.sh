@@ -6,8 +6,7 @@
 # Worqloads installation script for user's IT infrastructre
 # ####################################################
 
-# WQL_VERSION=VALUE WQL_API_KEY=2e3101f094a3fffa382444d645e4595e DD_SITE="datadoghq.eu" bash -c \
-# "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+# WQL_VERSION=VALUE WQL_API_KEY=XXX bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)"
 
 # Initialize variables
 app_folder="/app"
