@@ -894,11 +894,11 @@
 
       stopEC2s: function (ips, callback) {
           var self = this;
-          console.log('ips:', ips);
-          console.log('self.mappings_ip_id:', self.mappings_ip_id);
-          console.log('ids:', Object.keys(self.mappings_ip_id).filter(key_ip => ips.indexOf(key_ip) >= 0).map(key => self.mappings_ip_id(key)));
+          // console.log('ips:',ips)
+          // console.log('self.mappings_ip_id:',self.mappings_ip_id)
+          // console.log('ids:',Object.keys(self.mappings_ip_id).filter( (key_ip) => ips.indexOf(key_ip) >= 0 ).map( key => self.mappings_ip_id[key]))
           self.ec2.stopInstances({
-              InstanceIds: Object.keys(self.mappings_ip_id).filter(key_ip => ips.indexOf(key_ip) >= 0).map(key => self.mappings_ip_id(key))
+              InstanceIds: Object.keys(self.mappings_ip_id).filter(key_ip => ips.indexOf(key_ip) >= 0).map(key => self.mappings_ip_id[key])
           }, callback);
       },
 
@@ -1474,7 +1474,7 @@
           }
         }
         // send back the list instances for update by the scaler scheduler
-        queue_cb(null, res_all_instances);
+        queue_cb(null, { [job_data.system.syst_id]: res_all_instances });
       });
     },
 
@@ -1627,7 +1627,7 @@
               // Get list of instances and check system status
               function (cli_data, async_cb) {
                 // check if there is not a stop in progress for this instance
-                if (updated_system_instances[syst_id].filter(i => i.status == 2 && i.instancenr == alert.labels.sn).length == 0) {
+                if (updated_system_instances[syst_id] == undefined || updated_system_instances[syst_id].filter(i => i.status == 2 && i.instancenr == alert.labels.sn).length == 0) {
                   // Set instance in stop WIP so they are not considered as active. Prevent from shutting down all AS.
                   // set status == 2 for stop in progress
                   var updated_instances_list = [];
@@ -1662,7 +1662,6 @@
                           if (count > 0) {
                             setTimeout(function () {
                               soap_client.GetSystemInstanceList({}, function (err, result) {
-                                // TODO
                                 if (!err) {
                                   var inst_status = result.instance.item && result.instance.item.filter(i => i.instanceNr == sn);
                                   if (inst_status && inst_status[0] && inst_status[0].status != 'SAPControl-GREEN') {
