@@ -32,16 +32,16 @@ echo "app version: $WQL_VERSION"
 # update profile
 [[ `cat ~/.bashrc | grep -c '^export SECUDIR='` -ne 0  ]] || echo export SECUDIR=${secudir} >> ~/.bashrc ; export SECUDIR=${secudir}
 [[ `cat ~/.bashrc | grep -c '^export NODE_ENV='` -ne 0  ]] || echo export NODE_ENV='production' >> ~/.bashrc ; export NODE_ENV='production'
-[[ `cat ~/.profile | grep -c '^export SECUDIR='` -ne 0  ]] || echo export SECUDIR=${secudir} >> ~/.profile
-[[ `cat ~/.profile | grep -c "^export NODE_ENV="` -ne 0  ]] || echo export NODE_ENV='production' >> ~/.profile 
+[[ -f ~/.profile ]] && [[ `cat ~/.profile | grep -c '^export SECUDIR='` -ne 0  ]] || echo export SECUDIR=${secudir} >> ~/.profile
+[[ -f ~/.profile ]] && [[ `cat ~/.profile | grep -c "^export NODE_ENV="` -ne 0  ]] || echo export NODE_ENV='production' >> ~/.profile 
 
 # install NodeJS, NPM, PM2, GIT
 yes | sudo yum install curl git 
 [[ -d ${app_folder} ]] || sudo mkdir -p ${app_folder}
 sudo chown -R $wql_user:$wql_user ${app_folder} 
 [[ -d ~/.ssh ]] || mkdir ~/.ssh && chmod 700  ~/.ssh
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - 
-yes | sudo apt-get install -y nodejs 
+curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash - 
+yes | sudo yum install -y nodejs 
 yes | sudo npm install npm@latest -g 
 yes | sudo npm install pm2 -g
 [[ -d ~/.npm ]] && sudo chown -R $wql_user:$wql_user ~/.npm 
@@ -53,6 +53,6 @@ git clone https://github.com/worqloads/wql_installer.git $scaler_folder
 cd ${scaler_folder} && sudo npm install
 # [[ -d ${secudir} ]] || mkdir -p ${secudir}
 # cp ${shared_lxc_folder}/pub/keys/worqloads_client.pse ${secudir}/
-sudo chown -R $wql_user:$wql_user ${app_folder} /home/wql_user/.npm 
+sudo chown -R $wql_user:$wql_user ${app_folder} /home/$wql_user/.npm 
 
 history -c
