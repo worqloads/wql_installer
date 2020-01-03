@@ -182,7 +182,7 @@
       //   console.log('del:',response)
       // })
       .catch(function (error) {
-        console.error(error);
+        console.error('pshgtw::del::error :', error);
       });
     },
 
@@ -195,7 +195,7 @@
       //   console.log('del:',response)
       // })
       .catch(function (error) {
-        console.error(error);
+        console.error('pshgtw::delSerie::error :', error);
       });
     },
 
@@ -208,7 +208,7 @@
       //   console.log('del:',response)
       // })
       .catch(function (error) {
-        console.error(error);
+        console.error('pshgtw::delInstance::error :', error);
       });
     }
 
@@ -797,6 +797,7 @@
   function AWSMng() {
       console.log('! AWSMng! Constructor begins ');
       this.ec2 = new awsSdk.EC2({ apiVersion: '2016-11-15', region: 'eu-west-3' });
+      this.mappings_ip_id = {};
 
       awsSdk.config.getCredentials(function (err) {
           if (err) console.log(err.stack);
@@ -880,6 +881,7 @@
                       if (err) {
                           console.error(' getEC2s error:', err);
                       }
+                      self.mappings_ip_id = list_instance_ids;
                       callback(list_instance_ids);
                   });
               } else {
@@ -890,10 +892,10 @@
           }
       },
 
-      stopEC2s: function (ids, callback) {
+      stopEC2s: function (ips, callback) {
           var self = this;
           self.ec2.stopInstances({
-              InstanceIds: ids
+              InstanceIds: Object.keys(self.mappings_ip_id).filter(key_ip => ips.indexOf(key_ip) >= 0).map(key => self.mappings_ip_id(key))
           }, callback);
       },
 
@@ -1510,11 +1512,32 @@
 
         var updated_system_instances = {};
 
+        // [ { type: 2,
+        //  instances: [ [Object], [Object], [Object], [Object] ],
+        //  sid: 'NPL',
+        //  hostname: 'ip-10-1-1-164.eu-west-3.compute.internal',
+        //  ip_internal: '10.1.1.164',
+        //  sn: '00',
+        //  syst_id: '5e04c6458f0bde16376204e8',
+        //  syst_status: 1,
+        //  syst_type: 2,
+        //  entity_id: '5e04c6458f0bde16376204d1',
+        //  username: 'npladm',
+        //  password: 'Hnltcs0_',
+        //  is_direct: true,
+        //  is_encrypted: true,
+        //  auth_method: 0 } ]
+
+
         async.each(sap_systems, function (syst_id, each_cb) {
-          console.log(' >> processing system ', syst_id);
+          var curr_system = d.systems.filter(x => x.syst_id == syst_id)[0];
+          var CI_ip = curr_system.instances.filter(i => i.features.indexOf('MESSAGESERVER') >= 0);
+          CI_ip = CI_ip && CI_ip[0].ip_internal;
+          // console.log(' >> processing system ', syst_id)
           var firing_alerts = d.alerts.filter(a => a.status == 'firing' && a.labels.instance == syst_id);
-          console.log(' >>>> firing_alerts ', firing_alerts.map(x => x.labels.sn));
+          // console.log(' >>>> firing_alerts ',firing_alerts.map(x=>x.labels.sn))
           // Run in sequence as firing_alerts get modified during loop
+
           async.eachOfSeries(firing_alerts, function (alert, alert_idx, eachof_cb) {
             if (alert != undefined) {
               console.log(' ======= alert ' + alert.labels.alertname + ' ' + alert.labels.sn + ' - ' + alert.fingerprint + '===========');
@@ -1529,7 +1552,7 @@
                   waterfall_cb(null, {
                     'keys': d.keys_buff,
                     // 'func':  d.func,
-                    'syst': d.systems.filter(x => x.syst_id == syst_id)[0]
+                    'syst': curr_system
                   });
                   // that.get_sap_syst_data(alert.labels.instance, { 'name' : d.action.name }, waterfall_cb)
                 }
@@ -1559,12 +1582,16 @@
                       var alerts_with_features = firing_alerts.filter(a => a.labels.instance == results.syst._id).map(a => Object.assign({}, a, { 'features': features_of_instancenr[a.labels.sn] }));
 
                       firing_alerts.forEach(a => {
-                        if (a.labels.sn != undefined) {
+
+                        if (a.labels.ip_internal == CI_ip) {
+                          cb_not_called_yet = false;
+                          cb('System Central Instance [' + a.labels.sn + ']cannot be stopped ');
+                        } else if (a.labels.sn != undefined) {
                           var nb_total_instances_of_type = Object.values(features_of_instancenr).filter(x => x == features_of_instancenr[a.labels.sn]).length;
                           var curr_nb_instances_of_type = alerts_with_features.filter(a => a.features == features_of_instancenr[a.labels.sn]).length;
                           // console.log('nb_total_instances_of_type:'+nb_total_instances_of_type+' vs curr_nb_instances_of_type:'+curr_nb_instances_of_type)
                           if (nb_total_instances_of_type == curr_nb_instances_of_type) {
-                            var primary_as_idx = firing_alerts.reduce((acc_idx, cur, idx) => firing_alerts[acc_idx].labels.instance == results.syst._id ? parseInt(firing_alerts[acc_idx].labels.sn) > parseInt(cur.labels.sn) ? idx : acc_idx : idx > acc_idx ? acc_idx : acc_idx + 1, 0);
+                            var primary_as_idx = firing_alerts.reduce((acc_idx, cur, idx) => firing_alerts[acc_idx].labels.instance == results.syst.syst_id ? parseInt(firing_alerts[acc_idx].labels.sn) > parseInt(cur.labels.sn) ? idx : acc_idx : idx > acc_idx ? acc_idx : acc_idx + 1, 0);
                             // console.log(' >>>> remove ',firing_alerts[primary_as_idx].labels.sn)
                             firing_alerts.splice(primary_as_idx, 1);
                             if (alert_idx == primary_as_idx) {
@@ -1636,8 +1663,8 @@
                   } else {
 
                     async.series([function (serie_cb) {
-                      console.log('trigger stop SAP instance... ' + new Date() + ' of :', { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.ip_internal.sn });
-                      sapctrl_process_func$1.call(that, err, result, d.action.name, { _id: cli_data.payload.syst._id, sid: cli_data.payload.syst.sid }, { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.ip_internal.sn }, null, d.groupLabels.entity_id, d.commonLabels.customer, [], null, serie_cb);
+                      console.log('trigger stop SAP instance... ' + new Date() + ' of :', { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn });
+                      sapctrl_process_func$1.call(that, err, result, d.action.name, { _id: cli_data.payload.syst._id, sid: cli_data.payload.syst.sid }, { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn }, null, d.groupLabels.entity_id, d.commonLabels.customer, [], null, serie_cb);
                       // sapctrl_process_func.call(that, err, result, job_data.func.name, { _id: job_data.system.syst_id, sid: job_data.system.sid }, { ip_internal: client.i, hostname: client.h, sn: client.n } , job_data.func.type , job_data.entity_id, job_data.customer, job_data.restricted_kpis, job_data.rule_id, serie_cb )
                     }, function (serie_cb) {
                       console.log('waiting for instance to actually stop within timeout ... ' + new Date());
