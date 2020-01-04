@@ -1500,23 +1500,24 @@
       var that = this;
       // to prevent error for self signed certificates of SAP systems
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+      // TODO
+      // improvement: can set minimal number of instances instead of 1
       function do_stop(d, queue_cb) {
         // console.log('do_action:', d)
-        // improvement: can set minimal number of instances instead of 1
+
+        var alert = d.alert;
+        var syst_id = alert.labels.instance;
         const min_instance_running = 1;
         var updated_system_instances = {}; // keeps track of instance to stop / being stopped
 
-        // Process actions in parallel per SAP systems
-        var sap_systems = [];
-        d.alerts.forEach(item => {
-          if (sap_systems.indexOf(item.labels.instance) === -1) {
-            sap_systems.push(item.labels.instance);
-          }
-        });
+        // console.log(' >> processing system ', syst_id)
 
+
+        // GET ALL ACTIVE SAP SYSTEMS & relatad Cloud VMs
+        // _______________________________________________
         // add new instances host in that.all_systems_hosts
         var temp_list_hosts = d.systems.reduce((acc, curr) => {
-          // console.log('  > temp_list_hosts curr system:', curr.instances.map(i => i.ip_internal).filter( (el, i, arr) => arr.indexOf(el) === i && Object.keys(that.all_systems_hosts).indexOf(el) < 0) )
           return acc.concat(curr.instances.map(i => i.ip_internal).filter((el, i, arr) => arr.indexOf(el) === i && Object.keys(that.all_systems_hosts).indexOf(el) < 0));
         }, []);
         // console.log('>> temp_list_hosts:', temp_list_hosts)
@@ -1526,447 +1527,152 @@
         });
         // console.log('>> that.all_systems_hosts:', that.all_systems_hosts)
 
-        async.each(sap_systems, function (syst_id, each_cb) {
-          var curr_system = d.systems.filter(x => x.syst_id == syst_id)[0];
-          var CI_ip = curr_system && curr_system.instances.filter(i => i.features.indexOf('MESSAGESERVER') >= 0 || i.features.indexOf('ENQUE') >= 0);
-          CI_ip = CI_ip && CI_ip[0].ip_internal;
-          // console.log(' >> processing system ', syst_id)
-          var firing_alerts = d.alerts.filter(a => a.status == 'firing' && a.labels.instance == syst_id && a.labels.ip_internal != CI_ip);
+        var curr_system = d.systems.filter(x => x.syst_id == syst_id)[0];
+        var CI_ip = curr_system && curr_system.instances.filter(i => i.features.indexOf('MESSAGESERVER') >= 0 || i.features.indexOf('ENQUE') >= 0);
+        CI_ip = CI_ip && CI_ip[0].ip_internal;
 
-          async.eachOfSeries(firing_alerts, function (alert, alert_idx, eachof_cb) {
-            if (alert != undefined) {
-              console.log(' ======= ' + (curr_system != undefined && curr_system.sid || '-No System-') + ' alert ' + alert.labels.alertname + ' ' + alert.labels.sn + ' - ' + alert.labels.ip_internal + '===========');
-              async.waterfall([
-              // filter out exclusded systems/instances and get required data for eligible ones
-              function (waterfall_cb) {
-                // exclude systems that are in backlist or are part of another company entity 
-                if (d.action.parameters && d.action.parameters.excluded && d.action.parameters.excluded.length > 0 && d.action.parameters.excluded.filter(x => x.syst_id == alert.labels.instance.substring(0, 24) && (x.tenant_id == undefined || x.tenant_id == alert.labels.instance.substring(24, 48)) && (x.sn == undefined || x.sn == alert.labels.sn)).length > 0 && d.action.entity_id != alert.labels.entity_id) {
-                  waterfall_cb('System excluded :' + alert.labels.instance);
-                } else {
-                  waterfall_cb(null, {
-                    'keys': d.keys_buff,
-                    // 'func':  d.func,
-                    'syst': curr_system
-                  });
-                }
-              },
-              // connect to the entry point instance and provide soapclient
-              function (results, cb) {
-
-                if (results.syst) {
-
-                  var cb_not_called_yet = true;
-                  // if d.action.name = stop (instance), 
-                  // if 
-                  //    system has only 1 instance of this type running => skip, 
-                  // else 
-                  //    if nb(instance type) == total same instance type & instance => exclude 1 instance (min instancenr for ex)
-                  //    then stop all other instances in parallel
-
-                  var features_of_instancenr = {};
-                  // method 1: get nb of up and running instances from db. not synced ? (few delay)!
-                  results.syst.instances.filter(i => i.status == 1).forEach(i => {
-                    features_of_instancenr[i.instancenr] = i.features.join('-');
-                  });
-
-                  if (Object.values(features_of_instancenr).filter(x => x == features_of_instancenr[alert.labels.sn]).length > min_instance_running) {
-
-                    var alerts_with_features = firing_alerts.filter(a => a.labels.instance == results.syst._id).map(a => Object.assign({}, a, { 'features': features_of_instancenr[a.labels.sn] }));
-
-                    firing_alerts.forEach(a => {
-
-                      if (CI_ip != undefined && a.labels.ip_internal == CI_ip) {
-                        cb_not_called_yet = false;
-                        console.log('System Central Instance [' + a.labels.sn + '] cannot be stopped ');
-                      } else if (a.labels.sn != undefined) {
-                        var nb_total_instances_of_type = Object.values(features_of_instancenr).filter(x => x == features_of_instancenr[a.labels.sn]).length;
-                        var curr_nb_instances_of_type = alerts_with_features.filter(a => a.features == features_of_instancenr[a.labels.sn]).length;
-                        // console.log('nb_total_instances_of_type:'+nb_total_instances_of_type+' vs curr_nb_instances_of_type:'+curr_nb_instances_of_type)
-                        if (nb_total_instances_of_type == curr_nb_instances_of_type) {
-                          var primary_as_idx = firing_alerts.reduce((acc_idx, cur, idx) => firing_alerts[acc_idx].labels.instance == results.syst.syst_id ? parseInt(firing_alerts[acc_idx].labels.sn) > parseInt(cur.labels.sn) ? idx : acc_idx : idx > acc_idx ? acc_idx : acc_idx + 1, 0);
-                          // console.log(' >>>> remove ',firing_alerts[primary_as_idx].labels.sn)
-                          firing_alerts.splice(primary_as_idx, 1);
-                          if (alert_idx == primary_as_idx) {
-                            // we skip as the current alert in loop is deleted
-                            cb_not_called_yet = false;
-                            cb('System instance cannot be stop as One at least is needed for system run ' + a.labels.sn);
-                          }
-                          // console.log(' >>>> after deletion ',firing_alerts)
-                        }
-                      }
-                    });
-                  } else {
-                    cb_not_called_yet = false;
-                    cb('System instance cannot be stop as One at least is needed for system run ' + alert.labels.sn + ' w/ features:' + Object.values(features_of_instancenr).filter(x => x == features_of_instancenr[alert.labels.sn]));
-                  }
-
-                  if (cb_not_called_yet) {
-                    var pfx_certif = null;
-                    var syst_instance = results.syst.instances.filter(x => x.instancenr == alert.labels.sn)[0];
-                    const http_s = results.syst.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
-                    var soap_url = http_s.protocol + '://' + syst_instance.ip_internal + ':5' + alert.labels.sn + http_s.port_suffix + '/';
-                    if (results.syst.auth_method == 1) {
-                      pfx_certif = results.keys.buff;
-                    }
-
-                    that.new_soap_client(soap_url, {
-                      method: results.syst.auth_method, // method is the index of options
-                      options: [{
-                        user: results.syst.username,
-                        pwd: results.syst.password
-                      }, {
-                        pfx: pfx_certif
-                      }]
-                    }, results, cb);
-                  }
-                } else {
-                  console.log('No system or no system connection active');
-                  cb('No system or no system connection active');
-                }
-              },
-              // Get list of instances and check system status
-              function (cli_data, async_cb) {
-                // check if there is not a stop in progress for this instance
-                if (updated_system_instances[syst_id] == undefined || updated_system_instances[syst_id].filter(i => i.status == 2 && i.instancenr == alert.labels.sn).length == 0) {
-                  // Set instance in stop WIP so they are not considered as active. Prevent from shutting down all AS.
-                  // set status == 2 for stop in progress
-                  var updated_instances_list = [];
-                  cli_data.payload.syst.instances.forEach(i => {
-                    if (i.instancenr == alert.labels.sn) {
-                      updated_instances_list.push(Object.assign({}, i, { status: 2 }));
-                    } else {
-                      updated_instances_list.push(i);
-                    }
-                  });
-                  updated_system_instances[syst_id] = updated_instances_list;
-
-                  // call async now to prevent delay of DB update due to waiting for stop operations 
-                  async_cb();
-
-                  sapcontrol_operations$1[d.action.name].call(cli_data.soapcli, {}, (err, result) => {
-                    if (err) {
-                      console.error('sapcontrol call error:', err);
-                    } else {
-
-                      async.series([function (serie_cb) {
-                        console.log('trigger stop SAP instance... ' + new Date() + ' of :', { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn });
-                        sapctrl_process_func$1.call(that, err, result, d.action.name, { _id: cli_data.payload.syst._id, sid: cli_data.payload.syst.sid }, { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn }, null, d.groupLabels.entity_id, d.commonLabels.customer, [], null, serie_cb);
-                        // sapctrl_process_func.call(that, err, result, job_data.func.name, { _id: job_data.system.syst_id, sid: job_data.system.sid }, { ip_internal: client.i, hostname: client.h, sn: client.n } , job_data.func.type , job_data.entity_id, job_data.customer, job_data.restricted_kpis, job_data.rule_id, serie_cb )
-                      }, function (serie_cb) {
-                        console.log('waiting for instance to actually stop within timeout ... ' + new Date());
-                        const step_wait_sec = 20;
-                        const timeout_wait_sec = 300;
-                        const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
-
-                        function check_stop_instance(soap_client, count, wait_sec, sn) {
-                          if (count > 0) {
-                            setTimeout(function () {
-                              soap_client.GetSystemInstanceList({}, function (err, result) {
-                                if (!err) {
-                                  var inst_status = result.instance.item && result.instance.item.filter(i => i.instanceNr == sn);
-                                  if (inst_status && inst_status[0] && inst_status[0].status != 'SAPControl-GREEN') {
-                                    serie_cb();
-                                  } else {
-                                    check_stop_instance(soap_client, count - 1, wait_sec, sn);
-                                  }
-                                } else {
-                                  check_stop_instance(soap_client, count - 1, wait_sec, sn);
-                                }
-                              });
-                            }, wait_sec); // 3 retries with 20sec to valide in 1 min
-                          } else serie_cb();
-                        }
-                        check_stop_instance(cli_data.soapcli, nb_iterations, step_wait_sec * 1000, alert.labels.sn);
-                      }, function (serie_cb) {
-                        console.log('trigger stop EC2 instance... ' + new Date());
-                        // Stop EC2 host
-                        that.aws_cli.stopEC2s([alert.labels.ip_internal], serie_cb);
-                      }], function (err) {
-                        if (err) {
-                          console.error('Stop instances error:', err);
-                        }
-                        // async_cb()
-                      });
-                    }
-                  }); // end sapcontrol_operations
-                } else {
-                  async_cb();
-                }
-              }], function (waterfall_err) {
-                if (waterfall_err) {
-                  console.log('error for alert:', waterfall_err);
-                }
-                eachof_cb();
+        if (alert.labels.ip_internal != CI_ip) {
+          console.log(' ======= ' + (curr_system != undefined && curr_system.sid || '-No System-') + ' alert ' + alert.labels.alertname + ' ' + alert.labels.sn + ' - ' + alert.labels.ip_internal + '===========');
+          async.waterfall([
+          // filter out exclusded systems/instances and get required data for eligible ones
+          function (waterfall_cb) {
+            // exclude systems that are in backlist or are part of another company entity 
+            if (d.action.parameters && d.action.parameters.excluded && d.action.parameters.excluded.length > 0 && d.action.parameters.excluded.filter(x => x.syst_id == alert.labels.instance.substring(0, 24) && (x.tenant_id == undefined || x.tenant_id == alert.labels.instance.substring(24, 48)) && (x.sn == undefined || x.sn == alert.labels.sn)).length > 0 && d.action.entity_id != alert.labels.entity_id) {
+              waterfall_cb('System excluded :' + alert.labels.instance);
+            } else {
+              waterfall_cb(null, {
+                'keys': d.keys_buff,
+                'syst': curr_system
               });
             }
-          }, function (err) {
-            if (err) {
-              console.log("do_stop err:", err);
+          },
+          // connect to the entry point instance and provide soapclient
+          function (results, cb) {
+
+            var features_of_instancenr = {};
+
+            if (results.syst) {
+
+              // method 1: get nb of up and running instances from db. not synced ? (few delay)!
+              // if d.action.name = stop (instance), 
+              // if 
+              //    system has only 1 instance of this type running => skip, 
+              // else 
+              //    if nb(instance type) == total same instance type & instance => exclude 1 instance (min instancenr for ex)
+              //    then stop all other instances in parallel
+
+              results.syst.instances.filter(i => i.status == 1).forEach(i => {
+                features_of_instancenr[i.instancenr] = i.features.join('-');
+              });
+
+              if (Object.values(features_of_instancenr).filter(x => x == features_of_instancenr[alert.labels.sn]).length > min_instance_running) {
+
+                var pfx_certif = null;
+                var syst_instance = results.syst.instances.filter(x => x.instancenr == alert.labels.sn)[0];
+                const http_s = results.syst.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
+                var soap_url = http_s.protocol + '://' + syst_instance.ip_internal + ':5' + alert.labels.sn + http_s.port_suffix + '/';
+                if (results.syst.auth_method == 1) {
+                  pfx_certif = results.keys.buff;
+                }
+
+                that.new_soap_client(soap_url, {
+                  method: results.syst.auth_method, // method is the index of options
+                  options: [{
+                    user: results.syst.username,
+                    pwd: results.syst.password
+                  }, {
+                    pfx: pfx_certif
+                  }]
+                }, results, cb);
+              } else {
+                console.log('No system or no system connection active');
+                cb('No system or no system connection active');
+              }
+            } else {
+              console.log('No system or no system connection active');
+              cb('No system or no system connection active');
             }
-            each_cb();
+          },
+          // Get list of instances and check system status
+          function (cli_data, async_cb) {
+
+            // check if there is not a stop in progress for this instance
+            if (updated_system_instances[syst_id] == undefined || updated_system_instances[syst_id].filter(i => i.status == 2 && i.instancenr == alert.labels.sn).length == 0) {
+              // Set instance in stop WIP so they are not considered as active. Prevent from shutting down all AS.
+              // set status == 2 for stop in progress
+              var updated_instances_list = [];
+              cli_data.payload.syst.instances.forEach(i => {
+                if (i.instancenr == alert.labels.sn) {
+                  updated_instances_list.push(Object.assign({}, i, { status: 2 }));
+                } else {
+                  updated_instances_list.push(i);
+                }
+              });
+              updated_system_instances[syst_id] = updated_instances_list;
+
+              // call async now to prevent delay of DB update due to waiting for stop operations 
+              async_cb();
+
+              sapcontrol_operations$1[d.action.name].call(cli_data.soapcli, {}, (err, result) => {
+                if (err) {
+                  console.error('sapcontrol call error:', err);
+                } else {
+
+                  async.series([function (serie_cb) {
+                    console.log('trigger stop SAP instance... ' + new Date() + ' of :', { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn });
+                    sapctrl_process_func$1.call(that, err, result, d.action.name, { _id: cli_data.payload.syst._id, sid: cli_data.payload.syst.sid }, { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn }, null, d.groupLabels.entity_id, d.commonLabels.customer, [], null, serie_cb);
+                    // sapctrl_process_func.call(that, err, result, job_data.func.name, { _id: job_data.system.syst_id, sid: job_data.system.sid }, { ip_internal: client.i, hostname: client.h, sn: client.n } , job_data.func.type , job_data.entity_id, job_data.customer, job_data.restricted_kpis, job_data.rule_id, serie_cb )
+                  }, function (serie_cb) {
+                    console.log('waiting for instance to actually stop within timeout ... ' + new Date());
+                    const step_wait_sec = 20;
+                    const timeout_wait_sec = 300;
+                    const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+
+                    function check_stop_instance(soap_client, count, wait_sec, sn) {
+                      if (count > 0) {
+                        setTimeout(function () {
+                          soap_client.GetSystemInstanceList({}, function (err, result) {
+                            if (!err) {
+                              var inst_status = result.instance.item && result.instance.item.filter(i => i.instanceNr == sn);
+                              if (inst_status && inst_status[0] && inst_status[0].status != 'SAPControl-GREEN') {
+                                serie_cb();
+                              } else {
+                                check_stop_instance(soap_client, count - 1, wait_sec, sn);
+                              }
+                            } else {
+                              check_stop_instance(soap_client, count - 1, wait_sec, sn);
+                            }
+                          });
+                        }, wait_sec); // 3 retries with 20sec to valide in 1 min
+                      } else serie_cb();
+                    }
+                    check_stop_instance(cli_data.soapcli, nb_iterations, step_wait_sec * 1000, alert.labels.sn);
+                  }, function (serie_cb) {
+                    console.log('trigger stop EC2 instance... ' + new Date());
+                    // Stop EC2 host
+                    that.aws_cli.stopEC2s([alert.labels.ip_internal], serie_cb);
+                  }], function (err) {
+                    if (err) {
+                      console.error('Stop instances error:', err);
+                    }
+                    // async_cb()
+                  });
+                }
+              }); // end sapcontrol_operations
+            } else {
+              async_cb();
+            }
+          }], function (waterfall_err) {
+            if (waterfall_err) {
+              console.log('error for alert:', waterfall_err);
+            }
+            eachof_cb();
           });
-        }, function (err) {
-          if (err) {
-            console.log("do_stop err:", err);
-          }
-          queue_cb(null, updated_system_instances);
-        });
+        } else {
+          console.log('System Central Instance [' + alert.labels.sn + '] cannot be stopped ');
+        }
+        queue_cb(null, updated_system_instances);
       }
-      // function do_action(d, queue_cb) {
-      //   // console.log('do_action:', d)
-      //   // improvement: can set minimal number of instances instead of 1
-      //   const min_instance_running = 1
-
-      //   // Process actions in parallel per SAP systems
-      //   var sap_systems = []
-      //   d.alerts.forEach(item => {
-      //     if(sap_systems.indexOf(item.labels.instance) === -1) {
-      //       sap_systems.push(item.labels.instance)
-      //     }
-      //   })
-
-      //   var updated_system_instances = {}
-
-
-      //   // [ { type: 2,
-      //   //  instances: [ [Object], [Object], [Object], [Object] ],
-      //   //  sid: 'NPL',
-      //   //  hostname: 'ip-10-1-1-164.eu-west-3.compute.internal',
-      //   //  ip_internal: '10.1.1.164',
-      //   //  sn: '00',
-      //   //  syst_id: '5e04c6458f0bde16376204e8',
-      //   //  syst_status: 1,
-      //   //  syst_type: 2,
-      //   //  entity_id: '5e04c6458f0bde16376204d1',
-      //   //  username: 'npladm',
-      //   //  password: 'Hnltcs0_',
-      //   //  is_direct: true,
-      //   //  is_encrypted: true,
-      //   //  auth_method: 0 } ]
-
-
-      //   async.each(sap_systems, function(syst_id, each_cb) {
-      //     var curr_system = d.systems.filter(x => x.syst_id == syst_id)[0]
-      //     var CI_ip = curr_system.instances.filter( i => i.features.indexOf('MESSAGESERVER') >= 0)
-      //     CI_ip = CI_ip && CI_ip[0].ip_internal
-      //     // console.log(' >> processing system ', syst_id)
-      //     var firing_alerts = d.alerts.filter(a => a.status == 'firing' && a.labels.instance == syst_id)
-      //     // console.log(' >>>> firing_alerts ',firing_alerts.map(x=>x.labels.sn))
-      //     // Run in sequence as firing_alerts get modified during loop
-
-      //     async.eachOfSeries(firing_alerts, function(alert, alert_idx, eachof_cb) {
-      //       if (alert != undefined) {
-      //         console.log(' ======= '+curr_system.sid+' alert '+alert.labels.alertname+' '+alert.labels.sn+' - '+alert.labels.ip_internal+'===========')
-      //         async.waterfall([
-      //           // filter out exclusded systems/instances and get required data for eligible ones
-      //           function(waterfall_cb) {  
-      //             // exclude systems that are in backlist or are part of another company entity 
-      //             if ( d.action.parameters && 
-      //               d.action.parameters.excluded &&
-      //               d.action.parameters.excluded.length > 0 &&
-      //               d.action.parameters.excluded.filter(x => 
-      //                 x.syst_id == alert.labels.instance.substring(0,24) &&
-      //                 (x.tenant_id == undefined || x.tenant_id == alert.labels.instance.substring(24,48)) &&
-      //                 (x.sn == undefined || x.sn == alert.labels.sn)
-      //               ).length > 0 &&
-      //               d.action.entity_id != alert.labels.entity_id
-      //               ) {
-      //                 waterfall_cb('System excluded :'+ alert.labels.instance)
-      //               } else {
-      //                 // TODO replace
-      //                 waterfall_cb(null, {
-      //                   'keys': d.keys_buff,
-      //                   // 'func':  d.func,
-      //                   'syst': curr_system
-      //                 })
-      //                 // that.get_sap_syst_data(alert.labels.instance, { 'name' : d.action.name }, waterfall_cb)
-      //             }
-      //           },
-      //           // connect to the entry point instance and provide soapclient
-      //           function(results, cb){
-
-      //             if (results.syst) {
-
-      //               var cb_not_called_yet = true
-      //               // if d.action.name = stop (instance), 
-      //               // if 
-      //               //    system has only 1 instance of this type running => skip, 
-      //               // else 
-      //               //    if nb(instance type) == total same instance type & instance => exclude 1 instance (min instancenr for ex)
-      //               //    then stop all other instances in parallel
-      //               if(d.action && d.action.name == 'Stop') {
-
-      //                 var features_of_instancenr = {}
-      //                 // method 1: get nb of up and running instances from db. not synced ? (few delay)!
-      //                 results.syst.instances.filter(i=> i.status == 1).forEach( i => {
-      //                   features_of_instancenr[i.instancenr] = i.features.join('-')
-      //                 })
-
-      //                 if (Object.values(features_of_instancenr).filter(x => x == features_of_instancenr[ alert.labels.sn ]).length > min_instance_running ) {
-
-      //                   var alerts_with_features = firing_alerts.filter(a=>a.labels.instance == results.syst._id).map( a => Object.assign({}, a, {'features': features_of_instancenr[a.labels.sn] }))
-
-      //                   firing_alerts.forEach( a => {
-
-      //                     if (CI_ip != undefined && a.labels.ip_internal == CI_ip) {
-      //                       cb_not_called_yet = false
-      //                       console.log('System Central Instance ['+a.labels.sn+'] cannot be stopped ')
-      //                     } else if (a.labels.sn != undefined) {
-      //                       var nb_total_instances_of_type = Object.values(features_of_instancenr).filter(x => x == features_of_instancenr[ a.labels.sn ]).length
-      //                       var curr_nb_instances_of_type = alerts_with_features.filter(a => a.features == features_of_instancenr[ a.labels.sn ]).length
-      //                       // console.log('nb_total_instances_of_type:'+nb_total_instances_of_type+' vs curr_nb_instances_of_type:'+curr_nb_instances_of_type)
-      //                       if (nb_total_instances_of_type == curr_nb_instances_of_type) {
-      //                         var primary_as_idx = firing_alerts.reduce( 
-      //                           (acc_idx,cur,idx) => 
-      //                           firing_alerts[acc_idx].labels.instance == results.syst.syst_id ? 
-      //                             parseInt(firing_alerts[acc_idx].labels.sn) > parseInt(cur.labels.sn) ? idx : acc_idx
-      //                             :  idx > acc_idx ? acc_idx : acc_idx+1,
-      //                           0
-      //                         )
-      //                         // console.log(' >>>> remove ',firing_alerts[primary_as_idx].labels.sn)
-      //                         firing_alerts.splice(primary_as_idx, 1)
-      //                         if (alert_idx == primary_as_idx) {
-      //                           // we skip as the current alert in loop is deleted
-      //                           cb_not_called_yet = false
-      //                           cb('System instance cannot be stop as One at least is needed for system run '+a.labels.sn)
-      //                         }
-      //                         // console.log(' >>>> after deletion ',firing_alerts)
-      //                       }
-      //                     }
-      //                   })
-      //                 } else {
-      //                   cb_not_called_yet = false
-      //                   cb('System instance cannot be stop as One at least is needed for system run '+alert.labels.sn+' w/ features:'+Object.values(features_of_instancenr).filter(x => x == features_of_instancenr[ alert.labels.sn ]))
-      //                 }
-      //               }
-
-      //               if (cb_not_called_yet) {
-      //                 var pfx_certif = null
-      //                 var syst_instance = results.syst.instances.filter( x => x.instancenr == alert.labels.sn)[0]
-      //                 const http_s = results.syst.is_encrypted ? 
-      //                   {protocol: 'https', port_suffix: '14'} : {protocol: 'http', port_suffix: '13'}
-      //                 var soap_url = http_s.protocol + '://'+syst_instance.ip_internal+':5' + alert.labels.sn + http_s.port_suffix +'/'
-      //                 if (results.syst.auth_method == 1) {
-      //                   pfx_certif = results.keys.buff
-      //                 }
-
-      //                 that.new_soap_client(soap_url, { 
-      //                   method: results.syst.auth_method, // method is the index of options
-      //                   options: [{
-      //                       user: results.syst.username,
-      //                       pwd: results.syst.password
-      //                     },{ 
-      //                       pfx: pfx_certif
-      //                     }]
-      //                 }, results, cb)
-      //               }
-
-      //             } else {
-      //               console.log('No system or no system connection active')
-      //               cb('No system or no system connection active')
-      //             }
-      //           },
-      //           // Get list of instances and check system status
-      //           function(cli_data, async_cb) {
-      //             // Set instance in stop WIP so they are not considered as active. Prevent from shutting down all AS.
-      //             if (d.action && d.action.name == 'Stop') {
-      //               // set status == 2 for stop in progress
-      //               var updated_instances_list = []
-      //               cli_data.payload.syst.instances.forEach( i => {
-      //                 if (i.instancenr == alert.labels.sn) {
-      //                   updated_instances_list.push(Object.assign({}, i, {status: 2}))
-      //                 } else {
-      //                   updated_instances_list.push(i)
-      //                 }
-      //               })
-      //               updated_system_instances[syst_id] = updated_instances_list
-      //             }
-
-      //             // call async now to prevent delay of DB update due to waiting for stop operations 
-      //             async_cb()
-
-      //             // todo check if action = start, do not exceeds max nb of instances
-      //             // if (d.action && d.action.name == 'Start') {
-
-      //             // }
-
-      //             sapcontrol_operations[  d.action.name  ].call(cli_data.soapcli,
-      //               {}, 
-      //               (err, result) => {
-      //                 if (err) {
-      //                   console.error('sapcontrol call error:', err)
-      //                 } else {
-
-      //                   async.series([
-      //                     function(serie_cb) {
-      //                       console.log('trigger stop SAP instance... '+new Date()+' of :', { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn } )
-      //                       sapctrl_process_func.call(that, err, result, d.action.name, { _id: cli_data.payload.syst._id, sid: cli_data.payload.syst.sid }, { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn }, null, d.groupLabels.entity_id, d.commonLabels.customer, [], null, serie_cb);
-      //                       // sapctrl_process_func.call(that, err, result, job_data.func.name, { _id: job_data.system.syst_id, sid: job_data.system.sid }, { ip_internal: client.i, hostname: client.h, sn: client.n } , job_data.func.type , job_data.entity_id, job_data.customer, job_data.restricted_kpis, job_data.rule_id, serie_cb )
-      //                     },
-      //                     function(serie_cb) {
-      //                       console.log('waiting for instance to actually stop within timeout ... '+new Date())
-      //                       const step_wait_sec = 20
-      //                       const timeout_wait_sec = 300
-      //                       const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec)
-
-      //                       function check_stop_instance(soap_client, count, wait_sec, sn) {
-      //                         if (count > 0) {
-      //                           setTimeout(function() {
-      //                             soap_client.GetSystemInstanceList({}, function(err, result) {
-      //                               // TODO
-      //                               if (!err) {
-      //                                 var inst_status = result.instance.item && result.instance.item.filter( i => i.instanceNr == sn)
-      //                                 if (inst_status && inst_status[0] && inst_status[0].status != 'SAPControl-GREEN') {
-      //                                   serie_cb()
-      //                                 } else {
-      //                                   check_stop_instance(soap_client, count-1, wait_sec, sn)
-      //                                 }                                    
-      //                               } else {
-      //                                 check_stop_instance(soap_client, count-1, wait_sec, sn)
-      //                               }
-      //                             })
-      //                           }, wait_sec); // 3 retries with 20sec to valide in 1 min
-      //                         } else serie_cb()                            
-      //                       }
-      //                       check_stop_instance(cli_data.soapcli, nb_iterations, step_wait_sec * 1000, alert.labels.ip_internal.sn)
-      //                     },
-      //                     function(serie_cb) {
-      //                       console.log('trigger stop EC2 instance... '+new Date())
-      //                       // Stop EC2 host
-      //                       that.aws_cli.stopEC2s([alert.labels.ip_internal], serie_cb)
-      //                     }
-      //                   ], function(err) {
-      //                     if (err) { console.error('Stop instances error:',err)}
-      //                     // async_cb()
-      //                   })
-
-      //                   // console.log('call to action: ', d.action.name, {_id: cli_data.payload.syst._id, sid: cli_data.payload.syst.sid}, {sn: alert.labels.sn, ip_internal: alert.labels.ip_internal}, alert.labels.entity_id, alert.labels.customer, alert.labels.sn)
-      //                   // sapctrl_process_func.call(that, err, result, d.action.name, {_id: cli_data.payload.syst._id, sid: cli_data.payload.syst.sid}, {sn: alert.labels.sn, ip_internal: alert.labels.ip_internal}, null /*cli_data.payload.func.type*/ , d.groupLabels.entity_id, d.commonLabels.customer, [], null, async_cb ) 
-      //                 }
-      //               } 
-      //             )
-      //           }
-      //         ], function(waterfall_err, wtf_res){
-      //           if (waterfall_err) {
-      //             console.log('error for alert:', waterfall_err)
-      //           }
-      //           eachof_cb()
-      //         })
-      //       }
-      //     }, function(err){
-      //       if (err) {
-      //         console.log("do_action err:", err)
-      //       }
-      //       each_cb()
-      //     })
-
-      //   }, function(err){
-      //     if (err) {
-      //       console.log("do_action err:", err)
-      //     }
-      //     queue_cb(null, updated_system_instances)
-      //   })  
-      // }
 
       that.queue.process('webhook_exec', that.nb_workers, function (job, done) {
         if (job.data.action && job.data.alerts && job.data.severity != undefined) {
