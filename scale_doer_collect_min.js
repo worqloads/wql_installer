@@ -1076,6 +1076,7 @@
     // this.systems_sap_realtime = [];
     this.all_systems = [];
     this.all_systems_hosts = [];
+    this.updated_system_instances = {}; // keeps track of instance to stop / being stopped
     // this.mapping_hostname_ip = {}
     this.nb_workers = 1;
     this.conn_retries = {};
@@ -1137,10 +1138,10 @@
 
     // create a sap client and provides it to the callback function
     new_soap_client: function (url, auth, data, cb) {
-      soap.createClient(url + '?wsdl', function (err, client) {
+      soap.createClient(url + '?wsdl', { returnFault: true }, function (err, client) {
         if (err || !client) {
           // VM server is not running or connextion to WSDL is lost
-          cb(err || 'no client created', null);
+          cb(err);
         } else {
           switch (auth.method) {
             case 0:
@@ -1157,54 +1158,6 @@
         }
       });
     },
-
-    // set mapping using sapcontrol function to get Server Configuration / IP address
-    // get_system_instances_Ip_Hostname : function(system, cb) {
-    //   var that = this
-    //   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
-    //   if (!system || !system.instances || system.instances.length == 0) { 
-    //     cb() 
-    //   } else {
-    //     async.each(system.instances, function(instance, each_cb) {
-    //       const http_s = system.is_encrypted ? {protocol: 'https', port_suffix: '14'} : {protocol: 'http', port_suffix: '13'}
-    //       const soap_url = http_s.protocol + '://'+instance.ip_internal+':5'+instance.instancenr + http_s.port_suffix +'/'
-
-    //       that.new_soap_client(soap_url, { 
-    //         method: system.auth_method, // method is the index of options
-    //         options: [{
-    //             user: system.username,
-    //             pwd: system.password
-    //           },{ 
-    //             pfx: (system.auth_method == 1) && keys_buff
-    //           }]
-    //       }, null, function (err, soapcli) {
-    //         if (err) { 
-    //           console.error('Error creating SOAP client :', err) 
-    //           each_cb()
-    //         } else {
-    //           soapcli.soapcli.GetAlertTree({}, function(soapcli_err, result) {
-    //             if (err || !result) { 
-    //               console.error('Error executing GetAlertTree :', soapcli_err) 
-    //             } else {
-    //               var tmp_ip_host = result.tree.item.filter( i => result.tree.item[i.parent] && result.tree.item[i.parent].name.trim() == 'Server Configuration' && (i.name.trim() == 'IP Address' || i.name.trim() == 'Host') ).map( function(x) { return {'name': x.name, 'description': x.description}})
-    //               if (tmp_ip_host && tmp_ip_host.length>0) {
-    //                 that.mapping_hostname_ip[tmp_ip_host.filter(i => i.name.trim() == 'Host' )[0].description] = tmp_ip_host.filter(i => i.name.trim() == 'IP Address' )[0].description
-    //               }
-    //             }
-    //             each_cb()
-    //           }, {
-    //             timeout: 5000 // 5s of timeout
-    //           })
-    //         }
-    //       })
-    //     }, function (err) {
-    //       if (err) {
-    //         console.error(' get_system_instances_Ip_Hostname error:', err)
-    //       }
-    //       cb()
-    //     })
-    //   }
-    // },
 
     // init connection to redis & HANA db
     // init : function (redis_config, worker_config, hana_enabled, keepalive_hana, next) {
@@ -1269,11 +1222,14 @@
       const green_status = 'SAPControl-GREEN';
       const red_status = 'SAPControl-RED';
       const gray_status = 'SAPControl-GRAY';
-      const error_system_conn_failed = 'Connection to SAP system failed';
-      var main_soap_client = null;
+      const _errors = {
+        'conn_failed': 'Connection to SAP system failed',
+        'no_system_conn': 'No SAP system or no system connection active',
+        'no_active_instance': 'No active SAP instance available'
+        // var main_soap_client = null
 
-      // to prevent error for self signed certificates of SAP systems
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+        // to prevent error for self signed certificates of SAP systems
+      };process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
       // check status of SAP system based on its instances status
       // SAP system is DOWN if CI is down or all DI are down
@@ -1304,21 +1260,21 @@
         return green_status;
       }
 
-      // recursive func to triple connection is down before confirmation
+      // recursive func to check conn_retries_max times if connection is down before confirmation
       function check_failed_conn(soap_client, job_data) {
-        setTimeout(function () {
-          soap_client.GetSystemInstanceList({}, function (err, result) {
-            var syst_status = check_system_status(result.instance.item, job_data.system.syst_id, job_data.system.sid, job_data.entity_id);
-            if (!err && result && result.instance && result.instance.item && (syst_status == red_status || syst_status == gray_status) && that.conn_retries[job_data.system.syst_id] <= that.conn_retries_max) {
-              // console.log('check_failed_conn ', that.conn_retries[job_data.system.syst_id], ' => ', result.instance.item);
-              that.checkDeletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, "", null, job_data.system.sid);
-              // If conn_retries_max is reached, that.conn_retries[job_data.system.syst_id] = 0 now
-              if (that.conn_retries[job_data.system.syst_id] > 0) {
+        if (that.conn_retries[job_data.system.syst_id] <= that.conn_retries_max) {
+          setTimeout(function () {
+            soap_client.GetSystemInstanceList({}, function (err, result) {
+              var syst_status = check_system_status(result.instance.item, job_data.system.syst_id, job_data.system.sid, job_data.entity_id);
+              if (result && result.instance && result.instance.item && (syst_status == red_status || syst_status == gray_status) || err) {
+                that.conn_retries[job_data.system.syst_id]++;
                 check_failed_conn(soap_client, job_data);
               }
-            }
-          });
-        }, 20000); // 3 retries with 20sec to valide in 1 min
+            });
+          }, 20000); // 3 retries with 20sec to valide in 1 min
+        } else {
+          that.deletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, '', null, job_data.system.sid);
+        }
       }
 
       async.waterfall([
@@ -1328,9 +1284,9 @@
 
         // if status has changed and is now inactive, delete pushgtw data
         if (syst_idx >= 0 && that.all_systems[syst_idx].status != job_data.system.syst_status && job_data.system.syst_status == 0) {
-          console.log('No system or no system connection active');
+          // console.log('No system or no system connection active')
           that.deletePrometheus(job_data.entity_id, 'scale', job_data.system.syst_id, "", null, job_data.system.sid);
-          cb('No system or no system connection active');
+          cb(_errors.no_system_conn);
         } else {
           // check if system is newly created, if so add it
           if (syst_idx < 0) {
@@ -1376,22 +1332,24 @@
             var temp_list_hosts = instances_list.map(i => i.ip_internal).filter((el, i, arr) => arr.indexOf(el) === i && Object.keys(that.all_systems_hosts).indexOf(el) < 0);
             // console.log('>> temp_list_hosts:', temp_list_hosts)
             // console.log('>> that.all_systems_hosts:', that.all_systems_hosts)
+
+            // get AWS EC2 IDs for those systems
             that.aws_cli.getEC2IDs(temp_list_hosts, that.all_systems_hosts, function (list_ids) {
               // [{ip:id},{},...]
               that.all_systems_hosts = Object.assign({}, list_ids, that.all_systems_hosts);
             });
 
             // delete prometheus data for sap instance that went inactive
-            if (instances_list.filter(x => x.status == 1 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0).length == 0) {
+            if (instances_list.filter(x => x.status == 0 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0).length == 0) {
               that.pushgtw_cli.delSerie('scale', { instance: job_data.system.syst_id });
             }
 
             // update up status for system, delete if not up
             var syst_status = check_system_status(result.instance.item, job_data.system.syst_id, job_data.system.sid, job_data.entity_id);
             if (syst_status == red_status || syst_status == gray_status) {
-              that.checkDeletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, "", null, job_data.system.sid);
-              main_soap_client = cli_data.soapcli;
-              cb(error_system_conn_failed);
+              // that.checkDeletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, "", null, job_data.system.sid)
+              // main_soap_client = cli_data.soapcli
+              cb(_errors.conn_failed, cli_data.soapcli);
             } else {
               that.pushgtw_cli.pushUpInstance('up', job_data.entity_id, job_data.system.syst_id, '', '', job_data.system.sid, 1);
               that.conn_retries[job_data.system.syst_id] = 0;
@@ -1399,7 +1357,7 @@
               cb(null, instances_list, job_data.system.auth_method, job_data.system.username, job_data.system.password, job_data.system.auth_method == 1 ? job_data.keys_buff : null, { 'is_encrypted': job_data.system.is_encrypted, 'is_direct': job_data.system.is_direct }, job_data);
             }
           } else {
-            cb(err);
+            cb(err, cli_data.soapcli);
           }
         });
       },
@@ -1408,7 +1366,7 @@
         var soap_clients = [];
         if (!all_instances || all_instances.filter(x => x.status == 1).length == 0) {
           that.pushgtw_cli.pushInstance('scale', results.syst._id);
-          cb('No active instances available', all_instances);
+          cb(_errors.no_active_instance, all_instances);
         } else {
           async.each(all_instances.filter(x => x.status == 1), function (inst, callback) {
             const http_s = conn.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
@@ -1462,19 +1420,35 @@
             cb(err, all_instances);
           });
         }
-      }], function (err, res_all_instances) {
+      }], function (err, waterfall_res) {
         if (err) {
-          // Objective is to alert asap if a system is down
-          // If there is an error connectiong to the system, we retry until the max_retries is reach or connection finally works.
-          // we do not wait for the next execution 5min later
-          if (err == error_system_conn_failed && main_soap_client) {
-            check_failed_conn(main_soap_client, job_data);
-          } else if (err && err.errno != 'ETIMEDOUT') {
-            console.error('call_sapcontrol init conn error,', err);
+          switch (err) {
+            case _errors.conn_failed:
+              console.error('>E ', _errors.conn_failed);
+              // Objective is to alert asap if a system is down
+              // If there is an error connectiong to the system, we retry until the max_retries is reach or connection finally works.
+              // we do not wait for the next execution 5min later
+              check_failed_conn(waterfall_res, job_data); // use soap client of errorneous conn
+              break;
+            case _errors.no_system_conn:
+              console.error('>E ', _errors.no_system_conn);
+              if (err && err.errno != 'ETIMEDOUT') {
+                console.error('call_sapcontrol init conn error:', err);
+              }
+              break;
+            case _errors.no_active_instance:
+              console.error('>E ', _errors.no_system_conn);
+              break;
+            default:
+              console.error('>E default');
+              console.error('SAP control WS not reachable:', err && err.address + ' ' + err.port);
+              break;
           }
+          queue_cb(err, {});
+        } else {
+          // send back the list instances for update by the scaler scheduler
+          queue_cb(null, { [job_data.system.syst_id]: waterfall_res });
         }
-        // send back the list instances for update by the scaler scheduler
-        queue_cb(null, { [job_data.system.syst_id]: res_all_instances });
       });
     },
 
@@ -1509,7 +1483,6 @@
         var alert = d.alert;
         var syst_id = alert.labels.instance;
         const min_instance_running = 1;
-        var updated_system_instances = {}; // keeps track of instance to stop / being stopped
 
         // console.log(' >> processing system ', syst_id)
 
@@ -1596,8 +1569,8 @@
         function (cli_data, async_cb) {
 
           // check if there is not a stop in progress for this instance
-          if (updated_system_instances[syst_id] == undefined || updated_system_instances[syst_id].filter(i => i.status == 2 && i.instancenr == alert.labels.sn).length == 0) {
-            // Set instance in stop WIP so they are not considered as active. Prevent from shutting down all AS.
+          if (that.updated_system_instances[syst_id] == undefined || that.updated_system_instances[syst_id].filter(i => i.status == 2 && i.instancenr == alert.labels.sn).length == 0) {
+            // Set instance in stop WIP so they are not considered as active. Prevent from shutting down all AS and trying to shut down same AS from the same alert when the stop takes more time than alert resending
             // set status == 2 for stop in progress
             var updated_instances_list = [];
             cli_data.payload.syst.instances.forEach(i => {
@@ -1607,7 +1580,7 @@
                 updated_instances_list.push(i);
               }
             });
-            updated_system_instances[syst_id] = updated_instances_list;
+            that.updated_system_instances[syst_id] = updated_instances_list;
 
             // call async now to prevent delay of DB update due to waiting for stop operations 
             async_cb();
@@ -1633,7 +1606,8 @@
                         soap_client.GetSystemInstanceList({}, function (err, result) {
                           if (!err) {
                             var inst_status = result.instance.item && result.instance.item.filter(i => i.instanceNr == sn);
-                            if (inst_status && inst_status[0] && inst_status[0].status != 'SAPControl-GREEN') {
+                            if (inst_status && inst_status[0] && inst_status[0].status == 'SAPControl-GRAY') {
+                              // if (inst_status && inst_status[0] && inst_status[0].status != 'SAPControl-GREEN') {
                               serie_cb();
                             } else {
                               check_stop_instance(soap_client, count - 1, wait_sec, sn);
@@ -1647,7 +1621,7 @@
                   }
                   check_stop_instance(cli_data.soapcli, nb_iterations, step_wait_sec * 1000, alert.labels.sn);
                 }, function (serie_cb) {
-                  console.log('trigger stop EC2 instance... ' + new Date());
+                  console.log('trigger stop EC2 instance ' + alert.labels.ip_internal + '... ' + new Date());
                   // Stop EC2 host
                   that.aws_cli.stopEC2s([alert.labels.ip_internal], serie_cb);
                 }], function (err) {
@@ -1670,7 +1644,9 @@
         // } else {
         //   console.log('System Central Instance ['+alert.labels.sn+'] cannot be stopped ')
         // }
-        queue_cb(null, updated_system_instances);
+        queue_cb(null, that.updated_system_instances);
+        // todo reinit instances status
+        // that.updated_system_instances[syst_id] = undefined
       }
 
       that.queue.process('webhook_exec', that.nb_workers, function (job, done) {
