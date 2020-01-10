@@ -107,7 +107,7 @@
       const groupings = tenantName != undefined && tenantName != '' ? { instance: systId + '' + tenantId } : { instance: systId };
       var req = '# TYPE status_up gauge\n' + 'status_up {instance="' + systId + tenantId + '",entity_id="' + entity_id + '",sid="' + sid + '"' + tenant + ' } ' + status + '\n';
       axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(groupings), req).catch(function (error) {
-        console.error(error);
+        console.error('pushUpInstance error:', error);
       });
       // delete status_up for sap hana SID that went singledb to MDC
       if (tenant != undefined && tenant != '') {
@@ -125,7 +125,7 @@
         req += 'status_instance_up {instance="' + systId + '",entity_id="' + entity_id + '",sid="' + sid + '",sn="' + i.instancenr + '"} ' + i.status + '\n';
       });
       axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(groupings), req).catch(function (error) {
-        console.error(error);
+        console.error('pushUpSAPInstance error:', error);
       });
     },
 
@@ -321,7 +321,7 @@
 
       // f = function name
       // syst = _id, sid
-      // instance = nr, hostname
+      // instance = nr, hostname, features
       // t = type
       // e = entity id
       // c = customer (id + name)
@@ -542,7 +542,11 @@
                       if (!restricted_kpis || restricted_kpis.length == 0) {
                           end_nodes.forEach(e => {
                               if (e) {
-                                  var labels = 'instance="' + syst._id + '",sid="' + syst.sid + '",category="' + e.category + '",type="' + e.type + '",entity_id="' + entity_id + '"'; //,hostname="'+ instance.hostname+'"'
+                                  // original worqloads version
+                                  // var labels = 'instance="'+syst._id+'",sid="'+ syst.sid+'",category="'+ e.category+'",type="'+ e.type+'",entity_id="'+ entity_id+'"'//,hostname="'+ instance.hostname+'"'
+                                  // Scaler with limited labels
+                                  var labels = 'instance="' + syst._id + '",sid="' + syst.sid + '",type="' + e.type + '",entity_id="' + entity_id + '"'; //,hostname="'+ instance.hostname+'"'
+                                  if (instance.features != undefined) labels += ',features="' + instance.features + '"';
                                   if (instance.sn != undefined) labels += ',sn="' + instance.sn + '"';
                                   if (rule_id != undefined) labels += ',rule_id="' + rule_id + '"';
                                   if (customer != undefined) labels += ',customer="' + customer.id + '__' + customer.name + '"';
@@ -560,7 +564,11 @@
                               if (e) {
                                   var kpi_name = def_kpi_name(t, e);
                                   if (restricted_kpis.indexOf(kpi_name) >= 0) {
-                                      var labels = 'instance="' + syst._id + '",sid="' + syst.sid + '",category="' + e.category + '",type="' + e.type + '",entity_id="' + entity_id + '"'; //,hostname="'+ instance.hostname+'"'
+                                      // original worqloads version
+                                      // var labels = 'instance="'+syst._id+'",sid="'+ syst.sid+'",category="'+ e.category+'",type="'+ e.type+'",entity_id="'+ entity_id+'"'//,hostname="'+ instance.hostname+'"'
+                                      // Scaler with limited labels
+                                      var labels = 'instance="' + syst._id + '",sid="' + syst.sid + '",type="' + e.type + '",entity_id="' + entity_id + '"'; //,hostname="'+ instance.hostname+'"'
+                                      if (instance.features != undefined) labels += ',features="' + instance.features + '"';
                                       if (instance.sn != undefined) labels += ',sn="' + instance.sn + '"';
                                       if (rule_id != undefined) labels += ',rule_id="' + rule_id + '"';
                                       if (customer != undefined) labels += ',customer="' + customer.id + '__' + customer.name + '"';
@@ -585,7 +593,7 @@
                   // ~= SM50 = current instance
                   // console.log('Result of (' + f + '@' + syst.sid + ')= ', result.workprocess.item);
                   const types = ['dia', 'upd', 'up2', 'enq', 'btc', 'spo'];
-                  const statuses = ['wait', 'hold', 'run', 'stop', 'ended', 'new'];
+                  const statuses = ['wait', 'hold', 'run', 'stop', 'ended', 'new', 'down'];
                   var res = {};
 
                   const def_kpi_name_ABAPGetWPTable = function (t, elt_Status) {
@@ -1618,6 +1626,7 @@
                               check_stop_instance(soap_client, count - 1, wait_sec, sn);
                             }
                           } else {
+                            // console.log('check_stop_instance err', err)
                             check_stop_instance(soap_client, count - 1, wait_sec, sn);
                           }
                         });
@@ -1769,13 +1778,15 @@
 
                 async.series([function (serie_cb) {
                   console.log('trigger stop SAP instance... ' + new Date() + ' of :', { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn });
-                  sapctrl_process_func$1.call(that, err, result, d.action.name, { _id: cli_data.payload.syst._id, sid: cli_data.payload.syst.sid }, { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn }, null, d.groupLabels.entity_id, d.commonLabels.customer, [], null, serie_cb);
+                  sapctrl_process_func$1.call(that, err, result, d.action.name, { _id: cli_data.payload.syst._id, sid: cli_data.payload.syst.sid }, // system
+                  { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn, features: cli_data.payload.syst.instances.filter(i => i.instancenr == alert.labels.sn)[0].features.join('-') }, // instance
+                  null, d.groupLabels.entity_id, d.commonLabels.customer, [], null, serie_cb);
                   // sapctrl_process_func.call(that, err, result, job_data.func.name, { _id: job_data.system.syst_id, sid: job_data.system.sid }, { ip_internal: client.i, hostname: client.h, sn: client.n } , job_data.func.type , job_data.entity_id, job_data.customer, job_data.restricted_kpis, job_data.rule_id, serie_cb )
                 }, function (serie_cb) {
-                  console.log('waiting for instance to actually stop within timeout ... ' + new Date());
                   const step_wait_sec = 20;
                   const timeout_wait_sec = 300;
                   const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+                  console.log('waiting for instance to actually stop within timeout ' + nb_iterations + ' times ... ' + new Date());
 
                   function check_stop_instance(soap_client, count, wait_sec, sn) {
                     if (count > 0) {
