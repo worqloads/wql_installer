@@ -1404,7 +1404,7 @@
               if (client.f.indexOf(job_data.func.type) >= 0 || job_data.func.type == 'ALL') {
                 sapcontrol_operations$1[job_data.func.name].call(client.c, {}, (err, result) => {
                   // if (err) { console.error('call sapcontrol error:',err) }
-                  sapctrl_process_func$1.call(that, err, result, job_data.func.name, { _id: job_data.system.syst_id, sid: job_data.system.sid }, { ip_internal: client.i, hostname: client.h, sn: client.n }, job_data.func.type, job_data.entity_id, job_data.customer, job_data.restricted_kpis, job_data.rule_id, async_cb);
+                  sapctrl_process_func$1.call(that, err, result, job_data.func.name, { _id: job_data.system.syst_id, sid: job_data.system.sid }, { ip_internal: client.i, hostname: client.h, sn: client.n, features: client.f.join('|') }, job_data.func.type, job_data.entity_id, job_data.customer, job_data.restricted_kpis, job_data.rule_id, async_cb);
                   // async.series([
                   //   function(serie_cb) {
                   //     console.log('trigger stop SAP instance... '+new Date())
@@ -1779,7 +1779,7 @@
                 async.series([function (serie_cb) {
                   console.log('trigger stop SAP instance... ' + new Date() + ' of :', { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn });
                   sapctrl_process_func$1.call(that, err, result, d.action.name, { _id: cli_data.payload.syst._id, sid: cli_data.payload.syst.sid }, // system
-                  { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn, features: cli_data.payload.syst.instances.filter(i => i.instancenr == alert.labels.sn)[0].features.join('-') }, // instance
+                  { ip_internal: alert.labels.ip_internal, hostname: alert.labels.hostname, sn: alert.labels.sn }, // instance
                   null, d.groupLabels.entity_id, d.commonLabels.customer, [], null, serie_cb);
                   // sapctrl_process_func.call(that, err, result, job_data.func.name, { _id: job_data.system.syst_id, sid: job_data.system.sid }, { ip_internal: client.i, hostname: client.h, sn: client.n } , job_data.func.type , job_data.entity_id, job_data.customer, job_data.restricted_kpis, job_data.rule_id, serie_cb )
                 }, function (serie_cb) {
