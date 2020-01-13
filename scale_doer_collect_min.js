@@ -1681,6 +1681,12 @@
             }], function (err) {
               if (err) {
                 console.error('Stop instances error:', err);
+              } else {
+                that.updated_system_instances[syst_id].forEach((instance, idx) => {
+                  if (instance.instancenr == alert.labels.sn) {
+                    that.updated_system_instances[idx].status = 0;
+                  }
+                });
               }
               // async_cb()
             });
@@ -1797,7 +1803,15 @@
                   var cli_data = array_res[2];
                   if (cli_data && cli_data.soapcli) {
                     sapcontrol_operations$1[d.action.name].call(cli_data.soapcli, {}, err => {
-                      if (err) console.error(err);
+                      if (err) {
+                        console.error('starting sap instance error:', err);
+                      } else {
+                        that.updated_system_instances[syst_id].forEach((instance, idx) => {
+                          if (instance.instancenr == syst_instance_to_start.instancenr) {
+                            that.updated_system_instances[idx].status = 1;
+                          }
+                        });
+                      }
                     }); // end sapcontrol_operations
                   } else {
                     console.error('No SOAP Client created');
@@ -1821,6 +1835,11 @@
         }
       }
 
+      function do_update_scaling_instance(d, queue_cb) {
+        console.log('do_update_scaling_instance:', d, updated_system_instances);
+        queue_cb(null, updated_system_instances[d.syst_id].filter(i => i.instancenr == d.instance_nr)[0]);
+      }
+
       that.queue.process('webhook_exec', that.nb_workers, function (job, done) {
         if (job.data.action && job.data.alerts && job.data.severity != undefined) {
           switch (job.data.action.type) {
@@ -1837,6 +1856,9 @@
                   break;
                 case 'Start':
                   do_start(job.data, done);
+                  break;
+                case 'UpdateScalingInstance':
+                  do_update_scaling_instance(job.data, done);
                   break;
                 default:
                   done();
