@@ -609,13 +609,15 @@
                           res[def_kpi_name_ABAPGetWPTable(t, s)] = res[def_kpi_name_ABAPGetWPTable(t, s)] ? Object.assign({}, res[def_kpi_name_ABAPGetWPTable(t, s)], { [ty]: 0 }) : { [ty]: 0 };
                       });
                   });
-                  result.workprocess.item.forEach(i => {
-                      if (res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())] && res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())][i.Typ.toLowerCase()] != undefined) {
-                          res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())][i.Typ.toLowerCase()]++;
-                      } else {
-                          console.error('not definition for ', def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase()));
-                      }
-                  });
+                  if (result.workprocess && result.workprocess.item) {
+                      result.workprocess.item.forEach(i => {
+                          if (res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())] && res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())][i.Typ.toLowerCase()] != undefined) {
+                              res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())][i.Typ.toLowerCase()]++;
+                          } else {
+                              console.error('not definition for ', def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase()));
+                          }
+                      });
+                  }
 
                   var labels = 'instance="' + syst._id + '",sid="' + syst.sid + '",type="' + t + '",entity_id="' + entity_id + '"'; //,hostname="'+ instance.hostname+'"'
                   if (instance.hostname != undefined) labels += ',hostname="' + instance.hostname + '"';
@@ -1379,7 +1381,8 @@
           if (!err && result && result.instance && result.instance.item) {
             // console.log('GetSystemInstanceList '+ cli_data.payload.syst && cli_data.payload.syst.sid+' :',  result.instance.item);
             var instances_list = result.instance.item.map(x => {
-              return {
+              const temp_ip_internal = job_data.system.instances.filter(i => i.hostname.toLowerCase() == x.hostname.toLowerCase() && i.instancenr == ('' + x.instanceNr).padStart(2, '0'));
+              return temp_ip_internal && temp_ip_internal[0] && temp_ip_internal[0].ip_internal ? {
                 'hostname': x.hostname,
                 'ip_internal': job_data.system.instances.filter(i => i.hostname.toLowerCase() == x.hostname.toLowerCase() && i.instancenr == ('' + x.instanceNr).padStart(2, '0'))[0].ip_internal, //that.mapping_hostname_ip[x.hostname],
                 'instancenr': ('' + x.instanceNr).padStart(2, '0'),
@@ -1387,8 +1390,9 @@
                 // 'id' : crypto.createHash('md5').update(x.hostname+x.instanceNr+x.features+x.dispstatus).digest("hex"),
                 // 'role': x.features.split('|'),
                 'status': x.dispstatus == green_status ? 1 : 0
-              };
-            }) || [];
+              } : {};
+              // filter to handle situation when there is no instance with the requested ip internal
+            }).filter(i => i.ip_internal != undefined) || [];
 
             // add new instances host in that.all_systems_hosts
             var temp_list_hosts = instances_list.map(i => i.ip_internal).filter((el, i, arr) => arr.indexOf(el) === i && Object.keys(that.all_systems_hosts).indexOf(el) < 0);
@@ -1458,19 +1462,6 @@
                 sapcontrol_operations$1[job_data.func.name].call(client.c, {}, (err, result) => {
                   // if (err) { console.error('call sapcontrol error:',err) }
                   sapctrl_process_func$1.call(that, err, result, job_data.func.name, { _id: job_data.system.syst_id, sid: job_data.system.sid }, { ip_internal: client.i, hostname: client.h, sn: client.n, features: client.f.join('|') }, job_data.func.type, job_data.entity_id, job_data.customer, job_data.restricted_kpis, job_data.rule_id, async_cb);
-                  // async.series([
-                  //   function(serie_cb) {
-                  //     console.log('trigger stop SAP instance... '+new Date())
-                  //     sapctrl_process_func.call(that, err, result, job_data.func.name, { _id: job_data.system.syst_id, sid: job_data.system.sid }, { ip_internal: client.i, hostname: client.h, sn: client.n } , job_data.func.type , job_data.entity_id, job_data.customer, job_data.restricted_kpis, job_data.rule_id, serie_cb )
-                  //   },
-                  //   function(serie_cb) {
-                  //     console.log('trigger stop EC2 instance... '+new Date())
-                  //     // Stop EC2 host
-                  //     that.aws_cli.stopEC2s([client.i], serie_cb)
-                  //   }
-                  // ], function(err) {
-                  //   async_cb()
-                  // })
                 });
               } else async_cb();
             }, each_err => {
@@ -1684,7 +1675,7 @@
               } else {
                 that.updated_system_instances[syst_id].forEach((instance, idx) => {
                   if (instance.instancenr == alert.labels.sn) {
-                    that.updated_system_instances[idx].status = 0;
+                    that.updated_system_instances[syst_id][idx].status = 0;
                   }
                 });
               }
@@ -1733,9 +1724,9 @@
             if (syst_instance_to_start) {
 
               // check if there is not a start in progress for this instance
-              if (that.updated_system_instances[syst_id] == undefined || that.updated_system_instances[syst_id].filter(i => i.status == 3 && i.instancenr == syst_instance_to_start.instancenr).length == 0) {
+              if (that.updated_system_instances[syst_id] == undefined || that.updated_system_instances[syst_id].filter(i => i.status == 3 /*&& i.instancenr == syst_instance_to_start.instancenr*/).length == 0) {
 
-                console.log(' ======= ' + (curr_system != undefined && curr_system.sid || '-No System-') + ' alert ' + alert.labels.alertname + ' - ' + alert.labels.ip_internal + '===========');
+                console.log(' ======= ' + (curr_system != undefined && curr_system.sid || '-No System-') + ' alert ' + alert.labels.alertname + ' - ' + (alert.labels.ip_internal != undefined && alert.labels.ip_internal) + '===========');
 
                 // Set instance in start WIP so they are not considered as active. Prevent from shutting down all AS and trying to shut down same AS from the same alert when the stop takes more time than alert resending
                 // set status == 3 for start in progress
@@ -1808,7 +1799,7 @@
                       } else {
                         that.updated_system_instances[syst_id].forEach((instance, idx) => {
                           if (instance.instancenr == syst_instance_to_start.instancenr) {
-                            that.updated_system_instances[idx].status = 1;
+                            that.updated_system_instances[syst_id][idx].status = 1;
                           }
                         });
                       }
@@ -1836,41 +1827,41 @@
       }
 
       function do_update_scaling_instance(d, queue_cb) {
-        console.log('do_update_scaling_instance:', d, updated_system_instances);
-        queue_cb(null, updated_system_instances[d.syst_id].filter(i => i.instancenr == d.instance_nr)[0]);
+        // console.log('do_update_scaling_instance:',d,that.updated_system_instances)
+        queue_cb(null, that.updated_system_instances[d.syst_id].filter(i => i.instancenr == d.instance_nr)[0]);
       }
 
       that.queue.process('webhook_exec', that.nb_workers, function (job, done) {
-        if (job.data.action && job.data.alerts && job.data.severity != undefined) {
-          switch (job.data.action.type) {
-            case 0:
-              // communication
-              // do_action(job.data, done)
-              done();
-              break;
-            case 1:
-              // action
-              switch (job.data.action.name) {
-                case 'Stop':
-                  do_stop(job.data, done);
-                  break;
-                case 'Start':
-                  do_start(job.data, done);
-                  break;
-                case 'UpdateScalingInstance':
-                  do_update_scaling_instance(job.data, done);
-                  break;
-                default:
-                  done();
-                  break;
-              }
-              break;
-            default:
-              console.log('action type not supported:', job.data.action.type);
-              done();
-              break;
-          }
-        } else {
+        if (job.data.action /*&& job.data.alerts && job.data.severity != undefined*/) {
+            switch (job.data.action.type) {
+              case 0:
+                // communication
+                // do_action(job.data, done)
+                done();
+                break;
+              case 1:
+                // action
+                switch (job.data.action.name) {
+                  case 'Stop':
+                    if (!job.data.alerts) done();else do_stop(job.data, done);
+                    break;
+                  case 'Start':
+                    if (!job.data.alerts) done();else do_start(job.data, done);
+                    break;
+                  case 'UpdateScalingInstance':
+                    do_update_scaling_instance(job.data, done);
+                    break;
+                  default:
+                    done();
+                    break;
+                }
+                break;
+              default:
+                console.log('action type not supported:', job.data.action.type);
+                done();
+                break;
+            }
+          } else {
           done();
         }
       });
