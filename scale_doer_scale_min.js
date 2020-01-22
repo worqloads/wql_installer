@@ -1190,7 +1190,7 @@
     },
 
     // create a sap client and provides it to the callback function
-    new_soap_client: function (url, auth, data, cb) {
+    new_soap_client: function (url, auth, data, options = {}, cb) {
       soap.createClient(url + '?wsdl', { returnFault: true }, function (err, client) {
         if (err || !client) {
           cb(err);
@@ -1208,7 +1208,7 @@
           client.setEndpoint(url + 'SAPControl.cgi');
           cb(null, { soapcli: client, payload: data });
         }
-      });
+      }, options);
     },
 
     // init connection to redis & HANA db
@@ -1329,7 +1329,7 @@
             }, {
               pfx: job_data.system.auth_method == 1 && job_data.keys_buff
             }]
-          }, job_data, cb);
+          }, job_data, {}, cb);
         }
       },
       // Get list of instances and check system status
@@ -1403,7 +1403,7 @@
               }, {
                 pfx: pfx_certif
               }]
-            }, null, function (soap_err, client) {
+            }, null, {}, function (soap_err, client) {
               if (soap_err) {
                 console.error('error connecting to instance: ', inst, 'with error: ', soap_err);
                 callback();
@@ -1490,22 +1490,29 @@
           switch (job.data.type) {
             case 0:
               // sap system
-
+              const soap_timeout_sec = 10000;
+              const green_status = 'SAPControl-GREEN';
+              const _errors = {
+                'conn_failed': 'Connection to SAP system failed',
+                'ws_not_reachable': 'SAP control WS not reachable',
+                'no_system_conn': 'No SAP system or no system connection active',
+                'no_active_instance': 'No active SAP instance available'
+              };
               async.waterfall([
               // connect to the entry point instance and provide soapclient
               function (cb) {
-                const http_s = job_data.system.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
-                const soap_url = http_s.protocol + '://' + job_data.system.ip_internal + ':5' + job_data.system.sn + http_s.port_suffix + '/';
+                const http_s = job.data.system.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
+                const soap_url = http_s.protocol + '://' + job.data.system.ip_internal + ':5' + job.data.system.sn + http_s.port_suffix + '/';
 
                 that.new_soap_client(soap_url, {
-                  method: job_data.system.auth_method, // method is the index of options
+                  method: job.data.system.auth_method, // method is the index of options
                   options: [{
-                    user: job_data.system.username,
-                    pwd: job_data.system.password
+                    user: job.data.system.username,
+                    pwd: job.data.system.password
                   }, {
-                    pfx: job_data.system.auth_method == 1 && job_data.keys_buff
+                    pfx: job.data.system.auth_method == 1 && job.data.keys_buff
                   }]
-                }, job_data, cb);
+                }, job.data, { timeout: soap_timeout_sec }, cb);
               },
               // Get list of instances and check system status
               function (cli_data, cb) {
@@ -1531,7 +1538,7 @@
                           };
                         });
 
-                        cb(null, instances_list, job_data.system.auth_method, job_data.system.username, job_data.system.password, job_data.system.auth_method == 1 ? job_data.keys_buff : null, { 'is_encrypted': job_data.system.is_encrypted, 'is_direct': job_data.system.is_direct }, job_data);
+                        cb(null, instances_list, job.data.system.auth_method, job.data.system.username, job.data.system.password, job.data.system.auth_method == 1 ? job.data.keys_buff : null, { 'is_encrypted': job.data.system.is_encrypted, 'is_direct': job.data.system.is_direct }, job.data);
                       } else {
                         cb(_errors.ws_not_reachable, err && err.address + ' ' + err.port);
                       }
@@ -1554,7 +1561,7 @@
                       }, {
                         pfx: pfx_certif
                       }]
-                    }, null, function (soap_err, client) {
+                    }, null, { timeout: soap_timeout_sec }, function (soap_err, client) {
                       if (soap_err) {
                         if (err.code) {
                           // conn refused
@@ -1570,7 +1577,7 @@
                   }, function (err) {
 
                     async.each(soap_clients, (client, async_cb) => {
-                      client.AccessCheck({ function: 'Start' }, function (err, result) {
+                      client.c.AccessCheck({ function: 'Start' }, function (err, result) {
                         if (err) {
                           all_instances.filter((i, idx) => {
                             if (i.instancenr == client.n) {
@@ -1722,7 +1729,7 @@
                 }]
               }, {
                 'instances': curr_system.instances
-              }, cb);
+              }, {}, cb);
             } else {
               cb('System Instance cannot be stop due to minimal running instance');
             }
@@ -1878,7 +1885,7 @@
                       }, {
                         pfx: pfx_certif
                       }]
-                    }, {}, serie_cb);
+                    }, {}, {}, serie_cb);
                   } else {
                     serie_cb('System Instance cannot be started due to maximal running instances');
                   }
