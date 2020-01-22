@@ -1,14 +1,15 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('axios'), require('async'), require('moment'), require('aws-sdk'), require('kue'), require('cron'), require('soap')) :
-  typeof define === 'function' && define.amd ? define(['axios', 'async', 'moment', 'aws-sdk', 'kue', 'cron', 'soap'], factory) :
-  (global.scaledoercollect = factory(global.axios,global.async,global.moment,global.awsSdk,global.kue,global.cron,global.soap));
-}(this, (function (axios,async,moment,awsSdk,kue,cron,soap) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('axios'), require('async'), require('moment'), require('aws-sdk'), require('kue'), require('fs'), require('cron'), require('soap')) :
+  typeof define === 'function' && define.amd ? define(['axios', 'async', 'moment', 'aws-sdk', 'kue', 'fs', 'cron', 'soap'], factory) :
+  (global.scaledoercollect = factory(global.axios,global.async,global.moment,global.awsSdk,global.kue,global.fs,global.cron,global.soap));
+}(this, (function (axios,async,moment,awsSdk,kue,fs,cron,soap) { 'use strict';
 
   axios = axios && axios.hasOwnProperty('default') ? axios['default'] : axios;
   async = async && async.hasOwnProperty('default') ? async['default'] : async;
   moment = moment && moment.hasOwnProperty('default') ? moment['default'] : moment;
   awsSdk = awsSdk && awsSdk.hasOwnProperty('default') ? awsSdk['default'] : awsSdk;
   kue = kue && kue.hasOwnProperty('default') ? kue['default'] : kue;
+  fs = fs && fs.hasOwnProperty('default') ? fs['default'] : fs;
   cron = cron && cron.hasOwnProperty('default') ? cron['default'] : cron;
   soap = soap && soap.hasOwnProperty('default') ? soap['default'] : soap;
 
@@ -1103,7 +1104,6 @@
   // ----------------------------------------------------------------------------
 
   //  var mongoose =  require('mongoose')
-  //  , fs =       require('fs')
   var { sapcontrol_operations: sapcontrol_operations$1, sapctrl_process_func: sapctrl_process_func$1 } = sapctrl_helpers;
   // , axios = require('axios')
 
@@ -1129,6 +1129,7 @@
     this.cronjob = cron.CronJob;
 
     // Internal attributes
+    this.sending_sslcertifs = {};
     this.company = '';
     this.all_systems = [];
     this.all_systems_hosts = [];
@@ -1140,6 +1141,9 @@
     this.conn_retries_delay_msec = 40000; // 40 sec
     this.keepalive_delay_msec = 60000;
     this.queue = null;
+
+    // directory of sap systems certificates for sap ctrl authentification
+    this.certif_dir = __dirname + '/../.keys';
 
     // Integration components
     this.pushgtw_cli = new pushcli(prometheus[env].pushgateway_protocole + '://' + (prometheus[env].pushgateway_credentials ? prometheus[env].pushgateway_credentials + '@' : '') + prometheus[env].pushgateway_host + ':' + prometheus[env].pushgateway_port + '/pshgtw');
@@ -1236,7 +1240,37 @@
         console.error('Oops... redis queue error', err);
       });
 
+      // check for local SSL key dir existence, create if needed
+      if (!fs.existsSync(that.certif_dir)) {
+        fs.mkdirSync(that.certif_dir);
+      }
+
       next.call(that);
+    },
+
+    update_sending_ssl: function (system_id, pfx_buffer, callback) {
+      const that = this;
+
+      if (system_id) {
+        // look for system_id file = certif
+        fs.access(that.certif_dir + '/' + system_id + '.pfx', fs.F_OK, err => {
+          if (err) {
+            // certif does not exists at file level
+            if (!pfx_buffer) {
+              fs.writeFile(that.certif_dir + '/' + system_id + '.pfx', pfx_buffer, function (err) {
+                that.sending_sslcertifs[system_id] = !!err;
+                callback();
+              });
+            } else {
+              that.sending_sslcertifs[system_id] = true;
+              callback();
+            }
+          } else {
+            that.sending_sslcertifs[system_id] = false;
+            callback();
+          }
+        });
+      } else callback();
     },
 
     call_sapcontrol: function (job_data, queue_cb) {
@@ -1299,6 +1333,10 @@
       }
 
       async.waterfall([
+      // check system certificate
+      function (cb) {
+        that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, cb);
+      },
       // connect to the entry point instance and provide soapclient
       function (cb) {
         var syst_idx = that.all_systems.map(x => x.id).indexOf(job_data.system.syst_id);
@@ -1499,6 +1537,10 @@
                 'no_active_instance': 'No active SAP instance available'
               };
               async.waterfall([
+              // check system certificate
+              function (cb) {
+                that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, cb);
+              },
               // connect to the entry point instance and provide soapclient
               function (cb) {
                 const http_s = job.data.system.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
@@ -1689,6 +1731,10 @@
 
         var curr_system = d.system;
         async.waterfall([
+        // check system certificate
+        function (cb) {
+          that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, cb);
+        },
         // connect to the entry point instance and provide soapclient
         function (cb) {
           var features_of_instancenr = {};
@@ -1810,6 +1856,10 @@
         if (curr_system) {
 
           async.waterfall([
+          // check system certificate
+          function (cb) {
+            that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, cb);
+          },
           // init ec2 ids
           function (async_cb) {
             // GET ALL Inactive SAP SYSTEMS & relatad Cloud VMs
