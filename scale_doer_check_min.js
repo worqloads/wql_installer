@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('axios'), require('async'), require('moment'), require('aws-sdk'), require('kue'), require('cron'), require('soap')) :
   typeof define === 'function' && define.amd ? define(['axios', 'async', 'moment', 'aws-sdk', 'kue', 'cron', 'soap'], factory) :
-  (global.scaledoerscale = factory(global.axios,global.async,global.moment,global.awsSdk,global.kue,global.cron,global.soap));
+  (global.scaledoercheck = factory(global.axios,global.async,global.moment,global.awsSdk,global.kue,global.cron,global.soap));
 }(this, (function (axios,async,moment,awsSdk,kue,cron,soap) { 'use strict';
 
   axios = axios && axios.hasOwnProperty('default') ? axios['default'] : axios;
@@ -1976,14 +1976,14 @@
 
   var myenv = process.env.NODE_ENV || 'production';
   var scaleScaleDoer = new scaledoer(myenv);
-  scaleScaleDoer.init(redis[myenv], worker[myenv], scaleScaleDoer.scale);
+  scaleScaleDoer.init(redis[myenv], worker[myenv], scaleScaleDoer.checkconnection);
 
   process.on('exit', function (code) {
     return console.log('! Webhook Worker ! About to exit with code ' + code);
   });
 
-  var scale_doer_scale = {};
+  var scale_doer_check = {};
 
-  return scale_doer_scale;
+  return scale_doer_check;
 
 })));

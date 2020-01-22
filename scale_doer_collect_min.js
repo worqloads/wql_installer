@@ -1113,7 +1113,6 @@
   // Internal librairies
   // -----------------------------------------------------------------------------
 
-  // , Licenser = require('./licenser.js')
 
   //kue.app.listen(3000);
 
@@ -1129,17 +1128,8 @@
 
     this.cronjob = cron.CronJob;
 
-    this.ALL_SOURCE = -1;
-    this.SAP_SOURCE = 2;
-
-    this.kpiname_separator = '_';
-    this.kpi_prefix_sap = 'sap' + this.kpiname_separator;
-
     // Internal attributes
     this.company = '';
-    // this.systems_all = [];
-    // this.systems_all_realtime = []; // *_realtime: most up to day info for delta identification
-    // this.systems_sap_realtime = [];
     this.all_systems = [];
     this.all_systems_hosts = [];
     this.updated_system_instances = {}; // keeps track of instance to stop / being stopped
@@ -1150,12 +1140,9 @@
     this.conn_retries_delay_msec = 40000; // 40 sec
     this.keepalive_delay_msec = 60000;
     this.queue = null;
-    // this.refresh_info_freq = '0 * * * * *'; // every minutes. freq to refresh info of current collectors, entities, systems, ...
-    this.licensecheckfreq = '0 0 0 * * *'; // daily license check
 
-    // Prometheus
+    // Integration components
     this.pushgtw_cli = new pushcli(prometheus[env].pushgateway_protocole + '://' + (prometheus[env].pushgateway_credentials ? prometheus[env].pushgateway_credentials + '@' : '') + prometheus[env].pushgateway_host + ':' + prometheus[env].pushgateway_port + '/pshgtw');
-
     this.aws_cli = new awsmng();
   }
 
@@ -1206,7 +1193,6 @@
     new_soap_client: function (url, auth, data, cb) {
       soap.createClient(url + '?wsdl', { returnFault: true }, function (err, client) {
         if (err || !client) {
-          // VM server is not running or connextion to WSDL is lost
           cb(err);
         } else {
           switch (auth.method) {
@@ -1226,8 +1212,8 @@
     },
 
     // init connection to redis & HANA db
-    // init : function (redis_config, worker_config, hana_enabled, keepalive_hana, next) {
-    init: function (redis_config, worker_config, options, next) {
+    // init : function (redis_config, worker_config, next) {
+    init: function (redis_config, worker_config, next) {
       var that = this;
       // Load from company id from config file
       that.company = worker_config['company'];
@@ -1238,12 +1224,6 @@
       // ---------------------------------------------------------------------------
 
       console.log("! ScaleDoer init ! start  ! (now=" + new Date().toJSON() + ")");
-
-      // Check if license is valid
-      // Not needed for SaaS version
-      if (options.licence_check && !that.licenser.selfValidateLicense()) {
-        process.exit(1);
-      }
 
       // Initialize queue for engines communications
       that.queue = kue.createQueue({
@@ -1256,30 +1236,7 @@
         console.error('Oops... redis queue error', err);
       });
 
-      // Find all collectors attached to any systems (active ou not) and to the entities of watcher's company
-      // refresh_context_info(true)
-
       next.call(that);
-
-      // Plan recurrent execution
-      // ---------------------------------------------------------------------------
-
-      // Not needed for SaaS version
-      // Scheduling next license checks
-      if (options.licence_check) {
-        new that.cronjob(that.licensecheckfreq, function () {
-          console.log('! check license validity ! freq = ' + that.licensecheckfreq);
-          if (!that.licenser.selfValidateLicense()) {
-            process.exit(1);
-          }
-        }).start();
-      }
-
-      // Scheduling next refresh info
-      // new that.cronjob( that.refresh_info_freq, function() {
-      //   // console.log('_____ refresh information with freq = ' + that.refresh_info_freq);
-      //   refresh_context_info(false)
-      // }).start();
     },
 
     call_sapcontrol: function (job_data, queue_cb) {
@@ -1381,7 +1338,8 @@
           if (!err && result && result.instance && result.instance.item) {
             // console.log('GetSystemInstanceList '+ cli_data.payload.syst && cli_data.payload.syst.sid+' :',  result.instance.item);
             var instances_list = result.instance.item.map(x => {
-              const temp_ip_internal = job_data.system.instances.filter(i => i.hostname.toLowerCase() == x.hostname.toLowerCase() && i.instancenr == ('' + x.instanceNr).padStart(2, '0'));
+              const temp_ip_internal = job_data.system.instances.filter(i => i.hostname.toLowerCase() == x.hostname.toLowerCase() && i.instancenr == ('' + x.instanceNr).padStart(2, '0') && i.status < 2 // to consider only stable instances
+              );
               return temp_ip_internal && temp_ip_internal[0] && temp_ip_internal[0].ip_internal ? {
                 'hostname': x.hostname,
                 'ip_internal': job_data.system.instances.filter(i => i.hostname.toLowerCase() == x.hostname.toLowerCase() && i.instancenr == ('' + x.instanceNr).padStart(2, '0'))[0].ip_internal, //that.mapping_hostname_ip[x.hostname],
@@ -1517,6 +1475,144 @@
           //   console.log('....mapping:', that.mapping_hostname_ip)
           that.call_sapcontrol(job.data, done);
           // })
+        } else {
+          done();
+        }
+      });
+    },
+
+    // Check connections to sap systems, cloud
+    checkconnection: function () {
+      var that = this;
+      that.queue.process('checkconn_exec', that.nb_workers, function (job, done) {
+        // console.log('consum NAK queue req:', job.data.systId)
+        if (job.data.type != undefined && job.data.system) {
+          switch (job.data.type) {
+            case 0:
+              // sap system
+
+              async.waterfall([
+              // connect to the entry point instance and provide soapclient
+              function (cb) {
+                const http_s = job_data.system.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
+                const soap_url = http_s.protocol + '://' + job_data.system.ip_internal + ':5' + job_data.system.sn + http_s.port_suffix + '/';
+
+                that.new_soap_client(soap_url, {
+                  method: job_data.system.auth_method, // method is the index of options
+                  options: [{
+                    user: job_data.system.username,
+                    pwd: job_data.system.password
+                  }, {
+                    pfx: job_data.system.auth_method == 1 && job_data.keys_buff
+                  }]
+                }, job_data, cb);
+              },
+              // Get list of instances and check system status
+              function (cli_data, cb) {
+                // check for authorization issue
+                cli_data.soapcli.AccessCheck({ function: 'Start' }, function (err, result) {
+                  if (err) {
+                    if (err.body) {
+                      console.error('AccessCheck RC:', err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]);
+                      cb(err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]);
+                    } else cb(err);
+                  } else {
+
+                    cli_data.soapcli.GetSystemInstanceList({}, function (err, result) {
+
+                      if (!err && result && result.instance && result.instance.item) {
+                        // console.log('GetSystemInstanceList '+ cli_data.payload.syst && cli_data.payload.syst.sid+' :',  result.instance.item);
+                        var instances_list = result.instance.item.map(x => {
+                          return {
+                            'hostname': x.hostname,
+                            'instancenr': ('' + x.instanceNr).padStart(2, '0'),
+                            'features': x.features.split('|'),
+                            'status': x.dispstatus == green_status ? 1 : 0
+                          };
+                        });
+
+                        cb(null, instances_list, job_data.system.auth_method, job_data.system.username, job_data.system.password, job_data.system.auth_method == 1 ? job_data.keys_buff : null, { 'is_encrypted': job_data.system.is_encrypted, 'is_direct': job_data.system.is_direct }, job_data);
+                      } else {
+                        cb(_errors.ws_not_reachable, err && err.address + ' ' + err.port);
+                      }
+                    });
+                  }
+                });
+              }, function (all_instances, auth_method, username, password, pfx_certif, conn, results, cb) {
+                var soap_clients = [];
+                if (!all_instances || all_instances.length == 0) {
+                  cb(null, []);
+                } else {
+                  async.eachOf(all_instances, function (inst, idx, callback) {
+                    const http_s = conn.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
+                    const soap_url = http_s.protocol + '://' + inst.hostname + ':5' + inst.instancenr + http_s.port_suffix + '/';
+                    that.new_soap_client(soap_url, {
+                      method: auth_method, // method is the index of options
+                      options: [{
+                        user: username,
+                        pwd: password
+                      }, {
+                        pfx: pfx_certif
+                      }]
+                    }, null, function (soap_err, client) {
+                      if (soap_err) {
+                        if (err.code) {
+                          // conn refused
+                          all_instances[idx].status = -1;
+                          all_instances[idx] = Object.assign(all_instances[idx], { error: err.code });
+                        }
+                        console.error('error connecting to instance: ', inst, 'with error: ', soap_err);
+                      } else {
+                        soap_clients.push({ c: client.soapcli, f: inst.features, n: inst.instancenr, h: inst.hostname });
+                        callback();
+                      }
+                    });
+                  }, function (err) {
+
+                    async.each(soap_clients, (client, async_cb) => {
+                      client.AccessCheck({ function: 'Start' }, function (err, result) {
+                        if (err) {
+                          all_instances.filter((i, idx) => {
+                            if (i.instancenr == client.n) {
+                              all_instances[idx].status = -1;
+                              all_instances[idx] = Object.assign(all_instances[idx], { error: err.body ? err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1] : err });
+                              return true;
+                            }
+                          });
+                        }
+                      });
+                      async_cb();
+                    }, each_err => {
+                      if (each_err) {
+                        console.error('call_sapcontrol exec operations error:', each_err);
+                      }
+                      cb(err, all_instances);
+                    });
+                  });
+                }
+              }], function (err, all_instances) {
+                if (err) {
+                  if (err.code) {
+                    // conn refused, from soap client error
+                    done(err.code);
+                  } else {
+                    // authorization error on main soap client (system central instance)
+                    done(err.code);
+                  }
+                } else {
+                  done(null, all_instances);
+                }
+              });
+
+              break;
+            case 1:
+              // aws
+
+              break;
+            default:
+              done();
+              break;
+          }
         } else {
           done();
         }
@@ -1673,6 +1769,8 @@
               if (err) {
                 console.error('Stop instances error:', err);
               } else {
+
+                // todo check instance is correctly stopped before confirmation
                 that.updated_system_instances[syst_id].forEach((instance, idx) => {
                   if (instance.instancenr == alert.labels.sn) {
                     that.updated_system_instances[syst_id][idx].status = 0;
@@ -1726,7 +1824,7 @@
               // check if there is not a start in progress for this instance
               if (that.updated_system_instances[syst_id] == undefined || that.updated_system_instances[syst_id].filter(i => i.status == 3 /*&& i.instancenr == syst_instance_to_start.instancenr*/).length == 0) {
 
-                console.log(' ======= ' + (curr_system != undefined && curr_system.sid || '-No System-') + ' alert ' + alert.labels.alertname + ' - ' + (alert.labels.ip_internal != undefined && alert.labels.ip_internal) + '===========');
+                console.log(' ======= ' + (curr_system != undefined && curr_system.sid || '-No System-') + ' alert ' + alert.labels.alertname + ' - ' + (alert.labels.ip_internal != undefined && alert.labels.ip_internal || '-No NR-') + '===========', syst_instance_to_start);
 
                 // Set instance in start WIP so they are not considered as active. Prevent from shutting down all AS and trying to shut down same AS from the same alert when the stop takes more time than alert resending
                 // set status == 3 for start in progress
@@ -1797,6 +1895,8 @@
                       if (err) {
                         console.error('starting sap instance error:', err);
                       } else {
+
+                        // todo check instance is correctly started before confirmation
                         that.updated_system_instances[syst_id].forEach((instance, idx) => {
                           if (instance.instancenr == syst_instance_to_start.instancenr) {
                             that.updated_system_instances[syst_id][idx].status = 1;
@@ -1880,9 +1980,7 @@
   var myenv = process.env.NODE_ENV || 'production';
 
   var collectScaleDoer = new scaledoer(myenv);
-  collectScaleDoer.init(redis[myenv], worker[myenv], {
-    'source': collectScaleDoer.SAP_SOURCE
-  }, collectScaleDoer.collect);
+  collectScaleDoer.init(redis[myenv], worker[myenv], collectScaleDoer.collect);
 
   process.on('exit', function (code) {
     return console.log('! ScaleDoer ! About to exit with code ' + code);
