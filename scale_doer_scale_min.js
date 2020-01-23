@@ -1143,7 +1143,7 @@
     this.queue = null;
 
     // directory of sap systems certificates for sap ctrl authentification
-    this.certif_dir = __dirname + '/../.keys';
+    this.certif_dir = __dirname + '/.keys';
 
     // Integration components
     this.pushgtw_cli = new pushcli(prometheus[env].pushgateway_protocole + '://' + (prometheus[env].pushgateway_credentials ? prometheus[env].pushgateway_credentials + '@' : '') + prometheus[env].pushgateway_host + ':' + prometheus[env].pushgateway_port + '/pshgtw');
@@ -1194,7 +1194,7 @@
     },
 
     // create a sap client and provides it to the callback function
-    new_soap_client: function (url, auth, data, options = {}, cb) {
+    new_soap_client: function (url, auth, data, cb) {
       soap.createClient(url + '?wsdl', { returnFault: true }, function (err, client) {
         if (err || !client) {
           cb(err);
@@ -1212,7 +1212,7 @@
           client.setEndpoint(url + 'SAPControl.cgi');
           cb(null, { soapcli: client, payload: data });
         }
-      }, options);
+      });
     },
 
     // init connection to redis & HANA db
@@ -1256,7 +1256,7 @@
         fs.access(that.certif_dir + '/' + system_id + '.pfx', fs.F_OK, err => {
           if (err) {
             // certif does not exists at file level
-            if (!pfx_buffer) {
+            if (pfx_buffer) {
               fs.writeFile(that.certif_dir + '/' + system_id + '.pfx', pfx_buffer, function (err) {
                 that.sending_sslcertifs[system_id] = !!err;
                 callback();
@@ -1335,7 +1335,7 @@
       async.waterfall([
       // check system certificate
       function (cb) {
-        that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, cb);
+        that.update_sending_ssl(job_data.system.syst_id, job_data.keys_buff, cb);
       },
       // connect to the entry point instance and provide soapclient
       function (cb) {
@@ -1365,9 +1365,9 @@
               user: job_data.system.username,
               pwd: job_data.system.password
             }, {
-              pfx: job_data.system.auth_method == 1 && job_data.keys_buff
+              pfx: job_data.system.auth_method == 1 && that.certif_dir + '/' + job.data.system.syst_id + '.pfx'
             }]
-          }, job_data, {}, cb);
+          }, job_data, cb);
         }
       },
       // Get list of instances and check system status
@@ -1416,7 +1416,7 @@
               that.pushgtw_cli.pushUpInstance('up', job_data.entity_id, job_data.system.syst_id, '', '', job_data.system.sid, 1);
               that.conn_retries[job_data.system.syst_id] = 0;
               // provide list of active instances for KPI collections
-              cb(null, instances_list, job_data.system.auth_method, job_data.system.username, job_data.system.password, job_data.system.auth_method == 1 ? job_data.keys_buff : null, { 'is_encrypted': job_data.system.is_encrypted, 'is_direct': job_data.system.is_direct }, job_data);
+              cb(null, instances_list, job_data.system.auth_method, job_data.system.username, job_data.system.password, job_data.system.auth_method == 1 ? that.certif_dir + '/' + job_data.system.syst_id + '.pfx' : null, { 'is_encrypted': job_data.system.is_encrypted, 'is_direct': job_data.system.is_direct }, job_data);
             }
           } else {
             cb(_errors.ws_not_reachable, err && err.address + ' ' + err.port);
@@ -1441,7 +1441,7 @@
               }, {
                 pfx: pfx_certif
               }]
-            }, null, {}, function (soap_err, client) {
+            }, null, function (soap_err, client) {
               if (soap_err) {
                 console.error('error connecting to instance: ', inst, 'with error: ', soap_err);
                 callback();
@@ -1523,7 +1523,7 @@
     checkconnection: function () {
       var that = this;
       that.queue.process('checkconn_exec', that.nb_workers, function (job, done) {
-        // console.log('consum NAK queue req:', job.data.systId)
+        // console.log('consum check queue req:', job.data.system)
         if (job.data.type != undefined && job.data.system) {
           switch (job.data.type) {
             case 0:
@@ -1539,10 +1539,13 @@
               async.waterfall([
               // check system certificate
               function (cb) {
+                console.log('... check system certificate');
                 that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, cb);
               },
               // connect to the entry point instance and provide soapclient
               function (cb) {
+                console.log('... connect to the entry point instance and provide soapclient');
+                console.log('that.sending_sslcertifs:', that.sending_sslcertifs);
                 const http_s = job.data.system.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
                 const soap_url = http_s.protocol + '://' + job.data.system.ip_internal + ':5' + job.data.system.sn + http_s.port_suffix + '/';
 
@@ -1552,19 +1555,22 @@
                     user: job.data.system.username,
                     pwd: job.data.system.password
                   }, {
-                    pfx: job.data.system.auth_method == 1 && job.data.keys_buff
+                    pfx: job.data.system.auth_method == 1 && that.certif_dir + '/' + job.data.system.syst_id + '.pfx'
                   }]
-                }, job.data, { timeout: soap_timeout_sec }, cb);
+                }, job.data, cb);
               },
               // Get list of instances and check system status
               function (cli_data, cb) {
+                console.log('... Get list of instances and check system status');
                 // check for authorization issue
                 cli_data.soapcli.AccessCheck({ function: 'Start' }, function (err, result) {
                   if (err) {
                     if (err.body) {
                       console.error('AccessCheck RC:', err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]);
                       cb(err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]);
-                    } else cb(err);
+                    } else {
+                      cb(err);
+                    }
                   } else {
 
                     cli_data.soapcli.GetSystemInstanceList({}, function (err, result) {
@@ -1580,14 +1586,15 @@
                           };
                         });
 
-                        cb(null, instances_list, job.data.system.auth_method, job.data.system.username, job.data.system.password, job.data.system.auth_method == 1 ? job.data.keys_buff : null, { 'is_encrypted': job.data.system.is_encrypted, 'is_direct': job.data.system.is_direct }, job.data);
+                        cb(null, instances_list, job.data.system.auth_method, job.data.system.username, job.data.system.password, job.data.system.auth_method == 1 ? that.certif_dir + '/' + job.data.system.syst_id + '.pfx' : null, { 'is_encrypted': job.data.system.is_encrypted, 'is_direct': job.data.system.is_direct }, job.data);
                       } else {
                         cb(_errors.ws_not_reachable, err && err.address + ' ' + err.port);
                       }
-                    });
+                    }, { timeout: soap_timeout_sec });
                   }
-                });
+                }, { timeout: soap_timeout_sec });
               }, function (all_instances, auth_method, username, password, pfx_certif, conn, results, cb) {
+                console.log('... all_instances:', all_instances);
                 var soap_clients = [];
                 if (!all_instances || all_instances.length == 0) {
                   cb(null, []);
@@ -1603,7 +1610,7 @@
                       }, {
                         pfx: pfx_certif
                       }]
-                    }, null, { timeout: soap_timeout_sec }, function (soap_err, client) {
+                    }, null, function (soap_err, client) {
                       if (soap_err) {
                         if (err.code) {
                           // conn refused
@@ -1629,7 +1636,7 @@
                             }
                           });
                         }
-                      });
+                      }, { timeout: soap_timeout_sec });
                       async_cb();
                     }, each_err => {
                       if (each_err) {
@@ -1646,10 +1653,10 @@
                     done(err.code);
                   } else {
                     // authorization error on main soap client (system central instance)
-                    done(err.code);
+                    done(err);
                   }
                 } else {
-                  done(null, all_instances);
+                  done(null, { 'sending_sslcertifs': that.sending_sslcertifs[job.data.system.syst_id], 'instances': all_instances });
                 }
               });
 
@@ -1733,7 +1740,7 @@
         async.waterfall([
         // check system certificate
         function (cb) {
-          that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, cb);
+          that.update_sending_ssl(d.system.syst_id, d.keys_buff, cb);
         },
         // connect to the entry point instance and provide soapclient
         function (cb) {
@@ -1762,7 +1769,7 @@
               const http_s = curr_system.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
               var soap_url = http_s.protocol + '://' + syst_instance.ip_internal + ':5' + alert.labels.sn + http_s.port_suffix + '/';
               if (curr_system.auth_method == 1) {
-                pfx_certif = d.keys_buff;
+                pfx_certif = that.certif_dir + '/' + curr_system.syst_id + '.pfx';
               }
 
               that.new_soap_client(soap_url, {
@@ -1775,7 +1782,7 @@
                 }]
               }, {
                 'instances': curr_system.instances
-              }, {}, cb);
+              }, cb);
             } else {
               cb('System Instance cannot be stop due to minimal running instance');
             }
@@ -1858,7 +1865,7 @@
           async.waterfall([
           // check system certificate
           function (cb) {
-            that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, cb);
+            that.update_sending_ssl(d.system.syst_id, d.keys_buff, cb);
           },
           // init ec2 ids
           function (async_cb) {
@@ -1924,7 +1931,7 @@
                     const http_s = curr_system.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
                     var soap_url = http_s.protocol + '://' + syst_instance_to_start.ip_internal + ':5' + syst_instance_to_start.instancenr + http_s.port_suffix + '/';
                     if (curr_system.auth_method == 1) {
-                      pfx_certif = d.keys_buff;
+                      pfx_certif = that.certif_dir + '/' + curr_system.syst_id + '.pfx';
                     }
 
                     that.new_soap_client(soap_url, {
@@ -1935,7 +1942,7 @@
                       }, {
                         pfx: pfx_certif
                       }]
-                    }, {}, {}, serie_cb);
+                    }, {}, serie_cb);
                   } else {
                     serie_cb('System Instance cannot be started due to maximal running instances');
                   }
