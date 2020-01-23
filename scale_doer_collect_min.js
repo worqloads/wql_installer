@@ -1257,7 +1257,7 @@
           if (err) {
             // certif does not exists at file level
             if (pfx_buffer) {
-              fs.writeFile(that.certif_dir + '/' + system_id + '.pfx', pfx_buffer, function (err) {
+              fs.writeFile(that.certif_dir + '/' + system_id + '.pfx', new Buffer(JSON.parse(pfx_buffer)), function (err) {
                 that.sending_sslcertifs[system_id] = !!err;
                 callback();
               });
@@ -1539,13 +1539,13 @@
               async.waterfall([
               // check system certificate
               function (cb) {
-                console.log('... check system certificate');
+                // console.log('... check system certificate')
                 that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, cb);
               },
               // connect to the entry point instance and provide soapclient
               function (cb) {
-                console.log('... connect to the entry point instance and provide soapclient');
-                console.log('that.sending_sslcertifs:', that.sending_sslcertifs);
+                // console.log('... connect to the entry point instance and provide soapclient')
+                // console.log('that.sending_sslcertifs:', that.sending_sslcertifs)
                 const http_s = job.data.system.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
                 const soap_url = http_s.protocol + '://' + job.data.system.ip_internal + ':5' + job.data.system.sn + http_s.port_suffix + '/';
 
@@ -1561,12 +1561,12 @@
               },
               // Get list of instances and check system status
               function (cli_data, cb) {
-                console.log('... Get list of instances and check system status');
+                // console.log('... Get list of instances and check system status')
                 // check for authorization issue
                 cli_data.soapcli.AccessCheck({ function: 'Start' }, function (err, result) {
                   if (err) {
                     if (err.body) {
-                      console.error('AccessCheck RC:', err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]);
+                      // console.error('AccessCheck RC:', err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1] )
                       cb(err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]);
                     } else {
                       cb(err);
@@ -1594,7 +1594,7 @@
                   }
                 }, { timeout: soap_timeout_sec });
               }, function (all_instances, auth_method, username, password, pfx_certif, conn, results, cb) {
-                console.log('... all_instances:', all_instances);
+                // console.log('... all_instances:',all_instances)
                 var soap_clients = [];
                 if (!all_instances || all_instances.length == 0) {
                   cb(null, []);
@@ -1612,12 +1612,13 @@
                       }]
                     }, null, function (soap_err, client) {
                       if (soap_err) {
-                        if (err.code) {
+                        if (soap_err.code) {
                           // conn refused
-                          all_instances[idx].status = -1;
-                          all_instances[idx] = Object.assign(all_instances[idx], { error: err.code });
+                          all_instances[idx].status = 0;
+                          all_instances[idx] = Object.assign(all_instances[idx], { error: soap_err.code });
                         }
-                        console.error('error connecting to instance: ', inst, 'with error: ', soap_err);
+                        console.error('E checkconnection instance with error:', soap_err.code);
+                        callback();
                       } else {
                         soap_clients.push({ c: client.soapcli, f: inst.features, n: inst.instancenr, h: inst.hostname });
                         callback();
@@ -1640,7 +1641,7 @@
                       async_cb();
                     }, each_err => {
                       if (each_err) {
-                        console.error('call_sapcontrol exec operations error:', each_err);
+                        console.error('E checkconnection error:', each_err);
                       }
                       cb(err, all_instances);
                     });
