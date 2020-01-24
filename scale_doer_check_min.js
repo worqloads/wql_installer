@@ -1105,6 +1105,7 @@
 
   //  var mongoose =  require('mongoose')
   var { sapcontrol_operations: sapcontrol_operations$1, sapctrl_process_func: sapctrl_process_func$1 } = sapctrl_helpers;
+  //  , crypto = require('crypto')
   // , axios = require('axios')
 
   // Debug memory leak
@@ -1365,7 +1366,7 @@
               user: job_data.system.username,
               pwd: job_data.system.password
             }, {
-              pfx: job_data.system.auth_method == 1 && that.certif_dir + '/' + job.data.system.syst_id + '.pfx'
+              pfx: job_data.system.auth_method == 1 && that.certif_dir + '/' + job_data.system.syst_id + '.pfx'
             }]
           }, job_data, cb);
         }
