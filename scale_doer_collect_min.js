@@ -349,6 +349,7 @@
                       var new_unit = elt.unit.replace(/\%/g, 'percent').replace(/\//g, '_per_').replace(/\W+/g, '').toLowerCase();
                       if (new_unit == '') new_unit = 'nb';
                       if (t.toUpperCase() != 'ALL') {
+                          // undefinedabap_CPUundefinedCPU_Utilization__percent
                           return that.kpi_prefix_sap + t.toLowerCase() + '_' + elt.kpi.replace(/\W+/g, '') + '__' + new_unit;
                       } else {
                           return that.kpi_prefix_sap + elt.kpi.replace(/\W+/g, mte_separator) + '__' + new_unit;
@@ -474,7 +475,8 @@
                           return null;
                       }
                   };
-                  if (result.tree && result.tree.item) {
+                  // Not applicable to Central Instance (msg server)
+                  if (instance.features.split('|').indexOf('MESSAGESERVER') < 0 && instance.features.split('|').indexOf('ENQUE') < 0 && result.tree && result.tree.item) {
                       result.tree.item.forEach(element => {
                           if (element.parent > parent) {
                               parents_name.push({
@@ -1143,6 +1145,10 @@
     this.keepalive_delay_msec = 60000;
     this.queue = null;
 
+    this.kpiname_separator = '_';
+    this.kpi_prefix_sap = 'sap' + this.kpiname_separator;
+    this.kpi_prefix_nak = 'nak' + this.kpiname_separator;
+
     // directory of sap systems certificates for sap ctrl authentification
     this.certif_dir = __dirname + '/.keys';
 
@@ -1233,7 +1239,7 @@
       // Initialize queue for engines communications
       that.queue = kue.createQueue({
         prefix: 'q',
-        redis: redis_config
+        redis: Object.assign(redis_config, { 'db': that.company })
       });
       that.queue.watchStuckJobs(); // Prevent inconsistency if redis connection lost
       that.queue.setMaxListeners(that.nb_workers * 3);
@@ -1379,17 +1385,28 @@
             var instances_list = result.instance.item.map(x => {
               const temp_ip_internal = job_data.system.instances.filter(i => i.hostname.toLowerCase() == x.hostname.toLowerCase() && i.instancenr == ('' + x.instanceNr).padStart(2, '0') && i.status < 2 // to consider only stable instances
               );
-              return temp_ip_internal && temp_ip_internal[0] && temp_ip_internal[0].ip_internal ? {
+              return {
                 'hostname': x.hostname,
-                'ip_internal': job_data.system.instances.filter(i => i.hostname.toLowerCase() == x.hostname.toLowerCase() && i.instancenr == ('' + x.instanceNr).padStart(2, '0'))[0].ip_internal, //that.mapping_hostname_ip[x.hostname],
+                'ip_internal': temp_ip_internal[0] && temp_ip_internal[0].ip_internal ? job_data.system.instances.filter(i => i.hostname.toLowerCase() == x.hostname.toLowerCase() && i.instancenr == ('' + x.instanceNr).padStart(2, '0'))[0].ip_internal : null, //that.mapping_hostname_ip[x.hostname],
                 'instancenr': ('' + x.instanceNr).padStart(2, '0'),
                 'features': x.features.split('|'),
                 // 'id' : crypto.createHash('md5').update(x.hostname+x.instanceNr+x.features+x.dispstatus).digest("hex"),
                 // 'role': x.features.split('|'),
                 'status': x.dispstatus == green_status ? 1 : 0
-              } : {};
-              // filter to handle situation when there is no instance with the requested ip internal
-            }).filter(i => i.ip_internal != undefined) || [];
+                // return (temp_ip_internal && temp_ip_internal[0] && temp_ip_internal[0].ip_internal) ? 
+                // { 
+                //   'hostname': x.hostname,
+                //   'ip_internal': job_data.system.instances.filter(i => i.hostname.toLowerCase() == x.hostname.toLowerCase() && i.instancenr == (''+x.instanceNr).padStart(2, '0'))[0].ip_internal, //that.mapping_hostname_ip[x.hostname],
+                //   'instancenr': (''+x.instanceNr).padStart(2, '0'),
+                //   'features': x.features.split('|'),
+                //   // 'id' : crypto.createHash('md5').update(x.hostname+x.instanceNr+x.features+x.dispstatus).digest("hex"),
+                //   // 'role': x.features.split('|'),
+                //   'status': x.dispstatus == green_status ? 1 : 0
+                // } : 
+                // { }
+                // filter to handle situation when there is no instance with the requested ip internal
+              };
+            }) /*.filter(i => i.ip_internal != undefined)*/ || [];
 
             // add new instances host in that.all_systems_hosts
             var temp_list_hosts = instances_list.map(i => i.ip_internal).filter((el, i, arr) => arr.indexOf(el) === i && Object.keys(that.all_systems_hosts).indexOf(el) < 0);
@@ -1428,12 +1445,12 @@
       function (all_instances, auth_method, username, password, pfx_certif, conn, results, cb) {
         var soap_clients = [];
         if (!all_instances || all_instances.filter(x => x.status == 1).length == 0) {
-          that.pushgtw_cli.pushInstance('scale', results.syst._id);
+          that.pushgtw_cli.pushInstance('scale', results.system.syst_id);
           cb(_errors.no_active_instance, all_instances);
         } else {
           async.each(all_instances.filter(x => x.status == 1), function (inst, callback) {
             const http_s = conn.is_encrypted ? { protocol: 'https', port_suffix: '14' } : { protocol: 'http', port_suffix: '13' };
-            const soap_url = http_s.protocol + '://' + inst.ip_internal + ':5' + inst.instancenr + http_s.port_suffix + '/';
+            const soap_url = http_s.protocol + '://' + (inst.ip_internal || inst.hostname) + ':5' + inst.instancenr + http_s.port_suffix + '/';
             that.new_soap_client(soap_url, {
               method: auth_method, // method is the index of options
               options: [{
