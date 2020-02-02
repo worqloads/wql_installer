@@ -6,20 +6,15 @@
 # Worqloads installation script for user's IT infrastructre
 # ####################################################
 
-# WQL_VERSION=VALUE WQL_API_KEY=XXX bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)"
+# WQL_VERSION=VALUE COMPANY_ID=XXX bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)"
 
 # Initialize variables
 app_folder="/app"
-shared_lxc_folder="/shared"
-bin_folder="${shared_lxc_folder}/binaries"
-conf_folder="${shared_lxc_folder}/pub/conf/"
 scaler_folder="${app_folder}/scaler"
 secudir=${scaler_folder}/.keys
-lxccontainer="worker"
 git_user="hnltcs"
-nb_systems="10"
-lic_request="req_worker.json"
 wql_user=`whoami`
+
 # stop if there's an error
 set -e
 
@@ -52,7 +47,14 @@ git clone https://github.com/worqloads/wql_installer.git $scaler_folder
 # [[ ! -z "$WQL_VERSION" ]] && cd ${scaler_folder} && git checkout ${WQL_VERSION}
 cd ${scaler_folder} && sudo npm install
 # [[ -d ${secudir} ]] || mkdir -p ${secudir}
-# cp ${shared_lxc_folder}/pub/keys/worqloads_client.pse ${secudir}/
 sudo chown -R $wql_user:$wql_user ${app_folder} /home/$wql_user/.npm 
 
-history -c
+# create local configuration
+node register.js
+
+# registration successful
+if [[ $? -eq 0 -a -f './conf.json' ]] then
+    pm2 start scale_doer_check_min.js scale_doer_collect_min.js scale_doer_scale_min.js 
+fi
+
+# add cron housekeeping script of pm2 logs

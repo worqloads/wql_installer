@@ -1,0 +1,1 @@
+{ "production": { "gateway": { "protocole" : "https", "credentials" : "08bf130aca@7e03cf2337", "host" : "app.worqloads.com", "port" : "443" }, "db": { "host": "app.worqloads.com", "port": 3333, "auth": "0238fca13b9337913378dde80c6217bfcc3a3e29", "db": 0, "options": { } }, "nb_workers": 10, "company": "5e342dbf78ba9244cc7d2cec" } }
