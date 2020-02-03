@@ -6,8 +6,8 @@
 # Worqloads installation script for user's IT infrastructre
 # ####################################################
 
-# WQL_VERSION=1.0.0 bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)" &> ./wql_installer.log
-# WQL_VERSION=1.0.0 COMPANY_ID=XXX bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)"
+# WQL_VERSION=v1.0.0 bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)" &> ./wql_installer.log
+# WQL_VERSION=v1.0.0 COMPANY_ID=XXX bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)"
 
 # Initialize variables
 app_folder="/app"
@@ -54,7 +54,7 @@ cd ${scaler_folder} && sudo npm install
 sudo chown -R $wql_user:$wql_user ${app_folder}
 
 # create local configuration
-node register.js
+node register_min.js
 
 # registration successful
 if [[ $? -eq 0 -a -f './conf.json' ]] then
