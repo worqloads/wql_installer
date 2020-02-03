@@ -6,7 +6,7 @@
 # Worqloads installation script for user's IT infrastructre
 # ####################################################
 
-# WQL_VERSION=1.0.0 bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)"
+# WQL_VERSION=1.0.0 bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)" &> ./wql_installer.log
 # WQL_VERSION=1.0.0 COMPANY_ID=XXX bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)"
 
 # Initialize variables
@@ -35,8 +35,6 @@ echo "app version: $WQL_VERSION"
 yes | sudo yum install curl git 
 yes | sudo yum remove -y nodejs npm
 [[ -d ${app_folder} ]] || sudo mkdir -p ${app_folder}
-# if $scaler_folder already exists, do a backup
-[[ -d $scaler_folder ]] && sudo mv $scaler_folder "${scaler_folder}_$(date "+%Y.%m.%d-%H.%M.%S")"
 sudo chown -R $wql_user:$wql_user ${app_folder} 
 [[ -d ~/.ssh ]] || mkdir ~/.ssh && chmod 700  ~/.ssh
 curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash - 
@@ -46,6 +44,8 @@ yes | sudo npm install pm2 -g
 [[ -d ~/.npm ]] && sudo chown -R $wql_user:$wql_user ~/.npm 
 [[ -d ~/.config ]] && sudo chown -R $wql_user:$wql_user ~/.config
 
+# if $scaler_folder already exists, do a backup
+[[ -d $scaler_folder ]] && sudo mv $scaler_folder "${scaler_folder}_$(date "+%Y.%m.%d-%H.%M.%S")"
 git clone https://github.com/worqloads/wql_installer.git $scaler_folder 
 
 [[ ! -z "$WQL_VERSION" ]] && cd ${scaler_folder} && git checkout ${WQL_VERSION}
