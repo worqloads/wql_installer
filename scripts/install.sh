@@ -6,7 +6,8 @@
 # Worqloads installation script for user's IT infrastructre
 # ####################################################
 
-# WQL_VERSION=VALUE COMPANY_ID=XXX bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)"
+# WQL_VERSION=1.0.0 bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)"
+# WQL_VERSION=1.0.0 COMPANY_ID=XXX bash -c "$(curl -L https://raw.githubusercontent.com/worqloads/wql_installer/master/scripts/install.sh)"
 
 # Initialize variables
 app_folder="/app"
@@ -44,7 +45,7 @@ yes | sudo npm install pm2 -g
 
 git clone https://github.com/worqloads/wql_installer.git $scaler_folder 
 
-# [[ ! -z "$WQL_VERSION" ]] && cd ${scaler_folder} && git checkout ${WQL_VERSION}
+[[ ! -z "$WQL_VERSION" ]] && cd ${scaler_folder} && git checkout ${WQL_VERSION}
 cd ${scaler_folder} && sudo npm install
 # [[ -d ${secudir} ]] || mkdir -p ${secudir}
 sudo chown -R $wql_user:$wql_user ${app_folder} /home/$wql_user/.npm 
