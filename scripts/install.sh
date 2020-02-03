@@ -33,7 +33,10 @@ echo "app version: $WQL_VERSION"
 
 # install NodeJS, NPM, PM2, GIT
 yes | sudo yum install curl git 
+yes | sudo yum remove -y nodejs npm
 [[ -d ${app_folder} ]] || sudo mkdir -p ${app_folder}
+# if $scaler_folder already exists, do a backup
+[[ -d $scaler_folder ]] && sudo mv $scaler_folder "${scaler_folder}_$(date "+%Y.%m.%d-%H.%M.%S")"
 sudo chown -R $wql_user:$wql_user ${app_folder} 
 [[ -d ~/.ssh ]] || mkdir ~/.ssh && chmod 700  ~/.ssh
 curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash - 
@@ -48,7 +51,7 @@ git clone https://github.com/worqloads/wql_installer.git $scaler_folder
 [[ ! -z "$WQL_VERSION" ]] && cd ${scaler_folder} && git checkout ${WQL_VERSION}
 cd ${scaler_folder} && sudo npm install
 # [[ -d ${secudir} ]] || mkdir -p ${secudir}
-sudo chown -R $wql_user:$wql_user ${app_folder} /home/$wql_user/.npm 
+sudo chown -R $wql_user:$wql_user ${app_folder}
 
 # create local configuration
 node register.js
