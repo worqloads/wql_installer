@@ -66,3 +66,9 @@ if [[ $? -eq 0 && -f './conf.json' ]]; then
 fi
 
 # add cron housekeeping script of pm2 logs
+tmp_cron="/tmp/crontab_jobs"
+crontab -l > ${tmp_cron}
+echo "5 * * * *     pm2 flush " >> ${tmp_cron}
+crontab ${tmp_cron}
+rm ${tmp_cron}
+crontab -l
