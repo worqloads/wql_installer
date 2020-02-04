@@ -17,7 +17,6 @@ wql_user=`whoami`
 log_file='./wql_installer.log'
 # ####################################################
 
-
 # stop if there's an error
 set -e
 
@@ -55,6 +54,12 @@ cd ${scaler_folder} && sudo npm install                                         
 [[ -d ${secudir} ]] || mkdir -p ${secudir}                                                          &> ${log_file}
 sudo chown -R $wql_user:$wql_user ${app_folder}                                                     &> ${log_file}
 
+# get aws instance region
+TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` &> ${log_file}
+[[ -z $TOKEN ]] || awsregion=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/availability-zone) &&  echo ${awsregion::-1}  > .aws_region
+[[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/instance-id > .aws_instanceid
+
+[[ -f .aws_region && -f .aws_instanceid ]] || exit 1
 # create local configuration
 clear
 node register_min.js
@@ -66,9 +71,7 @@ if [[ $? -eq 0 && -f './conf.json' ]]; then
 fi
 
 # add cron housekeeping script of pm2 logs
-tmp_cron="/tmp/crontab_jobs"
-crontab -l > ${tmp_cron}
-echo "5 * * * *     pm2 flush " >> ${tmp_cron}
-crontab ${tmp_cron}
-rm ${tmp_cron}
-crontab -l
+pm2 install pm2-logrotate
+pm2 set pm2-logrotate:max_size 100M
+pm2 set pm2-logrotate:compress true
+pm2 set pm2-logrotate:rotateInterval '0 * * * *'
