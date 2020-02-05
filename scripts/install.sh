@@ -71,7 +71,7 @@ TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metad
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/hostname > ${installer_folder}/.aws_hostname
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/local-ipv4 > ${installer_folder}/.aws_ip
 
-[[ -f .aws_region && -f .aws_instanceid && -f aws_hostname && -f aws_ip ]] || exit 1
+[[ -f ${installer_folder}/.aws_region && -f ${installer_folder}/.aws_instanceid && -f ${installer_folder}/.aws_hostname && -f ${installer_folder}/.aws_ip ]] || exit 1
 # create local configuration
 clear
 node register_min.js
