@@ -49,8 +49,9 @@ yes | sudo npm install pm2 -g                                                   
 [[ -d $scaler_folder ]] && sudo mv $scaler_folder "${scaler_folder}_$(date "+%Y.%m.%d-%H.%M.%S")"   &> ${log_file}
 git clone https://github.com/worqloads/wql_installer.git $scaler_folder                             &> ${log_file}
 
-[[ ! -z "$WQL_VERSION" ]] && cd ${scaler_folder} && git checkout ${WQL_VERSION}                     &> ${log_file}
-cd ${scaler_folder} && sudo npm install                                                             &> ${log_file}
+cd ${scaler_folder}
+[[ ! -z "$WQL_VERSION" ]] && git checkout ${WQL_VERSION}                                            &> ${log_file}
+sudo npm install                                                                                    &> ${log_file}
 [[ -d ${secudir} ]] || mkdir -p ${secudir}                                                          &> ${log_file}
 sudo chown -R $wql_user:$wql_user ${app_folder}                                                     &> ${log_file}
 
