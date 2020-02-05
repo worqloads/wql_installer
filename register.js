@@ -33,8 +33,7 @@ const wql_cred = 'https://cred.worqloads.com'
 const wql_user = 'credmngr'
 const wql_pass = 'zHFJiNP2jTcpwvKVuyK9'
 const conf_file = 'conf.json'
-const aws_region = get_region()
-const aws_instanceid = get_instanceid()
+const agent = get_agent()
 
 // Prompt configuration
 prompt.message = "WQL"
@@ -59,6 +58,7 @@ try {
     if (__DEBUG__) {
         console.log('D wql_gateway:' + wql_gateway)
         console.log('D wql_cred:' + wql_cred)
+        console.log('D agent:' + agent)
     }
 
     // make sure the script has not been changed
@@ -182,13 +182,13 @@ function confirm_inputs(result, cb) {
     })
 }
 
-function process_inputs(result) {
+function process_inputs(user_inputs) {
 
     async.waterfall([
         // send inputs for creation. and get company_id
         function (waterfall_cb) {
-            if (__DEBUG__) console.log('D send_inputs with:', result)
-            send_inputs(result, waterfall_cb)
+            if (__DEBUG__) console.log('D send_inputs with:', user_inputs)
+            send_inputs(user_inputs, waterfall_cb)
         },
         // get UUID and passwords
         function (company_id, waterfall_cb) {
@@ -207,7 +207,7 @@ function process_inputs(result) {
             valid_cred(result, waterfall_cb)
         },
         function (entity_id, waterfall_cb) {
-            valid_api(entity_id, waterfall_cb)
+            valid_api(entity_id, user_inputs, waterfall_cb)
         }
     ], (err) => {
         if (err) registration_failed(err)
@@ -372,29 +372,29 @@ function valid_cred(result, callback) {
                             timeout: 30000, // 30sec,
                         })
                     .then(function (data) {
-                        parallel_cb(data)
+                        parallel_cb(null, data)
                     })
                     .catch(function (error) {
                         if (error) console.error('E valid_cred cred company:', error)
                         parallel_cb()
                     })
             }
-        }, (err, res) => callback(err, res && res.company))
+        }, (err, res) => callback(err, res && res.company && res.company.data && res.company.data.data._id))
     } else {
         callback('error')
     }
 }
 
-function valid_api(entity_id, callback) {
+function valid_api(entity_id, user_inputs, callback) {
     // save keys in file ~/.aws/credentials
     const aws_dir = os.homedir()+'/.aws'
     if (!fs.existsSync(aws_dir)){
         fs.mkdirSync(aws_dir)
     }
-    fs.writeFileSync(aws_dir + '/' + credentials, credentials_content(result.aws_api_key, result.aws_api_secret), { encoding: 'utf8', flag: 'w' })
+    fs.writeFileSync(aws_dir + '/credentials', credentials_content(user_inputs.aws_api_key, user_inputs.aws_api_secret), { encoding: 'utf8', flag: 'w' })
 
     // check against AWS
-    const ec2_cli = new AWS.EC2({apiVersion: '2016-11-15', region: 'eu-west-3'})
+    const ec2_cli = new AWS.EC2({apiVersion: '2016-11-15', region: agent.region})
 
     async.waterfall([
         // load credentials
@@ -414,7 +414,7 @@ function valid_api(entity_id, callback) {
         // validate credentials
         function(waterfall_cb2) {
             // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeInstanceStatus-property
-            ec2_cli.describeInstanceStatus({ InstanceIds: [ aws_instanceid ]}, waterfall_cb2)                    
+            ec2_cli.describeInstanceStatus({ InstanceIds: [ agent.instanceid ]}, waterfall_cb2)                    
         },
         // update cloud provider cred in DB
         function (res, waterfall_cb2) {
@@ -430,27 +430,45 @@ function valid_api(entity_id, callback) {
                 })
                 .catch(function (error) {
                     if (error) waterfall_cb2(error)
-                })                
+                })              
+        },
+        // add cloud agent and rel
+        function (res, waterfall_cb2) {
+            axios.post(
+                wql_gateway + '/registration/confirm_cpagent', { 
+                    entity: entity_id,
+                    agent: agent
+                },
+                {
+                    timeout: 60000 // 1min
+                })
+                .then(function (response) {
+                    if (__DEBUG__) console.log('D valid_api response.data:', response.data)
+                    waterfall_cb2()
+                })
+                .catch(function (error) {
+                    if (error) waterfall_cb2(error)
+                })
         }
-    ], function(err, res) {
+    ], function(err) {
         if (err) {
             console.error('E valid_api error:', err)
-            callback(null, err)
+            callback(err)
         }
     })
 }
 
-function get_region(){
-    return fs.readFileSync('./.aws_region')
-}
-function get_instanceid(){
-    return fs.readFileSync('./.aws_instanceid')
+function get_agent(){
+    return { 
+        'instanceid': fs.readFileSync('./.aws_instanceid').toString(),
+        'hostname': fs.readFileSync('./.aws_hostname').toString(),
+        'ip_internal': fs.readFileSync('./.aws_ip').toString(),
+        'region': fs.readFileSync('./.aws_region').toString()
+    }
 }
 
 function credentials_content(aws_api_key, aws_api_secret) {
-    return '[default]\
-aws_access_key_id = '+aws_api_key+'\
-aws_secret_access_key = '+aws_api_secret+'\n'
+    return '[default]\naws_access_key_id = '+aws_api_key+'\naws_secret_access_key = '+aws_api_secret+'\n'
 }
 
 // Helpers
@@ -501,6 +519,7 @@ function registration_failed(err) {
     console.log('')
     console.log('')
 }
+
 function api_failed(err) {
     console.log('')
     console.log('Thank you for providing the AWS key/secret pair but unfortunately they cannot be validated.')
