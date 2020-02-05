@@ -13,9 +13,9 @@ app_folder="/app"
 scaler_folder="${app_folder}/scaler"
 installer_folder="${scaler_folder}/installer"
 secudir=${scaler_folder}/.keys
+log_file="${installer_folder}/wql_installer_$(date "+%Y.%m.%d-%H.%M.%S").log"
 git_user="hnltcs"
 wql_user=`whoami`
-log_file="./wql_installer_$(date "+%Y.%m.%d-%H.%M.%S").log"
 # ####################################################
 
 # stop if there's an error
@@ -34,7 +34,8 @@ echo " + App version: $WQL_VERSION"
 [[ -f ~/.profile ]] && [[ `cat ~/.profile | grep -c "^export NODE_ENV="` -ne 0  ]] || echo export NODE_ENV='production' >> ~/.profile 
 
 # install NodeJS, NPM, PM2, GIT
-yes | sudo yum install curl git                                                                     &> ${log_file}
+yes | sudo yum update                                                                               &> ${log_file}
+yes | sudo yum install curl git                                                                     &>> ${log_file}
 yes | sudo yum remove -y nodejs npm                                                                 &>> ${log_file}
 [[ -d ${app_folder} ]] || sudo mkdir -p ${app_folder}                                               &>> ${log_file}
 sudo chown -R $wql_user:$wql_user ${app_folder}                                                     &>> ${log_file}
