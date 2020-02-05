@@ -13,7 +13,7 @@ app_folder="/app"
 scaler_folder="${app_folder}/scaler"
 installer_folder="${scaler_folder}/installer"
 secudir=${scaler_folder}/.keys
-log_file="./wql_installer_$(date "+%Y.%m.%d-%H.%M.%S").log"
+log_file="/tmp/wql_installer_$(date "+%Y.%m.%d-%H.%M.%S").log"
 git_user="hnltcs"
 wql_user=`whoami`
 # ####################################################
@@ -66,7 +66,7 @@ sudo chown -R $wql_user:$wql_user ${app_folder}                                 
 
 # get aws instance region
 TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` &>> ${log_file}
-[[ -z $TOKEN ]] || awsregion=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/availability-zone) && echo ${awsregion::-1} > ${installer_folder}/.aws_region
+[[ -z $TOKEN ]] || awsregion=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/availability-zone) && echo -n ${awsregion::-1} > ${installer_folder}/.aws_region
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/instance-id > ${installer_folder}/.aws_instanceid
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/hostname > ${installer_folder}/.aws_hostname
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/local-ipv4 > ${installer_folder}/.aws_ip
@@ -84,3 +84,4 @@ if [[ $? -eq 0 && -f './conf.json' ]]; then
     pm2 save                                                                                        &>> ${log_file}
 fi
 
+rm -rf ${installer_folder}/
