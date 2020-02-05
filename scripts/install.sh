@@ -36,10 +36,10 @@ echo " + App version: $WQL_VERSION"
 # install NodeJS, NPM, PM2, GIT
 yes | sudo yum update                                                                               &> ${log_file}
 yes | sudo yum install curl git                                                                     &>> ${log_file}
-yes | sudo yum remove -y nodejs npm                                                                 &>> ${log_file}
 [[ -d ${app_folder} ]] || sudo mkdir -p ${app_folder}                                               &>> ${log_file}
 sudo chown -R $wql_user:$wql_user ${app_folder}                                                     &>> ${log_file}
 [[ -d ~/.ssh ]] || mkdir ~/.ssh && chmod 700  ~/.ssh                                                &>> ${log_file}
+#yes | sudo yum remove -y nodejs npm                                                                 &>> ${log_file}
 curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash -                                     &>> ${log_file}
 yes | sudo yum install -y nodejs                                                                    &>> ${log_file}
 yes | sudo npm install npm@latest -g                                                                &>> ${log_file}
