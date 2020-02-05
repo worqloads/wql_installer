@@ -13,7 +13,7 @@ app_folder="/app"
 scaler_folder="${app_folder}/scaler"
 installer_folder="${scaler_folder}/installer"
 secudir=${scaler_folder}/.keys
-log_file="~/wql_installer_$(date "+%Y.%m.%d-%H.%M.%S").log"
+log_file="./wql_installer_$(date "+%Y.%m.%d-%H.%M.%S").log"
 git_user="hnltcs"
 wql_user=`whoami`
 # ####################################################
