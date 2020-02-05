@@ -68,8 +68,10 @@ sudo chown -R $wql_user:$wql_user ${app_folder}                                 
 TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` &>> ${log_file}
 [[ -z $TOKEN ]] || awsregion=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/availability-zone) && echo ${awsregion::-1} > ${installer_folder}/.aws_region
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/instance-id > ${installer_folder}/.aws_instanceid
+[[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/hostname > ${installer_folder}/.aws_hostname
+[[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/local-ipv4 > ${installer_folder}/.aws_ip
 
-[[ -f .aws_region && -f .aws_instanceid ]] || exit 1
+[[ -f ${installer_folder}/.aws_region && -f ${installer_folder}/.aws_instanceid && -f ${installer_folder}/.aws_hostname && -f ${installer_folder}/.aws_ip ]] || exit 1
 # create local configuration
 clear
 node register_min.js
@@ -77,7 +79,7 @@ node register_min.js
 # registration successful
 if [[ $? -eq 0 && -f './conf.json' ]]; then
     cd ${scaler_folder}
-    mv ${installer_folder}/*min.js ${installer_folder}/node_modules ${installer_folder}/.aws_* .    &>> ${log_file}
+    mv ${installer_folder}/scale*min.js ${installer_folder}/node_modules ${installer_folder}/.aws_* ${installer_folder}/conf.json .    &>> ${log_file}
     pm2 start scale_doer_check_min.js scale_doer_collect_min.js scale_doer_scale_min.js             &>> ${log_file}
     pm2 save                                                                                        &>> ${log_file}
 fi
