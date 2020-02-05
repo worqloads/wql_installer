@@ -45,6 +45,12 @@ yes | sudo npm install pm2 -g                                                   
 [[ -d ~/.npm ]] && sudo chown -R $wql_user:$wql_user ~/.npm                                         &> ${log_file}
 [[ -d ~/.config ]] && sudo chown -R $wql_user:$wql_user ~/.config                                   &> ${log_file}
 
+# add cron housekeeping script of pm2 logs
+pm2 install pm2-logrotate              &> ${log_file}
+pm2 set pm2-logrotate:max_size 100M             &> ${log_file}
+pm2 set pm2-logrotate:compress true             &> ${log_file}
+pm2 set pm2-logrotate:rotateInterval '0 * * * *'              &> ${log_file}
+
 # if $scaler_folder already exists, do a backup
 [[ -d $scaler_folder ]] && sudo mv $scaler_folder "${scaler_folder}_$(date "+%Y.%m.%d-%H.%M.%S")"   &> ${log_file}
 git clone https://github.com/worqloads/wql_installer.git $scaler_folder                             &> ${log_file}
@@ -57,8 +63,8 @@ sudo chown -R $wql_user:$wql_user ${app_folder}                                 
 
 # get aws instance region
 TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` &> ${log_file}
-[[ -z $TOKEN ]] || awsregion=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/availability-zone) &&  echo ${awsregion::-1}  > .aws_region
-[[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/instance-id > .aws_instanceid
+[[ -z $TOKEN ]] || awsregion=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/availability-zone) &&  echo ${awsregion::-1}  > ${scaler_folder}/.aws_region
+[[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/instance-id > ${scaler_folder}/.aws_instanceid
 
 [[ -f .aws_region && -f .aws_instanceid ]] || exit 1
 # create local configuration
@@ -71,8 +77,3 @@ if [[ $? -eq 0 && -f './conf.json' ]]; then
     pm2 save
 fi
 
-# add cron housekeeping script of pm2 logs
-pm2 install pm2-logrotate
-pm2 set pm2-logrotate:max_size 100M
-pm2 set pm2-logrotate:compress true
-pm2 set pm2-logrotate:rotateInterval '0 * * * *'
