@@ -1,31 +1,39 @@
 var prompt = require('prompt')
     , axios = require('axios')
-    , http = require('http')
-    , https = require('https')
     , crypto = require('crypto')
     , fs = require('fs')
+    , os = require('os')
     , async = require('async')
-    , wqlconf = require('./wqlconf.js')
     , invalid_mails = require('./mails.js')
     , child = require('child_process')
+    , AWS = require('aws-sdk')
 
 // TODO next version
 // ----------------------------------------------------------------------------
 // 
-// save a copy of original script for restauration if corruption
-// save inputs for quickier retries
+// checks for cloud access conf (AWS)
+// save inputs for quickier retries (steps saved: accound registered, cloud provider api saved, cloud provider api validate)
 // stronger inputs validation (ascii char)
 // logs in file
 
 // Configuration
 // ----------------------------------------------------------------------------
-var myenv = process.env.NODE_ENV || 'production'
+// var myenv = process.env.NODE_ENV || 'production'
+// Errors handling
 const __DEBUG__ = process.env.WQL_DBG || false
-const login_url = wqlconf[myenv].login_url
-const support_email = wqlconf[myenv].support_email
-const wql_gateway = 'https://' + wqlconf[myenv].wql_host
-const wql_cred = 'https://' + wqlconf[myenv].cred_host
+const __ERROR_INTEGRITY = 1
+const __ERROR_API = 2
+const __ERROR_ACCOUNT = 3
+const __ERROR_API_ACCOUNT = 4
+// External integration
+const login_url = 'https://app.worqloads.com/'
+const support_email = 'support@worqloads.com'
+const wql_gateway = 'https://app.worqloads.com'
+const wql_cred = 'https://cred.worqloads.com'
+const wql_user = 'credmngr'
+const wql_pass = 'zHFJiNP2jTcpwvKVuyK9'
 const conf_file = 'conf.json'
+const agent = get_agent()
 
 // Prompt configuration
 prompt.message = "WQL"
@@ -50,46 +58,66 @@ try {
     if (__DEBUG__) {
         console.log('D wql_gateway:' + wql_gateway)
         console.log('D wql_cred:' + wql_cred)
+        console.log('D agent:' + agent)
     }
 
-    // make sure the invalid email list is not changed
-    // integrity_check()
+    // make sure the script has not been changed
+    integrity_check()
     welcome_msg()
-    // prompt.start()
-    start()
+    prompt.start()
+    // restore previous registration
+    start( restore_existing_registration() )
 } catch (e) {
     console.error('E exception raised:', e)
 }
 
-
 // Prompts function definition
 // ----------------------------------------------------------------------------
-function start() {
+function start( already_registered ) {
     async.waterfall([
         (waterfall_cb) => {
+            // if (already_registered != null) {
+            //     waterfall_cb(null, already_registered.data)
+            // } else {
+            //     get_inputs(waterfall_cb)
+            // }
             // get_inputs(waterfall_cb)
-            let radom13chars = function () {
-                return Math.random().toString(16).substring(2, 15)
-            }
-            waterfall_cb({
-                'company_name': radom13chars(),
-                'entity_name': radom13chars(),
-                'firstname': radom13chars(),
-                'lastname': radom13chars(),
-                'email': radom13chars()+'@'+radom13chars()+'.com',
-                'password': 'Test1234_-',
-            })
+            waterfall_cb()
         },
         (result, waterfall_cb) => {
             // confirm_inputs(result, waterfall_cb)
-            waterfall_cb(null, result)
+            waterfall_cb()
         },
     ], (err, res) => {
         if (err) {
             console.error('An error occured:', err, '.\nPlease retry.')
             start()
         } else {
-            process_inputs(res)
+            /*
+            let radom13chars = function () {
+                return Math.random().toString(16).substring(2, 15)
+            }
+            waterfall_cb(null,{
+                'company_name': radom13chars(),
+                'entity_name': radom13chars(),
+                'firstname': radom13chars(),
+                'lastname': radom13chars(),
+                'email': radom13chars()+'@'+radom13chars()+'.com',
+                'password': 'Test1234_-',
+                'aws_api_key': 'AKIATSZMM6MFAZXWGHM7',
+                'aws_api_secret': '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'
+            })
+            */
+            process_inputs({
+                'company_name': 'worqloads',
+                'entity_name': 'demo',
+                'firstname': 'yi',
+                'lastname': 'jiang',
+                'email': 'yi.jiang@worqloads.com',
+                'password': '_W0rqloads',
+                'aws_api_key': 'AKIATSZMM6MFAZXWGHM7',
+                'aws_api_secret': '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'
+            })
         }
     })
 }
@@ -124,7 +152,8 @@ function get_inputs(cb) {
                 const corporate_name = value.split('@')[1]
                 return (invalid_mails.indexOf(corporate_name) < 0)
             }
-        }, prompt_email_validation), {
+        }, prompt_email_validation),
+        {
             name: 'password',
             description: 'Admin user (complex) password',
             hidden: true,
@@ -134,6 +163,22 @@ function get_inputs(cb) {
             conform: function (value) {
                 const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!-@#\$%\^&\*\_])(?=.{8,})");
                 return strongRegex.test(value)
+            }
+        },
+        {
+            name: 'aws_api_key',
+            description: 'AWS API key',
+            required: true,
+            conform: function(value) {
+                return (new RegExp("[A-Z0-9]{20,}")).test(value)
+            }
+        },
+        {
+            name: 'aws_api_secret',
+            description: 'AWS API secret',
+            required: true,
+            conform: function(value) {
+                return (new RegExp("[A-Za-z0-9/+=]{40,}")).test(value)
             }
         }
     ], cb)
@@ -160,16 +205,16 @@ function confirm_inputs(result, cb) {
             console.log('')
             cb(null, result)
         }
-    }
-    )
+    })
 }
 
-function process_inputs(result) {
+function process_inputs(user_inputs) {
+
     async.waterfall([
         // send inputs for creation. and get company_id
         function (waterfall_cb) {
-            if (__DEBUG__) console.log('D send_inputs with:', result)
-            send_inputs(result, waterfall_cb)
+            if (__DEBUG__) console.log('D send_inputs with:', user_inputs)
+            send_inputs(user_inputs, waterfall_cb)
         },
         // get UUID and passwords
         function (company_id, waterfall_cb) {
@@ -177,6 +222,7 @@ function process_inputs(result) {
             get_cred(company_id, waterfall_cb)
         },
         // create local conf in with company_id
+        // data: { company:, uuid:, gateway_user:, gateway_pass:, .dbkey: }
         function (data, waterfall_cb) {
             if (__DEBUG__) console.log('D create_local_conf:', data)
             create_local_conf(data, waterfall_cb)
@@ -185,11 +231,23 @@ function process_inputs(result) {
         function (result, waterfall_cb) {
             if (__DEBUG__) console.log('D valid_cred:', result)
             valid_cred(result, waterfall_cb)
+        },
+        function (entity_id, waterfall_cb) {
+            valid_api(entity_id, user_inputs, waterfall_cb)
         }
     ], (err) => {
         if (err) registration_failed(err)
         else registration_completed()
+
+        // if (res.account) registration_failed(res.account)
+        // if (res.api) api_failed(res.api)
+        // if (res.account && res.api) process.exit(__ERROR_API_ACCOUNT)
+        // if (res.account) process.exit(__ERROR_ACCOUNT)
+        // if (res.api) process.exit(__ERROR_API)
+        // process.exit(0)
+
     })
+
 }
 
 // Processing functions
@@ -203,9 +261,7 @@ function send_inputs(data, callback) {
         wql_gateway + '/registration/new_company',
         data,
         {
-            timeout: 60000, // 1min
-            httpAgent: new http.Agent({ keepAlive: true }),
-            httpsAgent: new https.Agent({ keepAlive: true })
+            timeout: 60000 // 1min
         })
         .then(function (response) {
             if (__DEBUG__) console.log('D send_inputs response.data:', response.data)
@@ -287,6 +343,10 @@ function create_local_conf(data, callback) {
 function get_cred(company_id, callback) {
     axios
         .post(wql_cred + '/gen', {}, {
+            auth: {
+                username: wql_user,
+                password: wql_pass
+            },
             timeout: 30000 // 30sec
         })
         .then(function (response) {
@@ -308,41 +368,133 @@ function get_cred(company_id, callback) {
 function valid_cred(result, callback) {
     if (result.ok) {
         async.parallel({
-            function(parallel_cb) {
+            cred: function(parallel_cb) {
                 axios
                     .post(
                         wql_cred + '/validate',
                         { uuid: result.uuid },
                         {
+                            auth: {
+                                username: wql_user,
+                                password: wql_pass
+                            },
                             timeout: 30000, // 30sec,
                         }
                     )
                     .then(function (res) {
-                        if (__DEBUG__) console.log('E cred validate ok:', res)
+                        if (__DEBUG__) console.log('D cred validate ok:', res)
                         parallel_cb()
                     })
                     .catch(function (error) {
-                        if (error) parallel_cb(error)
+                        if (error) console.error('E valid_cred cred error:', error)
+                        parallel_cb()
                     })
             },
-            function(parallel_cb) {
+            company: function(parallel_cb) {
                 axios
                     .post(wql_gateway + '/registration/confirm_company', result,
                         // data: { uuid: result.uuid, company: result.company }
                         {
                             timeout: 30000, // 30sec,
                         })
-                    .then(function () {
-                        parallel_cb()
+                    .then(function (data) {
+                        parallel_cb(null, data)
                     })
                     .catch(function (error) {
-                        if (error) parallel_cb(error)
+                        if (error) console.error('E valid_cred cred company:', error)
+                        parallel_cb()
                     })
             }
-        }, (err) => callback(err))
+        }, (err, res) => callback(err, res && res.company && res.company.data && res.company.data.data._id))
     } else {
         callback('error')
     }
+}
+
+function valid_api(entity_id, user_inputs, callback) {
+    // save keys in file ~/.aws/credentials
+    const aws_dir = os.homedir()+'/.aws'
+    if (!fs.existsSync(aws_dir)){
+        fs.mkdirSync(aws_dir)
+    }
+    fs.writeFileSync(aws_dir + '/credentials', credentials_content(user_inputs.aws_api_key, user_inputs.aws_api_secret), { encoding: 'utf8', flag: 'w' })
+
+    // check against AWS
+    const ec2_cli = new AWS.EC2({apiVersion: '2016-11-15', region: agent.region})
+
+    async.waterfall([
+        // load credentials
+        function(waterfall_cb2) {
+            AWS.config.getCredentials(function(err) {
+                if (err) {
+                    console.log(err.stack)
+                    waterfall_cb2(err.stack)
+                // credentials not loaded
+                } else {
+                    console.log("Access key:", AWS.config.credentials.accessKeyId)
+                    console.log("Secret access key:", AWS.config.credentials.secretAccessKey)
+                    waterfall_cb2()
+                }
+            })
+        },
+        // validate credentials
+        function(waterfall_cb2) {
+            // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeInstanceStatus-property
+            ec2_cli.describeInstanceStatus({ InstanceIds: [ agent.instanceid ]}, waterfall_cb2)                    
+        },
+        // update cloud provider cred in DB
+        function (res, waterfall_cb2) {
+            axios.post(
+                wql_gateway + '/registration/confirm_cpcred',
+                { entity: entity_id },
+                {
+                    timeout: 60000 // 1min
+                })
+                .then(function (response) {
+                    if (__DEBUG__) console.log('D valid_api response.data:', response.data)
+                    waterfall_cb2()
+                })
+                .catch(function (error) {
+                    if (error) waterfall_cb2(error)
+                })              
+        },
+        // add cloud agent and rel
+        function (waterfall_cb2) {
+            axios.post(
+                wql_gateway + '/registration/confirm_cpagent', { 
+                    entity: entity_id,
+                    agent: agent
+                },
+                {
+                    timeout: 60000 // 1min
+                })
+                .then(function (response) {
+                    if (__DEBUG__) console.log('D valid_api response.data:', response.data)
+                    waterfall_cb2()
+                })
+                .catch(function (error) {
+                    if (error) waterfall_cb2(error)
+                })
+        }
+    ], function(err) {
+        if (err) {
+            console.error('E valid_api error:', err)
+            callback(err)
+        }
+    })
+}
+
+function get_agent(){
+    return { 
+        'instanceid': fs.readFileSync('./.aws_instanceid').toString(),
+        'hostname': fs.readFileSync('./.aws_hostname').toString(),
+        'ip_internal': fs.readFileSync('./.aws_ip').toString(),
+        'region': fs.readFileSync('./.aws_region').toString()
+    }
+}
+
+function credentials_content(aws_api_key, aws_api_secret) {
+    return '[default]\naws_access_key_id = '+aws_api_key+'\naws_secret_access_key = '+aws_api_secret+'\n'
 }
 
 // Helpers
@@ -361,6 +513,8 @@ function welcome_msg() {
     console.log('')
     console.log('Please fill out this questionary to register an enterprise account at')
     console.log('https://app.worqloads.com')
+    console.log('')
+    console.log('Before starting, make sure you have created AWS Access Keys for API access.')
     console.log('')
     console.log('                                                            Press Ctrl+D to quit')
     console.log('--------------------------------------------------------------------------------')
@@ -390,7 +544,6 @@ function registration_failed(err) {
     }
     console.log('')
     console.log('')
-    process.exit(1)
 }
 
 // make sure the min script has not been modified. 
@@ -402,6 +555,11 @@ function integrity_check() {
         console.error('This registration script has been corrupted.')
         console.error('Please re-download it from Worqloads.')
         console.error('')
-        process.exit(2)
+        process.exit(__ERROR_INTEGRITY)
     }
+}
+
+// todo
+function restore_existing_registration() {
+    return null
 }
