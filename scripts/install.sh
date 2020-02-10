@@ -33,6 +33,10 @@ echo " + App version: $WQL_VERSION"
 [[ -f ~/.profile ]] && [[ `cat ~/.profile | grep -c '^export SECUDIR='` -ne 0  ]] || echo export SECUDIR=${secudir} >> ~/.profile
 [[ -f ~/.profile ]] && [[ `cat ~/.profile | grep -c "^export NODE_ENV="` -ne 0  ]] || echo export NODE_ENV='production' >> ~/.profile 
 
+# ####################################################
+# todo check for existing package before trying to install: https://unix.stackexchange.com/questions/122681/how-can-i-tell-whether-a-package-is-installed-via-yum-in-a-bash-script
+# ####################################################
+
 # install NodeJS, NPM, PM2, GIT
 yes | sudo yum update                                                                               &> ${log_file}
 yes | sudo yum install curl git                                                                     &>> ${log_file}
@@ -48,9 +52,9 @@ yes | sudo npm install pm2 -g                                                   
 [[ -d ~/.config ]] && sudo chown -R $wql_user:$wql_user ~/.config                                   &>> ${log_file}
 
 # add cron housekeeping script of pm2 logs
-pm2 install pm2-logrotate              &>> ${log_file}
-pm2 set pm2-logrotate:max_size 100M             &>> ${log_file}
-pm2 set pm2-logrotate:compress true             &>> ${log_file}
+pm2 install pm2-logrotate                              &>> ${log_file}
+pm2 set pm2-logrotate:max_size 100M                    &>> ${log_file}
+pm2 set pm2-logrotate:compress true                    &>> ${log_file}
 pm2 set pm2-logrotate:rotateInterval '0 * * * *'              &>> ${log_file}
 
 # if $scaler_folder already exists, do a backup
