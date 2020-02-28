@@ -34,7 +34,9 @@ const wql_user = 'credmngr'
 const wql_pass = 'zHFJiNP2jTcpwvKVuyK9'
 const conf_file = 'conf.json'
 const agent = get_agent()
+// get app version & staging info from command line. executed by wql_installer script
 const version = process.argv[2]
+const staging = process.argv[3]
 
 // Prompt configuration
 prompt.message = "WQL"
@@ -279,7 +281,7 @@ function create_local_conf(data, callback) {
 
     try {
 
-        fs.writeFileSync(__dirname + '/' + conf_file, '{ "production": { "gateway": { "protocole" : "https", "credentials" : "__gateway_cred__", "host" : "app.worqloads.com", "port" : "443" }, "db": { "host": "app.worqloads.com", "port": 3333, "auth": "__db_key__", "db": 0, "options": { } }, "nb_workers": 10, "version": "__version__", "company": "__company__" } }', { encoding: 'utf8', flag: 'w' })
+        fs.writeFileSync(__dirname + '/' + conf_file, '{ "production": { "gateway": { "protocole" : "https", "credentials" : "__gateway_cred__", "host" : "app.worqloads.com", "port" : "443" }, "db": { "host": "app.worqloads.com", "port": 3333, "auth": "__db_key__", "db": 0, "options": { } }, "nb_workers": 10, "version": "__version__", "staging": "__staging__", "company": "__company__" } }', { encoding: 'utf8', flag: 'w' })
 
         async.series([
             function (series_cb) {
@@ -308,6 +310,14 @@ function create_local_conf(data, callback) {
             },
             function (series_cb) {
                 _spawn('sed', ['-i', 's/__version__/' + version + '/', __dirname + '/' + conf_file], (err) => {
+                    if (err) {
+                        console.error('Error updating file:' + conf_file, err)
+                    }
+                    series_cb(err)
+                })
+            },
+            function (series_cb) {
+                _spawn('sed', ['-i', 's/__staging__/' + staging + '/', __dirname + '/' + conf_file], (err) => {
                     if (err) {
                         console.error('Error updating file:' + conf_file, err)
                     }
@@ -552,9 +562,12 @@ function integrity_check() {
         console.error('')
         process.exit(__ERROR_INTEGRITY)
     }
-    if (process.argv.length < 3 || !/^v[0-9]+.[0-9]+.[0-9]+$/.test(process.argv[2])) {
+    if (process.argv.length < 4 || 
+        !/^v[0-9]+.[0-9]+.[0-9]+$/.test(process.argv[2]) ||
+        ['dev','test','beta','production'].indexOf(process.argv[3]) < 0
+        ) {
         console.error('')
-        console.error('Missing version argument.')
+        console.error('Missing / invalid version or staging arguments.')
         console.error('')
     }
 }
