@@ -34,6 +34,7 @@ const wql_user = 'credmngr'
 const wql_pass = 'zHFJiNP2jTcpwvKVuyK9'
 const conf_file = 'conf.json'
 const agent = get_agent()
+const version = process.argv[2]
 
 // Prompt configuration
 prompt.message = "WQL"
@@ -278,7 +279,7 @@ function create_local_conf(data, callback) {
 
     try {
 
-        fs.writeFileSync(__dirname + '/' + conf_file, '{ "production": { "gateway": { "protocole" : "https", "credentials" : "__gateway_cred__", "host" : "app.worqloads.com", "port" : "443" }, "db": { "host": "app.worqloads.com", "port": 3333, "auth": "__db_key__", "db": 0, "options": { } }, "nb_workers": 10, "company": "__company__" } }', { encoding: 'utf8', flag: 'w' })
+        fs.writeFileSync(__dirname + '/' + conf_file, '{ "production": { "gateway": { "protocole" : "https", "credentials" : "__gateway_cred__", "host" : "app.worqloads.com", "port" : "443" }, "db": { "host": "app.worqloads.com", "port": 3333, "auth": "__db_key__", "db": 0, "options": { } }, "nb_workers": 10, "version": "__version__", "company": "__company__" } }', { encoding: 'utf8', flag: 'w' })
 
         async.series([
             function (series_cb) {
@@ -299,6 +300,14 @@ function create_local_conf(data, callback) {
             },
             function (series_cb) {
                 _spawn('sed', ['-i', 's/__company__/' + data.company + '/', __dirname + '/' + conf_file], (err) => {
+                    if (err) {
+                        console.error('Error updating file:' + conf_file, err)
+                    }
+                    series_cb(err)
+                })
+            },
+            function (series_cb) {
+                _spawn('sed', ['-i', 's/__version__/' + version + '/', __dirname + '/' + conf_file], (err) => {
                     if (err) {
                         console.error('Error updating file:' + conf_file, err)
                     }
@@ -461,6 +470,7 @@ function valid_api(entity_id, user_inputs, callback) {
 function get_agent(){
     return { 
         'instanceid': fs.readFileSync('./.aws_instanceid').toString(),
+        'instancetype': fs.readFileSync('./.aws_instancetype').toString(),
         'hostname': fs.readFileSync('./.aws_hostname').toString(),
         'ip_internal': fs.readFileSync('./.aws_ip').toString(),
         'region': fs.readFileSync('./.aws_region').toString()
@@ -541,6 +551,11 @@ function integrity_check() {
         console.error('Please re-download it from Worqloads.')
         console.error('')
         process.exit(__ERROR_INTEGRITY)
+    }
+    if (process.argv.length < 3 || !/^v[0-9]+.[0-9]+.[0-9]+$/.test(process.argv[2])) {
+        console.error('')
+        console.error('Missing version argument.')
+        console.error('')
     }
 }
 

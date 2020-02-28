@@ -54,7 +54,7 @@ yes | sudo npm install pm2 -g                                                   
 # add cron housekeeping script of pm2 logs
 pm2 install pm2-logrotate                              &>> ${log_file}
 pm2 set pm2-logrotate:max_size 100M                    &>> ${log_file}
-pm2 set pm2-logrotate:compress true                    &>> ${log_file}
+#pm2 set pm2-logrotate:compress true                    &>> ${log_file}
 pm2 set pm2-logrotate:rotateInterval '0 * * * *'              &>> ${log_file}
 
 # if $scaler_folder already exists, do a backup
@@ -72,13 +72,18 @@ sudo chown -R $wql_user:$wql_user ${app_folder}                                 
 TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` &>> ${log_file}
 [[ -z $TOKEN ]] || awsregion=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/availability-zone) && echo -n ${awsregion::-1} > ${installer_folder}/.aws_region
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/instance-id > ${installer_folder}/.aws_instanceid
+[[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/instance-type > ${installer_folder}/.aws_instancetype
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/hostname > ${installer_folder}/.aws_hostname
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/local-ipv4 > ${installer_folder}/.aws_ip
 
-[[ -f ${installer_folder}/.aws_region && -f ${installer_folder}/.aws_instanceid && -f ${installer_folder}/.aws_hostname && -f ${installer_folder}/.aws_ip ]] || exit 1
+[[  -f ${installer_folder}/.aws_region && \
+    -f ${installer_folder}/.aws_instanceid && \
+    -f ${installer_folder}/.aws_instancetype && \
+    -f ${installer_folder}/.aws_hostname && \
+    -f ${installer_folder}/.aws_ip ]] || exit 1
 # create local configuration
 clear
-node register_min.js
+node register_min.js ${WQL_VERSION}
 
 # registration successful
 if [[ $? -eq 0 && -f './conf.json' ]]; then
