@@ -1,6 +1,6 @@
 {
   "name": "worqloads",
-  "version": "1.4.5",
+  "version": "1.0.0",
   "dependencies": {
     "prompt": "^1.0.0",
     "async": "^2.6.2",
@@ -10,6 +10,7 @@
     "kue": "^0.11.6",
     "moment": "^2.24.0",
     "prom-client": "^11.1.1",
-    "soap": "^0.29.0"
+    "soap": "^0.29.0",
+    "yargs": "^15.3.1"
   }
 }
