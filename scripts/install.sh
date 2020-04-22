@@ -92,6 +92,7 @@ if [[ $? -eq 0 && -f './conf.json' ]]; then
     pm2 stop scale_doer_check_min || echo "no existing doer check"      &>> ${log_file}
     pm2 stop scale_doer_collect_min || echo "no existing doer collect"    &>> ${log_file}
     pm2 stop scale_doer_scale_min || echo "no existing doer scale"      &>> ${log_file}
+    pm2 flush all &>> ${log_file}
     pm2 start scale_doer_check_min.js scale_doer_collect_min.js scale_doer_scale_min.js             &>> ${log_file}
     pm2 save                                                                                        &>> ${log_file}
 fi
