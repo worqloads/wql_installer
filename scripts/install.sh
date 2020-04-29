@@ -89,9 +89,9 @@ node register_min.js ${WQL_VERSION} 'production'
 if [[ $? -eq 0 && -f './conf.json' ]]; then
     cd ${scaler_folder}
     mv ${installer_folder}/scale*min.js ${installer_folder}/node_modules ${installer_folder}/.aws_* ${installer_folder}/conf.json .    &>> ${log_file}
-    pm2 stop scale_doer_check_min || echo "no existing doer check"      &>> ${log_file}
-    pm2 stop scale_doer_collect_min || echo "no existing doer collect"    &>> ${log_file}
-    pm2 stop scale_doer_scale_min || echo "no existing doer scale"      &>> ${log_file}
+    pm2 stop scale_doer_check_min      &>> ${log_file}
+    pm2 stop scale_doer_collect_min    &>> ${log_file}
+    pm2 stop scale_doer_scale_min      &>> ${log_file}
     pm2 flush all &>> ${log_file}
     pm2 start scale_doer_check_min.js scale_doer_collect_min.js scale_doer_scale_min.js             &>> ${log_file}
     pm2 save                                                                                        &>> ${log_file}
