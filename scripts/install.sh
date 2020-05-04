@@ -14,7 +14,6 @@ scaler_folder="${app_folder}/scaler"
 installer_folder="${scaler_folder}/installer"
 secudir=${scaler_folder}/.keys
 log_file="/tmp/wql_installer_$(date "+%Y.%m.%d-%H.%M.%S").log"
-yum_file="/tmp/wql_pre_packages.log"
 git_user="hnltcs"
 wql_user=`whoami`
 # ####################################################
@@ -39,7 +38,6 @@ echo " + App version: $WQL_VERSION"
 # ####################################################
 
 # install NodeJS, NPM, PM2, GIT
-yum list installed > yum_file 2>&1
 yes | sudo yum update                                                                               &> ${log_file}
 yes | sudo yum install curl git                                                                     &>> ${log_file}
 [[ -d ${app_folder} ]] || sudo mkdir -p ${app_folder}                                               &>> ${log_file}
@@ -75,11 +73,16 @@ TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metad
 [[ -z $TOKEN ]] || awsregion=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/availability-zone) && echo -n ${awsregion::-1} > ${installer_folder}/.aws_region
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/instance-id > ${installer_folder}/.aws_instanceid
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/instance-type > ${installer_folder}/.aws_instancetype
+[[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/network/interfaces/macs > ${installer_folder}/.aws_mac
+# [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/network/interfaces/macs/$(cat ./.aws_mac)/subnet-id > ${installer_folder}/.aws_subnet
+[[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/network/interfaces/macs/$(cat ./.aws_mac)/vpc > ${installer_folder}/.vpc
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/hostname > ${installer_folder}/.aws_hostname
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/local-ipv4 > ${installer_folder}/.aws_ip
 
 [[  -f ${installer_folder}/.aws_region && \
     -f ${installer_folder}/.aws_instanceid && \
+    # -f ${installer_folder}/.aws_subnet && \
+    -f ${installer_folder}/.aws_vpc && \
     -f ${installer_folder}/.aws_instancetype && \
     -f ${installer_folder}/.aws_hostname && \
     -f ${installer_folder}/.aws_ip ]] || exit 1
@@ -91,9 +94,9 @@ node register_min.js ${WQL_VERSION} 'production'
 if [[ $? -eq 0 && -f './conf.json' ]]; then
     cd ${scaler_folder}
     mv ${installer_folder}/scale*min.js ${installer_folder}/node_modules ${installer_folder}/.aws_* ${installer_folder}/conf.json .    &>> ${log_file}
-    pm2 stop scale_doer_check_min                                                                   &>> ${log_file} || echo ''
-    pm2 stop scale_doer_collect_min                                                                 &>> ${log_file} || echo ''
-    pm2 stop scale_doer_scale_min                                                                   &>> ${log_file} || echo ''
+    pm2 stop scale_doer_check_min      &>> ${log_file} || echo ''
+    pm2 stop scale_doer_collect_min    &>> ${log_file} || echo ''
+    pm2 stop scale_doer_scale_min      &>> ${log_file} || echo ''
     pm2 flush all &>> ${log_file}
     pm2 start scale_doer_check_min.js scale_doer_collect_min.js scale_doer_scale_min.js             &>> ${log_file}
     pm2 save                                                                                        &>> ${log_file}
