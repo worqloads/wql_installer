@@ -74,13 +74,15 @@ TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metad
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/instance-id > ${installer_folder}/.aws_instanceid
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/instance-type > ${installer_folder}/.aws_instancetype
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/network/interfaces/macs > ${installer_folder}/.aws_mac
-[[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/network/interfaces/macs/$(cat ./.aws_mac)/subnet-id > ${installer_folder}/.aws_subnet
+# [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/network/interfaces/macs/$(cat ./.aws_mac)/subnet-id > ${installer_folder}/.aws_subnet
+[[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/network/interfaces/macs/$(cat ./.aws_mac)/vpc > ${installer_folder}/.vpc
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/hostname > ${installer_folder}/.aws_hostname
 [[ -z $TOKEN ]] || curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/local-ipv4 > ${installer_folder}/.aws_ip
 
 [[  -f ${installer_folder}/.aws_region && \
     -f ${installer_folder}/.aws_instanceid && \
-    -f ${installer_folder}/.aws_subnet && \
+    # -f ${installer_folder}/.aws_subnet && \
+    -f ${installer_folder}/.aws_vpc && \
     -f ${installer_folder}/.aws_instancetype && \
     -f ${installer_folder}/.aws_hostname && \
     -f ${installer_folder}/.aws_ip ]] || exit 1
