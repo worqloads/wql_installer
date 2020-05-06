@@ -1,1 +1,3838 @@
-var _0x18ab=['r1de45da792a8697130be','ra08cadce511ff197b26d','rfb5df2a2440192201d3f','r57a0a2089cded3b4fff7','rbfe1f1651b51d67bc74b','rd0074482b0529cb32e0f','rce36a026a223ead06904','r2939bbb672a85e65a35a','r8e880d60fadc492c52d0','rce0128b3a37d805eed4a','rd0b5a0532e73176b6ec2','r709dfa29ed094128337b','r82f51da34fd4e64cd7d2','r3e122758d5252afdf301','rc1636d9b64ba1c7d299a','r12a38cb3bcb8143e656b','r22cc19f9bd86c420755c','rfbbd3f86069568d629ad','re43358b5f71bf7b9b33a','r5c35935afbc4ecb59f54','r59f9520cfd70ae9f2dac','rbbdd4ae591afa6c96866','r63a325a6fc9cd7455ee7','r5507a87adb9a843814b8','ra1be4ede3f473d907098','r4c77e11f61d1fde79248','rce153ab447ff78bb63bd','r1a2fb16f5a163921d090','r1474d7fbb9a7324bfe8b','rbbee446c0ca0e678607a','rab56e993495f87e82568','rd28064b1b6a02e83d69f','r040dab23af4510e7149f','r345da673d33003cbcd34','r437d51923772d10e4f97','r1edcd9984a6482302f84','rd52fed8963807907af5b','r7296cee0472b5c42a056','r45b2cebbd4d7206037ff','r0337b93f18e636174af5','re1cbdcb73780e3bdfb36','r7d72640cccaa75eaf713','r7cb8a66e6f7d1a2d81dc','r28ac155def5413926a04','r4a905c628adb036f5ebc','r436d44a1adf050f0b97e','r083b2fc6cba07dbf4688','rbceb4ef80d4607215929','r4c95fa093bc7d290fced','r421bbad7bcce86124109','r27ba8feb2c4c546a4152','r84e26868c42700105908','r03ee55b42ebdc2c18a81','r23bee686be5fda753179','r77e4c1a01c6c040cd3ca','r50623b529d52cc31023e','r529f3a179b1611ff66ca','rac4f2bb8c900b7a4588b','r6bb54153c3cd0e34ef79','ra63c6d1f016107b0abcf','rb5336953a9773c4fdc85','rd4fcf8328ecbd58596b0','rf9db5f6d644bd379ea77','r335ac0fada359dc2a168','ref0b5cdf20e3d8e2c56f','r4ff46d82c7ee5abddf08','r3dd3add7a10f8e1a3fd5','r66c704c25f2db6ac805c','r2443efd44b6a1ed32cea','r9092c8b2288a642d30a8','r991f6fd4cdd5c01d11ee','r46a607ebca2880de70b9','rfc2f355901f83dbc6f32','re3911909956e43ffcbb7','r10377ca91782901d471c','rcd25f69d8b71238c4f89','r07b493479fe344b5cf11','r3582a8e329efcb4b3c35','company','agent','production','COLLECT_','DISCOVER_','DO_','gateway','nb_workers','redis_conf','company:','\x20staging:','createClient','key','Oops\x20redis\x20client\x20error:','code','\x20-\x20','origin','watchStuckJobs','Oops\x20redis\x20queue\x20error:','protocole','://','credentials','port','/pshgtw','existsSync','mkdirSync','ScaleDoer\x20init\x20completed\x20with\x20queues:','conn_retries','pshgtw:',':\x20delete\x20\x27','\x27\x20timeserie\x20data,\x20set\x20status=0\x20\x27up\x27\x20timeserie','delSerie','pushUpSAPInstance','Error\x20connecting\x20to\x20WSDL\x20:','?wsdl','soap_client_init','method','setSecurity','BasicAuthSecurity','options','pwd','ClientSSLSecurityPFX','setEndpoint','SAPControl.cgi','SOAP\x20client\x20init\x20exception:','https://','/?wsdl','instanceNr','padStart','dispstatus','_sap_statuses','green','yellow','soap_client_getinstance','check_sapcontrol_listening:\x20SOAP\x20client\x20init\x20exception:','http://','13/?wsdl','\x20WSDL\x20of\x20','statusCode','includes','timeout','\x20WSDL\x20checking\x20error\x20of\x20','.pfx','F_OK','parse','SSL\x20Keys\x20not\x20provided\x20for\x20','no\x20pfx\x20provided','NODE_TLS_REJECT_UNAUTHORIZED','[PENDING]\x20{','system','}\x20connect\x20sap','syst_id','keys_buff','is_encrypted','protocol','port_suffix','addInstance','new_soap_client','auth_method','username','soapcli','instances','find','check_system_status','red','gray','conn_failed','pushUpInstance','entity_id','password','is_direct','}\x20instances:','MESSAGESERVER','}\x20error\x20connecting\x20to\x20instance:\x20','}\x20sapcontrol\x20exec\x20operation\x20error:','scale','pushInstance','no_active_instance','[FAILED]\x20{','check_failed_conn','no_system_conn','ws_not_reachable','ETIMEDOUT','deletePrometheus','collect_exec','data','func','update_sending_ssl','connect_sap','type','}\x20sapcontrol:',':\x20execution','restricted_kpis','rule_id','System\x20details\x20not\x20found','aws_cli','discoverEC2Instances','Possible\x20combinations\x20of\x20IP\x20nr:','check_sapcontrol_listening','Error:','Valid\x20SAP\x20IP\x20NR\x20:','sap_instances_ip','readFileSync','/.aws_vpc','Exception\x20Unexcepted\x20error:','checkconn_exec','}\x20checkconn_exec\x20system','missing\x20pfx','findIndex','parallel','AccessCheck','Start','trim','No\x20IP\x20','getEC2ID_Type','cloud_instance_id','instance_id','cloud_instance_type','instance_type','checkconn_exec\x20error\x20getting\x20SAP\x20instance\x20details\x20(IP,\x20cloud\x20instance\x20ID\x20and\x20type):','check_start_sap_instance:','check_start_ec2_instance:','isEC2Running','isEC2Stopped','updated_system_instances','Instance\x20already\x20started','[COMPLETED]\x20{','}\x20(restart-',')\x20already\x20started:','}\x20(restart\x20-','now','ceil',')\x20waiting\x20for\x20SAP\x20instance\x20to\x20actually\x20start\x20within\x20timeout\x20300\x20sec:',')\x20fully\x20started:',')\x20all\x20retries\x20completed:','save_resume_step','labels','\x20from\x20alert\x20','alertname','}\x20(stop',')\x20-\x20all\x20instances\x20of\x20system:','values','_resume_on_step','stop','sap_stop_triggered','payload','min_instances_reached','address',')\x20no\x20soap\x20client\x20created\x20for\x20system\x20instance\x20',')\x20triggered:\x20','\x20(counter=','1\x20entity=','resume_here_on_interruption','pushCounter','counter_updated',')\x20triggered\x20SAP\x20instance:','action',')\x20waiting\x20SAP\x20instance\x20to\x20stop\x20before\x20timeout\x20300\x20sec:\x20','ec2_stop_triggered',')\x20triggered\x20EC2\x20instance:',')\x20partially\x20stopped\x20(SAP:OK,\x20EC2:NOK):','\x20error:','[CANCELLED]\x20{',')\x20instance\x20is\x20already\x20being\x20stopped','stop_ongoing',')\x20on\x20',')\x20no\x20system\x20provided','alert','}\x20(start',')\x20requested\x20for\x20instance:','ENQUE','no_start_candidate','https','test','max_instances_reached',')\x20all\x20instances\x20of\x20system:','normal_instance_to_start','resume_instance_to_start',')\x20alert:','\x20on\x20','start','begin',')\x20triggered:','\x20entity=','ec2_start_triggered',')\x20trigger\x20EC2\x20instance:',')\x20error:','sap_start_triggered',')\x20partially\x20started\x20(EC2:OK,\x20SAP:NOK):\x20','start_ongoing','[CHECKS\x20FAILED]\x20{','[FAILED]\x20{}\x20(start','No\x20system\x20provided','instance_nr','Error\x20getting\x20system\x20instance\x20latest\x20status\x20','System\x20instance\x20not\x20indexed','System\x20instance\x20not\x20active','parameters','slack','alerts','firing','\x20new)','section','mrkdwn','<https://scaling.worqloads.com|','fingerprint','*System*\x0a','divider','email','ZqDvnKwJhCz69koeSUSB59jIhyDMjHm3RMHyg675','}\x20(notif):','Stop\x20EC2\x20server\x20operation\x20timeout\x20(but\x20SAP\x20instance\x20successfully\x20stopped)','EC2\x20server\x20to\x20stop\x20cannot\x20be\x20found','Stop\x20SAP\x20instance\x20operation\x20timeout','root','{\x22root\x22:{}}','redis\x20client\x20get/set\x20error:','loaded\x20from\x20cache\x20:','resume_on_step','resuming\x20interrupted\x20scale\x20processing\x20operation:','(resume)\x20stop\x20error\x20:','(resume)\x20stop\x20OK:','(resume)\x20start\x20on:','resume_context','(resume)\x20start\x20OK:','(resume)\x20action\x20type\x20not\x20supported:','webhook_exec','stop\x20action\x20data:','UpdateScalingInstance','no\x20data\x20provided','http://169.254.169.254/latest/meta-data/placement/availability-zone','get_cloud_region\x20','get_cloud_region\x20:\x20no\x20data','redis\x20client\x20get\x20error:','system\x20instances\x20buffer\x20saved','Kue\x20shutdown:\x20','quit','/conf.json','E\x20missing\x20configuration\x20file','init','collect','SIGUSR1','SIGUSR2','Exception\x20raised:','exit','object','exports','async','moment','http','kue','redis','cron','soap','amd','axios','aws-sdk','crypto','version','staging','gtw_url','metrics_caches','up_timeseries','ec2','EC2','eu-west-3','mappings_ip_id','_errors','No\x20EC2\x20instance\x20found','AWS\x20credentials\x20keys\x20not\x20loadded','Error\x20starting\x20EC2\x20instance','config','getCredentials','error','credentials_not_loaded','global_log_level','LOG_LEVEL_ERROR','LOG_LEVEL_MIN','LOG_LEVEL_INFO','LOG_LEVEL_DEBUG','level_letter','separator','queue','QUEUES','region','concurrency_nb','sending_sslcertifs','conn_retries_max','min_instance_running','max_instance_running','sap','kpiname_separator','SAPControl-GREEN','SAPControl-YELLOW','SAPControl-GRAY','Error\x20getting\x20instance\x20list','SAP\x20control\x20WS\x20not\x20reachable','No\x20active\x20SAP\x20instance\x20available','Stop\x20SAP\x20instance\x20already\x20ongoing','Start\x20eligible\x20system\x20instance\x20already\x20ongoing','No\x20eligible\x20system\x20instance\x20to\x20be\x20started','Maximal\x20autorized\x20running\x20instances\x20reached','certif_dir','/.keys','redis_cli','pushgtw_cli','gateway_creds','logger','debug','CronJob','from','substring','length','hex','createDecipheriv','aes-256-cbc','update','toString','hasOwnProperty','default','assign','keys','map','join','counter','series','counter_','\x22}\x200\x0a','post','generateGroupings','catch','pushCounter\x20error:','\x20{policy_name=\x22','\x22}\x20','status_up','#\x20TYPE\x20status_up\x20gauge\x0astatus_up\x20{instance=\x22','\x22,sid=\x22','\x22,cp_region=\x22','\x22\x20}\x20','pushUpInstance\x20error:','scaling_up','assign_hierarchy','pushUpScaling\x20error:','forEach','status_instance_up','instancenr','status','status_instance_up\x20{instance=\x22','\x22,sn=\x22','/metrics/job/','#\x20TYPE\x20status_instance_up\x20gauge\x0a','filter','each','\x20gauge\x0a','pushInstance\x20error:','format','split','indexOf','splice','push','then','pshgtw::del::error\x20:','delete','pshgtw::delSerie::error\x20:','pshgtw::delInstance::error\x20:','execution\x20error\x20of\x20(','sid',')\x20:','body','GetAlerts','GetAlertTree','tree','item','parent','description','match','concat','name','reduce','replace','idx','pop','kpi_prefix_sap','instance=\x22','_id','\x22,entity_id=\x22','features',',sn=\x22',',rule_id=\x22','hostname','ip_internal',',ip_internal=\x22','filesystem',',network_int=\x22','network_int','database',',database=\x22','db_datafile',',db_datafile=\x22','set','value','\x22,features=\x22',',hostname=\x22',',filesystem=\x22','ABAPGetWPTable','dia','upd','enq','btc','spo','wait','hold','ended','new','down','ALL','_workprocess_','__nb','workprocess','Status','toLowerCase','Typ','not\x20definition\x20for\x20',',workproces=\x22','ABAPGetSystemWPTable','Result\x20of\x20(','EnqGetStatistic','enqueue_','__sec','\x22,type=\x22','\x22,company_id=\x22','GetProcessList','log','process','ABAPGetComponentList','component','GetQueueStatistic',')=\x20','GetVersionInfo','GetSystemInstanceList','instance','J2EEGetClusterMsgList','msg','GetCallstack','lines','GetEnvironment','env','ICMGetConnectionList','ICMGetProxyConnectionList','connection','ICMGetCacheEntries','ICMGetThreadList','thread','EnqGetLockTable','lock','GetInstanceProperties','properties','J2EEGetCacheStatistic2','cache','J2EEGetThreadList2','J2EEGetSharedTableInfo','jsf','J2EEGetVMHeapInfo','heap','J2EEGetThreadTaskStack','items','_per_','round','slice','max','OperatingSystem','Disk_','Microsoft\x20SQL\x20Server','Space\x20management','Performance','I/O','Server\x20Configuration','R3Services','ICM','Stop','RestartInstance','J2EEGetWebSessionList','J2EEGetEJBSessionList','J2EEGetRemoteObjectList','J2EEGetThreadCallStack','prototype','waterfall','discoverEC2Instances\x20filter:','describeInstances','Reservations','Instances','PrivateIpAddress','InstanceId','InstanceType','eachOf','get','abort','E\x20discoverSAPInstances\x20error:','list_private_props:','vpc-id','vpc_id','ec2_not_found','E\x20getEC2ID\x20error:','describeInstanceStatus','InstanceStatuses','InstanceState','InstanceStatus','E\x20isEC2sRunning\x20error:','getEC2ID','isEC2RunningFromID','SystemStatus','E\x20isEC2RunningFromID\x20error:','isEC2StoppedFromID','Code','E\x20isEC2StoppedFromID\x20error:','private-ip-address','E\x20getEC2ID_Type\x20error','ec2_not_stopped','startInstances','ec2_not_started','call','toJSON','apply','__DEBUG__','r32efa73bcdf4efd261c9','r59166c85971605a74b9e','rf831452f1b8c742fead0','re8eece2435bbe0e78f2b','rc70c916b6592c27704df','r8a385ea327ece206db01','r6c05150afc9c97508dea','re2a09ccb04375117069c','rfc57ce1d5fc7792fcebe','raa9c88633a52a77fde21','r690921766564cc95c40e','rcbeb52e1c23cbce73346','r792c05a3f02afc263c5a','r5d395572d2daf94d0ee2','rdae4b6632805cde75d91','r332cd69dadab050c7e03','re59cb5e280e1e0b44c4a','rd1e8793e1e910c6d0f9c','r5fa62eac76fca09570cb','r6cd6ed29c886ed30605c','r590bf147ef64eeafadb3','r50e64b10cdf172df702f','r190450cc6f31a91a63d9','r361b458eef37bcfd1026','r9d9e6e7398c8824e81b3','r2b778d94531380c958ef','r7ac5719dddcd6cfe5f47','rb05c9f7bc67b56220cd1','r5f50370755f8497cd69c','rb4ef150604770a802c7d','rb6e830dd1ea871ad8899','r81ab714c7e51fc02a633','r9bae614fb830de88a71d','r657cbd37fc1f0469a93f','r99d13cf3716dbb9bec98','r3da7e567487bbe4f3fa4','r82088db4b59f4aaea8b5','r35ec33085df5762700a0','rb038a9a2c15d45bbcb04','rffadbacb14fad0388ee5','r327ab1a623b81f16bb28','r53b4eb6eeef131884a85','r44515715af21b234f6e9','r82c436ecec51222acaee','r6271d85d7ea5c2016537','r1fcaba9bdf50c7f3ffae','r27823c02ac78c807f5de','raf8f5c1c0382364207d5','rcf1d727056f77b00d328','r9870d5e052ce6f50f908','re9c03ba5a6cf356f87c9','rdbf17cc155ced91fa2c0','rd81305f10db800bfa71f','rf0fe0a692443ce6dcc3d','r6a775f58d6096e8f3fee','r8b0e6f19ee35972b7bac','r42cda9d2b8d1e2ca5c5b','r265a148ef5bd3d04ca07','rc435f687bffdc6d17d11','rc5429e6293709c0143b6','r4162b7460866dd16e593','r92cae2d1732a92c30110','r734f34a9c8d198a1765c','rbb0a9b910059520d314a','r55bee04c50e70d63d98d','ra636956dad6e6dd5e5c9','r83341d366fbbd3dd725e','r0818532768d5ac4c862b','re7c8da36761c7429a194','rd8d5b640eea865041c93','r5130ec262e8001c71b63','rb7a007dae35fc36db7f0'];(function(_0x3968a2,_0xffab8a){var _0xde27b8=function(_0x5911a3){while(--_0x5911a3){_0x3968a2['push'](_0x3968a2['shift']());}};_0xde27b8(++_0xffab8a);}(_0x18ab,0x157));var _0x3ee4=function(_0x2776ea,_0x60edc1){_0x2776ea=_0x2776ea-0x0;var _0x2f3e31=_0x18ab[_0x2776ea];return _0x2f3e31;};!function(_0xef9402,_0x4ef0a7){_0x3ee4('0x0')==typeof exports&&'undefined'!=typeof module?module[_0x3ee4('0x1')]=_0x4ef0a7(require('axios'),require(_0x3ee4('0x2')),require(_0x3ee4('0x3')),require('aws-sdk'),require(_0x3ee4('0x4')),require(_0x3ee4('0x5')),require(_0x3ee4('0x6')),require('fs'),require(_0x3ee4('0x7')),require('crypto'),require(_0x3ee4('0x8'))):'function'==typeof define&&define[_0x3ee4('0x9')]?define([_0x3ee4('0xa'),_0x3ee4('0x2'),_0x3ee4('0x3'),_0x3ee4('0xb'),'http',_0x3ee4('0x5'),_0x3ee4('0x6'),'fs',_0x3ee4('0x7'),_0x3ee4('0xc'),_0x3ee4('0x8')],_0x4ef0a7):_0xef9402['scaledoercollect']=_0x4ef0a7(_0xef9402['axios'],_0xef9402['async'],_0xef9402[_0x3ee4('0x3')],_0xef9402[_0x3ee4('0xb')],_0xef9402[_0x3ee4('0x4')],_0xef9402[_0x3ee4('0x5')],_0xef9402[_0x3ee4('0x6')],_0xef9402['fs'],_0xef9402[_0x3ee4('0x7')],_0xef9402[_0x3ee4('0xc')],_0xef9402[_0x3ee4('0x8')]);}(this,function(_0xd32879,_0x1e6ef7,_0x17b699,_0x439c8a,_0x14e799,_0x4908d5,_0x3ba1ca,_0x58c694,_0x2b786b,_0x32c00b,_0x5a26fe){'use strict';function _0x5a8251(_0xd32879,_0x1e6ef7,_0x17b699){this[_0x3ee4('0xd')]=_0x1e6ef7,this[_0x3ee4('0xe')]=_0x17b699,this[_0x3ee4('0xf')]=_0xd32879,this[_0x3ee4('0x10')]={},this[_0x3ee4('0x11')]={};}function _0x5b24bd(){var _0xd32879=this;this[_0x3ee4('0x12')]=new _0x439c8a[(_0x3ee4('0x13'))]({'apiVersion':'2016-11-15','region':_0x3ee4('0x14')}),this[_0x3ee4('0x15')]={},this[_0x3ee4('0x16')]={'ec2_not_found':_0x3ee4('0x17'),'credentials_not_loaded':_0x3ee4('0x18'),'ec2_not_started':_0x3ee4('0x19'),'ec2_not_stopped':'Error\x20stopping\x20EC2\x20instance'},_0x439c8a[_0x3ee4('0x1a')][_0x3ee4('0x1b')](function(_0x1e6ef7){_0x1e6ef7&&console[_0x3ee4('0x1c')](_0xd32879[_0x3ee4('0x16')][_0x3ee4('0x1d')]+':',_0x1e6ef7['stack']);});}function _0x54d697(_0xd32879=0x1){this[_0x3ee4('0x1e')]=_0xd32879,this['__DEBUG__']=!0x1,this[_0x3ee4('0x1f')]=0x0,this[_0x3ee4('0x20')]=0x1,this[_0x3ee4('0x21')]=0x2,this[_0x3ee4('0x22')]=0x3,this[_0x3ee4('0x23')]=['E','M','I','D'],this[_0x3ee4('0x24')]='\x20:';}function _0x259c1d(){this[_0x3ee4('0x25')]=null,this[_0x3ee4('0x26')]={},this['company']='',this[_0x3ee4('0x27')]='',this[_0x3ee4('0x28')]=0x1,this[_0x3ee4('0x29')]={},this['conn_retries']={},this[_0x3ee4('0x2a')]=0x3,this['conn_retries_delay_msec']=0x9c40,this['updated_system_instances']={},this[_0x3ee4('0x2b')]=0x1,this[_0x3ee4('0x2c')]=0xa,this['kpiname_separator']='_',this['kpi_prefix_sap']=_0x3ee4('0x2d')+this[_0x3ee4('0x2e')],this['_sap_statuses']={'green':_0x3ee4('0x2f'),'yellow':_0x3ee4('0x30'),'red':'SAPControl-RED','gray':_0x3ee4('0x31')},this['_errors']={'soap_client_init':'SOAP\x20client\x20could\x20not\x20be\x20created','soap_client_getinstance':_0x3ee4('0x32'),'conn_failed':'Connection\x20to\x20SAP\x20system\x20failed','ws_not_reachable':_0x3ee4('0x33'),'no_system_conn':'No\x20SAP\x20system\x20or\x20no\x20system\x20connection\x20active','no_active_instance':_0x3ee4('0x34'),'stop_ongoing':_0x3ee4('0x35'),'start_ongoing':_0x3ee4('0x36'),'no_start_candidate':_0x3ee4('0x37'),'min_instances_reached':'Minimal\x20running\x20instances\x20reached','max_instances_reached':_0x3ee4('0x38')},this['_resume_on_step']={'stop':{'begin':0x1,'counter_updated':0x2,'sap_stop_triggered':0x3,'ec2_stop_triggered':0x4},'start':{'begin':0x1,'counter_updated':0x2,'ec2_start_triggered':0x3,'sap_start_triggered':0x4}},this[_0x3ee4('0x39')]=__dirname+_0x3ee4('0x3a'),this['aws_cli']=new _0x250914(),this[_0x3ee4('0x3b')]=null,this[_0x3ee4('0x3c')]=null,this[_0x3ee4('0x3d')]=null,this[_0x3ee4('0x3e')]=new _0x254c11(),this['logger'][_0x3ee4('0x3f')](!0x0),this['cronjob']=_0x2b786b[_0x3ee4('0x40')];}function _0xdfee82(_0xd32879,_0x1e6ef7){var _0x17b699=Buffer[_0x3ee4('0x41')](_0xd32879[_0x3ee4('0x42')](0x62,_0xd32879[_0x3ee4('0x43')]-0xe),_0x3ee4('0x44')),_0x439c8a=Buffer[_0x3ee4('0x41')](_0xd32879[_0x3ee4('0x42')](0x2,_0xd32879[_0x3ee4('0x43')]-0x20-0xe),_0x3ee4('0x44')),_0x14e799=_0x32c00b[_0x3ee4('0x45')](_0x3ee4('0x46'),Buffer[_0x3ee4('0x41')](_0x1e6ef7[_0x3ee4('0x42')](0x0,0x20)),_0x17b699),_0x4908d5=_0x14e799[_0x3ee4('0x47')](_0x439c8a);return Buffer['concat']([_0x4908d5,_0x14e799['final']()])[_0x3ee4('0x48')]();}_0xd32879=_0xd32879&&_0xd32879[_0x3ee4('0x49')](_0x3ee4('0x4a'))?_0xd32879[_0x3ee4('0x4a')]:_0xd32879,_0x1e6ef7=_0x1e6ef7&&_0x1e6ef7[_0x3ee4('0x49')](_0x3ee4('0x4a'))?_0x1e6ef7[_0x3ee4('0x4a')]:_0x1e6ef7,_0x17b699=_0x17b699&&_0x17b699[_0x3ee4('0x49')](_0x3ee4('0x4a'))?_0x17b699[_0x3ee4('0x4a')]:_0x17b699,_0x439c8a=_0x439c8a&&_0x439c8a[_0x3ee4('0x49')](_0x3ee4('0x4a'))?_0x439c8a[_0x3ee4('0x4a')]:_0x439c8a,_0x14e799=_0x14e799&&_0x14e799[_0x3ee4('0x49')]('default')?_0x14e799[_0x3ee4('0x4a')]:_0x14e799,_0x4908d5=_0x4908d5&&_0x4908d5[_0x3ee4('0x49')](_0x3ee4('0x4a'))?_0x4908d5[_0x3ee4('0x4a')]:_0x4908d5,_0x3ba1ca=_0x3ba1ca&&_0x3ba1ca[_0x3ee4('0x49')](_0x3ee4('0x4a'))?_0x3ba1ca['default']:_0x3ba1ca,_0x58c694=_0x58c694&&_0x58c694[_0x3ee4('0x49')](_0x3ee4('0x4a'))?_0x58c694['default']:_0x58c694,_0x2b786b=_0x2b786b&&_0x2b786b['hasOwnProperty']('default')?_0x2b786b[_0x3ee4('0x4a')]:_0x2b786b,_0x32c00b=_0x32c00b&&_0x32c00b[_0x3ee4('0x49')]('default')?_0x32c00b['default']:_0x32c00b,_0x5a26fe=_0x5a26fe&&_0x5a26fe['hasOwnProperty'](_0x3ee4('0x4a'))?_0x5a26fe[_0x3ee4('0x4a')]:_0x5a26fe,_0x5a8251['prototype']={'Constructor':_0x5a8251,'assign_hierarchy'(_0xd32879,_0x1e6ef7,_0x17b699){for(var _0x439c8a=_0x1e6ef7[_0x3ee4('0x43')]-0x1,_0x14e799=0x0;_0x14e799<_0x439c8a;++_0x14e799){var _0x4908d5=_0x1e6ef7[_0x14e799];_0x4908d5 in _0xd32879||(_0xd32879[_0x4908d5]={}),_0xd32879=_0xd32879[_0x4908d5];}_0xd32879[_0x1e6ef7[_0x439c8a]]=_0x17b699;},'generateGroupings':function(_0xd32879){const _0x1e6ef7=this;if(!_0xd32879)return'/version/'+_0x1e6ef7[_0x3ee4('0xd')]+'/staging/'+_0x1e6ef7[_0x3ee4('0xe')];var _0x17b699=Object[_0x3ee4('0x4b')](_0xd32879,{'version':_0x1e6ef7['version'],'staging':_0x1e6ef7[_0x3ee4('0xe')]});return Object[_0x3ee4('0x4c')](_0x17b699)[_0x3ee4('0x4d')](_0xd32879=>'/'+encodeURIComponent(_0xd32879)+'/'+encodeURIComponent(_0x17b699[_0xd32879]))[_0x3ee4('0x4e')]('');},'addInstance':function(_0xd32879){this['metrics_caches'][_0xd32879]||(this[_0x3ee4('0x10')][_0xd32879]={});},'pushCounter':function(_0x17b699=_0x3ee4('0x4f'),_0x439c8a,_0x14e799,_0x4908d5,_0x3ba1ca,_0x58c694,_0x2b786b){var _0x32c00b=this;const _0x5a26fe={'instance':_0x14e799,'system_id':_0x4908d5,'instancenr':_0x3ba1ca},_0x5a8251='#\x20TYPE\x20counter_'+_0x439c8a+'\x20gauge\x0a';_0x1e6ef7[_0x3ee4('0x50')]([_0x1e6ef7=>{if(0x1==_0x2b786b){var _0x14e799=_0x5a8251+_0x3ee4('0x51')+_0x439c8a+'\x20{policy_name=\x22'+_0x58c694+_0x3ee4('0x52');_0xd32879[_0x3ee4('0x53')](_0x32c00b[_0x3ee4('0xf')]+'/metrics/job/'+encodeURIComponent(_0x17b699)+_0x32c00b[_0x3ee4('0x54')](_0x5a26fe),_0x14e799)[_0x3ee4('0x55')](function(_0xd32879){_0xd32879&&console[_0x3ee4('0x1c')](_0x3ee4('0x56'),_0xd32879);})['finally'](()=>{setTimeout(()=>{_0x1e6ef7();},0x61a8);});}else _0x1e6ef7();},_0x1e6ef7=>{var _0x14e799=_0x5a8251+_0x3ee4('0x51')+_0x439c8a+_0x3ee4('0x57')+_0x58c694+_0x3ee4('0x58')+_0x2b786b+'\x0a';_0xd32879[_0x3ee4('0x53')](_0x32c00b['gtw_url']+'/metrics/job/'+encodeURIComponent(_0x17b699)+_0x32c00b[_0x3ee4('0x54')](_0x5a26fe),_0x14e799)[_0x3ee4('0x55')](function(_0xd32879){_0xd32879&&console[_0x3ee4('0x1c')](_0x3ee4('0x56'),_0xd32879);})['finally'](()=>{_0x1e6ef7();});}]);},'pushUpInstance':function(_0x1e6ef7='up',_0x17b699,_0x439c8a,_0x14e799,_0x4908d5,_0x3ba1ca){var _0x58c694=this,_0x2b786b=_0x58c694[_0x3ee4('0x11')][_0x439c8a]&&_0x58c694[_0x3ee4('0x11')][_0x439c8a][_0x3ee4('0x59')]&&_0x58c694[_0x3ee4('0x11')][_0x439c8a][_0x3ee4('0x59')][_0x17b699+'+'+_0x14e799+'+'+_0x4908d5];if(null==_0x2b786b&&_0x58c694['assign_hierarchy'](_0x58c694[_0x3ee4('0x11')],[_0x439c8a,'status_up',_0x17b699+'+'+_0x14e799+'+'+_0x4908d5],_0x3ba1ca),_0x2b786b!==_0x3ba1ca){var _0x32c00b=_0x3ee4('0x5a')+_0x439c8a+'\x22,entity_id=\x22'+_0x17b699+_0x3ee4('0x5b')+_0x4908d5+_0x3ee4('0x5c')+_0x14e799+_0x3ee4('0x5d')+_0x3ba1ca+'\x0a';_0xd32879[_0x3ee4('0x53')](_0x58c694[_0x3ee4('0xf')]+'/metrics/job/'+encodeURIComponent(_0x1e6ef7)+_0x58c694[_0x3ee4('0x54')]({'instance':_0x439c8a}),_0x32c00b)['catch'](function(_0xd32879){console[_0x3ee4('0x1c')](_0x3ee4('0x5e'),_0xd32879);});}},'pushUpScaling':function(_0x1e6ef7='up',_0x17b699,_0x439c8a,_0x14e799){var _0x4908d5=this,_0x3ba1ca=_0x4908d5[_0x3ee4('0x11')][_0x439c8a]&&_0x4908d5['up_timeseries'][_0x439c8a][_0x3ee4('0x5f')]&&_0x4908d5[_0x3ee4('0x11')][_0x439c8a][_0x3ee4('0x5f')][_0x17b699];if(null==_0x3ba1ca&&_0x4908d5[_0x3ee4('0x60')](_0x4908d5['up_timeseries'],[_0x439c8a,_0x3ee4('0x5f'),_0x17b699],_0x14e799),_0x3ba1ca!==_0x14e799){var _0x58c694='#\x20TYPE\x20scaling_up\x20gauge\x0ascaling_up\x20{instance=\x22'+_0x439c8a+'\x22,entity_id=\x22'+_0x17b699+_0x3ee4('0x5d')+_0x14e799+'\x0a';_0xd32879['post'](_0x4908d5['gtw_url']+'/metrics/job/'+encodeURIComponent(_0x1e6ef7)+_0x4908d5[_0x3ee4('0x54')]({'instance':_0x439c8a}),_0x58c694)[_0x3ee4('0x55')](function(_0xd32879){console['error'](_0x3ee4('0x61'),_0xd32879);});}},'pushUpSAPInstance':function(_0x1e6ef7='up',_0x17b699,_0x439c8a,_0x14e799,_0x4908d5,_0x3ba1ca){var _0x58c694=this,_0x2b786b='';_0x3ba1ca[_0x3ee4('0x62')](_0xd32879=>{_0x58c694[_0x3ee4('0x11')][_0x439c8a]&&_0x58c694['up_timeseries'][_0x439c8a][_0x3ee4('0x63')]&&null==_0x58c694[_0x3ee4('0x11')][_0x439c8a][_0x3ee4('0x63')][_0x17b699+'+'+_0x14e799+'+'+_0x4908d5+'+'+_0xd32879[_0x3ee4('0x64')]]&&_0x58c694[_0x3ee4('0x60')](_0x58c694[_0x3ee4('0x11')],[_0x439c8a,_0x3ee4('0x63'),_0x17b699+'+'+_0x14e799+'+'+_0x4908d5+'+'+_0xd32879[_0x3ee4('0x64')]],_0xd32879[_0x3ee4('0x65')]);_0x2b786b+=_0x3ee4('0x66')+_0x439c8a+'\x22,entity_id=\x22'+_0x17b699+'\x22,sid=\x22'+_0x4908d5+_0x3ee4('0x5c')+_0x14e799+_0x3ee4('0x67')+_0xd32879[_0x3ee4('0x64')]+_0x3ee4('0x58')+_0xd32879['status']+'\x0a';}),''!=_0x2b786b&&_0xd32879[_0x3ee4('0x53')](_0x58c694[_0x3ee4('0xf')]+_0x3ee4('0x68')+encodeURIComponent(_0x1e6ef7)+_0x58c694[_0x3ee4('0x54')]({'instance':_0x439c8a}),_0x3ee4('0x69')+_0x2b786b)[_0x3ee4('0x55')](function(_0xd32879){console[_0x3ee4('0x1c')]('pushUpSAPInstance\x20error:',_0xd32879);});},'pushInstance':function(_0x17b699,_0x439c8a,_0x14e799){var _0x4908d5=this;if(_0x4908d5[_0x3ee4('0x10')][_0x439c8a]){var _0x3ba1ca=Object[_0x3ee4('0x4c')](_0x4908d5[_0x3ee4('0x10')][_0x439c8a])[_0x3ee4('0x6a')](_0xd32879=>_0x4908d5['metrics_caches'][_0x439c8a][_0xd32879]['length']>0x0);_0x1e6ef7[_0x3ee4('0x6b')](_0x3ba1ca,function(_0x1e6ef7,_0x14e799){const _0x3ba1ca='#\x20TYPE\x20'+_0x1e6ef7+_0x3ee4('0x6c')+_0x4908d5['metrics_caches'][_0x439c8a][_0x1e6ef7][_0x3ee4('0x4d')](_0xd32879=>_0x1e6ef7+'\x20'+_0xd32879)['join']('\x0a')+'\x0a';_0xd32879[_0x3ee4('0x53')](_0x4908d5[_0x3ee4('0xf')]+_0x3ee4('0x68')+encodeURIComponent(_0x17b699)+_0x4908d5[_0x3ee4('0x54')]({'instance':_0x439c8a}),_0x3ba1ca)['then'](function(_0xd32879){_0x4908d5[_0x3ee4('0x10')][_0x439c8a][_0x1e6ef7]=[],_0x14e799();})[_0x3ee4('0x55')](function(_0xd32879){_0x4908d5[_0x3ee4('0x10')][_0x439c8a][_0x1e6ef7]=[],_0x14e799(_0xd32879);});},function(_0xd32879){_0xd32879&&console[_0x3ee4('0x1c')](_0x3ee4('0x6d'),_0xd32879),_0x4908d5[_0x3ee4('0x10')][_0x439c8a]={},_0x14e799&&_0x14e799();});}else _0x14e799&&_0x14e799();},'set':function(_0xd32879,_0x1e6ef7,_0x439c8a,_0x14e799){var _0x4908d5=this,_0x3ba1ca=_0x1e6ef7['replace'](/-|\(|\)|\[|\]|\%|\+|\.|\s/g,'_'),_0x58c694=null==_0x439c8a?0x0:isNaN(_0x439c8a)?Math['round'](parseInt(_0x17b699(_0x439c8a,'YYYY/MM/DD\x20hh:mm:ss')[_0x3ee4('0x6e')]('X'))):Math['round'](parseInt(_0x439c8a));_0x4908d5[_0x3ee4('0x10')][_0x14e799][_0x3ba1ca]||(_0x4908d5['metrics_caches'][_0x14e799][_0x3ba1ca]=[]);const _0x2b786b=_0x4908d5[_0x3ee4('0x10')][_0x14e799][_0x3ba1ca][_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x6f')]('\x20')[0x0])[_0x3ee4('0x70')](_0xd32879);_0x2b786b>=0x0&&_0x4908d5[_0x3ee4('0x10')][_0x14e799][_0x3ba1ca][_0x3ee4('0x71')](_0x2b786b,0x1),_0x4908d5['metrics_caches'][_0x14e799][_0x3ba1ca][_0x3ee4('0x72')](_0xd32879+'\x20'+_0x58c694);},'del':function(_0x1e6ef7,_0x17b699){var _0x439c8a=this;_0xd32879['delete'](_0x439c8a['gtw_url']+_0x3ee4('0x68')+encodeURIComponent(_0x1e6ef7)+_0x439c8a[_0x3ee4('0x54')]({'instance':_0x17b699}))[_0x3ee4('0x73')](function(_0xd32879){})[_0x3ee4('0x55')](function(_0xd32879){console['error'](_0x3ee4('0x74'),_0xd32879);});},'delSerie':function(_0x1e6ef7,_0x17b699){var _0x439c8a=this;_0xd32879[_0x3ee4('0x75')](_0x439c8a['gtw_url']+_0x3ee4('0x68')+encodeURIComponent(_0x1e6ef7)+_0x439c8a['generateGroupings'](_0x17b699))['then'](function(_0xd32879){})[_0x3ee4('0x55')](function(_0xd32879){console[_0x3ee4('0x1c')](_0x3ee4('0x76'),_0xd32879);});},'delInstance':function(_0x1e6ef7,_0x17b699){var _0x439c8a=this;_0xd32879[_0x3ee4('0x75')](_0x439c8a[_0x3ee4('0xf')]+'/metrics/job/'+encodeURIComponent(_0x1e6ef7)+_0x439c8a[_0x3ee4('0x54')]({'instance':_0x17b699}))[_0x3ee4('0x73')](function(_0xd32879){})[_0x3ee4('0x55')](function(_0xd32879){console[_0x3ee4('0x1c')](_0x3ee4('0x77'),_0xd32879);});}};var _0x11386e=_0x5a8251,_0x49ff79=function(_0xd32879,_0x1e6ef7,_0x17b699,_0x439c8a,_0x14e799,_0x4908d5,_0x3ba1ca,_0x58c694,_0x2b786b,_0x32c00b){var _0x5a26fe=this;if(_0xd32879)console[_0x3ee4('0x1c')](_0x3ee4('0x78')+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+_0x3ee4('0x7a')+_0xd32879&&_0xd32879[_0x3ee4('0x7b')]),_0x32c00b();else switch(_0x17b699){case _0x3ee4('0x7c'):case _0x3ee4('0x7d'):var _0x5a8251=-0x1,_0x5b24bd=[],_0x54d697=[],_0x259c1d=[];const _0xd32879=_0x5a26fe['kpiname_separator'];_0x1e6ef7[_0x3ee4('0x7e')]&&_0x1e6ef7[_0x3ee4('0x7e')][_0x3ee4('0x7f')]&&(_0x1e6ef7[_0x3ee4('0x7e')][_0x3ee4('0x7f')]['forEach'](_0x17b699=>{if(_0x17b699['parent']>_0x5a8251){_0x5b24bd[_0x3ee4('0x72')]({'idx':_0x17b699[_0x3ee4('0x80')],'name':_0x1e6ef7[_0x3ee4('0x7e')]['item'][_0x17b699[_0x3ee4('0x80')]]['name'],'status':_0x1e6ef7[_0x3ee4('0x7e')][_0x3ee4('0x7f')][_0x17b699['parent']]['ActualValue']});const _0x439c8a=_0x17b699[_0x3ee4('0x81')]['split']('\x20');_0x439c8a[0x0]['indexOf'](':')>0x0?_0x439c8a['forEach'](_0x1e6ef7=>{const _0x439c8a=_0x1e6ef7[_0x3ee4('0x6f')](':');0x2==_0x439c8a[_0x3ee4('0x43')]&&_0x439c8a[0x1][_0x3ee4('0x82')](/[0-9]+(\.[0-9]+)?/g)&&(_0x259c1d=_0x259c1d[_0x3ee4('0x83')]([_0x21272b(_0x5b24bd,_0xd32879,Object[_0x3ee4('0x4b')](_0x17b699,{'name':_0x17b699[_0x3ee4('0x84')]+_0xd32879+_0x439c8a[0x0]}),[_0x439c8a[0x1]],_0x4908d5)]));}):_0x439c8a[0x0][_0x3ee4('0x82')](/[0-9]+(\.[0-9]+)?/g)&&(_0x259c1d=_0x259c1d[_0x3ee4('0x83')]([_0x21272b(_0x5b24bd,_0xd32879,_0x17b699,[_0x439c8a[_0x3ee4('0x85')]((_0xd32879,_0x1e6ef7)=>_0x1e6ef7['match'](/[0-9]+(\.[0-9]+)?/g)?_0xd32879+_0x1e6ef7:_0xd32879,''),_0x439c8a[_0x439c8a[_0x3ee4('0x43')]-0x1][_0x3ee4('0x86')](/\s|[0-9]/g,'',_0x4908d5)])])),_0x5a8251=_0x17b699[_0x3ee4('0x80')];}else if(_0x17b699['parent']==_0x5a8251){const _0x1e6ef7=_0x17b699[_0x3ee4('0x81')]['split']('\x20');_0x1e6ef7[0x0][_0x3ee4('0x70')](':')>0x0?_0x1e6ef7['forEach'](_0x1e6ef7=>{const _0x439c8a=_0x1e6ef7['split'](':');0x2==_0x439c8a[_0x3ee4('0x43')]&&_0x439c8a[0x1][_0x3ee4('0x82')](/[0-9]+(\.[0-9]+)?/g)&&(_0x259c1d=_0x259c1d[_0x3ee4('0x83')]([_0x21272b(_0x5b24bd,_0xd32879,Object[_0x3ee4('0x4b')](_0x17b699,{'name':_0x17b699[_0x3ee4('0x84')]+_0xd32879+_0x439c8a[0x0]}),[_0x439c8a[0x1]],_0x4908d5)]));}):_0x1e6ef7[0x0][_0x3ee4('0x82')](/[0-9]+(\.[0-9]+)?/g)&&(_0x259c1d=_0x259c1d[_0x3ee4('0x83')]([_0x21272b(_0x5b24bd,_0xd32879,_0x17b699,[_0x1e6ef7[_0x3ee4('0x85')]((_0xd32879,_0x1e6ef7)=>_0x1e6ef7[_0x3ee4('0x82')](/[0-9]+(\.[0-9]+)?/g)?_0xd32879+_0x1e6ef7:_0xd32879,''),_0x1e6ef7[_0x1e6ef7[_0x3ee4('0x43')]-0x1]['replace'](/\s|[0-9]/g,'',_0x4908d5)])]));}else{_0x54d697=_0x54d697['concat'](_0x259c1d);for(var _0x439c8a=_0x5b24bd[_0x3ee4('0x43')]-0x1;_0x439c8a>=0x0&&_0x5b24bd[_0x439c8a][_0x3ee4('0x87')]>_0x17b699[_0x3ee4('0x80')];)_0x5b24bd[_0x3ee4('0x88')](),_0x439c8a--;_0x259c1d=[],_0x5a8251=_0x17b699['parent'];}}),_0x58c694&&0x0!=_0x58c694[_0x3ee4('0x43')]?_0x54d697[_0x3ee4('0x62')](_0x1e6ef7=>{if(_0x1e6ef7){var _0x17b699=_0x49cbed(_0x5a26fe[_0x3ee4('0x89')],_0xd32879,_0x1e6ef7);if(_0x58c694[_0x3ee4('0x70')](_0x17b699)>=0x0){var _0x4908d5=_0x3ee4('0x8a')+_0x439c8a[_0x3ee4('0x8b')]+_0x3ee4('0x5b')+_0x439c8a[_0x3ee4('0x79')]+_0x3ee4('0x8c')+_0x3ba1ca+'\x22,features=\x22'+_0x14e799[_0x3ee4('0x8d')]+'\x22';void 0x0!=_0x14e799['sn']&&(_0x4908d5+=_0x3ee4('0x8e')+_0x14e799['sn']+'\x22'),void 0x0!=_0x2b786b&&(_0x4908d5+=_0x3ee4('0x8f')+_0x2b786b+'\x22'),void 0x0!=_0x14e799[_0x3ee4('0x90')]&&(_0x4908d5+=',hostname=\x22'+_0x14e799[_0x3ee4('0x90')]+'\x22'),void 0x0!=_0x14e799[_0x3ee4('0x91')]&&(_0x4908d5+=_0x3ee4('0x92')+_0x14e799[_0x3ee4('0x91')]+'\x22'),void 0x0!=_0x1e6ef7[_0x3ee4('0x93')]&&(_0x4908d5+=',filesystem=\x22'+_0x1e6ef7[_0x3ee4('0x93')]+'\x22'),void 0x0!=_0x1e6ef7['network_int']&&(_0x4908d5+=_0x3ee4('0x94')+_0x1e6ef7[_0x3ee4('0x95')]+'\x22'),void 0x0!=_0x1e6ef7[_0x3ee4('0x96')]&&(_0x4908d5+=_0x3ee4('0x97')+_0x1e6ef7[_0x3ee4('0x96')]+'\x22'),void 0x0!=_0x1e6ef7[_0x3ee4('0x98')]&&(_0x4908d5+=_0x3ee4('0x99')+_0x1e6ef7[_0x3ee4('0x98')]+'\x22'),_0x5a26fe[_0x3ee4('0x3c')][_0x3ee4('0x9a')]('{'+_0x4908d5+'}',_0x17b699,_0x1e6ef7[_0x3ee4('0x9b')],_0x439c8a['_id']);}}}):_0x54d697['forEach'](_0x1e6ef7=>{if(_0x1e6ef7){var _0x17b699=_0x3ee4('0x8a')+_0x439c8a[_0x3ee4('0x8b')]+_0x3ee4('0x5b')+_0x439c8a[_0x3ee4('0x79')]+_0x3ee4('0x8c')+_0x3ba1ca+_0x3ee4('0x9c')+_0x14e799['features']+'\x22';void 0x0!=_0x14e799['sn']&&(_0x17b699+=_0x3ee4('0x8e')+_0x14e799['sn']+'\x22'),void 0x0!=_0x2b786b&&(_0x17b699+=_0x3ee4('0x8f')+_0x2b786b+'\x22'),void 0x0!=_0x14e799['hostname']&&(_0x17b699+=_0x3ee4('0x9d')+_0x14e799[_0x3ee4('0x90')]+'\x22'),void 0x0!=_0x14e799[_0x3ee4('0x91')]&&(_0x17b699+=_0x3ee4('0x92')+_0x14e799['ip_internal']+'\x22'),void 0x0!=_0x1e6ef7[_0x3ee4('0x93')]&&(_0x17b699+=_0x3ee4('0x9e')+_0x1e6ef7[_0x3ee4('0x93')]+'\x22'),void 0x0!=_0x1e6ef7[_0x3ee4('0x95')]&&(_0x17b699+=_0x3ee4('0x94')+_0x1e6ef7[_0x3ee4('0x95')]+'\x22'),void 0x0!=_0x1e6ef7[_0x3ee4('0x96')]&&(_0x17b699+=',database=\x22'+_0x1e6ef7[_0x3ee4('0x96')]+'\x22'),void 0x0!=_0x1e6ef7[_0x3ee4('0x98')]&&(_0x17b699+=_0x3ee4('0x99')+_0x1e6ef7['db_datafile']+'\x22'),_0x5a26fe[_0x3ee4('0x3c')]['set']('{'+_0x17b699+'}',_0x49cbed(_0x5a26fe[_0x3ee4('0x89')],_0xd32879,_0x1e6ef7),_0x1e6ef7[_0x3ee4('0x9b')],_0x439c8a[_0x3ee4('0x8b')]);}})),_0x32c00b();break;case _0x3ee4('0x9f'):const _0x49ff79=[_0x3ee4('0xa0'),_0x3ee4('0xa1'),'up2',_0x3ee4('0xa2'),_0x3ee4('0xa3'),_0x3ee4('0xa4')],_0x5d59b0=[_0x3ee4('0xa5'),_0x3ee4('0xa6'),'run','stop',_0x3ee4('0xa7'),_0x3ee4('0xa8'),_0x3ee4('0xa9')];var _0xdfee82={};const _0x3f8648=function(_0xd32879,_0x1e6ef7){return _0x3ee4('0xaa')!=_0xd32879['toUpperCase']()?_0x5a26fe['kpi_prefix_sap']+_0xd32879['toLowerCase']()+_0x3ee4('0xab')+_0x1e6ef7+'__nb':_0x5a26fe[_0x3ee4('0x89')]+_0x3ee4('0xab')+_0x1e6ef7+_0x3ee4('0xac');};_0x49ff79['forEach'](_0xd32879=>{_0x5d59b0[_0x3ee4('0x62')](_0x1e6ef7=>{_0xdfee82[_0x3f8648(_0x4908d5,_0x1e6ef7)]=_0xdfee82[_0x3f8648(_0x4908d5,_0x1e6ef7)]?Object['assign']({},_0xdfee82[_0x3f8648(_0x4908d5,_0x1e6ef7)],{[_0xd32879]:0x0}):{[_0xd32879]:0x0};});}),_0x1e6ef7[_0x3ee4('0xad')]&&_0x1e6ef7[_0x3ee4('0xad')][_0x3ee4('0x7f')]&&_0x1e6ef7[_0x3ee4('0xad')][_0x3ee4('0x7f')][_0x3ee4('0x62')](_0xd32879=>{_0xdfee82[_0x3f8648(_0x4908d5,_0xd32879[_0x3ee4('0xae')]['toLowerCase']())]&&void 0x0!=_0xdfee82[_0x3f8648(_0x4908d5,_0xd32879[_0x3ee4('0xae')][_0x3ee4('0xaf')]())][_0xd32879[_0x3ee4('0xb0')][_0x3ee4('0xaf')]()]?_0xdfee82[_0x3f8648(_0x4908d5,_0xd32879[_0x3ee4('0xae')]['toLowerCase']())][_0xd32879[_0x3ee4('0xb0')][_0x3ee4('0xaf')]()]++:console[_0x3ee4('0x1c')](_0x3ee4('0xb1'),_0x3f8648(_0x4908d5,_0xd32879[_0x3ee4('0xae')][_0x3ee4('0xaf')]()));});_0x11386e=_0x3ee4('0x8a')+_0x439c8a[_0x3ee4('0x8b')]+_0x3ee4('0x5b')+_0x439c8a[_0x3ee4('0x79')]+'\x22,type=\x22'+_0x4908d5+_0x3ee4('0x8c')+_0x3ba1ca+'\x22';void 0x0!=_0x14e799[_0x3ee4('0x90')]&&(_0x11386e+=_0x3ee4('0x9d')+_0x14e799[_0x3ee4('0x90')]+'\x22'),void 0x0!=_0x14e799[_0x3ee4('0x91')]&&(_0x11386e+=',ip_internal=\x22'+_0x14e799['ip_internal']+'\x22'),void 0x0!=_0x14e799['sn']&&(_0x11386e+=',sn=\x22'+_0x14e799['sn']+'\x22'),void 0x0!=_0x2b786b&&(_0x11386e+=_0x3ee4('0x8f')+_0x2b786b+'\x22'),Object[_0x3ee4('0x4c')](_0xdfee82)[_0x3ee4('0x62')](_0xd32879=>{_0x58c694&&0x0!=_0x58c694['length']?_0x58c694['indexOf'](_0xd32879)>=0x0&&_0x49ff79[_0x3ee4('0x62')](_0x1e6ef7=>{_0x5a26fe[_0x3ee4('0x3c')][_0x3ee4('0x9a')]('{'+_0x11386e+_0x3ee4('0xb2')+_0x1e6ef7+'\x22}',_0xd32879,_0xdfee82[_0xd32879][_0x1e6ef7],_0x439c8a[_0x3ee4('0x8b')]);}):_0x49ff79['forEach'](_0x1e6ef7=>{_0x5a26fe[_0x3ee4('0x3c')]['set']('{'+_0x11386e+_0x3ee4('0xb2')+_0x1e6ef7+'\x22}',_0xd32879,_0xdfee82[_0xd32879][_0x1e6ef7],_0x439c8a[_0x3ee4('0x8b')]);});}),_0x32c00b();break;case _0x3ee4('0xb3'):console['log'](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+')=\x20',_0x1e6ef7[_0x3ee4('0xad')]['item']),_0x32c00b();break;case _0x3ee4('0xb5'):const _0x4788b7=function(_0xd32879){return _0xd32879[_0x3ee4('0xaf')]()[_0x3ee4('0x82')](/.*time$/)?_0x5a26fe[_0x3ee4('0x89')]+_0x3ee4('0xb6')+_0xd32879[_0x3ee4('0xaf')]()[_0x3ee4('0x86')](/[^a-zA-Z0-9]/g,'_')+_0x3ee4('0xb7'):_0x5a26fe[_0x3ee4('0x89')]+_0x3ee4('0xb6')+_0xd32879[_0x3ee4('0xaf')]()[_0x3ee4('0x86')](/[^a-zA-Z0-9]/g,'_')+'__nb';};var _0x11386e='instance=\x22'+_0x439c8a[_0x3ee4('0x8b')]+'\x22,sid=\x22'+_0x439c8a['sid']+_0x3ee4('0xb8')+_0x4908d5+_0x3ee4('0xb9')+company_id+_0x3ee4('0x8c')+_0x3ba1ca+'\x22';void 0x0!=_0x14e799[_0x3ee4('0x8d')]&&(_0x11386e+=',features=\x22'+_0x14e799['features']+'\x22'),void 0x0!=_0x14e799[_0x3ee4('0x90')]&&(_0x11386e+=_0x3ee4('0x9d')+_0x14e799['hostname']+'\x22'),void 0x0!=_0x14e799[_0x3ee4('0x91')]&&(_0x11386e+=_0x3ee4('0x92')+_0x14e799['ip_internal']+'\x22'),void 0x0!=_0x14e799['sn']&&(_0x11386e+=_0x3ee4('0x8e')+_0x14e799['sn']+'\x22'),void 0x0!=_0x2b786b&&(_0x11386e+=_0x3ee4('0x8f')+_0x2b786b+'\x22'),Object['keys'](_0x1e6ef7)['forEach'](_0xd32879=>{_0x5a26fe['pushgtw_cli'][_0x3ee4('0x9a')]('{'+_0x11386e+'}',_0x4788b7(_0xd32879),_0x1e6ef7[_0xd32879],_0x439c8a['_id']);}),_0x32c00b();break;case'J2EEGetProcessList2':case _0x3ee4('0xba'):console[_0x3ee4('0xbb')](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+')=\x20',_0x1e6ef7[_0x3ee4('0xbc')][_0x3ee4('0x7f')]),_0x32c00b();break;case'J2EEGetComponentList':case _0x3ee4('0xbd'):console['log'](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+')=\x20',_0x1e6ef7[_0x3ee4('0xbe')]['item']),_0x32c00b();break;case _0x3ee4('0xbf'):console[_0x3ee4('0xbb')](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+_0x3ee4('0xc0'),_0x1e6ef7['queue'][_0x3ee4('0x7f')]),_0x32c00b();break;case _0x3ee4('0xc1'):console[_0x3ee4('0xbb')]('Result\x20of\x20('+_0x17b699+'@'+_0x439c8a['sid']+_0x3ee4('0xc0'),_0x1e6ef7['version'][_0x3ee4('0x7f')]),_0x32c00b();break;case _0x3ee4('0xc2'):console[_0x3ee4('0xbb')](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a['sid']+')=\x20',_0x1e6ef7[_0x3ee4('0xc3')][_0x3ee4('0x7f')]),_0x32c00b();break;case _0x3ee4('0xc4'):console[_0x3ee4('0xbb')](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a['sid']+_0x3ee4('0xc0'),_0x1e6ef7[_0x3ee4('0xc5')]),_0x32c00b();break;case _0x3ee4('0xc6'):console[_0x3ee4('0xbb')]('Result\x20of\x20('+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+')=\x20',_0x1e6ef7[_0x3ee4('0xc7')][_0x3ee4('0x7f')]),_0x32c00b();break;case _0x3ee4('0xc8'):console[_0x3ee4('0xbb')](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+_0x3ee4('0xc0'),_0x1e6ef7[_0x3ee4('0xc9')][_0x3ee4('0x7f')]),_0x32c00b();break;case _0x3ee4('0xca'):case _0x3ee4('0xcb'):console['log'](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+_0x3ee4('0xc0'),_0x1e6ef7[_0x3ee4('0xcc')]),_0x32c00b();break;case _0x3ee4('0xcd'):console[_0x3ee4('0xbb')](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+')=\x20',_0x1e6ef7['entry'][_0x3ee4('0x7f')]),_0x32c00b();break;case _0x3ee4('0xce'):console['log'](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a['sid']+_0x3ee4('0xc0'),_0x1e6ef7[_0x3ee4('0xcf')][_0x3ee4('0x7f')]),_0x32c00b();break;case _0x3ee4('0xd0'):console[_0x3ee4('0xbb')]('Result\x20of\x20('+_0x17b699+'@'+_0x439c8a['sid']+_0x3ee4('0xc0'),_0x1e6ef7[_0x3ee4('0xd1')]),_0x32c00b();break;case _0x3ee4('0xd2'):console[_0x3ee4('0xbb')](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a['sid']+_0x3ee4('0xc0'),_0x1e6ef7[_0x3ee4('0xd3')][_0x3ee4('0x7f')]),_0x32c00b();break;case _0x3ee4('0xd4'):console['log'](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+_0x3ee4('0xc0'),_0x1e6ef7[_0x3ee4('0xd5')][_0x3ee4('0x7f')]),_0x32c00b();break;case _0x3ee4('0xd6'):console[_0x3ee4('0xbb')](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a['sid']+_0x3ee4('0xc0'),_0x1e6ef7[_0x3ee4('0xcf')][_0x3ee4('0x7f')]),_0x32c00b();break;case _0x3ee4('0xd7'):console['log'](_0x3ee4('0xb4')+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+')=\x20',_0x1e6ef7[_0x3ee4('0xd8')]['item']),_0x32c00b();break;case _0x3ee4('0xd9'):console[_0x3ee4('0xbb')]('Result\x20of\x20('+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+_0x3ee4('0xc0'),_0x1e6ef7[_0x3ee4('0xda')][_0x3ee4('0x7f')]),_0x32c00b();break;case'J2EEGetThreadCallStack':case _0x3ee4('0xdb'):console[_0x3ee4('0xbb')]('Result\x20of\x20('+_0x17b699+'@'+_0x439c8a['sid']+_0x3ee4('0xc0'),_0x1e6ef7[_0x3ee4('0x84')],'\x20',_0x1e6ef7['lines'][_0x3ee4('0xdc')]),_0x32c00b();break;default:console['log']('Result\x20of\x20('+_0x17b699+'@'+_0x439c8a[_0x3ee4('0x79')]+_0x3ee4('0xc0'),_0x1e6ef7),_0x32c00b();}};const _0x49cbed=function(_0xd32879,_0x1e6ef7,_0x17b699){var _0x439c8a=_0x17b699['unit'][_0x3ee4('0x86')](/\%/g,'percent')[_0x3ee4('0x86')](/\//g,_0x3ee4('0xdd'))['replace'](/\W+/g,'')[_0x3ee4('0xaf')]();return''==_0x439c8a&&(_0x439c8a='nb'),_0xd32879+_0x17b699['kpi'][_0x3ee4('0x86')](/\W+/g,_0x1e6ef7)+'__'+_0x439c8a;},_0x21272b=function(_0xd32879,_0x1e6ef7,_0x17b699,_0x439c8a,_0x14e799){var _0x4908d5={'value':isNaN(_0x439c8a[0x0][_0x3ee4('0x86')](/\s/g,''))?0x0:Math[_0x3ee4('0xde')](parseInt(_0x439c8a[0x0][_0x3ee4('0x86')](/\s/g,''))),'type':_0x14e799,'unit':_0x439c8a['length']>0x1&&_0x439c8a[0x1]||''};if(!(_0x17b699[_0x3ee4('0x80')]>0x1))return null;if(_0xd32879[_0x3ee4('0x43')]>=0x2)switch(_0xd32879[0x1][_0x3ee4('0x84')]){case'OperatingSystem':if(!(_0xd32879['length']>=0x4))return Object['assign'](_0x4908d5,{'category':_0xd32879[Math['max'](_0xd32879['length']-0x2,0x1)]['name'],'kpi':_0xd32879[_0x3ee4('0xdf')](Math[_0x3ee4('0xe0')](_0xd32879['length']-0x1,0x0),_0xd32879[_0x3ee4('0x43')])[_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x84')])['join'](_0x1e6ef7)+_0x1e6ef7+_0x17b699[_0x3ee4('0x84')]});switch(_0xd32879[0x2][_0x3ee4('0x84')]){case'Filesystems':return Object[_0x3ee4('0x4b')](_0x4908d5,{'filesystem':_0xd32879[0x3][_0x3ee4('0x84')],'category':_0x3ee4('0xe1'),'kpi':_0x3ee4('0xe2')+_0x17b699[_0x3ee4('0x84')]});case'Lan':return Object[_0x3ee4('0x4b')](_0x4908d5,{'network_int':_0xd32879[0x3][_0x3ee4('0x84')],'category':_0x3ee4('0xe1'),'kpi':'Network_'+_0x17b699[_0x3ee4('0x84')]});default:return Object['assign'](_0x4908d5,{'category':_0xd32879[Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x2,0x1)][_0x3ee4('0x84')],'kpi':_0xd32879[_0x3ee4('0xdf')](Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x1,0x0),_0xd32879[_0x3ee4('0x43')])[_0x3ee4('0x4d')](_0xd32879=>_0xd32879['name'])[_0x3ee4('0x4e')](_0x1e6ef7)+_0x1e6ef7+_0x17b699[_0x3ee4('0x84')]});}break;case _0x3ee4('0xe3'):if(!(_0xd32879[_0x3ee4('0x43')]>=0x4))return Object['assign'](_0x4908d5,{'category':_0xd32879[Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x2,0x1)]['name'],'kpi':_0xd32879[_0x3ee4('0xdf')](Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x1,0x0),_0xd32879['length'])[_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x84')])[_0x3ee4('0x4e')](_0x1e6ef7)+_0x1e6ef7+_0x17b699[_0x3ee4('0x84')]});switch(_0xd32879[0x2][_0x3ee4('0x84')]){case _0x3ee4('0xe4'):const _0x439c8a=_0xd32879[0x4]['name'][_0x3ee4('0x6f')]('/')[_0x3ee4('0x88')]();return Object['assign'](_0x4908d5,{'database':_0xd32879[0x3][_0x3ee4('0x84')][_0x3ee4('0x6f')](':')[0x1],'db_datafile':_0x439c8a,'category':_0xd32879[0x2][_0x3ee4('0x84')],'kpi':_0x17b699[_0x3ee4('0x84')]['replace'](new RegExp(_0x439c8a[_0x3ee4('0x86')](/(\.[a-z]{3})$/gi,'')+'\x20','gi'),'')});case _0x3ee4('0xe5'):return _0x3ee4('0xe6')==_0xd32879[0x3][_0x3ee4('0x84')]?Object[_0x3ee4('0x4b')](_0x4908d5,{'db_datafile':_0x17b699['name']['substring'](0x15,_0x17b699[_0x3ee4('0x84')]['length']),'category':_0xd32879[0x2]['name'],'kpi':_0xd32879[0x3][_0x3ee4('0x84')]}):Object[_0x3ee4('0x4b')](_0x4908d5,{'category':_0xd32879[0x2]['name'],'kpi':_0xd32879[0x3][_0x3ee4('0x84')]+_0x1e6ef7+_0x17b699[_0x3ee4('0x84')]});default:return Object[_0x3ee4('0x4b')](_0x4908d5,{'category':_0xd32879[Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x2,0x1)][_0x3ee4('0x84')],'kpi':_0xd32879[_0x3ee4('0xdf')](Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x1,0x0),_0xd32879[_0x3ee4('0x43')])[_0x3ee4('0x4d')](_0xd32879=>_0xd32879['name'])[_0x3ee4('0x4e')](_0x1e6ef7)+_0x1e6ef7+_0x17b699['name']});}break;case'InstanceAsTask':case _0x3ee4('0xe7'):if(_0x439c8a[0x0]['match'](/^([0-9]|\s)+(\.[0-9]+)?$/g))return Object[_0x3ee4('0x4b')](_0x4908d5,{'category':_0xd32879[0x1][_0x3ee4('0x84')],'kpi':_0xd32879[_0x3ee4('0xdf')](Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x1,0x0),_0xd32879[_0x3ee4('0x43')])[_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x84')])[_0x3ee4('0x4e')](_0x1e6ef7)+_0x1e6ef7+_0x17b699['name']});break;case _0x3ee4('0xe8'):return _0xd32879['length']>=0x3&&_0x3ee4('0xe9')==_0xd32879[0x2][_0x3ee4('0x84')]?Object[_0x3ee4('0x4b')](_0x4908d5,{'category':_0x3ee4('0xe8'),'kpi':_0xd32879[_0x3ee4('0xdf')](Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x2,0x0),_0xd32879[_0x3ee4('0x43')])[_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x84')])['join'](_0x1e6ef7)+_0x1e6ef7+_0x17b699[_0x3ee4('0x84')]}):Object['assign'](_0x4908d5,{'category':_0x3ee4('0xe8'),'kpi':_0xd32879['slice'](Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x1,0x0),_0xd32879['length'])[_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x84')])[_0x3ee4('0x4e')](_0x1e6ef7)+_0x1e6ef7+_0x17b699[_0x3ee4('0x84')]});default:return Object[_0x3ee4('0x4b')](_0x4908d5,{'category':_0xd32879[Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x2,0x1)][_0x3ee4('0x84')],'kpi':_0xd32879[_0x3ee4('0xdf')](Math[_0x3ee4('0xe0')](_0xd32879[_0x3ee4('0x43')]-0x1,0x0),_0xd32879[_0x3ee4('0x43')])[_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x84')])['join'](_0x1e6ef7)+_0x1e6ef7+_0x17b699[_0x3ee4('0x84')]});}};var _0x55c911={'sapcontrol_operations':{'ABAPGetComponentList':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xbd')](_0xd32879,_0x1e6ef7);},'GetProcessList':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xba')](_0xd32879,_0x1e6ef7);},'GetAlerts':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0x7c')](_0xd32879,_0x1e6ef7);},'GetAlertTree':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0x7d')](_0xd32879,_0x1e6ef7);},'GetEnvironment':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xc8')](_0xd32879,_0x1e6ef7);},'GetVersionInfo':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xc1')](_0xd32879,_0x1e6ef7);},'GetQueueStatistic':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xbf')](_0xd32879,_0x1e6ef7);},'GetInstanceProperties':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xd2')](_0xd32879,_0x1e6ef7);},'ABAPGetWPTable':function(_0xd32879,_0x1e6ef7){this['ABAPGetWPTable'](_0xd32879,_0x1e6ef7);},'Start':function(_0xd32879,_0x1e6ef7){this['Start'](_0xd32879,_0x1e6ef7);},'Stop':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xea')](_0xd32879,_0x1e6ef7);},'RestartInstance':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xeb')](_0xd32879,_0x1e6ef7);},'GetSystemInstanceList':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xc2')](_0xd32879,_0x1e6ef7);},'ABAPGetSystemWPTable':function(_0xd32879,_0x1e6ef7){this['ABAPGetSystemWPTable'](_0xd32879,_0x1e6ef7);},'GetCallstack':function(_0xd32879,_0x1e6ef7){this['GetCallstack'](_0xd32879,_0x1e6ef7);},'J2EEGetProcessList2':function(_0xd32879,_0x1e6ef7){this['J2EEGetProcessList2'](_0xd32879,_0x1e6ef7);},'J2EEGetThreadList2':function(_0xd32879,_0x1e6ef7){this['J2EEGetThreadList2'](_0xd32879,_0x1e6ef7);},'J2EEGetWebSessionList':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xec')](_0xd32879,_0x1e6ef7);},'J2EEGetCacheStatistic2':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xd4')](_0xd32879,_0x1e6ef7);},'J2EEGetVMHeapInfo':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xd9')](_0xd32879,_0x1e6ef7);},'J2EEGetEJBSessionList':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xed')](_0xd32879,_0x1e6ef7);},'J2EEGetRemoteObjectList':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xee')](_0xd32879,_0x1e6ef7);},'J2EEGetClusterMsgList':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xc4')](_0xd32879,_0x1e6ef7);},'J2EEGetSharedTableInfo':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xd7')](_0xd32879,_0x1e6ef7);},'J2EEGetThreadCallStack':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xef')](_0xd32879,_0x1e6ef7);},'J2EEGetThreadTaskStack':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xdb')](_0xd32879,_0x1e6ef7);},'J2EEGetComponentList':function(_0xd32879,_0x1e6ef7){this['J2EEGetComponentList'](_0xd32879,_0x1e6ef7);},'ICMGetThreadList':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xce')](_0xd32879,_0x1e6ef7);},'ICMGetConnectionList':function(_0xd32879,_0x1e6ef7){this['ICMGetConnectionList'](_0xd32879,_0x1e6ef7);},'ICMGetCacheEntries':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xcd')](_0xd32879,_0x1e6ef7);},'ICMGetProxyConnectionList':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xcb')](_0xd32879,_0x1e6ef7);},'WebDispGetServerList':function(_0xd32879,_0x1e6ef7){this['WebDispGetServerList'](_0xd32879,_0x1e6ef7);},'EnqGetLockTable':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xd0')](_0xd32879,_0x1e6ef7);},'EnqGetStatistic':function(_0xd32879,_0x1e6ef7){this[_0x3ee4('0xb5')](_0xd32879,_0x1e6ef7);}},'sapctrl_process_func':_0x49ff79};_0x5b24bd[_0x3ee4('0xf0')]={'Constructor':_0x5b24bd,'discoverEC2Instances':function(_0xd32879,_0x17b699){var _0x439c8a=this;_0x1e6ef7[_0x3ee4('0xf1')]([function(_0x1e6ef7){console[_0x3ee4('0xbb')](_0x3ee4('0xf2'),_0xd32879),_0x439c8a[_0x3ee4('0x12')][_0x3ee4('0xf3')]({'Filters':[{'Name':'vpc-id','Values':[_0xd32879]}]},_0x1e6ef7);},function(_0x1e6ef7,_0x17b699){if(_0x1e6ef7&&_0x1e6ef7[_0x3ee4('0xf4')]){let _0x439c8a=_0x1e6ef7[_0x3ee4('0xf4')][_0x3ee4('0x85')]((_0x1e6ef7,_0x17b699)=>_0x1e6ef7[_0x3ee4('0x83')](_0x17b699[_0x3ee4('0xf5')][_0x3ee4('0x85')]((_0x1e6ef7,_0x17b699)=>{_0x1e6ef7[_0x3ee4('0x72')]({'vpc_id':_0xd32879,'ip_internal':_0x17b699[_0x3ee4('0xf6')],'cloud_instance_id':_0x17b699[_0x3ee4('0xf7')],'cloud_instance_type':_0x17b699[_0x3ee4('0xf8')],'is_sap':!0x1});return _0x1e6ef7;},[])),[]);_0x17b699(null,_0x439c8a);}else _0x17b699('nothing\x20found');},function(_0xd32879,_0x17b699){_0x1e6ef7[_0x3ee4('0xf9')](_0xd32879,(_0x1e6ef7,_0x17b699,_0x439c8a)=>{let _0x4908d5=_0x14e799[_0x3ee4('0xfa')]('http://'+_0x1e6ef7[_0x3ee4('0x91')]+':1128/SAPHostControl/?wsdl',{'timeout':0x3e8},_0x1e6ef7=>{_0x1e6ef7&&0xc8==_0x1e6ef7['statusCode']&&(_0xd32879[_0x17b699]['is_sap']=!0x0,_0x439c8a());});_0x4908d5['on']('timeout',_0x4908d5[_0x3ee4('0xfb')]);_0x4908d5['on'](_0x3ee4('0x1c'),_0xd32879=>{_0x439c8a();});},_0x1e6ef7=>{_0x17b699(null,_0xd32879);});}],function(_0xd32879,_0x1e6ef7){_0xd32879?(console[_0x3ee4('0x1c')](_0x3ee4('0xfc'),_0xd32879,_0x1e6ef7),_0x17b699()):(console[_0x3ee4('0xbb')](_0x3ee4('0xfd'),_0x1e6ef7),_0x17b699(null,_0x1e6ef7));});},'getEC2PrivateProps':function(_0xd32879,_0x17b699){var _0x439c8a=this;_0x1e6ef7[_0x3ee4('0xf1')]([function(_0x1e6ef7){_0x439c8a[_0x3ee4('0x12')][_0x3ee4('0xf3')]({'Filters':[{'Name':_0x3ee4('0xfe'),'Values':[_0xd32879[_0x3ee4('0xff')]]}]},_0x1e6ef7);},function(_0xd32879,_0x1e6ef7){if(_0xd32879&&_0xd32879[_0x3ee4('0xf4')]){let _0x17b699=_0xd32879[_0x3ee4('0xf4')]['reduce']((_0xd32879,_0x1e6ef7)=>_0xd32879[_0x3ee4('0x83')](_0x1e6ef7['Instances'][_0x3ee4('0x85')]((_0xd32879,_0x1e6ef7)=>{_0xd32879['push']({'ip_internal':_0x1e6ef7[_0x3ee4('0xf6')],'cloud_instance_id':_0x1e6ef7[_0x3ee4('0xf7')],'cloud_instance_type':_0x1e6ef7[_0x3ee4('0xf8')]});return _0xd32879;},[])),[]);_0x1e6ef7(null,_0x17b699);}else _0x1e6ef7(_0x439c8a[_0x3ee4('0x16')][_0x3ee4('0x100')]);}],function(_0xd32879,_0x1e6ef7){_0xd32879?(console['error'](_0x3ee4('0x101'),_0xd32879,_0x1e6ef7),_0x17b699()):_0x17b699(_0x1e6ef7);});},'isEC2sRunning':function(_0xd32879,_0x17b699){var _0x439c8a=this;_0x1e6ef7[_0x3ee4('0xf1')]([function(_0x1e6ef7){_0x439c8a[_0x3ee4('0x12')][_0x3ee4('0x102')]({'InstanceIds':Object[_0x3ee4('0x4c')](_0x439c8a['mappings_ip_id'])[_0x3ee4('0x6a')](_0x1e6ef7=>_0xd32879[_0x3ee4('0x70')](_0x1e6ef7)>=0x0)[_0x3ee4('0x4d')](_0xd32879=>_0x439c8a[_0x3ee4('0x15')][_0xd32879]),'IncludeAllInstances':!0x0},_0x1e6ef7);},function(_0xd32879,_0x1e6ef7){var _0x17b699={};_0xd32879[_0x3ee4('0x103')][_0x3ee4('0x62')](_0xd32879=>{_0x17b699[_0xd32879[_0x3ee4('0xf7')]]=0x10==_0xd32879[_0x3ee4('0x104')]['Code']&&'ok'==_0xd32879[_0x3ee4('0x105')][_0x3ee4('0xae')]&&'ok'==_0xd32879['SystemStatus'][_0x3ee4('0xae')];}),_0x1e6ef7(null,_0x17b699);}],function(_0xd32879,_0x1e6ef7){_0xd32879&&console[_0x3ee4('0x1c')](_0x3ee4('0x106'),_0xd32879),_0x17b699(_0x1e6ef7);});},'isEC2Running':function(_0xd32879,_0x1e6ef7){var _0x17b699=this;_0x17b699[_0x3ee4('0x107')](_0xd32879,_0xd32879=>{_0xd32879?_0x17b699[_0x3ee4('0x108')](_0xd32879,_0x1e6ef7):(console[_0x3ee4('0x1c')](_0x17b699[_0x3ee4('0x16')][_0x3ee4('0x100')]),_0x1e6ef7());});},'isEC2RunningFromID':function(_0xd32879,_0x17b699){var _0x439c8a=this;_0x1e6ef7[_0x3ee4('0xf1')]([function(_0x1e6ef7){_0x439c8a[_0x3ee4('0x12')][_0x3ee4('0x102')]({'InstanceIds':[_0xd32879],'IncludeAllInstances':!0x0},_0x1e6ef7);},function(_0xd32879,_0x1e6ef7){_0xd32879[_0x3ee4('0x103')]&&_0xd32879['InstanceStatuses'][0x0]?_0x1e6ef7(null,0x10==_0xd32879['InstanceStatuses'][0x0][_0x3ee4('0x104')]['Code']&&'ok'==_0xd32879[_0x3ee4('0x103')][0x0][_0x3ee4('0x105')][_0x3ee4('0xae')]&&'ok'==_0xd32879[_0x3ee4('0x103')][0x0][_0x3ee4('0x109')]['Status']):_0x1e6ef7(_0x439c8a[_0x3ee4('0x16')]['ec2_not_found']);}],function(_0xd32879,_0x1e6ef7){_0xd32879&&console[_0x3ee4('0x1c')](_0x3ee4('0x10a'),_0xd32879),_0x17b699(_0x1e6ef7);});},'isEC2Stopped':function(_0xd32879,_0x1e6ef7){var _0x17b699=this;_0x17b699[_0x3ee4('0x107')](_0xd32879,_0xd32879=>{_0xd32879?_0x17b699[_0x3ee4('0x10b')](_0xd32879,_0x1e6ef7):(console[_0x3ee4('0x1c')](_0x17b699[_0x3ee4('0x16')]['ec2_not_found']),_0x1e6ef7());});},'isEC2StoppedFromID':function(_0xd32879,_0x17b699){var _0x439c8a=this;_0x1e6ef7[_0x3ee4('0xf1')]([function(_0x1e6ef7){_0x439c8a[_0x3ee4('0x12')][_0x3ee4('0x102')]({'InstanceIds':[_0xd32879],'IncludeAllInstances':!0x0},_0x1e6ef7);},function(_0xd32879,_0x1e6ef7){_0xd32879['InstanceStatuses']&&_0xd32879[_0x3ee4('0x103')][0x0]?_0x1e6ef7(null,0x50==_0xd32879['InstanceStatuses'][0x0][_0x3ee4('0x104')][_0x3ee4('0x10c')]):_0x1e6ef7(_0x439c8a[_0x3ee4('0x16')][_0x3ee4('0x100')]);}],function(_0xd32879,_0x1e6ef7){_0xd32879&&console['error'](_0x3ee4('0x10d'),_0xd32879),_0x17b699(_0x1e6ef7);});},'getEC2ID':function(_0xd32879,_0x17b699){var _0x439c8a=this;Object[_0x3ee4('0x4c')](_0x439c8a['mappings_ip_id'])[_0x3ee4('0x70')](_0xd32879)<0x0?_0x1e6ef7[_0x3ee4('0xf1')]([function(_0x1e6ef7){_0x439c8a['ec2'][_0x3ee4('0xf3')]({'Filters':[{'Name':_0x3ee4('0x10e'),'Values':[_0xd32879]}]},_0x1e6ef7);},function(_0xd32879,_0x1e6ef7){_0xd32879&&_0xd32879[_0x3ee4('0xf4')]&&_0xd32879['Reservations'][0x0]&&_0xd32879[_0x3ee4('0xf4')][0x0][_0x3ee4('0xf5')]&&_0xd32879[_0x3ee4('0xf4')][0x0][_0x3ee4('0xf5')][0x0]?_0x1e6ef7(null,_0xd32879[_0x3ee4('0xf4')][0x0]['Instances'][0x0][_0x3ee4('0xf7')]):_0x1e6ef7(_0x439c8a[_0x3ee4('0x16')][_0x3ee4('0x100')]);}],function(_0x1e6ef7,_0x14e799){_0x1e6ef7||!_0x14e799?(console[_0x3ee4('0x1c')](_0x3ee4('0x101'),_0x1e6ef7,_0x14e799),_0x17b699()):(_0x439c8a[_0x3ee4('0x15')][_0xd32879]=_0x14e799,_0x17b699(_0x14e799));}):_0x17b699(_0x439c8a[_0x3ee4('0x15')][_0xd32879]);},'getEC2ID_Type':function(_0xd32879,_0x17b699){var _0x439c8a=this;_0x1e6ef7[_0x3ee4('0xf1')]([function(_0x1e6ef7){_0x439c8a[_0x3ee4('0x12')][_0x3ee4('0xf3')]({'Filters':[{'Name':'private-ip-address','Values':[_0xd32879]}]},_0x1e6ef7);},function(_0xd32879,_0x1e6ef7){_0xd32879&&_0xd32879['Reservations']&&_0xd32879[_0x3ee4('0xf4')][0x0]&&_0xd32879[_0x3ee4('0xf4')][0x0]['Instances']&&_0xd32879[_0x3ee4('0xf4')][0x0]['Instances'][0x0]?_0x1e6ef7(null,_0xd32879[_0x3ee4('0xf4')][0x0][_0x3ee4('0xf5')][0x0]):_0x1e6ef7(_0x439c8a[_0x3ee4('0x16')]['ec2_not_found']);}],function(_0x1e6ef7,_0x14e799){_0x1e6ef7?(console[_0x3ee4('0x1c')](_0x3ee4('0x10f'),_0x1e6ef7),_0x17b699()):(_0x439c8a[_0x3ee4('0x15')][_0xd32879]=_0x14e799[_0x3ee4('0xf7')],_0x17b699({'instance_id':_0x14e799[_0x3ee4('0xf7')],'instance_type':_0x14e799['InstanceType']}));});},'stopEC2':function(_0xd32879,_0x1e6ef7){var _0x17b699=this;_0x17b699['getEC2ID'](_0xd32879,_0xd32879=>{_0xd32879?_0x17b699[_0x3ee4('0x10b')](_0xd32879,_0x439c8a=>{_0x439c8a?_0x1e6ef7():_0x17b699[_0x3ee4('0x12')]['stopInstances']({'InstanceIds':[_0xd32879]},_0xd32879=>{_0xd32879?(console['error'](_0x17b699[_0x3ee4('0x16')][_0x3ee4('0x110')],_0xd32879),_0x1e6ef7(_0x17b699[_0x3ee4('0x16')][_0x3ee4('0x110')])):_0x1e6ef7();});}):_0x1e6ef7(_0x17b699[_0x3ee4('0x16')][_0x3ee4('0x110')]);});},'startEC2':function(_0xd32879,_0x1e6ef7){var _0x17b699=this;_0x17b699[_0x3ee4('0x107')](_0xd32879,_0xd32879=>{_0xd32879?_0x17b699[_0x3ee4('0x108')](_0xd32879,_0x439c8a=>{_0x439c8a?_0x1e6ef7():_0x17b699[_0x3ee4('0x12')][_0x3ee4('0x111')]({'InstanceIds':[_0xd32879]},_0xd32879=>{_0xd32879?(console['error'](_0x17b699[_0x3ee4('0x16')]['ec2_not_started'],_0xd32879),_0x1e6ef7(_0x17b699['_errors']['ec2_not_started'])):_0x1e6ef7();});}):_0x1e6ef7(_0x17b699[_0x3ee4('0x16')][_0x3ee4('0x112')]);});}};var _0x250914=_0x5b24bd;_0x54d697['prototype']={'Constructor':_0x54d697,'log':function(_0xd32879){var _0x1e6ef7=this;(_0xd32879<=_0x1e6ef7[_0x3ee4('0x1e')]||_0x1e6ef7['__DEBUG__'])&&(Array[_0x3ee4('0xf0')][_0x3ee4('0x71')][_0x3ee4('0x113')](arguments,0x0,0x1,function(_0xd32879){switch(_0xd32879){case _0x1e6ef7['LOG_LEVEL_ERROR']:return'E'+_0x1e6ef7[_0x3ee4('0x24')]+new Date()[_0x3ee4('0x114')]()+_0x1e6ef7[_0x3ee4('0x24')];case _0x1e6ef7['LOG_LEVEL_MIN']:return'M'+_0x1e6ef7[_0x3ee4('0x24')]+new Date()[_0x3ee4('0x114')]()+_0x1e6ef7[_0x3ee4('0x24')];case _0x1e6ef7[_0x3ee4('0x21')]:return'I'+_0x1e6ef7[_0x3ee4('0x24')]+new Date()[_0x3ee4('0x114')]()+_0x1e6ef7['separator'];case _0x1e6ef7['LOG_LEVEL_DEBUG']:return'D'+_0x1e6ef7['separator']+new Date()[_0x3ee4('0x114')]()+_0x1e6ef7[_0x3ee4('0x24')];default:return'';}}(_0xd32879)),console[_0x3ee4('0xbb')][_0x3ee4('0x115')](null,Array['prototype'][_0x3ee4('0xdf')][_0x3ee4('0x113')](arguments)));},'debug':function(_0xd32879){console[_0x3ee4('0xbb')]('ON'),this[_0x3ee4('0x116')]=_0xd32879;}};var _0x254c11=_0x54d697,_0x175b18={'APPEND':_0x3ee4('0x117'),'ASKING':'r53eebe4bcfc8e4e11765','AUTH':_0x3ee4('0x118'),'BGREWRITEAOF':'r977f34a23a4c7dafd711','BGSAVE':'r8fbddd3ad25e66b66d75','BITCOUNT':_0x3ee4('0x119'),'BITFIELD':_0x3ee4('0x11a'),'BITOP':_0x3ee4('0x11b'),'BITPOS':'rddf7c86738135cc9feba','BLPOP':_0x3ee4('0x11c'),'BRPOP':'r8bc260d6056d562c74a7','BRPOPLPUSH':'r4cedfdedff04f42371a3','BZPOPMAX':_0x3ee4('0x11d'),'BZPOPMIN':'raceb1f507d73610d4985','CLIENT':_0x3ee4('0x11e'),'CLUSTER':_0x3ee4('0x11f'),'COMMAND':_0x3ee4('0x120'),'CONFIG':_0x3ee4('0x121'),'DBSIZE':_0x3ee4('0x122'),'DEBUG':_0x3ee4('0x123'),'DECR':_0x3ee4('0x124'),'DECRBY':_0x3ee4('0x125'),'DEL':_0x3ee4('0x126'),'DISCARD':_0x3ee4('0x127'),'DUMP':_0x3ee4('0x128'),'ECHO':_0x3ee4('0x129'),'EVAL':_0x3ee4('0x12a'),'EVALSHA':_0x3ee4('0x12b'),'EXEC':_0x3ee4('0x12c'),'EXISTS':_0x3ee4('0x12d'),'EXPIRE':_0x3ee4('0x12e'),'EXPIREAT':_0x3ee4('0x12f'),'FLUSHALL':_0x3ee4('0x130'),'FLUSHDB':_0x3ee4('0x131'),'GEOADD':_0x3ee4('0x132'),'GEODIST':'r03fc230a0569c81dd3b9','GEOHASH':_0x3ee4('0x133'),'GEOPOS':_0x3ee4('0x134'),'GEORADIUS':_0x3ee4('0x135'),'GEORADIUS_RO':_0x3ee4('0x136'),'GEORADIUSBYMEMBER':_0x3ee4('0x137'),'GEORADIUSBYMEMBER_RO':_0x3ee4('0x138'),'GET':_0x3ee4('0x139'),'GETBIT':_0x3ee4('0x13a'),'GETRANGE':_0x3ee4('0x13b'),'GETSET':_0x3ee4('0x13c'),'HDEL':_0x3ee4('0x13d'),'HEXISTS':'re920bcf404cb8d2e36f2','HGET':'rbcf42cf954a8b1ab485b','HGETALL':_0x3ee4('0x13e'),'HINCRBY':_0x3ee4('0x13f'),'HINCRBYFLOAT':'r7cefea74fb6a6b3ba2fe','HKEYS':_0x3ee4('0x140'),'HLEN':_0x3ee4('0x141'),'HMGET':_0x3ee4('0x142'),'HMSET':_0x3ee4('0x143'),'HOST:':_0x3ee4('0x144'),'HSCAN':_0x3ee4('0x145'),'HSET':_0x3ee4('0x146'),'HSETNX':_0x3ee4('0x147'),'HSTRLEN':_0x3ee4('0x148'),'HVALS':_0x3ee4('0x149'),'INCR':_0x3ee4('0x14a'),'INCRBY':_0x3ee4('0x14b'),'INCRBYFLOAT':_0x3ee4('0x14c'),'INFO':_0x3ee4('0x14d'),'KEYS':'r7c58fc41ca7901f7d01e','LASTSAVE':_0x3ee4('0x14e'),'LATENCY':_0x3ee4('0x14f'),'LINDEX':_0x3ee4('0x150'),'LINSERT':_0x3ee4('0x151'),'LLEN':'r9c3618e5fb721740773c','LOLWUT':'r90958e8cf18c41945d6b','LPOP':_0x3ee4('0x152'),'LPUSH':_0x3ee4('0x153'),'LPUSHX':_0x3ee4('0x154'),'LRANGE':_0x3ee4('0x155'),'LREM':_0x3ee4('0x156'),'LSET':_0x3ee4('0x157'),'LTRIM':_0x3ee4('0x158'),'MEMORY':_0x3ee4('0x159'),'MGET':'r963139d81e76a1db74a4','MIGRATE':_0x3ee4('0x15a'),'MODULE':_0x3ee4('0x15b'),'MONITOR':_0x3ee4('0x15c'),'MOVE':_0x3ee4('0x15d'),'MSET':'r37e0b9632995c39bb6dd','MSETNX':_0x3ee4('0x15e'),'MULTI':'r0ea46cead6ed2044d5e6','OBJECT':_0x3ee4('0x15f'),'PERSIST':_0x3ee4('0x160'),'PEXPIRE':_0x3ee4('0x161'),'PEXPIREAT':_0x3ee4('0x162'),'PFADD':_0x3ee4('0x163'),'PFCOUNT':_0x3ee4('0x164'),'PFDEBUG':_0x3ee4('0x165'),'PFMERGE':_0x3ee4('0x166'),'PFSELFTEST':'r8f375412da87e131abcb','PING':_0x3ee4('0x167'),'POST':_0x3ee4('0x168'),'PSETEX':_0x3ee4('0x169'),'PSUBSCRIBE':'ra3febaf705f0b3e94b08','PSYNC':_0x3ee4('0x16a'),'PTTL':_0x3ee4('0x16b'),'PUBLISH':'r652fea692b19d3b13951','PUBSUB':_0x3ee4('0x16c'),'PUNSUBSCRIBE':_0x3ee4('0x16d'),'RANDOMKEY':_0x3ee4('0x16e'),'READONLY':_0x3ee4('0x16f'),'READWRITE':'rce322cd74d5847a2a37f','RENAME':'r9066a7800a292a1904c6','RENAMENX':'r2dcb924dc3c52eaf4326','REPLCONF':_0x3ee4('0x170'),'REPLICAOF':_0x3ee4('0x171'),'RESTORE':_0x3ee4('0x172'),'RESTORE-ASKING':'r0491b9fc7fc0c1ed612a','ROLE':_0x3ee4('0x173'),'RPOP':_0x3ee4('0x174'),'RPOPLPUSH':_0x3ee4('0x175'),'RPUSH':'r4b45792fb7e0ea8585f8','RPUSHX':_0x3ee4('0x176'),'SADD':'r91342b9fa4eab746dc3c','SAVE':_0x3ee4('0x177'),'SCAN':'r569298b21c9637769832','SCARD':_0x3ee4('0x178'),'SCRIPT':_0x3ee4('0x179'),'SDIFF':'r0c3af3d708a2987a660b','SDIFFSTORE':'r5192532048d831a95037','SELECT':_0x3ee4('0x17a'),'SET':_0x3ee4('0x17b'),'SETBIT':_0x3ee4('0x17c'),'SETEX':'r46e57e1c52332b5a5a99','SETNX':'r0f6b51f5c3e0dc6a5333','SETRANGE':_0x3ee4('0x17d'),'SHUTDOWN':_0x3ee4('0x17e'),'SINTER':_0x3ee4('0x17f'),'SINTERSTORE':_0x3ee4('0x180'),'SISMEMBER':'re9edaf9af49dedd76dc0','SLAVEOF':'r72fd174d37c08265e5c1','SLOWLOG':_0x3ee4('0x181'),'SMEMBERS':_0x3ee4('0x182'),'SMOVE':'rb012f694f06baded5843','SORT':_0x3ee4('0x183'),'SPOP':_0x3ee4('0x184'),'SRANDMEMBER':'r4834b22bf2e167eec413','SREM':_0x3ee4('0x185'),'SSCAN':_0x3ee4('0x186'),'STRLEN':'r3731b868ab6a189fad20','SUBSCRIBE':_0x3ee4('0x187'),'SUBSTR':'r210d71a176f50c7d0d0d','SUNION':_0x3ee4('0x188'),'SUNIONSTORE':_0x3ee4('0x189'),'SWAPDB':'r8115b24806a99207caa4','SYNC':_0x3ee4('0x18a'),'TIME':_0x3ee4('0x18b'),'TOUCH':_0x3ee4('0x18c'),'TTL':_0x3ee4('0x18d'),'TYPE':_0x3ee4('0x18e'),'UNLINK':_0x3ee4('0x18f'),'UNSUBSCRIBE':_0x3ee4('0x190'),'UNWATCH':_0x3ee4('0x191'),'WAIT':'rf80e88ba805e079b3e78','WATCH':_0x3ee4('0x192'),'XACK':_0x3ee4('0x193'),'XADD':_0x3ee4('0x194'),'XCLAIM':_0x3ee4('0x195'),'XDEL':_0x3ee4('0x196'),'XGROUP':'r4fb8652508296ac45931','XINFO':'r5edea82e53e6ce3cb66d','XLEN':'r841df2001c1ae836aaaa','XPENDING':_0x3ee4('0x197'),'XRANGE':'re231794108ea049c510b','XREAD':_0x3ee4('0x198'),'XREADGROUP':'rd2da0178505f01ac6a56','XREVRANGE':_0x3ee4('0x199'),'XSETID':'rf041428ca117772f3c65','XTRIM':_0x3ee4('0x19a'),'ZADD':_0x3ee4('0x19b'),'ZCARD':_0x3ee4('0x19c'),'ZCOUNT':_0x3ee4('0x19d'),'ZINCRBY':'r763956de8cf90a3cf1a8','ZINTERSTORE':'r9f9daf2c0f512192f12e','ZLEXCOUNT':_0x3ee4('0x19e'),'ZPOPMAX':_0x3ee4('0x19f'),'ZPOPMIN':_0x3ee4('0x1a0'),'ZRANGE':_0x3ee4('0x1a1'),'ZRANGEBYLEX':_0x3ee4('0x1a2'),'ZRANGEBYSCORE':'r85011b7d9cfd9bfc465c','ZRANK':_0x3ee4('0x1a3'),'ZREM':'raa23ccab68c12c7d94ed','ZREMRANGEBYLEX':'r23d9446a001853d37fc1','ZREMRANGEBYRANK':_0x3ee4('0x1a4'),'ZREMRANGEBYSCORE':_0x3ee4('0x1a5'),'ZREVRANGE':_0x3ee4('0x1a6'),'ZREVRANGEBYLEX':_0x3ee4('0x1a7'),'ZREVRANGEBYSCORE':_0x3ee4('0x1a8'),'ZREVRANK':_0x3ee4('0x1a9'),'ZSCAN':_0x3ee4('0x1aa'),'ZSCORE':_0x3ee4('0x1ab'),'ZUNIONSTORE':_0x3ee4('0x1ac')},{sapcontrol_operations:sapcontrol_operations$1,sapctrl_process_func:sapctrl_process_func$1}=_0x55c911;_0x259c1d[_0x3ee4('0xf0')]={'Constructor':_0x259c1d,'init':function(_0xd32879,_0x17b699){var _0x439c8a=this;_0x439c8a[_0x3ee4('0x1ad')]=_0xd32879[_0x3ee4('0x1ad')],_0x439c8a[_0x3ee4('0x1ae')]=_0xd32879[_0x3ee4('0x1ae')],_0x439c8a[_0x3ee4('0xd')]=_0xd32879['version'],_0x439c8a[_0x3ee4('0xe')]=_0xd32879['staging']||_0x3ee4('0x1af'),_0x439c8a[_0x3ee4('0x26')]={'collect_exec':_0x3ee4('0x1b0')+_0x439c8a['staging']+'_'+_0x439c8a[_0x3ee4('0x1ae')],'checkconn_exec':'CHECK_'+_0x439c8a[_0x3ee4('0x1ae')],'discover_exec':_0x3ee4('0x1b1')+_0x439c8a[_0x3ee4('0x1ae')],'webhook_exec':_0x3ee4('0x1b2')+_0x439c8a[_0x3ee4('0x1ae')]},_0x439c8a[_0x3ee4('0x3d')]=_0xd32879[_0x3ee4('0x1b3')]['credentials'],_0x439c8a[_0x3ee4('0x28')]=_0xd32879[_0x3ee4('0x1b4')],_0x439c8a[_0x3ee4('0x1b5')]=_0xd32879['db'],_0x439c8a['logger'][_0x3ee4('0xbb')](_0x439c8a[_0x3ee4('0x3e')]['LOG_LEVEL_INFO'],'ScaleDoer\x20init\x20start'),_0x439c8a[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x439c8a[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x1b6')+_0x439c8a[_0x3ee4('0x1ad')]+'\x20version:'+_0x439c8a[_0x3ee4('0xd')]+_0x3ee4('0x1b7')+_0x439c8a[_0x3ee4('0xe')]),_0x1e6ef7['parallel']([function(_0xd32879){_0x439c8a['get_cloud_region']['call'](_0x439c8a,_0xd32879);},function(_0x1e6ef7){_0x439c8a[_0x3ee4('0x3b')]=_0x3ba1ca[_0x3ee4('0x1b8')](Object[_0x3ee4('0x4b')](_0x439c8a[_0x3ee4('0x1b5')],{'prefix':'q','db':0x2,'password':_0xdfee82(_0x439c8a[_0x3ee4('0x1b5')][_0x3ee4('0x1b9')],_0x439c8a[_0x3ee4('0x1ad')]+_0x439c8a[_0x3ee4('0x3d')]['replace'](':','')),'rename_commands':_0x175b18})),_0x439c8a[_0x3ee4('0x3b')]['on'](_0x3ee4('0x1c'),function(_0xd32879){_0x439c8a['logger'][_0x3ee4('0xbb')](_0x439c8a['logger'][_0x3ee4('0x1f')],_0x3ee4('0x1ba')+_0xd32879[_0x3ee4('0x1bb')]+_0x3ee4('0x1bc')+_0xd32879['command']+_0x3ee4('0x1bc')+_0xd32879[_0x3ee4('0x1bd')]);}),_0x439c8a[_0x3ee4('0x25')]=_0x4908d5['createQueue']({'prefix':'q','redis':Object[_0x3ee4('0x4b')](_0x439c8a[_0x3ee4('0x1b5')],{'auth':_0xdfee82(_0x439c8a[_0x3ee4('0x1b5')][_0x3ee4('0x1b9')],_0x439c8a['company']+_0x439c8a[_0x3ee4('0x3d')][_0x3ee4('0x86')](':','')),'db':_0xd32879['dbindex'],'options':{'rename_commands':_0x175b18}})}),_0x439c8a[_0x3ee4('0x25')][_0x3ee4('0x1be')](),_0x439c8a[_0x3ee4('0x25')]['setMaxListeners'](0x2*_0x439c8a[_0x3ee4('0x28')]),_0x439c8a[_0x3ee4('0x25')]['on']('error',function(_0xd32879){_0x439c8a['logger'][_0x3ee4('0xbb')](_0x439c8a[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x1bf')+_0xd32879[_0x3ee4('0x1bb')]+_0x3ee4('0x1bc')+_0xd32879['command']+_0x3ee4('0x1bc')+_0xd32879[_0x3ee4('0x1bd')]);}),_0x1e6ef7();},function(_0x1e6ef7){_0x439c8a[_0x3ee4('0x3c')]=new _0x11386e(_0xd32879[_0x3ee4('0x1b3')][_0x3ee4('0x1c0')]+_0x3ee4('0x1c1')+(_0xd32879[_0x3ee4('0x1b3')]['credentials']?_0xd32879[_0x3ee4('0x1b3')][_0x3ee4('0x1c2')]+'@':'')+_0xd32879['gateway']['host']+':'+_0xd32879[_0x3ee4('0x1b3')][_0x3ee4('0x1c3')]+_0x3ee4('0x1c4'),_0x439c8a[_0x3ee4('0xd')],_0x439c8a[_0x3ee4('0xe')]),_0x1e6ef7();},function(_0xd32879){_0x58c694[_0x3ee4('0x1c5')](_0x439c8a['certif_dir'])||_0x58c694[_0x3ee4('0x1c6')](_0x439c8a['certif_dir']),_0xd32879();}],function(){_0x439c8a[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x439c8a[_0x3ee4('0x3e')]['LOG_LEVEL_INFO'],_0x3ee4('0x1c7'),_0x439c8a['QUEUES']),_0x17b699[_0x3ee4('0x113')](_0x439c8a);});},'deletePrometheus':function(_0xd32879,_0x1e6ef7,_0x17b699,_0x439c8a,_0x14e799){var _0x4908d5=this;void 0x0==_0x4908d5[_0x3ee4('0x1c8')][_0x17b699]&&(_0x4908d5['conn_retries'][_0x17b699]=0x0),_0x4908d5[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x4908d5[_0x3ee4('0x3e')]['LOG_LEVEL_INFO'],_0x3ee4('0x1c9')+_0x17b699+_0x3ee4('0x1ca')+_0xd32879+_0x3ee4('0x1cb')),_0x4908d5['pushgtw_cli'][_0x3ee4('0x1cc')](_0xd32879,{'instance':_0x17b699}),_0x4908d5[_0x3ee4('0x3c')][_0x3ee4('0x1cd')]('up',_0x1e6ef7,_0x17b699,_0x4908d5[_0x3ee4('0x27')],_0x439c8a,_0x14e799[_0x3ee4('0x4d')](_0xd32879=>Object[_0x3ee4('0x4b')](_0xd32879,{'status':0x0}))),_0x4908d5['conn_retries'][_0x17b699]=0x0;},'new_soap_client':function(_0xd32879,_0x1e6ef7,_0x17b699,_0x439c8a){const _0x14e799=this;try{_0x5a26fe[_0x3ee4('0x1b8')](_0xd32879+'?wsdl',{'returnFault':!0x0},function(_0x4908d5,_0x3ba1ca){if(_0x4908d5||!_0x3ba1ca)_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x1ce')+_0xd32879+_0x3ee4('0x1cf')),_0x439c8a(_0x14e799['_errors'][_0x3ee4('0x1d0')],_0x17b699);else{switch(_0x1e6ef7[_0x3ee4('0x1d1')]){case 0x0:_0x3ba1ca[_0x3ee4('0x1d2')](new _0x5a26fe[(_0x3ee4('0x1d3'))](_0x1e6ef7['options'][0x0]['user'],_0x1e6ef7[_0x3ee4('0x1d4')][0x0][_0x3ee4('0x1d5')]));break;case 0x1:_0x3ba1ca[_0x3ee4('0x1d2')](new _0x5a26fe[(_0x3ee4('0x1d6'))](_0x1e6ef7['options'][0x1]['pfx'],null,{'rejectUnauthorized':!0x1}));break;default:_0x3ba1ca[_0x3ee4('0x1d2')](new _0x5a26fe['ClientSSLSecurityPFX'](_0x1e6ef7[_0x3ee4('0x1d4')][0x1]['pfx'],null,{'rejectUnauthorized':!0x1}));}_0x3ba1ca[_0x3ee4('0x1d7')](_0xd32879+_0x3ee4('0x1d8')),_0x439c8a(null,{'soapcli':_0x3ba1ca,'payload':_0x17b699});}});}catch(_0x5a1332){_0x5a1332&&(_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x1d9'),_0x5a1332),_0x439c8a(_0x14e799[_0x3ee4('0x16')][_0x3ee4('0x1d0')],_0x17b699));}},'get_sap_instances_nr':function(_0xd32879,_0x1e6ef7,_0x17b699){const _0x439c8a=this,_0x14e799=_0x3ee4('0x1da')+_0xd32879+':5'+_0x1e6ef7+'14';try{_0x5a26fe[_0x3ee4('0x1b8')](_0x14e799+_0x3ee4('0x1db'),{'returnFault':!0x0},function(_0xd32879,_0x1e6ef7){_0xd32879||!_0x1e6ef7?_0x17b699(_0x439c8a[_0x3ee4('0x16')][_0x3ee4('0x1d0')],[]):_0x1e6ef7[_0x3ee4('0xc2')]({},function(_0xd32879,_0x1e6ef7){if(!_0xd32879&&_0x1e6ef7&&_0x1e6ef7[_0x3ee4('0xc3')]&&_0x1e6ef7[_0x3ee4('0xc3')][_0x3ee4('0x7f')]){let _0xd32879=_0x1e6ef7['instance'][_0x3ee4('0x7f')][_0x3ee4('0x4d')](_0xd32879=>{let _0x1e6ef7=(''+_0xd32879[_0x3ee4('0x1dc')])[_0x3ee4('0x1dd')](0x2,'0');return{'hostname':_0xd32879[_0x3ee4('0x90')],'instancenr':_0x1e6ef7,'features':_0xd32879[_0x3ee4('0x8d')][_0x3ee4('0x6f')]('|'),'status':_0xd32879[_0x3ee4('0x1de')]==_0x439c8a[_0x3ee4('0x1df')][_0x3ee4('0x1e0')]?0x1:_0xd32879[_0x3ee4('0x1de')]==_0x439c8a['_sap_statuses'][_0x3ee4('0x1e1')]?-0x1:0x0};});_0x17b699(null,_0xd32879);}else _0x17b699(_0x439c8a['_errors'][_0x3ee4('0x1e2')],[]);});});}catch(_0x37e1fb){_0x37e1fb&&_0x439c8a[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x439c8a[_0x3ee4('0x3e')]['LOG_LEVEL_ERROR'],_0x3ee4('0x1e3'),_0x37e1fb),_0x17b699(_0x439c8a[_0x3ee4('0x16')]['soap_client_getinstance'],[]);}},'check_sapcontrol_listening':function(_0xd32879,_0x1e6ef7,_0x17b699,_0x439c8a){const _0x4908d5=this;try{let _0x3ba1ca=_0x14e799[_0x3ee4('0xfa')](_0x3ee4('0x1e4')+_0xd32879+':5'+_0x1e6ef7+_0x3ee4('0x1e5'),{'timeout':0x3e8},_0x14e799=>{_0x4908d5[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x4908d5[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x1e6')+_0xd32879+':'+_0x1e6ef7,_0x14e799['statusCode']);if(_0x14e799&&0xc8==_0x14e799[_0x3ee4('0x1e7')]){const _0x14e799=_0x3ee4('0x1da')+_0xd32879+':5'+_0x1e6ef7+'14';_0x5a26fe['createClient'](_0x14e799+_0x3ee4('0x1db'),{'returnFault':!0x0},function(_0xd32879,_0x1e6ef7){_0xd32879||!_0x1e6ef7?_0x439c8a(!0x1):_0x1e6ef7['GetSystemInstanceList']({},function(_0xd32879,_0x1e6ef7){_0x439c8a(!_0xd32879&&_0x1e6ef7&&_0x1e6ef7[_0x3ee4('0xc3')]&&_0x1e6ef7['instance'][_0x3ee4('0x7f')]?_0x1e6ef7['instance'][_0x3ee4('0x7f')]['map'](_0xd32879=>_0xd32879['hostname'])[_0x3ee4('0x1e8')](_0x17b699):!0x1);},{'timeout':0x7d0});});}});_0x3ba1ca['on'](_0x3ee4('0x1e9'),()=>{_0x3ba1ca['abort']();}),_0x3ba1ca['on'](_0x3ee4('0x1c'),_0x17b699=>{_0x4908d5[_0x3ee4('0x3e')]['log'](_0x4908d5['logger'][_0x3ee4('0x22')],_0x3ee4('0x1ea')+_0xd32879+':'+_0x1e6ef7,_0x17b699);_0x439c8a(!0x1);});}catch(_0x21d9dc){_0x21d9dc&&_0x4908d5['logger']['log'](_0x4908d5[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x1e3'),_0x21d9dc),_0x439c8a(!0x1);}},'update_sending_ssl':function(_0xd32879,_0x1e6ef7,_0x17b699){const _0x439c8a=this;_0xd32879?_0x58c694['access'](_0x439c8a['certif_dir']+'/'+_0xd32879+_0x3ee4('0x1eb'),_0x58c694[_0x3ee4('0x1ec')],_0x14e799=>{_0x14e799?_0x1e6ef7?_0x58c694['writeFile'](_0x439c8a['certif_dir']+'/'+_0xd32879+_0x3ee4('0x1eb'),new Buffer['from'](JSON[_0x3ee4('0x1ed')](_0x1e6ef7)),function(_0x1e6ef7){_0x439c8a['sending_sslcertifs'][_0xd32879]=!!_0x1e6ef7,_0x17b699();}):(_0x439c8a[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x439c8a['logger']['LOG_LEVEL_ERROR'],_0x3ee4('0x1ee')+_0xd32879),_0x439c8a[_0x3ee4('0x29')][_0xd32879]=!0x0,_0x17b699(_0x3ee4('0x1ef'))):(_0x439c8a[_0x3ee4('0x29')][_0xd32879]=!0x1,_0x17b699());}):_0x17b699('no\x20system\x20provided');},'connect_sap':function(_0xd32879,_0x17b699,_0x439c8a){var _0x14e799=this;process[_0x3ee4('0xc9')][_0x3ee4('0x1f0')]='0',_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x14e799[_0x3ee4('0x3e')]['LOG_LEVEL_DEBUG'],_0x3ee4('0x1f1')+_0xd32879[_0x3ee4('0x1f2')]['syst_id']+_0x3ee4('0x1f3')),_0x1e6ef7[_0x3ee4('0xf1')]([function(_0x1e6ef7){_0x14e799['update_sending_ssl'](_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')],_0xd32879[_0x3ee4('0x1f5')],_0x1e6ef7);},function(_0x1e6ef7){const _0x17b699=_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f6')]?{'protocol':'https','port_suffix':'14'}:{'protocol':_0x3ee4('0x4'),'port_suffix':'13'},_0x439c8a=_0x17b699[_0x3ee4('0x1f7')]+_0x3ee4('0x1c1')+(_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x91')]||_0xd32879['system'][_0x3ee4('0x90')])+':5'+_0xd32879[_0x3ee4('0x1f2')]['sn']+_0x17b699[_0x3ee4('0x1f8')]+'/';_0x14e799[_0x3ee4('0x3e')]['log'](_0x14e799[_0x3ee4('0x3e')]['LOG_LEVEL_DEBUG'],'\x20connect\x20to\x20the\x20entry\x20point\x20instance\x20and\x20provide\x20soapclient\x20for\x20:',_0x439c8a),_0x14e799[_0x3ee4('0x3c')][_0x3ee4('0x1f9')](_0xd32879[_0x3ee4('0x1f2')]['syst_id']),_0x14e799[_0x3ee4('0x1fa')](_0x439c8a,{'method':_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fb')],'options':[{'user':_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fc')],'pwd':_0xd32879['system']['password']},{'pfx':0x1==_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fb')]&&_0x14e799[_0x3ee4('0x39')]+'/'+_0xd32879['system'][_0x3ee4('0x1f4')]+'.pfx'}]},_0xd32879,_0x1e6ef7);},function(_0x1e6ef7,_0x17b699){_0x1e6ef7[_0x3ee4('0x1fd')][_0x3ee4('0xc2')]({},function(_0x439c8a,_0x4908d5){if(!_0x439c8a&&_0x4908d5&&_0x4908d5[_0x3ee4('0xc3')]&&_0x4908d5[_0x3ee4('0xc3')][_0x3ee4('0x7f')]){var _0x3ba1ca=_0x4908d5[_0x3ee4('0xc3')][_0x3ee4('0x7f')][_0x3ee4('0x4d')](_0x1e6ef7=>{let _0x17b699=(''+_0x1e6ef7[_0x3ee4('0x1dc')])[_0x3ee4('0x1dd')](0x2,'0');let _0x439c8a=_0xd32879['system'][_0x3ee4('0x1fe')][_0x3ee4('0x1ff')](_0xd32879=>_0xd32879[_0x3ee4('0x64')]==_0x17b699);return{'ip_internal':_0x439c8a&&_0x439c8a['ip_internal'],'hostname':_0x1e6ef7[_0x3ee4('0x90')],'instancenr':_0x17b699,'features':_0x1e6ef7['features']['split']('|'),'status':_0x1e6ef7['dispstatus']==_0x14e799[_0x3ee4('0x1df')][_0x3ee4('0x1e0')]?0x1:_0x1e6ef7[_0x3ee4('0x1de')]==_0x14e799[_0x3ee4('0x1df')]['yellow']?-0x1:0x0};}),_0x58c694=_0x14e799[_0x3ee4('0x200')](_0x4908d5[_0x3ee4('0xc3')][_0x3ee4('0x7f')]);_0x58c694==_0x14e799[_0x3ee4('0x1df')][_0x3ee4('0x201')]||_0x58c694==_0x14e799[_0x3ee4('0x1df')][_0x3ee4('0x202')]?_0x17b699(_0x14e799[_0x3ee4('0x16')][_0x3ee4('0x203')],_0x1e6ef7[_0x3ee4('0x1fd')]):(_0x14e799[_0x3ee4('0x3c')][_0x3ee4('0x204')]('up',_0xd32879[_0x3ee4('0x205')],_0xd32879['system'][_0x3ee4('0x1f4')],_0x14e799[_0x3ee4('0x27')],_0xd32879['system'][_0x3ee4('0x79')],0x1),_0x14e799[_0x3ee4('0x1c8')][_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]]=0x0,_0x17b699(null,_0x3ba1ca,_0xd32879[_0x3ee4('0x1f2')]['auth_method'],_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fc')],_0xd32879['system'][_0x3ee4('0x206')],0x1==_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fb')]?_0x14e799['certif_dir']+'/'+_0xd32879[_0x3ee4('0x1f2')]['syst_id']+_0x3ee4('0x1eb'):null,{'is_encrypted':_0xd32879[_0x3ee4('0x1f2')]['is_encrypted'],'is_direct':_0xd32879['system'][_0x3ee4('0x207')]},_0xd32879));}else _0x17b699(_0x14e799[_0x3ee4('0x16')]['ws_not_reachable'],_0x439c8a&&_0x439c8a['address']+'\x20'+_0x439c8a[_0x3ee4('0x1c3')]);});},function(_0x439c8a,_0x4908d5,_0x3ba1ca,_0x58c694,_0x2b786b,_0x32c00b,_0x5a26fe,_0x5a8251){_0x14e799['logger']['log'](_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0x22')],'{'+_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]+_0x3ee4('0x208')+_0x439c8a[_0x3ee4('0x4d')](_0xd32879=>_0xd32879['ip_internal']+'|'+_0xd32879['hostname']+'/'+_0xd32879[_0x3ee4('0x64')]+'/'+_0xd32879['status'])['join'](',\x20'));var _0x5b24bd=[];_0x439c8a&&0x0!=_0x439c8a[_0x3ee4('0x6a')](_0xd32879=>0x1==_0xd32879['status']&&_0xd32879[_0x3ee4('0x8d')][_0x3ee4('0x70')](_0x3ee4('0x209'))<0x0&&_0xd32879['features'][_0x3ee4('0x70')]('ENQUE')<0x0)['length']?_0x1e6ef7[_0x3ee4('0xf9')](_0x439c8a['filter'](_0xd32879=>0x1==_0xd32879[_0x3ee4('0x65')]&&_0xd32879['features'][_0x3ee4('0x70')](_0x3ee4('0x209'))<0x0&&_0xd32879[_0x3ee4('0x8d')][_0x3ee4('0x70')]('ENQUE')<0x0),function(_0x1e6ef7,_0x17b699,_0x5a26fe){const _0x5a8251=_0x32c00b['is_encrypted']?{'protocol':'https','port_suffix':'14'}:{'protocol':'http','port_suffix':'13'},_0x54d697=_0x5a8251[_0x3ee4('0x1f7')]+_0x3ee4('0x1c1')+(_0x1e6ef7[_0x3ee4('0x91')]||_0x1e6ef7['hostname'])+':5'+_0x1e6ef7[_0x3ee4('0x64')]+_0x5a8251[_0x3ee4('0x1f8')]+'/';_0x14e799[_0x3ee4('0x1fa')](_0x54d697,{'method':_0x4908d5,'options':[{'user':_0x3ba1ca,'pwd':_0x58c694},{'pfx':_0x2b786b}]},null,function(_0x4908d5,_0x3ba1ca){if(_0x4908d5)_0x14e799[_0x3ee4('0x3e')]['log'](_0x14e799['logger'][_0x3ee4('0x1f')],'{'+_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]+_0x3ee4('0x20a')+_0x1e6ef7[_0x3ee4('0x90')]+'/'+_0x1e6ef7['instancenr']+':',_0x4908d5),_0x439c8a[_0x17b699][_0x3ee4('0x65')]=-0x1,_0x439c8a[_0x17b699]=Object[_0x3ee4('0x4b')](_0x439c8a[_0x17b699],{'error':_0x4908d5,'occur_date':new Date()}),_0x5a26fe();else{var _0x58c694=_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fe')][_0x3ee4('0x1ff')](_0xd32879=>_0xd32879[_0x3ee4('0x64')]==_0x1e6ef7[_0x3ee4('0x64')]);_0x5b24bd[_0x3ee4('0x72')]({'c':_0x3ba1ca[_0x3ee4('0x1fd')],'f':_0x1e6ef7[_0x3ee4('0x8d')],'n':_0x1e6ef7[_0x3ee4('0x64')],'h':_0x1e6ef7['hostname'],'i':_0x58c694&&_0x58c694&&_0x58c694[_0x3ee4('0x91')]}),_0x5a26fe();}});},function(){_0xd32879[_0x3ee4('0x1f2')]['instances'][_0x3ee4('0x62')]((_0x1e6ef7,_0x17b699)=>{_0x439c8a[_0x3ee4('0x62')](_0x14e799=>{_0x1e6ef7&&_0x1e6ef7[_0x3ee4('0x64')]==_0x14e799[_0x3ee4('0x64')]&&(_0xd32879[_0x3ee4('0x1f2')]['instances'][_0x17b699]=Object[_0x3ee4('0x4b')](_0x1e6ef7,_0x14e799),void 0x0==_0x14e799['error']&&-0x1!=_0x14e799[_0x3ee4('0x65')]&&delete _0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fe')][_0x17b699][_0x3ee4('0x1c')]);_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fe')][_0x3ee4('0x4d')](_0xd32879=>_0xd32879&&_0xd32879[_0x3ee4('0x64')])[_0x3ee4('0x70')](_0x14e799[_0x3ee4('0x64')])<0x0&&_0xd32879['system'][_0x3ee4('0x1fe')][_0x3ee4('0x72')](_0x14e799);_0x1e6ef7&&_0x439c8a[_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x64')])['indexOf'](_0x1e6ef7[_0x3ee4('0x64')])<0x0&&(_0xd32879['system'][_0x3ee4('0x1fe')][_0x17b699]['status']=0x0,delete _0xd32879['system'][_0x3ee4('0x1fe')][_0x17b699]['error']);});}),_0x14e799[_0x3ee4('0x3c')][_0x3ee4('0x1cd')]('up',_0xd32879[_0x3ee4('0x205')],_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')],_0x14e799[_0x3ee4('0x27')],_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x79')],_0xd32879[_0x3ee4('0x1f2')]['instances']),_0x1e6ef7[_0x3ee4('0x6b')](_0x5b24bd,(_0xd32879,_0x1e6ef7)=>{_0x17b699(_0xd32879,_0x439c8a,_0x1e6ef7);},_0x1e6ef7=>{_0x1e6ef7&&_0x14e799['logger']['log'](_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0x1f')],'{'+_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]+_0x3ee4('0x20b'),_0x1e6ef7);_0x14e799[_0x3ee4('0x3c')]['pushInstance'](_0x3ee4('0x20c'),_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]);_0x5a8251(_0x1e6ef7,_0x439c8a);});}):(_0x14e799[_0x3ee4('0x3c')][_0x3ee4('0x20d')]('scale',_0x5a26fe[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]),_0x5a8251(_0x14e799[_0x3ee4('0x16')][_0x3ee4('0x20e')]));}],function(_0x1e6ef7,_0x17b699){if(_0x1e6ef7){switch(_0x1e6ef7){case _0x14e799['_errors']['conn_failed']:_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0xd32879['system']['syst_id']+'}:',_0x14e799[_0x3ee4('0x16')]['conn_failed']),_0x14e799[_0x3ee4('0x210')](_0x17b699,_0xd32879);break;case _0x14e799['_errors'][_0x3ee4('0x211')]:_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]+'}:',_0x14e799['_errors']['no_system_conn']);break;case _0x14e799['_errors'][_0x3ee4('0x20e')]:_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]+'}:',_0x14e799['_errors'][_0x3ee4('0x20e')],_0x17b699),_0x14e799['deletePrometheus'](_0x3ee4('0x20c'),_0xd32879[_0x3ee4('0x205')],_0xd32879['system'][_0x3ee4('0x1f4')],_0xd32879[_0x3ee4('0x1f2')]['sid'],_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fe')]['map'](_0xd32879=>({'instancenr':_0xd32879['instancenr'],'status':0x0})));break;case _0x14e799[_0x3ee4('0x16')][_0x3ee4('0x212')]:_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]+'}:',_0x14e799[_0x3ee4('0x16')]['ws_not_reachable'],_0x17b699);break;default:_0x3ee4('0x213')==_0x1e6ef7['errno']?!0x0===_0x17b699&&_0x14e799[_0x3ee4('0x214')](_0x3ee4('0x20c'),_0xd32879[_0x3ee4('0x205')],_0xd32879['system'][_0x3ee4('0x1f4')],_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x79')],_0xd32879[_0x3ee4('0x1f2')]['instances'][_0x3ee4('0x4d')](_0xd32879=>({'instancenr':_0xd32879['instancenr'],'status':0x0}))):_0x14e799[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x14e799['logger'][_0x3ee4('0x1f')],'[FAILED]\x20{'+_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]+'}:',_0x1e6ef7,_0x17b699);}_0x439c8a(_0x1e6ef7['code']||_0x1e6ef7['errno']||_0x1e6ef7);}else _0x439c8a(null,{'sending_sslcertifs':_0x14e799[_0x3ee4('0x29')][_0xd32879[_0x3ee4('0x1f2')]['syst_id']],'instances':_0x17b699,'syst_id':_0xd32879['system'][_0x3ee4('0x1f4')]});});},'collect':function(){var _0xd32879=this;_0xd32879['queue'][_0x3ee4('0xbc')](_0xd32879[_0x3ee4('0x26')][_0x3ee4('0x215')],_0xd32879[_0x3ee4('0x28')],function(_0x1e6ef7,_0x17b699){_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x217')]&&_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x1f2')]?_0xd32879[_0x3ee4('0x218')](_0x1e6ef7[_0x3ee4('0x216')]['system'][_0x3ee4('0x1f4')],_0x1e6ef7[_0x3ee4('0x216')]['keys_buff'],_0x439c8a=>{_0x439c8a?_0x17b699('missing\x20pfx'):_0xd32879[_0x3ee4('0x219')](_0x1e6ef7[_0x3ee4('0x216')],(_0x17b699,_0x439c8a,_0x14e799)=>{_0x17b699['f'][_0x3ee4('0x70')](_0x1e6ef7['data']['func'][_0x3ee4('0x21a')])>=0x0||_0x3ee4('0xaa')==_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x217')][_0x3ee4('0x21a')]?(_0xd32879['logger']['log'](_0xd32879[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x1f1')+_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x1f2')]['syst_id']+_0x3ee4('0x21b')+_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x217')][_0x3ee4('0x84')]+_0x3ee4('0x21c')),sapcontrol_operations$1[_0x1e6ef7['data'][_0x3ee4('0x217')][_0x3ee4('0x84')]][_0x3ee4('0x113')](_0x17b699['c'],{},(_0x439c8a,_0x4908d5)=>{_0x439c8a&&_0xd32879[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0xd32879['logger']['LOG_LEVEL_ERROR'],_0x3ee4('0x20f')+_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]+_0x3ee4('0x21b')+_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x217')]['name']+':\x20exec\x20error:'+_0x439c8a['body']?_0x439c8a[_0x3ee4('0x7b')][_0x3ee4('0x82')](/<faultstring>(.*?)<\/faultstring>/)[0x1]:_0x439c8a);sapctrl_process_func$1['call'](_0xd32879,_0x439c8a,_0x4908d5,_0x1e6ef7['data'][_0x3ee4('0x217')][_0x3ee4('0x84')],{'_id':_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x1f2')][_0x3ee4('0x1f4')],'sid':_0x1e6ef7['data'][_0x3ee4('0x1f2')][_0x3ee4('0x79')]},{'ip_internal':_0x17b699['i'],'hostname':_0x17b699['h'],'sn':_0x17b699['n'],'features':_0x17b699['f']['join']('|')},_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x217')][_0x3ee4('0x21a')],_0x1e6ef7['data'][_0x3ee4('0x205')],_0x1e6ef7['data'][_0x3ee4('0x21d')],_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x21e')],_0x14e799);})):_0x14e799();},_0x17b699);}):(_0xd32879[_0x3ee4('0x3e')]['log'](_0xd32879['logger'][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0x1e6ef7[_0x3ee4('0x216')]['system'][_0x3ee4('0x1f4')]+'}\x20collect_exec:\x20no\x20data\x20provided'),_0x17b699());});},'checkconnection':function(){function _0xd32879(_0x14e799,_0x4908d5,_0x3ba1ca,_0x58c694,_0x2b786b){if(_0x4908d5<=0x0)_0x2b786b(_0x3ee4('0x21f'));else if(0x0==_0x3ba1ca[_0x3ee4('0x43')])_0x17b699[_0x3ee4('0x220')][_0x3ee4('0x221')](_0x14e799,(_0x1e6ef7,_0x17b699)=>{_0x17b699&&_0x17b699['length']>0x0?_0xd32879(_0x14e799,_0x4908d5-0x1,_0x17b699,_0x58c694,_0x2b786b):_0x2b786b(_0x3ee4('0x21f'));});else{let _0x32c00b=[];_0x3ba1ca[_0x3ee4('0x62')](_0xd32879=>{_0x58c694[_0x3ee4('0x62')](_0x1e6ef7=>{_0x32c00b[_0x3ee4('0x72')]({'ip':_0xd32879[_0x3ee4('0x91')],'nr':_0x1e6ef7[_0x3ee4('0x64')],'hostname':_0x1e6ef7[_0x3ee4('0x90')],'status':!0x1});});}),_0x17b699['logger'][_0x3ee4('0xbb')](_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x222'),_0x32c00b),_0x1e6ef7[_0x3ee4('0xf9')](_0x32c00b,(_0xd32879,_0x1e6ef7,_0x439c8a)=>{_0x17b699[_0x3ee4('0x223')](_0xd32879['ip'],_0xd32879['nr'],_0xd32879[_0x3ee4('0x90')],_0xd32879=>{_0x32c00b[_0x1e6ef7][_0x3ee4('0x65')]=_0xd32879;_0x439c8a();});},_0x1e6ef7=>{_0x1e6ef7&&_0x17b699['logger'][_0x3ee4('0xbb')](_0x17b699['logger'][_0x3ee4('0x1f')],_0x3ee4('0x224'),_0x1e6ef7);_0x17b699[_0x3ee4('0x3e')]['log'](_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x225'),_0x32c00b[_0x3ee4('0x6a')](_0xd32879=>_0xd32879['status']));let _0x5a26fe=_0x58c694['map'](_0xd32879=>{let _0x1e6ef7=_0x32c00b[_0x3ee4('0x1ff')](_0x1e6ef7=>_0x1e6ef7[_0x3ee4('0x65')]&&_0x1e6ef7['hostname']==_0xd32879[_0x3ee4('0x90')]&&_0x1e6ef7['nr']==_0xd32879[_0x3ee4('0x64')]);return Object[_0x3ee4('0x4b')](_0xd32879,{'ip_internal':_0x1e6ef7&&_0x1e6ef7['ip']});})['filter'](_0xd32879=>_0xd32879[_0x3ee4('0x91')]);0x0==_0x5a26fe[_0x3ee4('0x43')]||_0x5a26fe[_0x3ee4('0x43')]<_0x58c694[_0x3ee4('0x43')]?_0x17b699[_0x3ee4('0x220')][_0x3ee4('0x221')](_0x14e799,(_0x1e6ef7,_0x17b699)=>{if(_0x17b699&&0x0!=_0x17b699['length']){let _0x1e6ef7=_0x17b699[_0x3ee4('0x6a')](_0xd32879=>!_0x3ba1ca['includes'](_0xd32879['ip_internal']));_0x1e6ef7[_0x3ee4('0x43')]>0x0?_0xd32879(_0x14e799,_0x4908d5-0x1,_0x1e6ef7,_0x58c694,_0x2b786b):_0x2b786b('System\x20details\x20not\x20found');}else _0x2b786b(_0x3ee4('0x21f'));}):_0x4908d5==_0x439c8a?_0x2b786b(null,{'instances':_0x5a26fe}):_0x2b786b(null,{'instances':_0x5a26fe,'new_ec2':_0x3ba1ca});});}}var _0x17b699=this;let _0x439c8a=0x2;_0x17b699[_0x3ee4('0x25')][_0x3ee4('0xbc')](_0x17b699[_0x3ee4('0x26')]['discover_exec'],_0x17b699['concurrency_nb'],function(_0x1e6ef7,_0x14e799){void 0x0!=_0x1e6ef7[_0x3ee4('0x216')]['ip']&&void 0x0!=_0x1e6ef7[_0x3ee4('0x216')]['nr']&&void 0x0!=_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x90')]&&void 0x0!=_0x1e6ef7['data'][_0x3ee4('0x226')]?(process[_0x3ee4('0xc9')][_0x3ee4('0x1f0')]='0',_0x17b699['get_sap_instances_nr'](_0x1e6ef7['data']['ip'],_0x1e6ef7[_0x3ee4('0x216')]['nr'],(_0x4908d5,_0x3ba1ca)=>{if(_0x4908d5)_0x14e799(_0x4908d5);else try{let _0x4908d5=_0x58c694[_0x3ee4('0x227')](__dirname+_0x3ee4('0x228'))['toString']();_0x17b699[_0x3ee4('0x3e')]['log'](_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0x22')],'find_sap_instances\x20params:\x20',_0x4908d5,_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x226')],_0x3ba1ca),_0xd32879(_0x4908d5,_0x439c8a,_0x1e6ef7[_0x3ee4('0x216')][_0x3ee4('0x226')],_0x3ba1ca,_0x14e799);}catch(_0x5a955f){_0x17b699['logger']['log'](_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x229'),_0x5a955f),_0x14e799('Unexcepted\x20error');}})):_0x14e799();}),_0x17b699['queue']['process'](_0x17b699[_0x3ee4('0x26')][_0x3ee4('0x22a')],_0x17b699[_0x3ee4('0x28')],function(_0xd32879,_0x439c8a){if(void 0x0!=_0xd32879[_0x3ee4('0x216')][_0x3ee4('0x21a')]&&_0xd32879[_0x3ee4('0x216')]['system'])switch(_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x17b699['logger'][_0x3ee4('0x22')],_0x3ee4('0x1f1')+_0xd32879[_0x3ee4('0x216')]['system'][_0x3ee4('0x1f4')]+_0x3ee4('0x22b')),_0xd32879[_0x3ee4('0x216')][_0x3ee4('0x21a')]){case 0x0:_0x17b699[_0x3ee4('0x218')](_0xd32879[_0x3ee4('0x216')]['system'][_0x3ee4('0x1f4')],_0xd32879[_0x3ee4('0x216')][_0x3ee4('0x1f5')],_0x14e799=>{if(_0x14e799)_0x439c8a(_0x3ee4('0x22c'));else{_0x17b699[_0x3ee4('0x219')](_0xd32879[_0x3ee4('0x216')],(_0xd32879,_0x439c8a,_0x14e799)=>{const _0x4908d5=_0x439c8a[_0x3ee4('0x22d')](_0x1e6ef7=>_0x1e6ef7[_0x3ee4('0x64')]==_0xd32879['n']);_0x1e6ef7[_0x3ee4('0x22e')]({'check':_0x1e6ef7=>{_0xd32879['c'][_0x3ee4('0x22f')]({'function':_0x3ee4('0x230')},function(_0x14e799){_0x14e799&&(_0x17b699[_0x3ee4('0x3e')]['log'](_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0x1f')],'checkconn_exec\x20authorization\x20error\x20for\x20SAP\x20instance:'+_0xd32879['h']+'/'+_0xd32879['i']+'/'+_0xd32879['n']),_0x439c8a[_0x4908d5]['status']=-0x1,_0x439c8a[_0x4908d5]=Object[_0x3ee4('0x4b')](_0x439c8a[_0x4908d5],{'error':_0x14e799[_0x3ee4('0x7b')]?_0x14e799[_0x3ee4('0x7b')]['match'](/<faultstring>(.*?)<\/faultstring>/)[0x1]:_0x14e799,'occur_date':new Date()})),_0x1e6ef7();},{'timeout':0x2710});},'ip':_0x14e799=>{_0x1e6ef7['waterfall']([_0x1e6ef7=>{_0xd32879['c']['GetAlertTree']({},function(_0xd32879,_0x17b699){if(!_0xd32879&&_0x17b699&&_0x17b699[_0x3ee4('0x7e')]){const _0xd32879=_0x17b699[_0x3ee4('0x7e')][_0x3ee4('0x7f')][_0x3ee4('0x6a')](_0xd32879=>_0x17b699[_0x3ee4('0x7e')][_0x3ee4('0x7f')][_0xd32879[_0x3ee4('0x80')]]&&_0x3ee4('0xe7')==_0x17b699[_0x3ee4('0x7e')][_0x3ee4('0x7f')][_0xd32879[_0x3ee4('0x80')]]['name']['trim']()&&'IP\x20Address'==_0xd32879[_0x3ee4('0x84')][_0x3ee4('0x231')]());_0xd32879&&_0xd32879[0x0]&&_0xd32879[0x0][_0x3ee4('0x81')]&&(_0x439c8a[_0x4908d5][_0x3ee4('0x91')]=_0xd32879[0x0][_0x3ee4('0x81')],_0x1e6ef7(null,_0xd32879[0x0][_0x3ee4('0x81')]));}else _0x1e6ef7(_0x3ee4('0x232')+_0xd32879);});},(_0xd32879,_0x1e6ef7)=>{_0x17b699[_0x3ee4('0x220')][_0x3ee4('0x233')](_0xd32879,_0xd32879=>_0x1e6ef7(null,_0xd32879));},(_0xd32879,_0x1e6ef7)=>{_0x439c8a[_0x4908d5][_0x3ee4('0x234')]=_0xd32879[_0x3ee4('0x235')];_0x439c8a[_0x4908d5][_0x3ee4('0x236')]=_0xd32879[_0x3ee4('0x237')];_0x1e6ef7();}],_0x1e6ef7=>{_0x1e6ef7&&_0x17b699[_0x3ee4('0x3e')]['log'](_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x238')+_0xd32879['h']+'/'+_0xd32879['i']+'/'+_0xd32879['n']+':',_0x1e6ef7);_0x14e799();});}},function(){_0x14e799();});},_0x439c8a);}});break;case 0x1:default:_0x439c8a();}else _0x17b699[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0x1f')],'[FAILED]\x20{'+_0xd32879[_0x3ee4('0x216')][_0x3ee4('0x1f2')]['syst_id']+'}\x20checkconn_exec:\x20no\x20data\x20provided'),_0x439c8a();});},'scale':function(){function _0x17b699(_0xd32879,_0x1e6ef7,_0x439c8a,_0x14e799,_0x4908d5){_0x1e6ef7>0x0?setTimeout(function(){_0xd32879['GetSystemInstanceList']({},function(_0x3ba1ca,_0x58c694){if(_0x3ba1ca)_0x17b699(_0xd32879,_0x1e6ef7-0x1,_0x439c8a,_0x14e799,_0x4908d5);else{var _0x2b786b=_0x58c694[_0x3ee4('0xc3')][_0x3ee4('0x7f')]&&_0x58c694[_0x3ee4('0xc3')][_0x3ee4('0x7f')][_0x3ee4('0x6a')](_0xd32879=>_0xd32879['instanceNr']==_0x14e799);_0x2b786b&&_0x2b786b[0x0]&&'SAPControl-GRAY'==_0x2b786b[0x0][_0x3ee4('0x1de')]?_0x4908d5():_0x17b699(_0xd32879,_0x1e6ef7-0x1,_0x439c8a,_0x14e799,_0x4908d5);}});},_0x439c8a):_0x4908d5(_0x55c911);}function _0x439c8a(_0xd32879,_0x1e6ef7,_0x17b699,_0x14e799,_0x4908d5){_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x239'),_0x1e6ef7,_0x17b699,_0x14e799),_0x1e6ef7>0x0?setTimeout(function(){_0xd32879[_0x3ee4('0xc2')]({},function(_0x3ba1ca,_0x58c694){if(_0x3ba1ca)_0x439c8a(_0xd32879,_0x1e6ef7-0x1,_0x17b699,_0x14e799,_0x4908d5);else{var _0x2b786b=_0x58c694[_0x3ee4('0xc3')]['item']&&_0x58c694[_0x3ee4('0xc3')][_0x3ee4('0x7f')][_0x3ee4('0x6a')](_0xd32879=>(''+_0xd32879[_0x3ee4('0x1dc')])[_0x3ee4('0x1dd')](0x2,'0')==_0x14e799+'');_0x2b786b&&_0x2b786b[0x0]&&_0x2b786b[0x0]['dispstatus']==_0x5a8251['_sap_statuses'][_0x3ee4('0x1e0')]?_0x4908d5():_0x439c8a(_0xd32879,_0x1e6ef7-0x1,_0x17b699,_0x14e799,_0x4908d5);}});},_0x17b699):_0x4908d5(_0x49cbed);}function _0x14e799(_0xd32879,_0x1e6ef7,_0x17b699,_0x439c8a,_0x4908d5){_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x23a'),_0x1e6ef7,_0x17b699,_0x439c8a),_0x1e6ef7>0x0?setTimeout(function(){_0xd32879[_0x3ee4('0x23b')](_0x439c8a,function(_0x3ba1ca){void 0x0!=_0x3ba1ca&&null!=_0x3ba1ca?_0x3ba1ca?_0x4908d5():_0x14e799(_0xd32879,_0x1e6ef7-0x1,_0x17b699,_0x439c8a,_0x4908d5):_0x4908d5(_0x54d697);});},_0x17b699):_0x4908d5(_0x5b24bd);}function _0x4908d5(_0xd32879,_0x1e6ef7,_0x17b699,_0x439c8a,_0x14e799){_0x1e6ef7>0x0?setTimeout(function(){_0xd32879[_0x3ee4('0x23c')](_0x439c8a,function(_0x3ba1ca){void 0x0!=_0x3ba1ca&&null!=_0x3ba1ca?_0x3ba1ca?_0x14e799():_0x4908d5(_0xd32879,_0x1e6ef7-0x1,_0x17b699,_0x439c8a,_0x14e799):_0x14e799(_0x11386e);});},_0x17b699):_0x14e799(_0xdfee82);}function _0x3ba1ca(_0xd32879,_0x1e6ef7,_0x17b699,_0x14e799,_0x4908d5=0x1){_0x4908d5>0x0?(_0x5a8251[_0x3ee4('0x23d')][_0x1e6ef7[_0x3ee4('0x1f4')]][_0x14e799][_0x3ee4('0x65')]=0x3,sapcontrol_operations$1[_0x3ee4('0xeb')]['call'](_0xd32879,{},_0x58c694=>{if(void 0x0!==_0x58c694&&null!==_0x58c694)if(_0x58c694[_0x3ee4('0x7b')]){const _0x439c8a=_0x58c694['body'][_0x3ee4('0x82')](/<faultstring>(.*?)<\/faultstring>/)&&_0x58c694[_0x3ee4('0x7b')][_0x3ee4('0x82')](/<faultstring>(.*?)<\/faultstring>/)[0x1];_0x3ee4('0x23e')==_0x439c8a?(_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x20')],_0x3ee4('0x23f')+_0x1e6ef7[_0x3ee4('0x1f4')]+_0x3ee4('0x240')+_0x4908d5+_0x3ee4('0x241')+_0x1e6ef7[_0x3ee4('0x1f4')]+'/'+_0x17b699[_0x3ee4('0x90')]+'/'+_0x17b699[_0x3ee4('0x91')]+'/'+_0x17b699[_0x3ee4('0x64')]),_0x5a8251[_0x3ee4('0x23d')][_0x1e6ef7[_0x3ee4('0x1f4')]][_0x14e799][_0x3ee4('0x65')]=0x1,_0x5a8251['save_resume_step'](_0x1e6ef7['syst_id'],_0x14e799,-0x1)):(_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0x1e6ef7[_0x3ee4('0x1f4')]+_0x3ee4('0x242')+_0x4908d5+')\x20sap\x20instance\x20error:'+_0x439c8a),_0x5a8251['updated_system_instances'][_0x1e6ef7[_0x3ee4('0x1f4')]][_0x14e799]['status']=-0x1,_0x5a8251[_0x3ee4('0x23d')][_0x1e6ef7[_0x3ee4('0x1f4')]][_0x14e799][_0x3ee4('0x1c')]={'occur_date':Date[_0x3ee4('0x243')](),'msg':_0x250914[_0x49ff79]+':'+_0x439c8a},_0x3ba1ca(_0xd32879,_0x1e6ef7,_0x17b699,_0x14e799,_0x4908d5-0x1));}else _0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')]['LOG_LEVEL_ERROR'],_0x3ee4('0x20f')+_0x1e6ef7[_0x3ee4('0x1f4')]+'}\x20(restart\x20-'+_0x4908d5+')\x20sap\x20instance\x20error:',_0x58c694),_0x5a8251[_0x3ee4('0x23d')][_0x1e6ef7[_0x3ee4('0x1f4')]][_0x14e799][_0x3ee4('0x65')]=-0x1,_0x5a8251[_0x3ee4('0x23d')][_0x1e6ef7[_0x3ee4('0x1f4')]][_0x14e799][_0x3ee4('0x1c')]={'occur_date':Date['now'](),'msg':_0x250914[_0x49ff79]},_0x3ba1ca(_0xd32879,_0x1e6ef7,_0x17b699,_0x14e799,_0x4908d5-0x1);else{const _0x58c694=Math[_0x3ee4('0x244')](0xf);_0x5a8251['logger']['log'](_0x5a8251['logger'][_0x3ee4('0x22')],_0x3ee4('0x1f1')+_0x1e6ef7[_0x3ee4('0x1f4')]+_0x3ee4('0x242')+_0x4908d5+_0x3ee4('0x245')+_0x17b699[_0x3ee4('0x90')]+'/'+_0x17b699[_0x3ee4('0x91')]+'/'+_0x17b699[_0x3ee4('0x64')]),_0x439c8a(_0xd32879,_0x58c694,0x4e20,_0x17b699[_0x3ee4('0x64')],_0x439c8a=>{_0x439c8a?(_0x5a8251[_0x3ee4('0x23d')][_0x1e6ef7[_0x3ee4('0x1f4')]][_0x14e799]['status']=-0x1,_0x5a8251[_0x3ee4('0x23d')][_0x1e6ef7['syst_id']][_0x14e799][_0x3ee4('0x1c')]={'occur_date':Date[_0x3ee4('0x243')](),'msg':_0x250914[_0x49cbed]},_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x20')],_0x3ee4('0x23f')+_0x1e6ef7[_0x3ee4('0x1f4')]+_0x3ee4('0x240')+_0x4908d5+')\x20partially\x20started\x20(EC2:OK,\x20SAP:NOK):\x20'+_0x1e6ef7['syst_id']+'/'+_0x17b699[_0x3ee4('0x90')]+'/'+_0x17b699[_0x3ee4('0x91')]+'/'+_0x17b699[_0x3ee4('0x64')]+'\x20error:',_0x250914[_0x49cbed]),_0x3ba1ca(_0xd32879,_0x1e6ef7,_0x17b699,_0x14e799,_0x4908d5-0x1)):(_0x5a8251[_0x3ee4('0x23d')][_0x1e6ef7[_0x3ee4('0x1f4')]][_0x14e799][_0x3ee4('0x65')]=0x1,delete _0x5a8251[_0x3ee4('0x23d')][_0x1e6ef7[_0x3ee4('0x1f4')]][_0x14e799][_0x3ee4('0x1c')],_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x20')],_0x3ee4('0x23f')+_0x1e6ef7[_0x3ee4('0x1f4')]+_0x3ee4('0x240')+_0x4908d5+_0x3ee4('0x246')+_0x1e6ef7[_0x3ee4('0x1f4')]+'/'+_0x17b699['hostname']+'/'+_0x17b699[_0x3ee4('0x91')]+'/'+_0x17b699['instancenr']),_0x5a8251['save_resume_step'](_0x1e6ef7[_0x3ee4('0x1f4')],_0x14e799,-0x1));});}})):(_0x5a8251['logger']['log'](_0x5a8251['logger'][_0x3ee4('0x20')],'[COMPLETED]\x20{'+_0x1e6ef7[_0x3ee4('0x1f4')]+_0x3ee4('0x240')+_0x4908d5+_0x3ee4('0x247')+_0x1e6ef7[_0x3ee4('0x1f4')]+'/'+_0x17b699['hostname']+'/'+_0x17b699['ip_internal']+'/'+_0x17b699[_0x3ee4('0x64')]),_0x5a8251[_0x3ee4('0x23d')][_0x1e6ef7['syst_id']][_0x14e799][_0x3ee4('0x65')]=-0x1,_0x5a8251['updated_system_instances'][_0x1e6ef7['syst_id']][_0x14e799]['error']={'occur_date':Date[_0x3ee4('0x243')](),'msg':_0x250914[_0x49cbed]},_0x5a8251[_0x3ee4('0x248')](_0x1e6ef7[_0x3ee4('0x1f4')],_0x14e799,-0x1));}function _0x58c694(_0xd32879,_0x439c8a,_0x14e799=!0x1,_0x3ba1ca=-0x1){process[_0x3ee4('0xc9')][_0x3ee4('0x1f0')]='0';var _0x58c694=_0xd32879['alert'],_0x2b786b=_0xd32879[_0x3ee4('0x1f2')],_0x32c00b=_0x58c694['labels']['instance'],_0x5a26fe=_0x58c694[_0x3ee4('0x249')][_0x3ee4('0x205')],_0x5b24bd=_0x2b786b[_0x3ee4('0x1fe')][_0x3ee4('0x1ff')](_0xd32879=>_0xd32879[_0x3ee4('0x64')]==_0x58c694['labels']['sn']);const _0x54d697=_0x14e799?'<-':'';void 0x0!=_0x5a8251['updated_system_instances'][_0x32c00b]&&0x0!=_0x5a8251[_0x3ee4('0x23d')][_0x32c00b][_0x3ee4('0x43')]||(_0x5a8251['updated_system_instances'][_0x32c00b]=[..._0x2b786b[_0x3ee4('0x1fe')]]),_0x2b786b&&_0x5b24bd?(_0x5a8251['logger']['log'](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x21')],_0x3ee4('0x1f1')+_0x2b786b[_0x3ee4('0x1f4')]+'}\x20(stop'+_0x54d697+')\x20requested\x20for\x20instance\x20:'+_0x5b24bd[_0x3ee4('0x90')]+'/'+_0x5b24bd['instancenr']+'/'+_0x5b24bd['status']+_0x3ee4('0x24a')+_0x58c694[_0x3ee4('0x249')][_0x3ee4('0x24b')]+'\x20'+_0x58c694[_0x3ee4('0x249')]['sn']+_0x3ee4('0x1bc')+_0x58c694[_0x3ee4('0x249')][_0x3ee4('0x91')]+'\x20'+_0x58c694['labels'][_0x3ee4('0x90')]),_0x1e6ef7['waterfall']([function(_0x1e6ef7){_0x5a8251['update_sending_ssl'](_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')],_0xd32879[_0x3ee4('0x1f5')],_0x1e6ef7);},function(_0x1e6ef7){const _0x17b699={'protocol':'https','port_suffix':'14'},_0x439c8a=_0x17b699[_0x3ee4('0x1f7')]+'://'+(_0x5b24bd[_0x3ee4('0x91')]||_0x5b24bd['hostname'])+':5'+_0x5b24bd[_0x3ee4('0x64')]+_0x17b699['port_suffix']+'/';_0x5a8251['pushgtw_cli'][_0x3ee4('0x1f9')](_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]),_0x5a8251[_0x3ee4('0x1fa')](_0x439c8a,{'method':0x1,'options':[{},{'pfx':_0x5a8251['certif_dir']+'/'+_0xd32879[_0x3ee4('0x1f2')]['syst_id']+'.pfx'}]},_0xd32879,_0x1e6ef7);},function(_0x1e6ef7,_0x17b699){_0x1e6ef7&&_0x1e6ef7[_0x3ee4('0x1fd')]?_0x1e6ef7[_0x3ee4('0x1fd')]['GetSystemInstanceList']({},function(_0x439c8a,_0x4908d5){if(!_0x439c8a&&_0x4908d5&&_0x4908d5[_0x3ee4('0xc3')]&&_0x4908d5[_0x3ee4('0xc3')][_0x3ee4('0x7f')]){var _0x32c00b=_0x5a8251[_0x3ee4('0x200')](_0x4908d5['instance'][_0x3ee4('0x7f')]);if(_0x32c00b==_0x5a8251[_0x3ee4('0x1df')][_0x3ee4('0x201')]||_0x32c00b==_0x5a8251[_0x3ee4('0x1df')][_0x3ee4('0x202')])_0x17b699(_0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x203')],_0x1e6ef7[_0x3ee4('0x1fd')]);else{_0x5a8251[_0x3ee4('0x3c')][_0x3ee4('0x204')]('up',_0x5a26fe,_0xd32879[_0x3ee4('0x1f2')]['syst_id'],_0x5a8251[_0x3ee4('0x27')],_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x79')],0x1),_0x5a8251['conn_retries'][_0xd32879[_0x3ee4('0x1f2')]['syst_id']]=0x0;var _0x5b24bd={},_0x259c1d=_0x4908d5[_0x3ee4('0xc3')][_0x3ee4('0x7f')]['map'](_0xd32879=>({'hostname':_0xd32879[_0x3ee4('0x90')],'instancenr':(''+_0xd32879[_0x3ee4('0x1dc')])['padStart'](0x2,'0'),'features':_0xd32879[_0x3ee4('0x8d')][_0x3ee4('0x6f')]('|'),'status':_0xd32879['dispstatus']==_0x5a8251[_0x3ee4('0x1df')]['green']?0x1:_0xd32879[_0x3ee4('0x1de')]==_0x5a8251['_sap_statuses']['yellow']?-0x1:0x0}));_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x22')],'[PENDING]\x20{'+_0x2b786b['syst_id']+_0x3ee4('0x24c')+_0x54d697+_0x3ee4('0x24d')+_0x259c1d[_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x90')]+'/'+_0xd32879[_0x3ee4('0x64')]+'/'+_0xd32879[_0x3ee4('0x65')])['join'](',\x20')),_0x259c1d[_0x3ee4('0x6a')](_0xd32879=>0x1==_0xd32879[_0x3ee4('0x65')])[_0x3ee4('0x62')](_0xd32879=>{_0x5b24bd[_0xd32879['instancenr']]=_0xd32879[_0x3ee4('0x8d')]['join']('/');}),Object[_0x3ee4('0x24e')](_0x5b24bd)['filter'](_0xd32879=>_0xd32879==_0x5b24bd[_0x58c694[_0x3ee4('0x249')]['sn']])[_0x3ee4('0x43')]>_0x5a8251[_0x3ee4('0x2b')]||_0x14e799&&_0x3ba1ca>=_0x5a8251[_0x3ee4('0x24f')][_0x3ee4('0x250')][_0x3ee4('0x251')]?(_0x1e6ef7[_0x3ee4('0x252')]=Object[_0x3ee4('0x4b')](_0x1e6ef7[_0x3ee4('0x252')],{'instances':_0x259c1d}),_0x17b699(null,_0x1e6ef7)):_0x17b699(_0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x253')]);}}else _0x17b699(_0x5a8251['_errors'][_0x3ee4('0x212')],_0x439c8a&&_0x439c8a[_0x3ee4('0x254')]+'\x20'+_0x439c8a[_0x3ee4('0x1c3')]);}):(_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x1f1')+_0x2b786b[_0x3ee4('0x1f4')]+_0x3ee4('0x24c')+_0x54d697+_0x3ee4('0x255')+_0x32c00b),async_cb(_0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x1d0')]));},function(_0x439c8a,_0x3ba1ca){if(_0x14e799||0x0==_0x5a8251['updated_system_instances'][_0x32c00b][_0x3ee4('0x6a')](_0xd32879=>0x2==_0xd32879[_0x3ee4('0x65')]&&_0xd32879['instancenr']==_0x58c694[_0x3ee4('0x249')]['sn'])[_0x3ee4('0x43')]){var _0xdfee82=_0x5a8251['updated_system_instances'][_0x32c00b][_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x64')])[_0x3ee4('0x70')](_0x5b24bd['instancenr']);_0xdfee82<0x0?_0xdfee82=_0x5a8251[_0x3ee4('0x23d')][_0x32c00b]['push'](Object[_0x3ee4('0x4b')]({},_0x5b24bd,{'status':0x2,'resume_on_step':_0x5a8251[_0x3ee4('0x24f')][_0x3ee4('0x250')]['begin'],'resume_context':_0xd32879}))-0x1:_0x5a8251['updated_system_instances'][_0x32c00b][_0xdfee82]=Object['assign']({},_0x5a8251[_0x3ee4('0x23d')][_0x32c00b][_0xdfee82],{'status':0x2,'resume_on_step':_0x5a8251['_resume_on_step'][_0x3ee4('0x250')]['begin'],'resume_context':_0xd32879}),_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x21')],_0x3ee4('0x1f1')+_0x2b786b[_0x3ee4('0x1f4')]+_0x3ee4('0x24c')+_0x54d697+')\x20update\x20to\x20transition\x20status:'+_0x5a8251['updated_system_instances'][_0x32c00b][_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x90')]+'/'+_0xd32879[_0x3ee4('0x64')]+'/'+_0xd32879[_0x3ee4('0x65')])[_0x3ee4('0x4e')](',')),_0x3ba1ca();const _0x11386e=_0xd32879['counter'][_0x3ee4('0x1ff')](_0xd32879=>_0xd32879['instancenr']==_0x58c694['labels']['sn']),_0x49ff79=_0x11386e?_0x11386e[_0x3ee4('0x9b')]:0x0;_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251[_0x3ee4('0x3e')]['LOG_LEVEL_MIN'],_0x3ee4('0x1f1')+_0x32c00b+_0x3ee4('0x24c')+_0x54d697+_0x3ee4('0x256')+_0x58c694[_0x3ee4('0x249')][_0x3ee4('0x24b')]+'/'+_0x58c694['labels'][_0x3ee4('0x90')]+'/'+_0x58c694[_0x3ee4('0x249')]['sn']+_0x3ee4('0x257')+parseInt(_0x49ff79)+_0x3ee4('0x258')+_0x5a26fe+')'),_0x1e6ef7[_0x3ee4('0x50')]([function(_0xd32879){_0x14e799&&!_0x5a8251[_0x3ee4('0x259')](_0x32c00b,_0xdfee82,_0x5a8251['_resume_on_step'][_0x3ee4('0x250')]['counter_updated'])||(_0x5a8251['pushgtw_cli'][_0x3ee4('0x25a')](_0x3ee4('0x4f'),_0x3ee4('0x250'),_0x5a26fe,_0x32c00b,_0x58c694[_0x3ee4('0x249')]['sn'],_0x58c694['labels'][_0x3ee4('0x24b')],parseInt(_0x49ff79)+0x1),_0x5a8251[_0x3ee4('0x248')](_0x32c00b,_0xdfee82,_0x5a8251[_0x3ee4('0x24f')][_0x3ee4('0x250')][_0x3ee4('0x25b')])),_0xd32879();},function(_0x1e6ef7){!_0x14e799||_0x5a8251[_0x3ee4('0x259')](_0x32c00b,_0xdfee82,_0x5a8251['_resume_on_step'][_0x3ee4('0x250')][_0x3ee4('0x251')])?(_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251[_0x3ee4('0x3e')]['LOG_LEVEL_INFO'],_0x3ee4('0x1f1')+_0x32c00b+_0x3ee4('0x24c')+_0x54d697+_0x3ee4('0x25c')+_0x58c694[_0x3ee4('0x249')]['ip_internal']+'/'+_0x58c694[_0x3ee4('0x249')][_0x3ee4('0x90')]+'/'+_0x58c694[_0x3ee4('0x249')]['sn']),sapcontrol_operations$1[_0xd32879[_0x3ee4('0x25d')]['name']][_0x3ee4('0x113')](_0x439c8a[_0x3ee4('0x1fd')],{},_0xd32879=>{_0x5a8251[_0x3ee4('0x248')](_0x32c00b,_0xdfee82,_0x5a8251[_0x3ee4('0x24f')][_0x3ee4('0x250')][_0x3ee4('0x251')]);_0xd32879?_0x1e6ef7(_0x21272b):_0x1e6ef7();})):_0x1e6ef7();},function(_0xd32879){const _0x1e6ef7=Math[_0x3ee4('0x244')](0xf);_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251['logger'][_0x3ee4('0x21')],_0x3ee4('0x1f1')+_0x32c00b+_0x3ee4('0x24c')+_0x54d697+_0x3ee4('0x25e')+_0x58c694[_0x3ee4('0x249')][_0x3ee4('0x91')]+'/'+_0x58c694[_0x3ee4('0x249')]['hostname']+'/'+_0x58c694['labels']['sn']),_0x17b699(_0x439c8a[_0x3ee4('0x1fd')],_0x1e6ef7,0x4e20,_0x58c694['labels']['sn'],_0xd32879);},function(_0xd32879){!_0x14e799||_0x5a8251[_0x3ee4('0x259')](_0x32c00b,_0xdfee82,_0x5a8251[_0x3ee4('0x24f')][_0x3ee4('0x250')][_0x3ee4('0x25f')])?(_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x21')],_0x3ee4('0x1f1')+_0x32c00b+'}\x20(stop'+_0x54d697+_0x3ee4('0x260')+_0x58c694['labels'][_0x3ee4('0x91')]),_0x5a8251[_0x3ee4('0x220')]['stopEC2'](_0x58c694[_0x3ee4('0x249')]['ip_internal'],_0xd32879),_0x5a8251[_0x3ee4('0x248')](_0x32c00b,_0xdfee82,_0x5a8251['_resume_on_step'][_0x3ee4('0x250')][_0x3ee4('0x25f')])):_0xd32879();}],function(_0xd32879){if(_0xd32879){switch(_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0x32c00b+_0x3ee4('0x24c')+_0x54d697+'):',_0xd32879),_0xd32879){case _0x21272b:_0x5a8251['updated_system_instances'][_0x32c00b][_0xdfee82]['status']=-0x1,_0x5a8251['updated_system_instances'][_0x32c00b][_0xdfee82]['error']={'occur_date':Date[_0x3ee4('0x243')](),'msg':_0x250914[_0x21272b]};break;case _0x250914[_0x55c911]:_0x5a8251[_0x3ee4('0x23d')][_0x32c00b][_0xdfee82][_0x3ee4('0x65')]=-0x1,_0x5a8251[_0x3ee4('0x23d')][_0x32c00b][_0xdfee82]['error']={'occur_date':Date[_0x3ee4('0x243')](),'msg':_0x250914[_0x55c911]};break;case _0x5a8251[_0x3ee4('0x220')][_0x3ee4('0x16')][_0x3ee4('0x110')]:_0x5a8251[_0x3ee4('0x23d')][_0x32c00b][_0xdfee82][_0x3ee4('0x65')]=-0x1,_0x5a8251[_0x3ee4('0x23d')][_0x32c00b][_0xdfee82][_0x3ee4('0x1c')]={'occur_date':Date[_0x3ee4('0x243')](),'msg':_0x250914[_0x259c1d]};}_0x5a8251['save_resume_step'](_0x32c00b,_0xdfee82,-0x1);}else{const _0xd32879=Math['ceil'](0xf);_0x5a8251[_0x3ee4('0x23d')][_0x32c00b][_0xdfee82]['status']=0x0,_0x4908d5(_0x5a8251['aws_cli'],_0xd32879,0x4e20,_0x58c694[_0x3ee4('0x249')]['ip_internal'],_0xd32879=>{_0xd32879?(_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')]['LOG_LEVEL_MIN'],'[COMPLETED]\x20{'+_0x32c00b+_0x3ee4('0x24c')+_0x54d697+_0x3ee4('0x261')+_0x58c694[_0x3ee4('0x249')][_0x3ee4('0x91')]+'/'+_0x58c694[_0x3ee4('0x249')][_0x3ee4('0x90')]+'/'+_0x58c694[_0x3ee4('0x249')]['sn']+_0x3ee4('0x262'),_0x250914[_0xd32879]),_0x5a8251[_0x3ee4('0x23d')][_0x32c00b][_0xdfee82][_0x3ee4('0x1c')]={'occur_date':Date[_0x3ee4('0x243')](),'msg':_0x250914[_0xd32879]}):(delete _0x5a8251['updated_system_instances'][_0x32c00b][_0xdfee82]['error'],_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x20')],_0x3ee4('0x23f')+_0x32c00b+_0x3ee4('0x24c')+_0x54d697+')\x20fully\x20stopped:'+_0x58c694[_0x3ee4('0x249')][_0x3ee4('0x91')]+'/'+_0x58c694[_0x3ee4('0x249')]['hostname']+'/'+_0x58c694[_0x3ee4('0x249')]['sn']));_0x5a8251['save_resume_step'](_0x32c00b,_0xdfee82,-0x1);});}});}else _0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x21')],_0x3ee4('0x263')+_0x32c00b+_0x3ee4('0x24c')+_0x54d697+_0x3ee4('0x264')),_0x3ba1ca(_0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x265')]);}],function(_0xd32879){if(_0xd32879)switch(_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x1f')],'[CHECKS\x20FAILED]\x20{'+_0x32c00b+_0x3ee4('0x24c')+_0x54d697+_0x3ee4('0x266')+_0x2b786b[_0x3ee4('0x91')]+'/'+_0x2b786b[_0x3ee4('0x79')]+':',_0xd32879),_0xd32879){case _0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x1d0')]:case _0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x203')]:case _0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x212')]:case _0x5a8251[_0x3ee4('0x16')]['min_instances_reached']:case _0x5a8251['_errors']['stop_ongoing']:default:_0x439c8a(_0xd32879);}else _0x439c8a(null,{'sending_sslcertifs':_0x5a8251[_0x3ee4('0x29')][_0x2b786b[_0x3ee4('0x1f4')]+''],'instances':_0x5a8251['updated_system_instances'],'syst_id':_0x2b786b[_0x3ee4('0x1f4')]});})):(_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x263')+_0x32c00b+'}\x20(stop'+_0x54d697+_0x3ee4('0x267')),_0x439c8a('No\x20system\x20provided'));}function _0x2b786b(_0xd32879,_0x17b699,_0x4908d5=!0x1,_0x58c694=-0x1){process[_0x3ee4('0xc9')][_0x3ee4('0x1f0')]='0';var _0x2b786b=_0xd32879[_0x3ee4('0x268')],_0x32c00b=_0xd32879['system'],_0x5a26fe=_0x2b786b['labels'][_0x3ee4('0xc3')],_0x259c1d=_0x2b786b[_0x3ee4('0x249')][_0x3ee4('0x205')];const _0xdfee82=_0x4908d5?'<-':'';void 0x0!=_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe]&&0x0!=_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x3ee4('0x43')]||(_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe]=[..._0x32c00b[_0x3ee4('0x1fe')]]),_0x32c00b?(_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x21')],_0x3ee4('0x1f1')+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x269')+_0xdfee82+_0x3ee4('0x26a')+_0x32c00b[_0x3ee4('0x91')]+'-'+_0x32c00b['sid']),_0x1e6ef7[_0x3ee4('0xf1')]([function(_0x17b699){_0x1e6ef7[_0x3ee4('0x22e')]({'normal_instance_to_start':_0x17b699=>{_0x4908d5?_0x17b699():_0x1e6ef7[_0x3ee4('0xf1')]([function(_0xd32879){var _0x1e6ef7=_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x3ee4('0x6a')](_0xd32879=>0x0==_0xd32879['status']&&_0xd32879[_0x3ee4('0x8d')][_0x3ee4('0x70')](_0x3ee4('0x209'))<0x0&&_0xd32879[_0x3ee4('0x8d')][_0x3ee4('0x70')](_0x3ee4('0x26b'))<0x0);_0x1e6ef7&&_0x1e6ef7[_0x3ee4('0x43')]>0x0?_0xd32879():(_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0x32c00b[_0x3ee4('0x1f4')]+'}\x20(start'+_0xdfee82+'):'+_0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x26c')]),_0xd32879(_0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x26c')]));},function(_0x1e6ef7){_0x5a8251[_0x3ee4('0x218')](_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')],_0xd32879[_0x3ee4('0x1f5')],_0x1e6ef7);},function(_0x1e6ef7){const _0x17b699=_0xd32879['system'][_0x3ee4('0x1f6')]?{'protocol':_0x3ee4('0x26d'),'port_suffix':'14'}:{'protocol':'http','port_suffix':'13'},_0x439c8a=_0x17b699[_0x3ee4('0x1f7')]+'://'+(_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x91')]||_0xd32879['system'][_0x3ee4('0x90')])+':5'+_0xd32879[_0x3ee4('0x1f2')]['sn']+_0x17b699[_0x3ee4('0x1f8')]+'/';_0x5a8251[_0x3ee4('0x3c')][_0x3ee4('0x1f9')](_0xd32879[_0x3ee4('0x1f2')]['syst_id']),_0x5a8251['new_soap_client'](_0x439c8a,{'method':_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fb')],'options':[{'user':_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fc')],'pwd':_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x206')]},{'pfx':0x1==_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1fb')]&&_0x5a8251[_0x3ee4('0x39')]+'/'+_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]+'.pfx'}]},_0xd32879,_0x1e6ef7);},function(_0x1e6ef7,_0x17b699){_0x1e6ef7[_0x3ee4('0x1fd')]['GetSystemInstanceList']({},function(_0x439c8a,_0x14e799){if(!_0x439c8a&&_0x14e799&&_0x14e799[_0x3ee4('0xc3')]&&_0x14e799['instance'][_0x3ee4('0x7f')]){var _0x4908d5=_0x14e799[_0x3ee4('0xc3')][_0x3ee4('0x7f')][_0x3ee4('0x4d')](_0xd32879=>({'hostname':_0xd32879[_0x3ee4('0x90')],'instancenr':(''+_0xd32879[_0x3ee4('0x1dc')])[_0x3ee4('0x1dd')](0x2,'0'),'features':_0xd32879[_0x3ee4('0x8d')]['split']('|'),'status':_0xd32879['dispstatus']==_0x5a8251[_0x3ee4('0x1df')]['green']?0x1:_0xd32879['dispstatus']==_0x5a8251['_sap_statuses'][_0x3ee4('0x1e1')]?-0x1:0x0})),_0x3ba1ca=_0x5a8251[_0x3ee4('0x200')](_0x14e799[_0x3ee4('0xc3')][_0x3ee4('0x7f')]);_0x3ba1ca==_0x5a8251[_0x3ee4('0x1df')][_0x3ee4('0x201')]||_0x3ba1ca==_0x5a8251[_0x3ee4('0x1df')][_0x3ee4('0x202')]?_0x17b699(_0x5a8251['_errors'][_0x3ee4('0x203')],_0x1e6ef7[_0x3ee4('0x1fd')]):(_0x5a8251['pushgtw_cli'][_0x3ee4('0x204')]('up',_0x259c1d,_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')],_0x5a8251[_0x3ee4('0x27')],_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x79')],0x1),_0x5a8251[_0x3ee4('0x1c8')][_0xd32879[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]]=0x0,_0x17b699(null,_0x4908d5));}else _0x17b699(_0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x212')],_0x439c8a&&_0x439c8a[_0x3ee4('0x254')]+'\x20'+_0x439c8a[_0x3ee4('0x1c3')]);});},function(_0xd32879,_0x1e6ef7){var _0x17b699={};_0xd32879[_0x3ee4('0x6a')](_0xd32879=>0x1==_0xd32879[_0x3ee4('0x65')])['forEach'](_0xd32879=>{_0x17b699[_0xd32879['instancenr']]=_0xd32879['features'][_0x3ee4('0x4e')]('|');}),Object['values'](_0x17b699)[_0x3ee4('0x6a')](_0xd32879=>!RegExp(_0x3ee4('0x209'))['test'](_0xd32879)&&!RegExp('ENQUE')[_0x3ee4('0x26e')](_0xd32879))[_0x3ee4('0x43')]<_0x5a8251[_0x3ee4('0x2c')]?_0x1e6ef7(null,_0xd32879):_0x1e6ef7(_0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x26f')]);},function(_0xd32879,_0x1e6ef7){_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x22')],'[PENDING]\x20{'+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x269')+_0xdfee82+_0x3ee4('0x270')+_0xd32879['map'](_0xd32879=>_0xd32879['hostname']+'/'+_0xd32879[_0x3ee4('0x64')]+'/'+_0xd32879[_0x3ee4('0x65')])['join'](','));var _0x17b699=_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x3ee4('0x6a')](_0xd32879=>0x0==_0xd32879[_0x3ee4('0x65')]&&_0xd32879['features'][_0x3ee4('0x70')](_0x3ee4('0x209'))<0x0&&_0xd32879[_0x3ee4('0x8d')][_0x3ee4('0x70')](_0x3ee4('0x26b'))<0x0)[_0x3ee4('0x6a')](_0x1e6ef7=>_0xd32879[_0x3ee4('0x6a')](_0xd32879=>0x0==_0xd32879[_0x3ee4('0x65')])[_0x3ee4('0x22d')](_0xd32879=>_0xd32879[_0x3ee4('0x64')]==_0x1e6ef7['instancenr'])>=0x0||_0xd32879['findIndex'](_0xd32879=>_0xd32879[_0x3ee4('0x64')]==_0x1e6ef7[_0x3ee4('0x64')])<0x0);_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x1f1')+_0x32c00b['syst_id']+_0x3ee4('0x269')+_0xdfee82+')\x20candidates\x20instances:'+_0x17b699['map'](_0xd32879=>_0xd32879[_0x3ee4('0x90')]+'/'+_0xd32879[_0x3ee4('0x64')]+'/'+_0xd32879['status'])[_0x3ee4('0x4e')](',')),_0x17b699&&_0x17b699[_0x3ee4('0x43')]>0x0?_0x1e6ef7(null,_0x17b699[0x0]):_0x1e6ef7(_0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x26c')]);}],function(_0xd32879,_0x1e6ef7){_0xd32879?_0x17b699(_0xd32879):_0x17b699(null,_0x1e6ef7);});},'resume_instance_to_start':_0xd32879=>{_0x4908d5?_0xd32879(null,_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x58c694]):_0xd32879();}},(_0xd32879,_0x1e6ef7)=>{_0x17b699(_0xd32879,_0x1e6ef7[_0x3ee4('0x271')]||_0x1e6ef7[_0x3ee4('0x272')]);});},function(_0x17b699,_0x58c694){if(_0x5a8251['logger']['log'](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x1f1')+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x269')+_0xdfee82+')\x20current\x20buffered\x20instances:'+_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe]['map'](_0xd32879=>_0xd32879['hostname']+'/'+_0xd32879[_0x3ee4('0x64')]+'/'+_0xd32879['status'])['join'](',')),_0x4908d5||0x0==_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe]['filter'](_0xd32879=>0x3==_0xd32879['status'])[_0x3ee4('0x43')]){_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x21')],_0x3ee4('0x1f1')+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x269')+_0xdfee82+_0x3ee4('0x273')+_0x2b786b[_0x3ee4('0x249')][_0x3ee4('0x24b')]+_0x3ee4('0x274')+_0x17b699[_0x3ee4('0x90')]+'/'+_0x17b699[_0x3ee4('0x91')]+'/'+_0x17b699['instancenr']);var _0x11386e=_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe]['map'](_0xd32879=>_0xd32879[_0x3ee4('0x64')])[_0x3ee4('0x70')](_0x17b699[_0x3ee4('0x64')]);_0x11386e<0x0?_0x11386e=_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe]['push'](Object['assign']({},_0x17b699,{'status':0x3,'resume_on_step':_0x5a8251[_0x3ee4('0x24f')][_0x3ee4('0x275')][_0x3ee4('0x276')],'resume_context':_0xd32879}))-0x1:_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e]=Object[_0x3ee4('0x4b')]({},_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e],{'status':0x3,'resume_on_step':_0x5a8251[_0x3ee4('0x24f')]['start'][_0x3ee4('0x276')],'resume_context':_0xd32879}),_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')]['LOG_LEVEL_INFO'],_0x3ee4('0x1f1')+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x269')+_0xdfee82+')\x20update\x20to\x20transition\x20status:'+_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x3ee4('0x4d')](_0xd32879=>_0xd32879[_0x3ee4('0x90')]+'/'+_0xd32879[_0x3ee4('0x64')]+'/'+_0xd32879[_0x3ee4('0x65')])[_0x3ee4('0x4e')](',')),_0x58c694();const _0x21272b=_0xd32879[_0x3ee4('0x4f')]['find'](_0xd32879=>_0xd32879[_0x3ee4('0x64')]==_0x17b699[_0x3ee4('0x64')]),_0x55c911=_0x21272b?_0x21272b[_0x3ee4('0x9b')]:0x0;_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x20')],'[PENDING]\x20{'+_0x32c00b[_0x3ee4('0x1f4')]+'}\x20(start'+_0xdfee82+_0x3ee4('0x277')+_0x5a26fe+'/'+_0x17b699['ip_internal']+'/'+_0x17b699[_0x3ee4('0x90')]+'/'+_0x17b699['instancenr']+_0x3ee4('0x257')+(parseInt(_0x55c911)+0x1)+_0x3ee4('0x278')+_0x259c1d+')'),_0x1e6ef7[_0x3ee4('0x50')]({'incr':function(_0xd32879){_0x4908d5&&!_0x5a8251[_0x3ee4('0x259')](_0x5a26fe,_0x11386e,_0x5a8251[_0x3ee4('0x24f')]['start']['counter_updated'])||(_0x5a8251[_0x3ee4('0x3c')]['pushCounter']('counter',_0x3ee4('0x275'),_0x259c1d,_0x5a26fe,_0x17b699[_0x3ee4('0x64')],_0x2b786b[_0x3ee4('0x249')]['alertname'],parseInt(_0x55c911)+0x1),_0x5a8251[_0x3ee4('0x248')](_0x5a26fe,_0x11386e,_0x5a8251[_0x3ee4('0x24f')]['start'][_0x3ee4('0x25b')])),_0xd32879();},'start':function(_0xd32879){!_0x4908d5||_0x5a8251['resume_here_on_interruption'](_0x5a26fe,_0x11386e,_0x5a8251['_resume_on_step'][_0x3ee4('0x275')][_0x3ee4('0x279')])?(_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger']['LOG_LEVEL_INFO'],_0x3ee4('0x1f1')+_0x32c00b[_0x3ee4('0x1f4')]+'}\x20(start'+_0xdfee82+_0x3ee4('0x27a')+_0x17b699[_0x3ee4('0x91')]),_0x5a8251[_0x3ee4('0x220')]['startEC2'](_0x17b699[_0x3ee4('0x91')],_0xd32879),_0x5a8251[_0x3ee4('0x248')](_0x5a26fe,_0x11386e,_0x5a8251[_0x3ee4('0x24f')][_0x3ee4('0x275')][_0x3ee4('0x279')])):_0xd32879();},'check':function(_0xd32879){const _0x1e6ef7=Math[_0x3ee4('0x244')](0xf);_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x1f1')+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x269')+_0xdfee82+')\x20waiting\x20for\x20EC2\x20instance\x20to\x20actually\x20start\x20within\x20timeout\x20300\x20sec:'+_0x17b699[_0x3ee4('0x91')]),_0x14e799(_0x5a8251[_0x3ee4('0x220')],_0x1e6ef7,0x4e20,_0x17b699['ip_internal'],_0xd32879);},'soap':function(_0xd32879){var _0x1e6ef7=null;const _0x439c8a=_0x32c00b[_0x3ee4('0x1f6')]?{'protocol':'https','port_suffix':'14'}:{'protocol':'http','port_suffix':'13'};var _0x14e799=_0x439c8a[_0x3ee4('0x1f7')]+'://'+(_0x17b699['ip_internal']||_0x17b699[_0x3ee4('0x90')])+':5'+_0x17b699[_0x3ee4('0x64')]+_0x439c8a['port_suffix']+'/';0x1==_0x32c00b[_0x3ee4('0x1fb')]&&(_0x1e6ef7=_0x5a8251[_0x3ee4('0x39')]+'/'+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x1eb')),_0x5a8251[_0x3ee4('0x1fa')](_0x14e799,{'method':_0x32c00b[_0x3ee4('0x1fb')],'options':[{'user':_0x32c00b['username'],'pwd':_0x32c00b[_0x3ee4('0x206')]},{'pfx':_0x1e6ef7}]},{},_0xd32879);}},function(_0x14e799,_0x58c694){var _0x2b786b=_0x58c694[_0x3ee4('0x8')];if(_0x14e799||!_0x2b786b){switch(_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger']['LOG_LEVEL_ERROR'],_0x3ee4('0x20f')+_0x32c00b['syst_id']+_0x3ee4('0x269')+_0xdfee82+_0x3ee4('0x27b'),_0x14e799),_0x14e799){case _0x5a8251[_0x3ee4('0x220')][_0x3ee4('0x16')]['ec2_not_started']:_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e][_0x3ee4('0x65')]=-0x1,_0x5a8251['updated_system_instances'][_0x5a26fe][_0x11386e][_0x3ee4('0x1c')]={'occur_date':Date['now'](),'msg':_0x5a8251['aws_cli'][_0x3ee4('0x16')][_0x3ee4('0x112')]};break;case _0x5a8251[_0x3ee4('0x16')]['soap_client_init']:_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e][_0x3ee4('0x65')]=-0x1,_0x5a8251['updated_system_instances'][_0x5a26fe][_0x11386e][_0x3ee4('0x1c')]={'occur_date':Date[_0x3ee4('0x243')](),'msg':_0x5a8251['_errors'][_0x3ee4('0x1d0')]};break;case _0x54d697:case _0x5b24bd:default:_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e]['status']=-0x1,_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e][_0x3ee4('0x1c')]={'occur_date':Date['now'](),'msg':_0x250914[_0x14e799]};}_0x5a8251[_0x3ee4('0x248')](_0x5a26fe,_0x11386e,-0x1);}else _0x5a8251['logger']['log'](_0x5a8251['logger'][_0x3ee4('0x21')],_0x3ee4('0x1f1')+_0x32c00b['syst_id']+'}\x20(start'+_0xdfee82+')\x20trigger\x20start\x20SAP\x20instance:'+_0x17b699[_0x3ee4('0x90')]+'/'+_0x17b699[_0x3ee4('0x91')]+'/'+_0x17b699[_0x3ee4('0x64')]),_0x1e6ef7[_0x3ee4('0x50')]([_0x1e6ef7=>{!_0x4908d5||_0x5a8251[_0x3ee4('0x259')](_0x5a26fe,_0x11386e,_0x5a8251['_resume_on_step'][_0x3ee4('0x275')][_0x3ee4('0x27c')])?sapcontrol_operations$1[_0xd32879[_0x3ee4('0x25d')][_0x3ee4('0x84')]][_0x3ee4('0x113')](_0x2b786b['soapcli'],{},_0xd32879=>{_0x5a8251[_0x3ee4('0x248')](_0x5a26fe,_0x11386e,_0x5a8251[_0x3ee4('0x24f')][_0x3ee4('0x275')][_0x3ee4('0x27c')]);if(void 0x0!==_0xd32879&&null!==_0xd32879){if(_0xd32879['body']){const _0x1e6ef7=_0xd32879['body'][_0x3ee4('0x82')](/<faultstring>(.*?)<\/faultstring>/)&&_0xd32879[_0x3ee4('0x7b')][_0x3ee4('0x82')](/<faultstring>(.*?)<\/faultstring>/)[0x1];'Instance\x20already\x20started'==_0x1e6ef7?_0x5a8251['updated_system_instances'][_0x5a26fe][_0x11386e]['status']=0x1:(_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251['logger']['LOG_LEVEL_ERROR'],_0x3ee4('0x20f')+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x269')+_0xdfee82+')\x20sap\x20instance\x20error:'+_0x1e6ef7),_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e][_0x3ee4('0x65')]=-0x1,_0x5a8251['updated_system_instances'][_0x5a26fe][_0x11386e][_0x3ee4('0x1c')]={'occur_date':Date[_0x3ee4('0x243')](),'msg':_0x250914[_0x49ff79]+':'+_0x1e6ef7});}else _0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0x32c00b['syst_id']+_0x3ee4('0x269')+_0xdfee82+')\x20sap\x20instance\x20error:',_0xd32879),_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e]['status']=-0x1,_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e][_0x3ee4('0x1c')]={'occur_date':Date['now'](),'msg':_0x250914[_0x49ff79]};_0x5a8251['save_resume_step'](_0x5a26fe,_0x11386e,-0x1),_0x1e6ef7(_0xd32879);}else _0x1e6ef7();}):_0x1e6ef7();},_0xd32879=>{const _0x1e6ef7=Math['ceil'](0xf);_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251['logger']['LOG_LEVEL_DEBUG'],'[PENDING]\x20{'+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x269')+_0xdfee82+_0x3ee4('0x245')+_0x17b699['hostname']+'/'+_0x17b699[_0x3ee4('0x91')]+'/'+_0x17b699[_0x3ee4('0x64')]);_0x439c8a(_0x2b786b[_0x3ee4('0x1fd')],_0x1e6ef7,0x4e20,_0x17b699[_0x3ee4('0x64')],_0x1e6ef7=>{_0x1e6ef7?(_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e][_0x3ee4('0x65')]=-0x1,_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e][_0x3ee4('0x1c')]={'occur_date':Date['now'](),'msg':_0x250914[_0x49cbed]},_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x20')],'[COMPLETED]\x20{'+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x269')+_0xdfee82+_0x3ee4('0x27d')+_0x5a26fe+'/'+_0x17b699['hostname']+'/'+_0x17b699[_0x3ee4('0x91')]+'/'+_0x17b699[_0x3ee4('0x64')]+_0x3ee4('0x262'),_0x250914[_0x49cbed]),_0x3ba1ca(_0x2b786b[_0x3ee4('0x1fd')],_0x32c00b,_0x17b699,_0x11386e,0x1)):(_0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e][_0x3ee4('0x65')]=0x1,delete _0x5a8251[_0x3ee4('0x23d')][_0x5a26fe][_0x11386e][_0x3ee4('0x1c')],_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x20')],_0x3ee4('0x23f')+_0x32c00b['syst_id']+'}\x20(start'+_0xdfee82+_0x3ee4('0x246')+_0x5a26fe+'/'+_0x17b699[_0x3ee4('0x90')]+'/'+_0x17b699[_0x3ee4('0x91')]+'/'+_0x17b699['instancenr']),_0x5a8251[_0x3ee4('0x248')](_0x5a26fe,_0x11386e,-0x1));_0xd32879();});}]);});}else _0x58c694(_0x5a8251[_0x3ee4('0x16')][_0x3ee4('0x27e')]);}],function(_0xd32879){_0xd32879?(_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x27f')+_0x32c00b[_0x3ee4('0x1f4')]+_0x3ee4('0x269')+_0xdfee82+_0x3ee4('0x266')+_0x32c00b['ip_internal']+'-'+_0x32c00b[_0x3ee4('0x79')]+':',_0xd32879),_0x17b699(_0xd32879)):_0x17b699(null,{'sending_sslcertifs':_0x5a8251[_0x3ee4('0x29')][_0x32c00b['syst_id']+''],'instances':_0x5a8251[_0x3ee4('0x23d')],'syst_id':_0x32c00b['syst_id']});})):(_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x1f')],_0x3ee4('0x280')+_0xdfee82+'):\x20no\x20system\x20provided'),_0x17b699(_0x3ee4('0x281')));}function _0x32c00b(_0xd32879,_0x17b699){if(_0x5a8251[_0x3ee4('0x23d')][_0xd32879['syst_id']]){const _0x439c8a=_0x5a8251[_0x3ee4('0x23d')][_0xd32879['syst_id']]['filter'](_0x1e6ef7=>_0x1e6ef7['instancenr']==_0xd32879['instance_nr'])[0x0];_0x439c8a?(_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x1f1')+_0xd32879[_0x3ee4('0x1f4')]+'}\x20(update)\x20:'+_0x439c8a[_0x3ee4('0x90')]+'/'+_0x439c8a['instancenr']+'/'+_0x439c8a[_0x3ee4('0x65')]),-0x1==_0x439c8a[_0x3ee4('0x65')]?_0x1e6ef7[_0x3ee4('0xf1')]([function(_0x1e6ef7){_0x5a8251[_0x3ee4('0x218')](_0xd32879[_0x3ee4('0x1f4')],_0xd32879[_0x3ee4('0x1f5')],_0x1e6ef7);},function(_0x1e6ef7){const _0x17b699={'protocol':_0x3ee4('0x26d'),'port_suffix':'14'},_0x14e799=_0x17b699['protocol']+_0x3ee4('0x1c1')+(_0x439c8a[_0x3ee4('0x91')]||_0x439c8a['hostname'])+':5'+_0xd32879[_0x3ee4('0x282')]+_0x17b699[_0x3ee4('0x1f8')]+'/';_0x5a8251['new_soap_client'](_0x14e799,{'method':0x1,'options':[{},{'pfx':_0x5a8251[_0x3ee4('0x39')]+'/'+_0xd32879[_0x3ee4('0x1f4')]+_0x3ee4('0x1eb')}]},_0xd32879,_0x1e6ef7);},function(_0x1e6ef7,_0x17b699){_0x1e6ef7[_0x3ee4('0x1fd')]['GetSystemInstanceList']({},function(_0x1e6ef7,_0x439c8a){!_0x1e6ef7&&_0x439c8a&&_0x439c8a[_0x3ee4('0xc3')]&&_0x439c8a['instance']['item']?_0x17b699(null,_0x439c8a[_0x3ee4('0xc3')][_0x3ee4('0x7f')][_0x3ee4('0x1ff')](_0x1e6ef7=>(''+_0x1e6ef7[_0x3ee4('0x1dc')])[_0x3ee4('0x1dd')](0x2,'0')==_0xd32879['instance_nr'])):_0x17b699();});}],(_0x1e6ef7,_0x14e799)=>{_0x1e6ef7?_0x17b699(_0x3ee4('0x283')+_0x1e6ef7):_0x17b699(null,{'sending_sslcertifs':_0x5a8251[_0x3ee4('0x29')][_0xd32879[_0x3ee4('0x1f4')]+''],'instance':_0x14e799?Object[_0x3ee4('0x4b')](_0x439c8a,{'status':_0x14e799[_0x3ee4('0x1de')]==_0x5a8251['_sap_statuses'][_0x3ee4('0x1e0')]?0x1:_0x14e799[_0x3ee4('0x1de')]==_0x5a8251[_0x3ee4('0x1df')]['yellow']?-0x1:0x0},{'resume_context':null,'resume_on_step':null}):Object['assign'](_0x439c8a,{'resume_context':null,'resume_on_step':null}),'syst_id':_0xd32879['syst_id']});}):_0x17b699(null,{'sending_sslcertifs':_0x5a8251['sending_sslcertifs'][_0xd32879['syst_id']+''],'instance':_0x439c8a,'syst_id':_0xd32879['syst_id']})):(_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0xd32879[_0x3ee4('0x1f4')]+'}\x20(update)\x20system\x20not\x20indexed:'+_0xd32879['instance_nr']),_0x17b699(_0x3ee4('0x284')));}else _0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x1f')],_0x3ee4('0x20f')+_0xd32879[_0x3ee4('0x1f4')]+'}\x20(update)\x20system\x20not\x20active:'+_0xd32879['syst_id']),_0x17b699(_0x3ee4('0x285'));}function _0x5a26fe(_0x1e6ef7){var _0x17b699=null,_0x439c8a={},_0x14e799=_0x1e6ef7['action'][_0x3ee4('0x286')]['endpoint'];switch(_0x1e6ef7['action'][_0x3ee4('0x84')]){case _0x3ee4('0x287'):_0x17b699={'text':_0x1e6ef7[_0x3ee4('0x288')]['length']+'\x20notification'+(_0x1e6ef7[_0x3ee4('0x288')][_0x3ee4('0x43')]>0x1&&'s'||'')+'(\x20'+_0x1e6ef7[_0x3ee4('0x288')][_0x3ee4('0x6a')](_0xd32879=>_0x3ee4('0x289')==_0xd32879[_0x3ee4('0x65')])['length']+_0x3ee4('0x28a'),'blocks':function(_0xd32879,_0x1e6ef7){var _0x17b699=[];return _0x1e6ef7[_0x3ee4('0x43')]>0x0&&(_0x17b699[_0x3ee4('0x72')]({'type':_0x3ee4('0x28b'),'text':{'type':_0x3ee4('0x28c'),'text':_0x3ee4('0x28d')+_0xd32879+'>'}}),_0x1e6ef7[_0x3ee4('0x62')](function(_0xd32879){_0x17b699[_0x3ee4('0x72')]({'type':_0x3ee4('0x28b'),'block_id':_0xd32879[_0x3ee4('0x28e')],'fields':[{'type':'mrkdwn','text':'*Notification*\x0a'+_0xd32879['labels'][_0x3ee4('0x24b')]},{'type':_0x3ee4('0x28c'),'text':_0x3ee4('0x28f')+_0xd32879[_0x3ee4('0x249')][_0x3ee4('0x79')]+(void 0x0!=_0xd32879[_0x3ee4('0x249')]['hostname']&&''!=_0xd32879[_0x3ee4('0x249')]['hostname']?'@'+_0xd32879[_0x3ee4('0x249')][_0x3ee4('0x90')]:'')+(void 0x0!=_0xd32879[_0x3ee4('0x249')]['sn']&&''!=_0xd32879['labels']['sn']?'\x20['+_0xd32879[_0x3ee4('0x249')]['sn']+']':'')}]});}),_0x17b699[_0x3ee4('0x72')]({'type':_0x3ee4('0x290')})),_0x17b699;}('New\x20notifications',_0x1e6ef7[_0x3ee4('0x288')][_0x3ee4('0x6a')](_0xd32879=>'firing'==_0xd32879[_0x3ee4('0x65')]))};break;case _0x3ee4('0x291'):_0x17b699=Object[_0x3ee4('0x4b')](_0x1e6ef7,_0x1e6ef7[_0x3ee4('0x25d')]['parameters']),_0x439c8a={'headers':{'x-api-key':_0x3ee4('0x292')}};}null!=_0x17b699&&_0xd32879[_0x3ee4('0x53')](_0x14e799,_0x17b699,_0x439c8a)[_0x3ee4('0x73')](function(_0xd32879){_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x21')],_0x3ee4('0x23f')+_0x1e6ef7[_0x3ee4('0x25d')][_0x3ee4('0x84')]+'}\x20(notif)');})[_0x3ee4('0x55')](function(_0xd32879){_0xd32879&&_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x1f')],'[FAILED]\x20{'+_0x1e6ef7[_0x3ee4('0x25d')][_0x3ee4('0x84')]+_0x3ee4('0x293'),_0xd32879);});}const _0x5a8251=this,_0x5b24bd=0x0,_0x54d697=0x1,_0x259c1d=0x2,_0xdfee82=0x3,_0x11386e=0x4,_0x49ff79=0x5,_0x49cbed=0x6,_0x21272b=0x7,_0x55c911=0x8;var _0x250914=[];_0x250914[_0x5b24bd]='Start\x20EC2\x20server\x20operation\x20timeout',_0x250914[_0x54d697]='EC2\x20server\x20to\x20start\x20cannot\x20be\x20found',_0x250914[_0x259c1d]='EC2\x20server\x20could\x20not\x20be\x20stopped\x20(but\x20SAP\x20instance\x20successfully\x20stopped)',_0x250914[_0xdfee82]=_0x3ee4('0x294'),_0x250914[_0x11386e]=_0x3ee4('0x295'),_0x250914[_0x49ff79]='Start\x20SAP\x20instance\x20operation\x20failed',_0x250914[_0x49cbed]='Start\x20SAP\x20instance\x20operation\x20timeout',_0x250914[_0x21272b]='Stop\x20SAP\x20instance\x20operation\x20failed',_0x250914[_0x55c911]=_0x3ee4('0x296'),_0x1e6ef7['series']([function(_0xd32879){_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x20')],'loading\x20resume\x20processing\x20data...'),_0x1e6ef7['waterfall']([_0xd32879=>{_0x5a8251[_0x3ee4('0x3b')][_0x3ee4('0xfa')](_0x5a8251['company'],_0xd32879);},(_0xd32879,_0x1e6ef7)=>{_0x5a8251[_0x3ee4('0x23d')]=JSON['parse'](_0xd32879)&&JSON[_0x3ee4('0x1ed')](_0xd32879)[_0x3ee4('0x297')]||{};_0x5a8251['redis_cli'][_0x3ee4('0x9a')](_0x5a8251[_0x3ee4('0x1ad')],_0x3ee4('0x298'),_0x1e6ef7);}],_0x1e6ef7=>{_0x1e6ef7&&_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')]['LOG_LEVEL_ERROR'],_0x3ee4('0x299'),_0x1e6ef7);_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger']['LOG_LEVEL_MIN'],_0x3ee4('0x29a'),_0x5a8251[_0x3ee4('0x23d')]);_0xd32879();});},function(_0xd32879){_0x5a8251['updated_system_instances']&&Object[_0x3ee4('0x4c')](_0x5a8251[_0x3ee4('0x23d')])[_0x3ee4('0x43')]>0x0?(_0xd32879(),Object[_0x3ee4('0x4c')](_0x5a8251[_0x3ee4('0x23d')])[_0x3ee4('0x62')](_0xd32879=>{_0x1e6ef7['eachOf'](_0x5a8251['updated_system_instances'][_0xd32879],(_0x1e6ef7,_0x17b699,_0x439c8a)=>{if(_0x1e6ef7[_0x3ee4('0x29b')]>0x0)switch(_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251['logger']['LOG_LEVEL_MIN'],_0x3ee4('0x29c'),_0x1e6ef7[_0x3ee4('0x65')]),_0x1e6ef7['status']){case 0x2:_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x20')],'(resume)\x20stop\x20on:',_0x1e6ef7),_0x439c8a(),_0x58c694(_0x1e6ef7['resume_context'],(_0xd32879,_0x1e6ef7)=>{_0xd32879?_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x1f')],_0x3ee4('0x29d'),_0xd32879):_0x5a8251[_0x3ee4('0x3e')]['log'](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x29e'),_0x1e6ef7);},!0x0,_0x1e6ef7[_0x3ee4('0x29b')]);break;case 0x3:_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x20')],_0x3ee4('0x29f'),_0x1e6ef7),_0x439c8a(),_0x2b786b(_0x1e6ef7[_0x3ee4('0x2a0')],(_0xd32879,_0x1e6ef7)=>{_0xd32879?_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x1f')],'(resume)\x20start\x20error\x20:',_0xd32879):_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x2a1'),_0x1e6ef7);},!0x0,_0x17b699);break;default:_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x1f')],_0x3ee4('0x2a2'),_0x1e6ef7[_0x3ee4('0x65')]),_0x439c8a();}else delete _0x5a8251[_0x3ee4('0x23d')][_0xd32879][_0x17b699],_0x439c8a();},_0x1e6ef7=>{_0x1e6ef7&&_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x1f')],'(resume)\x20actions\x20error:',_0x1e6ef7);_0x5a8251[_0x3ee4('0x23d')][_0xd32879]=_0x5a8251[_0x3ee4('0x23d')][_0xd32879][_0x3ee4('0x6a')](_0xd32879=>void 0x0!=_0xd32879);});})):_0xd32879();},function(_0xd32879){_0x5a8251[_0x3ee4('0x25')]['process'](_0x5a8251[_0x3ee4('0x26')][_0x3ee4('0x2a3')],_0x5a8251[_0x3ee4('0x28')],function(_0xd32879,_0x1e6ef7){if(_0xd32879['data'][_0x3ee4('0x25d')])switch(_0xd32879[_0x3ee4('0x216')][_0x3ee4('0x25d')][_0x3ee4('0x21a')]){case 0x0:_0x5a26fe(_0xd32879[_0x3ee4('0x216')]),_0x1e6ef7();break;case 0x1:let _0x17b699=_0xd32879[_0x3ee4('0x216')][_0x3ee4('0x1f2')]?_0xd32879['data'][_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]:_0xd32879['data'][_0x3ee4('0x1f4')];_0x5a8251[_0x3ee4('0x218')](_0x17b699,_0xd32879[_0x3ee4('0x216')]['keys_buff'],_0x17b699=>{if(_0x17b699)_0x1e6ef7(_0x3ee4('0x22c'));else switch(_0xd32879[_0x3ee4('0x216')][_0x3ee4('0x25d')][_0x3ee4('0x84')]){case'Stop':_0x5a8251['logger'][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x22')],_0x3ee4('0x2a4'),_0xd32879[_0x3ee4('0x216')]),_0xd32879['data'][_0x3ee4('0x288')]?_0x58c694(_0xd32879[_0x3ee4('0x216')],_0x1e6ef7):_0x1e6ef7();break;case _0x3ee4('0x230'):_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x22')],'start\x20action\x20data:',_0xd32879[_0x3ee4('0x216')]),_0xd32879[_0x3ee4('0x216')][_0x3ee4('0x288')]?_0x2b786b(_0xd32879['data'],_0x1e6ef7):_0x1e6ef7();break;case _0x3ee4('0x2a5'):_0x32c00b(_0xd32879[_0x3ee4('0x216')],_0x1e6ef7);break;default:_0x1e6ef7();}});break;default:_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251['logger'][_0x3ee4('0x1f')],'action\x20type\x20not\x20supported:',_0xd32879[_0x3ee4('0x216')][_0x3ee4('0x25d')]['type']),_0x1e6ef7();}else _0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x5a8251[_0x3ee4('0x3e')][_0x3ee4('0x1f')],_0x3ee4('0x2a6')),_0x1e6ef7();}),_0xd32879();}]);},'get_cloud_region':function(_0x1e6ef7){var _0x17b699=this;{const _0x439c8a=_0x3ee4('0x2a7');_0xd32879[_0x3ee4('0xfa')](_0x439c8a)[_0x3ee4('0x73')](function(_0xd32879){_0xd32879[_0x3ee4('0x216')]?(_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0x21')],_0x3ee4('0x2a8'),_0xd32879[_0x3ee4('0x216')]),_0x17b699[_0x3ee4('0x27')]=_0xd32879[_0x3ee4('0x216')][_0x3ee4('0xdf')](0x0,-0x1),_0x1e6ef7()):(_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x17b699['logger'][_0x3ee4('0x1f')],_0x3ee4('0x2a9')),_0x1e6ef7());})[_0x3ee4('0x55')](function(_0xd32879){_0xd32879&&_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0x17b699[_0x3ee4('0x3e')][_0x3ee4('0x1f')],'get_cloud_region:',_0xd32879),_0x1e6ef7();});}},'check_system_status':function(_0xd32879){for(var _0x1e6ef7=this,_0x17b699=[],_0x439c8a=!0x1,_0x14e799=0x0,_0x4908d5=_0xd32879[_0x3ee4('0x43')];_0x14e799<_0x4908d5;_0x14e799++)if(_0xd32879[_0x14e799][_0x3ee4('0x8d')]['split']('|')[_0x3ee4('0x70')](_0x3ee4('0x209'))>=0x0||_0xd32879[_0x14e799]['features']['split']('|')[_0x3ee4('0x70')](_0x3ee4('0x26b'))>=0x0){if(_0xd32879[_0x14e799]['dispstatus']!=_0x1e6ef7[_0x3ee4('0x1df')]['green']){_0x439c8a=!0x0;break;}}else _0x17b699[_0x3ee4('0x72')]({'instancenr':(''+_0xd32879[_0x14e799][_0x3ee4('0x1dc')])[_0x3ee4('0x1dd')](0x2,'0'),'status':_0xd32879[_0x14e799][_0x3ee4('0x1de')]==_0x1e6ef7[_0x3ee4('0x1df')][_0x3ee4('0x1e0')]?0x1:0x0});return _0x439c8a||0x0==_0x17b699[_0x3ee4('0x85')]((_0xd32879,_0x1e6ef7)=>_0xd32879+_0x1e6ef7,0x0)?_0x1e6ef7[_0x3ee4('0x1df')][_0x3ee4('0x201')]:_0x1e6ef7['_sap_statuses'][_0x3ee4('0x1e0')];},'check_failed_conn':function(_0xd32879,_0x1e6ef7){var _0x17b699=this;_0x17b699[_0x3ee4('0x1c8')][_0x1e6ef7[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]]<=_0x17b699[_0x3ee4('0x2a')]?setTimeout(function(){_0xd32879[_0x3ee4('0xc2')]({},function(_0x439c8a,_0x14e799){if(!_0x439c8a&&_0x14e799&&_0x14e799['instance']&&_0x14e799['instance'][_0x3ee4('0x7f')]){var _0x4908d5=_0x17b699[_0x3ee4('0x200')](_0x14e799['instance']['item']);_0x4908d5==_0x17b699[_0x3ee4('0x1df')][_0x3ee4('0x201')]||_0x4908d5==_0x17b699[_0x3ee4('0x1df')][_0x3ee4('0x202')]?(_0x17b699[_0x3ee4('0x1c8')][_0x1e6ef7['system'][_0x3ee4('0x1f4')]]++,_0x17b699[_0x3ee4('0x210')](_0xd32879,_0x1e6ef7)):_0x17b699[_0x3ee4('0x3c')][_0x3ee4('0x204')]('up',_0x1e6ef7['entity_id'],_0x1e6ef7[_0x3ee4('0x1f2')]['syst_id'],_0x17b699[_0x3ee4('0x27')],_0x1e6ef7[_0x3ee4('0x1f2')]['sid'],0x1);}else _0x17b699['conn_retries'][_0x1e6ef7[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')]]++,_0x17b699[_0x3ee4('0x210')](_0xd32879,_0x1e6ef7);});},0x4e20):(_0x17b699[_0x3ee4('0x214')](_0x3ee4('0x20c'),_0x1e6ef7['entity_id'],_0x1e6ef7['system'][_0x3ee4('0x1f4')],_0x1e6ef7[_0x3ee4('0x1f2')]['sid'],_0x1e6ef7[_0x3ee4('0x1f2')]['instances']['map'](_0xd32879=>({'instancenr':_0xd32879[_0x3ee4('0x64')],'status':0x0}))),_0x17b699[_0x3ee4('0x3c')]['pushUpInstance']('up',_0x1e6ef7[_0x3ee4('0x205')],_0x1e6ef7[_0x3ee4('0x1f2')][_0x3ee4('0x1f4')],_0x17b699[_0x3ee4('0x27')],_0x1e6ef7[_0x3ee4('0x1f2')][_0x3ee4('0x79')],0x0));},'debug':function(_0xd32879){this[_0x3ee4('0x3e')]&&this[_0x3ee4('0x3e')][_0x3ee4('0x3f')](_0xd32879);},'save_resume_step':function(_0xd32879,_0x1e6ef7,_0x17b699){const _0x439c8a=this,_0x14e799=_0x17b699<0x0?{'resume_on_step':_0x17b699,'resume_context':null}:{'resume_on_step':_0x17b699};_0x439c8a[_0x3ee4('0x23d')][_0xd32879][_0x1e6ef7]=Object[_0x3ee4('0x4b')]({},_0x439c8a[_0x3ee4('0x23d')][_0xd32879][_0x1e6ef7],_0x14e799);},'resume_here_on_interruption':function(_0xd32879,_0x1e6ef7,_0x17b699){const _0x439c8a=this;return!(!_0x439c8a['updated_system_instances'][_0xd32879]||!_0x439c8a['updated_system_instances'][_0xd32879][_0x1e6ef7])&&_0x439c8a[_0x3ee4('0x23d')][_0xd32879][_0x1e6ef7][_0x3ee4('0x29b')]<_0x17b699;},'graceful_shutdown'(){var _0xd32879=this;_0xd32879[_0x3ee4('0x23d')]&&Object[_0x3ee4('0x4c')](_0xd32879[_0x3ee4('0x23d')])[_0x3ee4('0x43')]>0x0&&_0xd32879[_0x3ee4('0x3b')]['set'](_0xd32879[_0x3ee4('0x1ad')],JSON['stringify']({'root':_0xd32879[_0x3ee4('0x23d')]}),_0x1e6ef7=>{_0x1e6ef7?_0xd32879[_0x3ee4('0x3e')]['log'](_0xd32879['logger'][_0x3ee4('0x1f')],_0x3ee4('0x2aa'),_0x1e6ef7):_0xd32879['logger'][_0x3ee4('0xbb')](_0xd32879[_0x3ee4('0x3e')][_0x3ee4('0x22')],_0x3ee4('0x2ab'));}),_0xd32879[_0x3ee4('0x25')]&&_0xd32879['queue']['shutdown'](0x1388,function(_0x1e6ef7){_0xd32879[_0x3ee4('0x3e')][_0x3ee4('0xbb')](_0xd32879[_0x3ee4('0x3e')][_0x3ee4('0x20')],_0x3ee4('0x2ac'),_0x1e6ef7||'');}),_0xd32879[_0x3ee4('0x3b')]&&_0xd32879[_0x3ee4('0x3b')][_0x3ee4('0x2ad')]();}};var _0xb45fb6=_0x259c1d;try{var _0x57f203=_0xb45fb6,_0x575a06=_0x58c694,_0x2970af=__dirname+_0x3ee4('0x2ae');if(!_0x575a06[_0x3ee4('0x1c5')](_0x2970af))throw console['error'](_0x3ee4('0x2af'),_0x2970af),{'code':0x2};{const _0xd32879=JSON[_0x3ee4('0x1ed')](_0x575a06[_0x3ee4('0x227')](_0x2970af)),_0x1e6ef7=process[_0x3ee4('0xc9')]['NODE_ENV']||'production';var _0x33e1ff=new _0x57f203();_0x33e1ff[_0x3ee4('0x2b0')](Object[_0x3ee4('0x4b')](_0xd32879[_0x1e6ef7],{'dbindex':0x0}),_0x33e1ff[_0x3ee4('0x2b1')]),process['on'](_0x3ee4('0x2b2'),function(){console[_0x3ee4('0xbb')]('I\x20switching\x20debug\x20mode\x20ON'),_0x33e1ff['debug'](!0x0);}),process['on'](_0x3ee4('0x2b3'),function(){console[_0x3ee4('0xbb')]('I\x20switching\x20debug\x20mode\x20OFF'),_0x33e1ff[_0x3ee4('0x3f')](!0x1);});}}catch(_0x11f180){console[_0x3ee4('0x1c')](_0x3ee4('0x2b4'),_0x11f180[_0x3ee4('0x1bb')]||_0x11f180),process[_0x3ee4('0x2b5')](0x1);}return process['on'](_0x3ee4('0x2b5'),function(_0xd32879){return console[_0x3ee4('0xbb')]('I\x20Scale\x20Doer\x20Collect\x20!\x20About\x20to\x20exit\x20with\x20code\x20'+_0xd32879);}),{};});
+'use strict';
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var kue = _interopDefault(require('kue'));
+var redis = _interopDefault(require('redis'));
+var fs$1 = _interopDefault(require('fs'));
+var cron = _interopDefault(require('cron'));
+var async = _interopDefault(require('async'));
+var crypto = _interopDefault(require('crypto'));
+var soap = _interopDefault(require('soap'));
+var http = _interopDefault(require('http'));
+var axios = _interopDefault(require('axios'));
+var moment = _interopDefault(require('moment'));
+var awsSdk = _interopDefault(require('aws-sdk'));
+
+/**
+ * PushCli class
+ * ==================
+ * Hanalytics own implementation of Prometheus Pushgateway CLIENT API
+ */
+// External librairies
+// ----------------------------------------------------------------------------
+// Class definition
+// ----------------------------------------------------------------------------
+// Constructor
+
+function PushCli(endpoint, version, staging) {
+  // console.log('D PushCli ! Constructor begins');
+  this.version = version;
+  this.staging = staging;
+  this.gtw_url = endpoint; // 'http://'+prometheusGtw[env].pushgateway_host+':'+prometheusGtw[env].pushgateway_port
+
+  this.metrics_caches = {}; // {instance : [ array of labels, kpi_value, kpi]}
+  // buffer to limit actual push to pushgtw, push only on changes.
+
+  this.up_timeseries = {}; // { instance : { kpi: [labels array ]}}
+} // Class definition
+
+
+PushCli.prototype = {
+  Constructor: PushCli,
+
+  // Private methods
+  assign_hierarchy(obj, keyPath, value) {
+    var lastKeyIndex = keyPath.length - 1;
+
+    for (var i = 0; i < lastKeyIndex; ++i) {
+      var key = keyPath[i];
+
+      if (!(key in obj)) {
+        obj[key] = {};
+      }
+
+      obj = obj[key];
+    }
+
+    obj[keyPath[lastKeyIndex]] = value;
+  },
+
+  generateGroupings: function (groupings) {
+    const that = this;
+
+    if (!groupings) {
+      return '/version/' + that.version + '/staging/' + that.staging;
+    }
+
+    var all_groupings = Object.assign(groupings, {
+      version: that.version,
+      staging: that.staging
+    });
+    return Object.keys(all_groupings).map(key => `/${encodeURIComponent(key)}/${encodeURIComponent(all_groupings[key])}`).join('');
+  },
+  // Init an instance (SAP system)
+  addInstance: function (syst_id) {
+    // console.log('==== pshgtw addInstance '+syst_id)
+    if (!this.metrics_caches[syst_id]) this.metrics_caches[syst_id] = {};
+  },
+  // Remove an Instance (SAP system)
+  // deleteInstance: function(job,suid,region,sap_id) {
+  //   var self = this
+  //   const syst_id = suid
+  //   delete this.metrics_caches[syst_id]
+  //   //Delete all metrics for jobName & instance
+  //   self.delSerie(job, {instance: suid})
+  //   // Update SAP Up status
+  //   self.pushUpInstance('up', suid, region, sap_id, 0)
+  // },
+  // Push SAP instance Up state!
+  pushCounter: function (jobname = 'counter', operation, entity_id, syst_id, instancenr, policy_name, value) {
+    var self = this; // console.log(' pushCounter:', operation, entity_id, syst_id, instancenr, policy_name, value)
+    // dedicated groupings for counters with system & instances
+    // it prevents erasing previous values from other instances when new counter increment for specific counter
+
+    const groupings = {
+      instance: entity_id,
+      system_id: syst_id,
+      instancenr: instancenr
+    };
+    const req = '# TYPE counter_' + operation + ' gauge\n';
+    async.series([serie_cb => {
+      if (value == 1) {
+        var init_req = req + 'counter_' + operation + ' {policy_name="' + policy_name + '"} 0\n';
+        axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(groupings), init_req).catch(function (error) {
+          if (error) {
+            console.error('pushCounter error:', error);
+          }
+        }).finally(() => {
+          setTimeout(() => {
+            serie_cb();
+          }, 25000);
+        }); // req += 'counter_' + operation + ' {system_id="' + syst_id + '",policy_name="init",instancenr="' + instancenr + '"} ' + 0 + '\n'
+      } else serie_cb();
+    }, serie_cb => {
+      var upd_req = req + 'counter_' + operation + ' {policy_name="' + policy_name + '"} ' + value + '\n';
+      axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(groupings), upd_req).catch(function (error) {
+        if (error) {
+          console.error('pushCounter error:', error);
+        }
+      }).finally(() => {
+        serie_cb();
+      });
+    }]);
+  },
+  // Push SAP system Up state for a specified instance (SAP system)!
+  pushUpInstance: function (jobname = 'up', entity_id, systId, region, sid, status) {
+    var self = this;
+    var current_status = self.up_timeseries[systId] && self.up_timeseries[systId]['status_up'] && self.up_timeseries[systId]['status_up'][entity_id + '+' + region + '+' + sid]; // create dynamic object hierarchy
+
+    if (current_status == null) {
+      self.assign_hierarchy(self.up_timeseries, [systId, 'status_up', entity_id + '+' + region + '+' + sid], status);
+    }
+
+    if (current_status !== status) {
+      var req = '# TYPE status_up gauge\n' + 'status_up {instance="' + systId + '",entity_id="' + entity_id + '",sid="' + sid + '",cp_region="' + region + '" } ' + status + '\n';
+      axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
+        instance: systId
+      }), req).catch(function (error) {
+        console.error('pushUpInstance error:', error);
+      });
+    }
+  },
+  // Push scaling status for SAP system for a specified instance (SAP system)!
+  pushUpScaling: function (jobname = 'up', entity_id, systId, status) {
+    var self = this;
+    var current_status = self.up_timeseries[systId] && self.up_timeseries[systId]['scaling_up'] && self.up_timeseries[systId]['scaling_up'][entity_id]; // create dynamic object hierarchy
+
+    if (current_status == null) {
+      self.assign_hierarchy(self.up_timeseries, [systId, 'scaling_up', entity_id], status);
+    }
+
+    if (current_status !== status) {
+      var req = '# TYPE scaling_up gauge\n' + 'scaling_up {instance="' + systId + '",entity_id="' + entity_id + '" } ' + status + '\n';
+      axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
+        instance: systId
+      }), req).catch(function (error) {
+        console.error('pushUpScaling error:', error);
+      });
+    }
+  },
+  // Push SAP instance Up state!
+  pushUpSAPInstance: function (jobname = 'up', entity_id, systId, region, sid, instances) {
+    var self = this;
+    var req = '';
+    instances.forEach(i => {
+      if (self.up_timeseries[systId] && self.up_timeseries[systId]['status_instance_up'] && self.up_timeseries[systId]['status_instance_up'][entity_id + '+' + region + '+' + sid + '+' + i.instancenr] == null) {
+        self.assign_hierarchy(self.up_timeseries, [systId, 'status_instance_up', entity_id + '+' + region + '+' + sid + '+' + i.instancenr], i.status);
+      }
+
+      req += 'status_instance_up {instance="' + systId + '",entity_id="' + entity_id + '",sid="' + sid + '",cp_region="' + region + '",sn="' + i.instancenr + '"} ' + i.status + '\n';
+    });
+
+    if (req != '') {
+      axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
+        instance: systId
+      }), '# TYPE status_instance_up gauge\n' + req).catch(function (error) {
+        console.error('pushUpSAPInstance error:', error);
+      });
+    }
+  },
+  // Push KPIs values to the gateway for a specified instance!
+  pushInstance: function (jobname, systId, cb) {
+    var self = this; // console.log('==== pshgtw pushInstance '+systId)
+
+    if (self.metrics_caches[systId]) {
+      var arr_filter_keys = Object.keys(self.metrics_caches[systId]).filter(x => self.metrics_caches[systId][x].length > 0);
+      async.each(arr_filter_keys, function (kpi_id, callback) {
+        const req = '# TYPE ' + kpi_id + ' gauge\n' + self.metrics_caches[systId][kpi_id].map(x => kpi_id + ' ' + x).join('\n') + '\n'; // console.log("push:",req)
+
+        axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
+          instance: systId
+        }), req).then(function (response) {
+          self.metrics_caches[systId][kpi_id] = [];
+          callback();
+        }).catch(function (error) {
+          self.metrics_caches[systId][kpi_id] = [];
+          callback(error);
+        });
+      }, function (err) {
+        if (err) {
+          console.error('pushInstance error:', err);
+        }
+
+        self.metrics_caches[systId] = {};
+
+        if (cb) {
+          cb();
+        }
+      });
+    } else if (cb) {
+      cb();
+    }
+  },
+  // Set kpi and lables into caches for futur push
+  set: function (labelsnames, kpiname, value, system_id) {
+    var self = this;
+    var kpi = kpiname.replace(/-|\(|\)|\[|\]|\%|\+|\.|\s/g, '_'); // console.log('==== pshgtw set : '+system_id+' '+kpi+' >> self.metrics_caches[system_id]',self.metrics_caches[system_id])
+
+    var kpi_value = value == null ? 0 : isNaN(value) ? Math.round(parseInt(moment(value, 'YYYY/MM/DD hh:mm:ss').format('X'))) : Math.round(parseInt(value));
+    if (!self.metrics_caches[system_id][kpi]) self.metrics_caches[system_id][kpi] = []; // Check if KPI with same labels has already been submitting since the last pushInstance
+
+    const kpi_is_set_idx = self.metrics_caches[system_id][kpi].map(x => x.split(' ')[0]).indexOf(labelsnames
+    /*+' '+kpi_value*/
+    );
+
+    if (kpi_is_set_idx >= 0) {
+      // If so, update the value with the most recent one by deleting first, then inserting
+      self.metrics_caches[system_id][kpi].splice(kpi_is_set_idx, 1);
+    }
+
+    self.metrics_caches[system_id][kpi].push(labelsnames + ' ' + kpi_value);
+  },
+  // Delete last pushed metrics in Prometheus if connection to system (suid) is lost for (conn_retries_max) tentatives
+  del: function (jobname, sap_id) {
+    var self = this; // curl -X DELETE http://pushgateway.example.org:9091/metrics/job/some_job/instance/some_instance
+
+    axios.delete(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
+      instance: sap_id
+    })).then(function (response) {}) // .then(function(response){
+    //   console.log('del:',response)
+    // })
+    .catch(function (error) {
+      console.error('pshgtw::del::error :', error);
+    });
+  },
+  delSerie: function (jobname, matching_condition) {
+    var self = this; // curl -X DELETE http://pushgateway.example.org:9091/metrics/job/some_job/instance/some_instance
+
+    axios.delete(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(matching_condition)).then(function (response) {}) // .then(function(response){
+    //   console.log('del:',response)
+    // })
+    .catch(function (error) {
+      console.error('pshgtw::delSerie::error :', error);
+    });
+  },
+  delInstance: function (jobname, instance_id) {
+    var self = this; // curl -X DELETE http://pushgateway.example.org:9091/metrics/job/some_job/instance/some_instance
+
+    axios.delete(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
+      instance: instance_id
+    })).then(function (response) {}) // .then(function(response){
+    //   console.log('del:',response)
+    // })
+    .catch(function (error) {
+      console.error('pshgtw::delInstance::error :', error);
+    });
+  }
+}; // Export the class
+
+var pushcli = PushCli;
+
+var sapcontrol_operations = {
+  "ABAPGetComponentList": function (arg1, cb) {
+    this.ABAPGetComponentList(arg1, cb);
+  },
+  "GetProcessList": function (arg1, cb) {
+    this.GetProcessList(arg1, cb);
+  },
+  "GetAlerts": function (arg1, cb) {
+    this.GetAlerts(arg1, cb);
+  },
+  "GetAlertTree": function (arg1, cb) {
+    this.GetAlertTree(arg1, cb);
+  },
+  "GetEnvironment": function (arg1, cb) {
+    this.GetEnvironment(arg1, cb);
+  },
+  "GetVersionInfo": function (arg1, cb) {
+    this.GetVersionInfo(arg1, cb);
+  },
+  "GetQueueStatistic": function (arg1, cb) {
+    this.GetQueueStatistic(arg1, cb);
+  },
+  "GetInstanceProperties": function (arg1, cb) {
+    this.GetInstanceProperties(arg1, cb);
+  },
+  "ABAPGetWPTable": function (arg1, cb) {
+    this.ABAPGetWPTable(arg1, cb);
+  },
+  "Start": function (arg1, cb) {
+    this.Start(arg1, cb);
+  },
+  "Stop": function (arg1, cb) {
+    this.Stop(arg1, cb);
+  },
+  "RestartInstance": function (arg1, cb) {
+    this.RestartInstance(arg1, cb);
+  },
+  // "StartSystem": function ( arg1, cb) { this.StartSystem(arg1, cb ) },
+  // "StopSystem": function ( arg1, cb) { this.StopSystem(arg1, cb ) },
+  // "RestartSystem": function ( arg1, cb) { this.RestartSystem(arg1, cb ) },
+  "GetSystemInstanceList": function (arg1, cb) {
+    this.GetSystemInstanceList(arg1, cb);
+  },
+  "ABAPGetSystemWPTable": function (arg1, cb) {
+    this.ABAPGetSystemWPTable(arg1, cb);
+  },
+  "GetCallstack": function (arg1, cb) {
+    this.GetCallstack(arg1, cb);
+  },
+  "J2EEGetProcessList2": function (arg1, cb) {
+    this.J2EEGetProcessList2(arg1, cb);
+  },
+  "J2EEGetThreadList2": function (arg1, cb) {
+    this.J2EEGetThreadList2(arg1, cb);
+  },
+  "J2EEGetWebSessionList": function (arg1, cb) {
+    this.J2EEGetWebSessionList(arg1, cb);
+  },
+  "J2EEGetCacheStatistic2": function (arg1, cb) {
+    this.J2EEGetCacheStatistic2(arg1, cb);
+  },
+  "J2EEGetVMHeapInfo": function (arg1, cb) {
+    this.J2EEGetVMHeapInfo(arg1, cb);
+  },
+  "J2EEGetEJBSessionList": function (arg1, cb) {
+    this.J2EEGetEJBSessionList(arg1, cb);
+  },
+  "J2EEGetRemoteObjectList": function (arg1, cb) {
+    this.J2EEGetRemoteObjectList(arg1, cb);
+  },
+  "J2EEGetClusterMsgList": function (arg1, cb) {
+    this.J2EEGetClusterMsgList(arg1, cb);
+  },
+  "J2EEGetSharedTableInfo": function (arg1, cb) {
+    this.J2EEGetSharedTableInfo(arg1, cb);
+  },
+  "J2EEGetThreadCallStack": function (arg1, cb) {
+    this.J2EEGetThreadCallStack(arg1, cb);
+  },
+  "J2EEGetThreadTaskStack": function (arg1, cb) {
+    this.J2EEGetThreadTaskStack(arg1, cb);
+  },
+  "J2EEGetComponentList": function (arg1, cb) {
+    this.J2EEGetComponentList(arg1, cb);
+  },
+  "ICMGetThreadList": function (arg1, cb) {
+    this.ICMGetThreadList(arg1, cb);
+  },
+  "ICMGetConnectionList": function (arg1, cb) {
+    this.ICMGetConnectionList(arg1, cb);
+  },
+  "ICMGetCacheEntries": function (arg1, cb) {
+    this.ICMGetCacheEntries(arg1, cb);
+  },
+  "ICMGetProxyConnectionList": function (arg1, cb) {
+    this.ICMGetProxyConnectionList(arg1, cb);
+  },
+  "WebDispGetServerList": function (arg1, cb) {
+    this.WebDispGetServerList(arg1, cb);
+  },
+  "EnqGetLockTable": function (arg1, cb) {
+    this.EnqGetLockTable(arg1, cb);
+  },
+  "EnqGetStatistic": function (arg1, cb) {
+    this.EnqGetStatistic(arg1, cb);
+  }
+}; // f = function name
+// syst = _id, sid
+// instance = nr, hostname, features
+// t = type
+// e = entity id
+// c = customer (id + name)
+// restricted_kpis = array with for NAK only => to save only these KPIs in prometheus
+
+var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_id
+/*, company_id /*,customer*/
+, restricted_kpis, rule_id, callback) {
+  var that = this;
+
+  if (err) {
+    console.error('execution error of (' + f + '@' + syst.sid + ') :' + err && err.body); // delete prmths
+
+    callback();
+  } else {
+    switch (f) {
+      case 'GetAlerts':
+      case 'GetAlertTree':
+        // console.log('Result of (' + f + '@' + syst.sid + ')= ', result.tree.item);
+        var parent = -1;
+        var parents_name = [];
+        var end_nodes = [];
+        var tmp_nodes = [];
+        const mte_separator = that.kpiname_separator; // '_'
+        // const inactive_state = 'SAPControl-GRAY'
+
+        if (result.tree && result.tree.item) {
+          result.tree.item.forEach(element => {
+            if (element.parent > parent) {
+              parents_name.push({
+                idx: element.parent,
+                name: result.tree.item[element.parent].name,
+                status: result.tree.item[element.parent].ActualValue
+              });
+              const v = element.description.split(' '); // support values with 2 kpis: ex "Size:11280 in 	Used:11232"
+
+              if (v[0].indexOf(':') > 0) {
+                v.forEach(pair => {
+                  const vv = pair.split(':');
+
+                  if (vv.length == 2 && vv[1].match(/[0-9]+(\.[0-9]+)?/g)
+                  /* && element.ActualValue != inactive_state */
+                  ) {
+                      // console.log('1 valid :', vv)
+                      tmp_nodes = tmp_nodes.concat([create_node(parents_name, mte_separator, Object.assign(element, {
+                        name: element.name + mte_separator + vv[0]
+                      }), [vv[1]], t)]);
+                    }
+                });
+              } else {
+                // create only valid nodes (that only contains numbers)
+                if (v[0].match(/[0-9]+(\.[0-9]+)?/g)
+                /* && element.ActualValue != inactive_state */
+                ) {
+                    tmp_nodes = tmp_nodes.concat([create_node(parents_name, mte_separator, element, [v.reduce((acc, cur) => {
+                      return cur.match(/[0-9]+(\.[0-9]+)?/g) ? acc + cur : acc;
+                    }, ''), v[v.length - 1].replace(/\s|[0-9]/g, '', t)] // to support both "12121 23132" => "1212123132" and "1221 MB"
+                    )]);
+                  } // tmp_nodes = ( v[0].match(/\s+[0-9]+(\.[0-9]+)?/g ) /* && element.ActualValue != inactive_state */ ) ? 
+                //     [ create_node(parents_name, mte_separator, element, v) ] : []
+
+              }
+
+              parent = element.parent;
+            } else if (element.parent == parent) {
+              const v = element.description.split(' ');
+
+              if (v[0].indexOf(':') > 0) {
+                // console.log( "2. MULTIPLE VALUES :", v)
+                // support values with 2 kpis: ex "Size:11280 in 	Used:11232"
+                v.forEach(pair => {
+                  const vv = pair.split(':');
+
+                  if (vv.length == 2 && vv[1].match(/[0-9]+(\.[0-9]+)?/g)
+                  /* && element.ActualValue != inactive_state */
+                  ) {
+                      tmp_nodes = tmp_nodes.concat([create_node(parents_name, mte_separator, Object.assign(element, {
+                        name: element.name + mte_separator + vv[0]
+                      }), [vv[1]], t)]);
+                    }
+                });
+              } else {
+                // create only valid nodes (that only contains numbers)
+                if (v[0].match(/[0-9]+(\.[0-9]+)?/g)
+                /* && element.ActualValue != inactive_state */
+                ) {
+                    tmp_nodes = tmp_nodes.concat([create_node(parents_name, mte_separator, element, [v.reduce((acc, cur) => {
+                      return cur.match(/[0-9]+(\.[0-9]+)?/g) ? acc + cur : acc;
+                    }, ''), v[v.length - 1].replace(/\s|[0-9]/g, '', t)] // to support both "12121 23132" => "1212123132" and "1221 MB"
+                    )]);
+                  }
+              }
+            } else {
+              // element.parent < parent
+              end_nodes = end_nodes.concat(tmp_nodes);
+              var i = parents_name.length - 1;
+
+              while (i >= 0 && parents_name[i].idx > element.parent) {
+                parents_name.pop();
+                i--;
+              }
+
+              tmp_nodes = [];
+              parent = element.parent;
+            }
+          }); // console.log('Result of (' + f + '@' + syst.sid + ')= ');
+          // end_nodes/*.filter(x=>x.is_valid)*/.forEach(e => console.log(e))
+
+          if (!restricted_kpis || restricted_kpis.length == 0) {
+            end_nodes.forEach(e => {
+              if (e) {
+                // original worqloads version
+                // var labels = 'instance="'+syst._id+'",sid="'+ syst.sid+'",category="'+ e.category+'",type="'+ e.type+'",entity_id="'+ entity_id+'"'//,hostname="'+ instance.hostname+'"'
+                // Scaler with limited labels
+                var labels = 'instance="' + syst._id + '",sid="' + syst.sid + '",entity_id="' + entity_id + '",features="' + instance.features + '"'; //,hostname="'+ instance.hostname+'"'
+
+                if (instance.sn != undefined) labels += ',sn="' + instance.sn + '"';
+                if (rule_id != undefined) labels += ',rule_id="' + rule_id + '"';
+                if (instance.hostname != undefined) labels += ',hostname="' + instance.hostname + '"';
+                if (instance.ip_internal != undefined) labels += ',ip_internal="' + instance.ip_internal + '"';
+                if (e.filesystem != undefined) labels += ',filesystem="' + e.filesystem + '"';
+                if (e.network_int != undefined) labels += ',network_int="' + e.network_int + '"';
+                if (e.database != undefined) labels += ',database="' + e.database + '"';
+                if (e.db_datafile != undefined) labels += ',db_datafile="' + e.db_datafile + '"';
+                that.pushgtw_cli.set('{' + labels + '}', def_kpi_name(that.kpi_prefix_sap, mte_separator, e), e.value, syst._id);
+              }
+            });
+          } else {
+            end_nodes.forEach(e => {
+              if (e) {
+                var kpi_name = def_kpi_name(that.kpi_prefix_sap, mte_separator, e);
+
+                if (restricted_kpis.indexOf(kpi_name) >= 0) {
+                  // original worqloads version
+                  // var labels = 'instance="'+syst._id+'",sid="'+ syst.sid+'",category="'+ e.category+'",type="'+ e.type+'",entity_id="'+ entity_id+'"'//,hostname="'+ instance.hostname+'"'
+                  // Scaler with limited labels
+                  var labels = 'instance="' + syst._id + '",sid="' + syst.sid + '",entity_id="' + entity_id + '",features="' + instance.features + '"'; //,hostname="'+ instance.hostname+'"'
+                  // if (instance.features != undefined) labels += ',features="'+ instance.features +'"'
+
+                  if (instance.sn != undefined) labels += ',sn="' + instance.sn + '"';
+                  if (rule_id != undefined) labels += ',rule_id="' + rule_id + '"'; // if (customer != undefined) labels += ',customer="'+ customer.id+'__'+customer.name+'"'
+
+                  if (instance.hostname != undefined) labels += ',hostname="' + instance.hostname + '"';
+                  if (instance.ip_internal != undefined) labels += ',ip_internal="' + instance.ip_internal + '"';
+                  if (e.filesystem != undefined) labels += ',filesystem="' + e.filesystem + '"';
+                  if (e.network_int != undefined) labels += ',network_int="' + e.network_int + '"';
+                  if (e.database != undefined) labels += ',database="' + e.database + '"';
+                  if (e.db_datafile != undefined) labels += ',db_datafile="' + e.db_datafile + '"';
+                  that.pushgtw_cli.set('{' + labels + '}', kpi_name, e.value, syst._id);
+                }
+              }
+            });
+          } // console.log('Result of (' + f + '@' + syst.sid + ')= ', end_nodes);
+
+        } // else console.log('non result.tree.item')
+
+
+        callback();
+        break;
+
+      case 'ABAPGetWPTable':
+        // ~= SM50 = current instance
+        // console.log('Result of (' + f + '@' + syst.sid + ')= ', result.workprocess.item);
+        const types = ['dia', 'upd', 'up2', 'enq', 'btc', 'spo'];
+        const statuses = ['wait', 'hold', 'run', 'stop', 'ended', 'new', 'down'];
+        var res = {};
+
+        const def_kpi_name_ABAPGetWPTable = function (t, elt_Status) {
+          if (t.toUpperCase() != 'ALL') {
+            return that.kpi_prefix_sap + t.toLowerCase() + '_workprocess_' + elt_Status + '__nb';
+          } else {
+            return that.kpi_prefix_sap + '_workprocess_' + elt_Status + '__nb';
+          }
+        }; // init kpi values
+
+
+        types.forEach(ty => {
+          statuses.forEach(s => {
+            res[def_kpi_name_ABAPGetWPTable(t, s)] = res[def_kpi_name_ABAPGetWPTable(t, s)] ? Object.assign({}, res[def_kpi_name_ABAPGetWPTable(t, s)], {
+              [ty]: 0
+            }) : {
+              [ty]: 0
+            };
+          });
+        });
+
+        if (result.workprocess && result.workprocess.item) {
+          result.workprocess.item.forEach(i => {
+            if (res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())] && res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())][i.Typ.toLowerCase()] != undefined) {
+              res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())][i.Typ.toLowerCase()]++;
+            } else {
+              console.error('not definition for ', def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase()));
+            }
+          });
+        }
+
+        var labels = 'instance="' + syst._id + '",sid="' + syst.sid + '",type="' + t + '",entity_id="' + entity_id + '"'; //,hostname="'+ instance.hostname+'"'
+
+        if (instance.hostname != undefined) labels += ',hostname="' + instance.hostname + '"';
+        if (instance.ip_internal != undefined) labels += ',ip_internal="' + instance.ip_internal + '"';
+        if (instance.sn != undefined) labels += ',sn="' + instance.sn + '"';
+        if (rule_id != undefined) labels += ',rule_id="' + rule_id + '"';
+        Object.keys(res).forEach(k => {
+          if (!restricted_kpis || restricted_kpis.length == 0) {
+            types.forEach(ty => {
+              that.pushgtw_cli.set('{' + labels + ',workproces="' + ty + '"}', k, // kpi name
+              res[k][ty], // value
+              syst._id);
+            });
+          } else {
+            if (restricted_kpis.indexOf(k) >= 0) {
+              types.forEach(ty => {
+                that.pushgtw_cli.set('{' + labels + ',workproces="' + ty + '"}', k, // kpi name
+                res[k][ty], // value
+                syst._id);
+              });
+            }
+          }
+        });
+        callback();
+        break;
+
+      case 'ABAPGetSystemWPTable':
+        // ~= SM66 - all instances
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.workprocess.item);
+        callback();
+        break;
+
+      case 'EnqGetStatistic':
+        // console.log('Result of (' + f + '@' + syst.sid + ')= ', result);
+        const def_kpi_name_EnqGetStatistic = function (t) {
+          if (t.toLowerCase().match(/.*time$/)) {
+            return that.kpi_prefix_sap + 'enqueue_' + t.toLowerCase().replace(/[^a-zA-Z0-9]/g, '_') + '__sec';
+          } else {
+            return that.kpi_prefix_sap + 'enqueue_' + t.toLowerCase().replace(/[^a-zA-Z0-9]/g, '_') + '__nb';
+          }
+        };
+
+        var labels = 'instance="' + syst._id + '",sid="' + syst.sid + '",type="' + t + '",company_id="' + company_id + '",entity_id="' + entity_id + '"'; //,hostname="'+ instance.hostname+'"'
+
+        if (instance.features != undefined) labels += ',features="' + instance.features + '"';
+        if (instance.hostname != undefined) labels += ',hostname="' + instance.hostname + '"';
+        if (instance.ip_internal != undefined) labels += ',ip_internal="' + instance.ip_internal + '"';
+        if (instance.sn != undefined) labels += ',sn="' + instance.sn + '"';
+        if (rule_id != undefined) labels += ',rule_id="' + rule_id + '"';
+        Object.keys(result).forEach(key => {
+          // console.log(' >>> ' + def_kpi_name_EnqGetStatistic(key) + ' : '+result[key])
+          that.pushgtw_cli.set('{' + labels + '}', def_kpi_name_EnqGetStatistic(key), // kpi name
+          result[key], // value
+          syst._id);
+        }); // console.log('Result of (' + f + '@' + s.sid + ')= ', result);
+
+        callback();
+        break;
+
+      case 'J2EEGetProcessList2':
+      case 'GetProcessList':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.process.item);
+        callback();
+        break;
+
+      case 'J2EEGetComponentList':
+      case 'ABAPGetComponentList':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.component.item);
+        callback();
+        break;
+
+      case 'GetQueueStatistic':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.queue.item);
+        callback();
+        break;
+
+      case 'GetVersionInfo':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.version.item);
+        callback();
+        break;
+
+      case 'GetSystemInstanceList':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.instance.item);
+        callback();
+        break;
+
+      case 'J2EEGetClusterMsgList':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.msg);
+        callback();
+        break;
+
+      case 'GetCallstack':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.lines.item);
+        callback();
+        break;
+
+      case 'GetEnvironment':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.env.item);
+        callback();
+        break;
+
+      case 'ICMGetConnectionList':
+      case 'ICMGetProxyConnectionList':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.connection);
+        callback();
+        break;
+
+      case 'ICMGetCacheEntries':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.entry.item);
+        callback();
+        break;
+
+      case 'ICMGetThreadList':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.thread.item);
+        callback();
+        break;
+
+      case 'EnqGetLockTable':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.lock);
+        callback();
+        break;
+
+      case 'GetInstanceProperties':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.properties.item);
+        callback();
+        break;
+
+      case 'J2EEGetCacheStatistic2':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.cache.item);
+        callback();
+        break;
+
+      case 'J2EEGetThreadList2':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.thread.item);
+        callback();
+        break;
+
+      case 'J2EEGetSharedTableInfo':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.jsf.item);
+        callback();
+        break;
+
+      case 'J2EEGetVMHeapInfo':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.heap.item);
+        callback();
+        break;
+
+      case 'J2EEGetThreadCallStack':
+      case 'J2EEGetThreadTaskStack':
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result.name, ' ', result.lines.items);
+        callback();
+        break;
+
+      default:
+        console.log('Result of (' + f + '@' + syst.sid + ')= ', result);
+        callback();
+    }
+  }
+};
+
+const def_kpi_name = function (kpi_prefix_sap, mte_separator, elt) {
+  var new_unit = elt.unit.replace(/\%/g, 'percent').replace(/\//g, '_per_').replace(/\W+/g, '').toLowerCase();
+  if (new_unit == '') new_unit = 'nb'; // if (t.toUpperCase() != 'ALL') {
+  //   // undefinedabap_CPUundefinedCPU_Utilization__percent
+  //   return that.kpi_prefix_sap + t.toLowerCase() +'_' + elt.kpi.replace(/\W+/g, '')+'__'+new_unit
+  // } else {
+
+  return kpi_prefix_sap + elt.kpi.replace(/\W+/g, mte_separator) + '__' + new_unit; // }
+}; // Function to create the node
+
+
+const create_node = function (p, sep, e, v, t) {
+  var res = {
+    value: isNaN(v[0].replace(/\s/g, '')) ? 0 : Math.round(parseInt(v[0].replace(/\s/g, ''))),
+    type: t,
+    unit: v.length > 1 && v[1] || ''
+  };
+
+  if (e.parent > 1 // && result.tree.item[e.parent].ActualValue != inactive_state
+  ) {
+      // console.log('parents:',p)
+      if (p.length >= 2) {
+        switch (p[1].name) {
+          case 'OperatingSystem':
+            if (p.length >= 4) {
+              switch (p[2].name) {
+                case 'Filesystems':
+                  return Object.assign(res, {
+                    filesystem: p[3].name,
+                    category: 'OperatingSystem',
+                    kpi: 'Disk_' + e.name
+                  });
+
+                case 'Lan':
+                  return Object.assign(res, {
+                    network_int: p[3].name,
+                    category: 'OperatingSystem',
+                    kpi: 'Network_' + e.name
+                  });
+
+                default:
+                  return Object.assign(res, {
+                    category: p[Math.max(p.length - 2, 1)].name,
+                    kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+                  });
+              }
+            } else {
+              return Object.assign(res, {
+                category: p[Math.max(p.length - 2, 1)].name,
+                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+              });
+            }
+
+          case 'Microsoft SQL Server':
+            if (p.length >= 4) {
+              switch (p[2].name) {
+                case 'Space management':
+                  const dbf = p[4].name.split('/').pop();
+                  return Object.assign(res, {
+                    database: p[3].name.split(':')[1],
+                    db_datafile: dbf,
+                    category: p[2].name,
+                    kpi: e.name.replace(new RegExp(dbf.replace(/(\.[a-z]{3})$/gi, '') + ' ', "gi"), '')
+                  });
+
+                case 'Performance':
+                  if (p[3].name == 'I/O') {
+                    return Object.assign(res, {
+                      db_datafile: e.name.substring(21, e.name.length),
+                      category: p[2].name,
+                      kpi: p[3].name
+                    });
+                  } else {
+                    return Object.assign(res, {
+                      category: p[2].name,
+                      kpi: p[3].name + sep + e.name //p.slice( Math.max(p.length - 1, 0), p.length ).map(x=>x.name).join(sep) + sep + e.name,
+
+                    });
+                  }
+
+                default:
+                  return Object.assign(res, {
+                    category: p[Math.max(p.length - 2, 1)].name,
+                    kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+                  });
+              }
+            } else {
+              return Object.assign(res, {
+                category: p[Math.max(p.length - 2, 1)].name,
+                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+              });
+            }
+
+          case 'InstanceAsTask':
+          case 'Server Configuration':
+            // we only save in promtheus numerical values
+            if (v[0].match(/^([0-9]|\s)+(\.[0-9]+)?$/g)) {
+              return Object.assign(res, {
+                category: p[1].name,
+                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+              });
+            }
+
+            break;
+
+          case 'R3Services':
+            if (p.length >= 3 && p[2].name == 'ICM') {
+              return Object.assign(res, {
+                category: 'R3Services',
+                kpi: p.slice(Math.max(p.length - 2, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+              });
+            } else {
+              return Object.assign(res, {
+                category: 'R3Services',
+                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+              });
+            }
+
+          default:
+            return Object.assign(res, {
+              category: p[Math.max(p.length - 2, 1)].name,
+              kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+            });
+        }
+      }
+      /*else {
+          console.log('cas non gere:',e)
+      }*/
+
+    } else {
+    return null;
+  }
+};
+
+var sapctrl_helpers = {
+  sapcontrol_operations: sapcontrol_operations,
+  sapctrl_process_func: sapctrl_process_func
+};
+
+/**
+ * AWSMng class
+ * ==================
+ */
+// External librairies
+// ----------------------------------------------------------------------------   
+// , axios = require('axios')
+// , fs = require('fs')
+// , moment = require('moment')
+// Internal librairies
+// -----------------------------------------------------------------------------
+// Class definition
+// ----------------------------------------------------------------------------
+// Constructor
+
+function AWSMng() {
+  // console.log('D AWSMng! Constructor begins ')
+  var self = this;
+  this.ec2 = new awsSdk.EC2({
+    apiVersion: '2016-11-15',
+    region: 'eu-west-3'
+  });
+  this.mappings_ip_id = {};
+  this._errors = {
+    'ec2_not_found': 'No EC2 instance found',
+    'credentials_not_loaded': 'AWS credentials keys not loadded',
+    'ec2_not_started': 'Error starting EC2 instance',
+    'ec2_not_stopped': 'Error stopping EC2 instance'
+  };
+  awsSdk.config.getCredentials(function (err) {
+    if (err) console.error(self._errors.credentials_not_loaded + ':', err.stack); // credentials not loaded
+    // else {
+    //   console.log("Access key:", AWS.config.credentials.accessKeyId);
+    //   console.log("Secret access key:", AWS.config.credentials.secretAccessKey);
+    // }
+  });
+} // Class definition
+
+
+AWSMng.prototype = {
+  Constructor: AWSMng,
+  // {
+  //     'ip_internal': inst_with_ip && inst_with_ip.ip_internal,
+  //     'hostname': x.hostname,
+  //     'instancenr': nr,
+  //     'features': x.features.split('|'),
+  //     'status': x.dispstatus == that._sap_statuses.green ? 1 :
+  //       x.dispstatus == that._sap_statuses.yellow ? -1 : 0
+  //   }
+  // list EC2 instances in same VPC
+  // get list of EC2 instances private IP, instance-type, instance-id from subnet & instancetype
+  discoverEC2Instances: function (vpc_id, callback) {
+    var that = this;
+    async.waterfall([function (waterfall_cb) {
+      console.log("discoverEC2Instances filter:", vpc_id);
+      that.ec2.describeInstances({
+        Filters: [{
+          Name: "vpc-id",
+          Values: [vpc_id]
+        }]
+      }, waterfall_cb);
+    }, function (ec2s, waterfall_cb) {
+      if (ec2s && ec2s.Reservations) {
+        let list_private_props = ec2s.Reservations.reduce((r_acc, r_curr) => {
+          return r_acc.concat(r_curr.Instances.reduce((i_acc, i_curr) => {
+            i_acc.push({
+              "vpc_id": vpc_id,
+              "ip_internal": i_curr.PrivateIpAddress,
+              "cloud_instance_id": i_curr.InstanceId,
+              "cloud_instance_type": i_curr.InstanceType,
+              "is_sap": false
+            });
+            return i_acc;
+          }, []));
+        }, []);
+        waterfall_cb(null, list_private_props);
+      } else {
+        waterfall_cb('nothing found');
+      }
+    }, function (list_props, waterfall_cb) {
+      async.eachOf(list_props, (prop, idx, each_cb) => {
+        let request = http.get('http://' + prop.ip_internal + ':1128/SAPHostControl/?wsdl', {
+          timeout: 1000
+        }, response => {
+          if (response && response.statusCode == 200) {
+            list_props[idx].is_sap = true;
+            each_cb();
+          }
+        });
+        request.on('timeout', request.abort);
+        request.on("error", e => {
+          // console.error('error:', e)
+          each_cb();
+        });
+      }, err => {
+        waterfall_cb(null, list_props);
+      });
+    }], function (err, list_private_props) {
+      if (err) {
+        console.error('E discoverSAPInstances error:', err, list_private_props);
+        callback();
+      } else {
+        console.log('list_private_props:', list_private_props);
+        callback(null, list_private_props);
+      }
+    });
+  },
+  // get list of EC2 instances private IP, instance-type, instance-id from subnet & instancetype
+  getEC2PrivateProps: function (filters, callback) {
+    var self = this;
+    async.waterfall([function (waterfall_cb) {
+      self.ec2.describeInstances({
+        Filters: [{
+          Name: "vpc-id",
+          Values: [filters.vpc_id]
+        } // ,
+        // {
+        //     Name: "instance-type",
+        //     Values: [filters.instance_type]
+        // },
+        ]
+      }, waterfall_cb);
+    }, function (ec2s, waterfall_cb) {
+      // if (ec2s && ec2s.Reservations && ec2.Reservations[0] && ec2.Reservations[0].Instances && ec2.Reservations[0].Instances[0]) {
+      //     waterfall_cb(null, ec2.Reservations[0].Instances[0].InstanceId)
+      if (ec2s && ec2s.Reservations) {
+        let list_private_props = ec2s.Reservations.reduce((r_acc, r_curr) => {
+          return r_acc.concat(r_curr.Instances.reduce((i_acc, i_curr) => {
+            i_acc.push({
+              "ip_internal": i_curr.PrivateIpAddress,
+              "cloud_instance_id": i_curr.InstanceId,
+              "cloud_instance_type": i_curr.InstanceType
+            });
+            return i_acc;
+          }, []));
+        }, []);
+        waterfall_cb(null, list_private_props);
+      } else {
+        waterfall_cb(self._errors.ec2_not_found);
+      }
+    }], function (err, list_private_props) {
+      if (err) {
+        console.error('E getEC2ID error:', err, list_private_props);
+        callback();
+      } else {
+        callback(list_private_props);
+      }
+    });
+  },
+  isEC2sRunning: function (ips, callback) {
+    var self = this;
+    async.waterfall([function (waterfall_cb) {
+      // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeInstanceStatus-property
+      self.ec2.describeInstanceStatus({
+        // InstanceIds: ids
+        InstanceIds: Object.keys(self.mappings_ip_id).filter(key_ip => ips.indexOf(key_ip) >= 0).map(key => self.mappings_ip_id[key]),
+        IncludeAllInstances: true
+      }, waterfall_cb);
+    }, function (inst_statuses, waterfall_cb) {
+      var res_statuses = {};
+      inst_statuses.InstanceStatuses.forEach(status => {
+        res_statuses[status.InstanceId] = status.InstanceState.Code == 16 // 0 : pending, 16 : running, 32 : shutting-down, 48 : terminated, 64 : stopping, 80 : stopped
+        && status.InstanceStatus.Status == "ok" && status.SystemStatus.Status == "ok";
+      });
+      waterfall_cb(null, res_statuses);
+    }], function (err, list_instance_status) {
+      if (err) {
+        console.error('E isEC2sRunning error:', err);
+      }
+
+      callback(list_instance_status);
+    });
+  },
+  isEC2Running: function (ip, callback) {
+    var self = this;
+    self.getEC2ID(ip, ec2id => {
+      if (ec2id) {
+        self.isEC2RunningFromID(ec2id, callback);
+      } else {
+        console.error(self._errors.ec2_not_found);
+        callback();
+      }
+    });
+  },
+  isEC2RunningFromID: function (ec2id, callback) {
+    var self = this;
+    async.waterfall([function (waterfall_cb) {
+      // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeInstanceStatus-property
+      self.ec2.describeInstanceStatus({
+        // InstanceIds: ids
+        InstanceIds: [ec2id],
+        IncludeAllInstances: true
+      }, waterfall_cb);
+    }, function (inst_status, waterfall_cb) {
+      if (inst_status.InstanceStatuses && inst_status.InstanceStatuses[0]) {
+        // 0 : pending, 16 : running, 32 : shutting-down, 48 : terminated, 64 : stopping, 80 : stopped
+        waterfall_cb(null, inst_status.InstanceStatuses[0].InstanceState.Code == 16 && inst_status.InstanceStatuses[0].InstanceStatus.Status == "ok" && inst_status.InstanceStatuses[0].SystemStatus.Status == "ok");
+      } else {
+        waterfall_cb(self._errors.ec2_not_found);
+      }
+    }], function (err, instance_status) {
+      if (err) {
+        console.error('E isEC2RunningFromID error:', err);
+      }
+
+      callback(instance_status);
+    });
+  },
+  isEC2Stopped: function (ip, callback) {
+    var self = this;
+    self.getEC2ID(ip, ec2id => {
+      if (ec2id) {
+        self.isEC2StoppedFromID(ec2id, callback);
+      } else {
+        console.error(self._errors.ec2_not_found);
+        callback();
+      }
+    });
+  },
+  isEC2StoppedFromID: function (ec2id, callback) {
+    var self = this;
+    async.waterfall([function (waterfall_cb) {
+      // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeInstanceStatus-property
+      self.ec2.describeInstanceStatus({
+        // InstanceIds: ids
+        InstanceIds: [ec2id],
+        IncludeAllInstances: true
+      }, waterfall_cb);
+    }, function (inst_status, waterfall_cb) {
+      if (inst_status.InstanceStatuses && inst_status.InstanceStatuses[0]) {
+        waterfall_cb(null, inst_status.InstanceStatuses[0].InstanceState.Code == 80);
+      } else {
+        waterfall_cb(self._errors.ec2_not_found);
+      }
+    }], function (err, instance_status) {
+      if (err) {
+        console.error('E isEC2StoppedFromID error:', err);
+      }
+
+      callback(instance_status);
+    });
+  },
+  // get single ec2 instance from IP
+  getEC2ID: function (new_ip, callback) {
+    var self = this;
+
+    if (Object.keys(self.mappings_ip_id).indexOf(new_ip) < 0) {
+      async.waterfall([function (waterfall_cb) {
+        self.ec2.describeInstances({
+          Filters: [{
+            Name: "private-ip-address",
+            Values: [new_ip]
+          }]
+        }, waterfall_cb);
+      }, function (ec2, waterfall_cb) {
+        if (ec2 && ec2.Reservations && ec2.Reservations[0] && ec2.Reservations[0].Instances && ec2.Reservations[0].Instances[0]) {
+          waterfall_cb(null, ec2.Reservations[0].Instances[0].InstanceId);
+        } else {
+          waterfall_cb(self._errors.ec2_not_found);
+        }
+      }], function (err, instance_id) {
+        if (err || !instance_id) {
+          console.error('E getEC2ID error:', err, instance_id);
+          callback();
+        } else {
+          self.mappings_ip_id[new_ip] = instance_id;
+          callback(instance_id);
+        }
+      });
+    } else {
+      callback(self.mappings_ip_id[new_ip]);
+    }
+  },
+  // get ec2 instance id & instance type
+  // save them in buffer for future quickier accesses
+  getEC2ID_Type: function (new_ip, callback) {
+    var self = this;
+    async.waterfall([function (waterfall_cb) {
+      self.ec2.describeInstances({
+        Filters: [{
+          Name: "private-ip-address",
+          Values: [new_ip]
+        }]
+      }, waterfall_cb);
+    }, function (ec2, waterfall_cb) {
+      if (ec2 && ec2.Reservations && ec2.Reservations[0] && ec2.Reservations[0].Instances && ec2.Reservations[0].Instances[0]) {
+        waterfall_cb(null, ec2.Reservations[0].Instances[0]);
+      } else {
+        waterfall_cb(self._errors.ec2_not_found);
+      }
+    }], function (err, instance_details) {
+      if (err) {
+        console.error('E getEC2ID_Type error', err);
+        callback();
+      } else {
+        self.mappings_ip_id[new_ip] = instance_details.InstanceId;
+        callback({
+          instance_id: instance_details.InstanceId,
+          instance_type: instance_details.InstanceType
+        });
+      }
+    });
+  },
+  stopEC2: function (ip, callback) {
+    var self = this; // check first if ec2 instance is already stopped => nothing to do
+
+    self.getEC2ID(ip, ec2id => {
+      if (ec2id) {
+        self.isEC2StoppedFromID(ec2id, is_stopped => {
+          if (is_stopped) {
+            callback();
+          } else {
+            self.ec2.stopInstances({
+              InstanceIds: [ec2id]
+            }, err => {
+              if (err) {
+                console.error(self._errors.ec2_not_stopped, err); // if ec2 is already stopped, do not consider it as error
+
+                callback(self._errors.ec2_not_stopped);
+              } else callback();
+            });
+          }
+        });
+      } else callback(self._errors.ec2_not_stopped);
+    });
+  },
+  startEC2: function (ip, callback) {
+    var self = this;
+    self.getEC2ID(ip, ec2id => {
+      if (ec2id) {
+        self.isEC2RunningFromID(ec2id, is_running => {
+          if (is_running) {
+            callback();
+          } else {
+            self.ec2.startInstances({
+              InstanceIds: [ec2id]
+            }, err => {
+              if (err) {
+                console.error(self._errors.ec2_not_started, err);
+                callback(self._errors.ec2_not_started);
+              } else callback();
+            });
+          }
+        });
+      } else callback(self._errors.ec2_not_started);
+    });
+  } // stopEC2s: function (ips, callback) {
+  //     var self = this
+  //     self.ec2.stopInstances({
+  //         InstanceIds: Object.keys(self.mappings_ip_id).filter( (key_ip) => ips.indexOf(key_ip) >= 0 ).map( key => self.mappings_ip_id[key])
+  //     }, callback)
+  // },
+  // startEC2s: function (ips, callback) {
+  //     var self = this
+  //     self.ec2.startInstances({
+  //         InstanceIds: Object.keys(self.mappings_ip_id).filter( (key_ip) => ips.indexOf(key_ip) >= 0 ).map( key => self.mappings_ip_id[key])
+  //     }, callback)
+  // },
+  // getEC2IDs: function (new_ips, callback) {
+  //     var self = this
+  //     if (new_ips && new_ips.length > 0) {
+  //         const dedup_ips = new_ips.filter( i => Object.keys(self.mappings_ip_id).indexOf(i) < 0)
+  //         if (dedup_ips.length > 0) {
+  //             async.waterfall([
+  //                 function(waterfall_cb) {
+  //                     self.ec2.describeInstances({
+  //                         Filters: [
+  //                             {
+  //                                 Name: "private-ip-address",
+  //                                 Values: dedup_ips
+  //                             }
+  //                         ]
+  //                     }, waterfall_cb)
+  //                 },
+  //                 function (ec2s, waterfall_cb) {
+  //                     const instanceIds = {};
+  //                     for (const reservation of ec2s.Reservations) {
+  //                         for (const instance of reservation.Instances) {
+  //                             instanceIds[ instance.PrivateIpAddress ] = instance.InstanceId 
+  //                         }
+  //                     }
+  //                     waterfall_cb(null, instanceIds)
+  //                 }
+  //             ], function(err, list_instance_ids) {
+  //                 if (err) {
+  //                     console.error(' getEC2s error:', err)
+  //                 }
+  //                 self.mappings_ip_id = Object.assign(self.mappings_ip_id, list_instance_ids)
+  //                 callback(list_instance_ids)
+  //             })
+  //         } else {
+  //             callback([])
+  //         }
+  //     } else {
+  //         callback([])
+  //     }
+  // },
+  // Get instance ids by region, state name, private ips v4
+  // getEc2InstanceIds: async function (ec2Obj, stateName, ips) {
+  //     try {
+  //         const filters = [
+  //             {
+  //                 Name: "instance-state-name",
+  //                 Values: [ stateName ]
+  //             },
+  //             {
+  //                 Name: "private-ip-address",
+  //                 Values: [ ips ]
+  //             }
+  //         ];
+  //         const ec2Instances = await ec2Obj.describeInstances({
+  //             Filters: filters
+  //         }).promise();
+  //         const instanceIds = [];
+  //         for (const reservation of ec2Instances.Reservations) {
+  //             for (const instance of reservation.Instances) {
+  //                 instanceIds.push(
+  //                     instance.InstanceId
+  //                     // {
+  //                     // id: instance.InstanceId,
+  //                     // region: instance.AvailabilityZone
+  //                     // }
+  //                 )
+  //             }
+  //         }
+  //         return instanceIds;
+  //     } catch (e) {
+  //         throw e;
+  //     }
+  // },
+  // stopRunningEC2Instances: function (ec2Obj, instanceIds) {
+  //     return ec2Obj.stopInstances({
+  //         InstanceIds: instanceIds
+  //     }).promise();
+  // },
+  // startStoppedEc2Instances: function (ec2Obj, instanceIds) {
+  //     return ec2Obj.startInstances({
+  //         InstanceIds: instanceIds
+  //     }).promise();
+  // },
+  // handleStoppingEc2Instances: async function (ips) {
+  //     try {
+  //         console.log('Stopping instances task started..')
+  //         const ec2Obj = new AWS.EC2({apiVersion: '2016-11-15'})
+  //         const ec2InstanceIds = await getEc2InstanceIds(ec2Obj, 'running', ips);
+  //         console.log(region, ': ', ec2InstanceIds);
+  //         if (!ec2InstanceIds || ec2InstanceIds.length === 0) {
+  //             console.log('No instance for region ', region);
+  //             continue;
+  //         }
+  //         await stopRunningEC2Instances(ec2Obj, ec2InstanceIds);
+  //         console.log('Stopping task completed. Instances: ', ec2InstanceIds, '& Region: ', region);
+  //     } catch (e) {
+  //         throw e;
+  //     }
+  // },
+  // handleStartingEc2Instances: async function () {
+  //     try {
+  //         console.log('Starting instances task started..')
+  //         for (const region of EC2_REGIONS) {
+  //             const ec2Obj = new AWS.EC2({
+  //                 region
+  //             })
+  //             const ec2InstanceIds = await getEc2InstanceIds(ec2Obj, 'stopped', TAGS);
+  //             console.log(region, ': ', ec2InstanceIds);
+  //             if (!ec2InstanceIds || ec2InstanceIds.length === 0) {
+  //                 console.log('No instance for region ', region);
+  //                 continue;
+  //             }
+  //             await startStoppedEc2Instances(ec2Obj, ec2InstanceIds);
+  //             console.log('Starting task completed. Instances: ', ec2InstanceIds, ' & Region ', region);
+  //         }
+  //     } catch (e) {
+  //         throw e;
+  //     }
+  // },
+  // exports.handler = async (event) => {
+  //     try {
+  //         console.log("Received event: ", JSON.stringify(event, null, 2));
+  //         if (event.action === 'start') {
+  //             await handleStartingEc2Instances();
+  //         }
+  //         if (event.action === 'stop') {
+  //             await handleStoppingEc2Instances();
+  //         }
+  //         return;
+  //     } catch (e) {
+  //         throw e;
+  //     }
+  // }
+  // Collect AWS cloud KPI
+  // _collect_aws : function (vm, metric) { // AWS collect
+  //     var params = {
+  //         MetricDataQueries: [ /* required */
+  //             {
+  //             // Id: 'aiyzeorezlbkAz', /* required */
+  //             Id: (vm+metric).replace('-','_'), /* required */
+  //             MetricStat: {
+  //                 Metric: { /* required */
+  //                 Dimensions: [
+  //                     {
+  //                     Name: 'InstanceId',
+  //                     Value: vm
+  //                     },
+  //                     /* more items */
+  //                 ],
+  //                 MetricName: metric,
+  //                 Namespace: 'AWS/EC2',
+  //                 },
+  //                 Period: 10, /* required */
+  //                 Stat: 'Average', /* required */
+  //                 Unit: 'Percent'
+  //             },
+  //             ReturnData: true 
+  //             },
+  //             /* more items */
+  //         ],
+  //         StartTime: moment().add(-10,'m').unix(),
+  //         EndTime:  moment().add(-5,'m').unix(),
+  //         // StartTime: new Date((new Date).getTime() - 15*60000),
+  //         // EndTime:  new Date(),
+  //         MaxDatapoints: 10000,
+  //         // NextToken: 'STRING_VALUE',
+  //         ScanBy: 'TimestampAscending'
+  //     };
+  //     self.aws.cloudwatch.getMetricData(params, function(err, data) {
+  //         if (err) console.log('cloudwatch error: ', err, err.stack); // an error occurred
+  //         else {
+  //             self.pushgtw_cli.set(
+  //                 '{hostname="'+ vm+'"}',
+  //                 self._cleanKpiName(metric),
+  //                 data.MetricDataResults[0].Values[0],
+  //                 vm)
+  //         }
+  //     });
+  //     self.pushgtw_cli.pushInstance(self.cloud_job[self.cloud_type], vm)
+  // },
+
+}; // Export the class
+
+var awsmng = AWSMng;
+
+/**
+ * Logger class
+ * all methods called with .call to get access to __DEBUG__ properties of caller 
+ * ===============================================================================
+ * that.logger.call(that, that.logger.LOG_LEVEL_ERROR, '' )
+ */
+// Class definition
+// ----------------------------------------------------------------------------
+// Constructor
+function Logger(global_log_level = 1) {
+  this.global_log_level = global_log_level;
+  this.__DEBUG__ = false;
+  this.LOG_LEVEL_ERROR = 0;
+  this.LOG_LEVEL_MIN = 1; // value by defaut
+
+  this.LOG_LEVEL_INFO = 2;
+  this.LOG_LEVEL_DEBUG = 3;
+  this.level_letter = ['E', 'M', 'I', 'D'];
+  this.separator = ' :';
+} // Class definition
+
+
+Logger.prototype = {
+  Constructor: Logger,
+  // msg_lvl: number 0,1,2
+  // msg: string, object,...
+  log: function (msg_lvl) {
+    var self = this;
+
+    function _prefix(lvl) {
+      switch (lvl) {
+        case self.LOG_LEVEL_ERROR:
+          return 'E' + self.separator + new Date().toJSON() + self.separator;
+
+        case self.LOG_LEVEL_MIN:
+          return 'M' + self.separator + new Date().toJSON() + self.separator;
+
+        case self.LOG_LEVEL_INFO:
+          return 'I' + self.separator + new Date().toJSON() + self.separator;
+
+        case self.LOG_LEVEL_DEBUG:
+          return 'D' + self.separator + new Date().toJSON() + // self.separator +
+          // __function +
+          // self.separator +
+          // __line +
+          self.separator;
+
+        default:
+          return '';
+      }
+    } // display log msg only if msg level has a lesser/equal verbosity than global log level *OR* DEBUG mode is activated
+
+
+    if (msg_lvl <= self.global_log_level || self.__DEBUG__) {
+      Array.prototype.splice.call(arguments, 0, 1, _prefix(msg_lvl));
+      console.log.apply(null, Array.prototype.slice.call(arguments));
+    }
+  },
+  debug: function (on_off) {
+    console.log("I switching debug mode " + on_off ? 'ON' : 'OFF');
+    this.__DEBUG__ = on_off;
+  }
+}; // Export the class
+
+var logger = Logger;
+
+var rdscmds = {
+  "APPEND": "r32efa73bcdf4efd261c9",
+  "ASKING": "r53eebe4bcfc8e4e11765",
+  "AUTH": "r59166c85971605a74b9e",
+  "BGREWRITEAOF": "r977f34a23a4c7dafd711",
+  "BGSAVE": "r8fbddd3ad25e66b66d75",
+  "BITCOUNT": "rf831452f1b8c742fead0",
+  "BITFIELD": "re8eece2435bbe0e78f2b",
+  "BITOP": "rc70c916b6592c27704df",
+  "BITPOS": "rddf7c86738135cc9feba",
+  "BLPOP": "r8a385ea327ece206db01",
+  "BRPOP": "r8bc260d6056d562c74a7",
+  "BRPOPLPUSH": "r4cedfdedff04f42371a3",
+  "BZPOPMAX": "r6c05150afc9c97508dea",
+  "BZPOPMIN": "raceb1f507d73610d4985",
+  "CLIENT": "re2a09ccb04375117069c",
+  "CLUSTER": "rfc57ce1d5fc7792fcebe",
+  "COMMAND": "raa9c88633a52a77fde21",
+  "CONFIG": "r690921766564cc95c40e",
+  "DBSIZE": "rcbeb52e1c23cbce73346",
+  "DEBUG": "r792c05a3f02afc263c5a",
+  "DECR": "r5d395572d2daf94d0ee2",
+  "DECRBY": "rdae4b6632805cde75d91",
+  "DEL": "r332cd69dadab050c7e03",
+  "DISCARD": "re59cb5e280e1e0b44c4a",
+  "DUMP": "rd1e8793e1e910c6d0f9c",
+  "ECHO": "r5fa62eac76fca09570cb",
+  "EVAL": "r6cd6ed29c886ed30605c",
+  "EVALSHA": "r590bf147ef64eeafadb3",
+  "EXEC": "r50e64b10cdf172df702f",
+  "EXISTS": "r190450cc6f31a91a63d9",
+  "EXPIRE": "r361b458eef37bcfd1026",
+  "EXPIREAT": "r9d9e6e7398c8824e81b3",
+  "FLUSHALL": "r2b778d94531380c958ef",
+  "FLUSHDB": "r7ac5719dddcd6cfe5f47",
+  "GEOADD": "rb05c9f7bc67b56220cd1",
+  "GEODIST": "r03fc230a0569c81dd3b9",
+  "GEOHASH": "r5f50370755f8497cd69c",
+  "GEOPOS": "rb4ef150604770a802c7d",
+  "GEORADIUS": "rb6e830dd1ea871ad8899",
+  "GEORADIUS_RO": "r81ab714c7e51fc02a633",
+  "GEORADIUSBYMEMBER": "r9bae614fb830de88a71d",
+  "GEORADIUSBYMEMBER_RO": "r657cbd37fc1f0469a93f",
+  "GET": "r99d13cf3716dbb9bec98",
+  "GETBIT": "r3da7e567487bbe4f3fa4",
+  "GETRANGE": "r82088db4b59f4aaea8b5",
+  "GETSET": "r35ec33085df5762700a0",
+  "HDEL": "rb038a9a2c15d45bbcb04",
+  "HEXISTS": "re920bcf404cb8d2e36f2",
+  "HGET": "rbcf42cf954a8b1ab485b",
+  "HGETALL": "rffadbacb14fad0388ee5",
+  "HINCRBY": "r327ab1a623b81f16bb28",
+  "HINCRBYFLOAT": "r7cefea74fb6a6b3ba2fe",
+  "HKEYS": "r53b4eb6eeef131884a85",
+  "HLEN": "r44515715af21b234f6e9",
+  "HMGET": "r82c436ecec51222acaee",
+  "HMSET": "r6271d85d7ea5c2016537",
+  "HOST:": "r1fcaba9bdf50c7f3ffae",
+  "HSCAN": "r27823c02ac78c807f5de",
+  "HSET": "raf8f5c1c0382364207d5",
+  "HSETNX": "rcf1d727056f77b00d328",
+  "HSTRLEN": "r9870d5e052ce6f50f908",
+  "HVALS": "re9c03ba5a6cf356f87c9",
+  "INCR": "rdbf17cc155ced91fa2c0",
+  "INCRBY": "rd81305f10db800bfa71f",
+  "INCRBYFLOAT": "rf0fe0a692443ce6dcc3d",
+  "INFO": "r6a775f58d6096e8f3fee",
+  "KEYS": "r7c58fc41ca7901f7d01e",
+  "LASTSAVE": "r8b0e6f19ee35972b7bac",
+  "LATENCY": "r42cda9d2b8d1e2ca5c5b",
+  "LINDEX": "r265a148ef5bd3d04ca07",
+  "LINSERT": "rc435f687bffdc6d17d11",
+  "LLEN": "r9c3618e5fb721740773c",
+  "LOLWUT": "r90958e8cf18c41945d6b",
+  "LPOP": "rc5429e6293709c0143b6",
+  "LPUSH": "r4162b7460866dd16e593",
+  "LPUSHX": "r92cae2d1732a92c30110",
+  "LRANGE": "r734f34a9c8d198a1765c",
+  "LREM": "rbb0a9b910059520d314a",
+  "LSET": "r55bee04c50e70d63d98d",
+  "LTRIM": "ra636956dad6e6dd5e5c9",
+  "MEMORY": "r83341d366fbbd3dd725e",
+  "MGET": "r963139d81e76a1db74a4",
+  "MIGRATE": "r0818532768d5ac4c862b",
+  "MODULE": "re7c8da36761c7429a194",
+  "MONITOR": "rd8d5b640eea865041c93",
+  "MOVE": "r5130ec262e8001c71b63",
+  "MSET": "r37e0b9632995c39bb6dd",
+  "MSETNX": "rb7a007dae35fc36db7f0",
+  "MULTI": "r0ea46cead6ed2044d5e6",
+  "OBJECT": "r1de45da792a8697130be",
+  "PERSIST": "ra08cadce511ff197b26d",
+  "PEXPIRE": "rfb5df2a2440192201d3f",
+  "PEXPIREAT": "r57a0a2089cded3b4fff7",
+  "PFADD": "rbfe1f1651b51d67bc74b",
+  "PFCOUNT": "rd0074482b0529cb32e0f",
+  "PFDEBUG": "rce36a026a223ead06904",
+  "PFMERGE": "r2939bbb672a85e65a35a",
+  "PFSELFTEST": "r8f375412da87e131abcb",
+  "PING": "r8e880d60fadc492c52d0",
+  "POST": "rce0128b3a37d805eed4a",
+  "PSETEX": "rd0b5a0532e73176b6ec2",
+  "PSUBSCRIBE": "ra3febaf705f0b3e94b08",
+  "PSYNC": "r709dfa29ed094128337b",
+  "PTTL": "r82f51da34fd4e64cd7d2",
+  "PUBLISH": "r652fea692b19d3b13951",
+  "PUBSUB": "r3e122758d5252afdf301",
+  "PUNSUBSCRIBE": "rc1636d9b64ba1c7d299a",
+  "RANDOMKEY": "r12a38cb3bcb8143e656b",
+  "READONLY": "r22cc19f9bd86c420755c",
+  "READWRITE": "rce322cd74d5847a2a37f",
+  "RENAME": "r9066a7800a292a1904c6",
+  "RENAMENX": "r2dcb924dc3c52eaf4326",
+  "REPLCONF": "rfbbd3f86069568d629ad",
+  "REPLICAOF": "re43358b5f71bf7b9b33a",
+  "RESTORE": "r5c35935afbc4ecb59f54",
+  "RESTORE-ASKING": "r0491b9fc7fc0c1ed612a",
+  "ROLE": "r59f9520cfd70ae9f2dac",
+  "RPOP": "rbbdd4ae591afa6c96866",
+  "RPOPLPUSH": "r63a325a6fc9cd7455ee7",
+  "RPUSH": "r4b45792fb7e0ea8585f8",
+  "RPUSHX": "r5507a87adb9a843814b8",
+  "SADD": "r91342b9fa4eab746dc3c",
+  "SAVE": "ra1be4ede3f473d907098",
+  "SCAN": "r569298b21c9637769832",
+  "SCARD": "r4c77e11f61d1fde79248",
+  "SCRIPT": "rce153ab447ff78bb63bd",
+  "SDIFF": "r0c3af3d708a2987a660b",
+  "SDIFFSTORE": "r5192532048d831a95037",
+  "SELECT": "r1a2fb16f5a163921d090",
+  "SET": "r1474d7fbb9a7324bfe8b",
+  "SETBIT": "rbbee446c0ca0e678607a",
+  "SETEX": "r46e57e1c52332b5a5a99",
+  "SETNX": "r0f6b51f5c3e0dc6a5333",
+  "SETRANGE": "rab56e993495f87e82568",
+  "SHUTDOWN": "rd28064b1b6a02e83d69f",
+  "SINTER": "r040dab23af4510e7149f",
+  "SINTERSTORE": "r345da673d33003cbcd34",
+  "SISMEMBER": "re9edaf9af49dedd76dc0",
+  "SLAVEOF": "r72fd174d37c08265e5c1",
+  "SLOWLOG": "r437d51923772d10e4f97",
+  "SMEMBERS": "r1edcd9984a6482302f84",
+  "SMOVE": "rb012f694f06baded5843",
+  "SORT": "rd52fed8963807907af5b",
+  "SPOP": "r7296cee0472b5c42a056",
+  "SRANDMEMBER": "r4834b22bf2e167eec413",
+  "SREM": "r45b2cebbd4d7206037ff",
+  "SSCAN": "r0337b93f18e636174af5",
+  "STRLEN": "r3731b868ab6a189fad20",
+  "SUBSCRIBE": "re1cbdcb73780e3bdfb36",
+  "SUBSTR": "r210d71a176f50c7d0d0d",
+  "SUNION": "r7d72640cccaa75eaf713",
+  "SUNIONSTORE": "r7cb8a66e6f7d1a2d81dc",
+  "SWAPDB": "r8115b24806a99207caa4",
+  "SYNC": "r28ac155def5413926a04",
+  "TIME": "r4a905c628adb036f5ebc",
+  "TOUCH": "r436d44a1adf050f0b97e",
+  "TTL": "r083b2fc6cba07dbf4688",
+  "TYPE": "rbceb4ef80d4607215929",
+  "UNLINK": "r4c95fa093bc7d290fced",
+  "UNSUBSCRIBE": "r421bbad7bcce86124109",
+  "UNWATCH": "r27ba8feb2c4c546a4152",
+  "WAIT": "rf80e88ba805e079b3e78",
+  "WATCH": "r84e26868c42700105908",
+  "XACK": "r03ee55b42ebdc2c18a81",
+  "XADD": "r23bee686be5fda753179",
+  "XCLAIM": "r77e4c1a01c6c040cd3ca",
+  "XDEL": "r50623b529d52cc31023e",
+  "XGROUP": "r4fb8652508296ac45931",
+  "XINFO": "r5edea82e53e6ce3cb66d",
+  "XLEN": "r841df2001c1ae836aaaa",
+  "XPENDING": "r529f3a179b1611ff66ca",
+  "XRANGE": "re231794108ea049c510b",
+  "XREAD": "rac4f2bb8c900b7a4588b",
+  "XREADGROUP": "rd2da0178505f01ac6a56",
+  "XREVRANGE": "r6bb54153c3cd0e34ef79",
+  "XSETID": "rf041428ca117772f3c65",
+  "XTRIM": "ra63c6d1f016107b0abcf",
+  "ZADD": "rb5336953a9773c4fdc85",
+  "ZCARD": "rd4fcf8328ecbd58596b0",
+  "ZCOUNT": "rf9db5f6d644bd379ea77",
+  "ZINCRBY": "r763956de8cf90a3cf1a8",
+  "ZINTERSTORE": "r9f9daf2c0f512192f12e",
+  "ZLEXCOUNT": "r335ac0fada359dc2a168",
+  "ZPOPMAX": "ref0b5cdf20e3d8e2c56f",
+  "ZPOPMIN": "r4ff46d82c7ee5abddf08",
+  "ZRANGE": "r3dd3add7a10f8e1a3fd5",
+  "ZRANGEBYLEX": "r66c704c25f2db6ac805c",
+  "ZRANGEBYSCORE": "r85011b7d9cfd9bfc465c",
+  "ZRANK": "r2443efd44b6a1ed32cea",
+  "ZREM": "raa23ccab68c12c7d94ed",
+  "ZREMRANGEBYLEX": "r23d9446a001853d37fc1",
+  "ZREMRANGEBYRANK": "r9092c8b2288a642d30a8",
+  "ZREMRANGEBYSCORE": "r991f6fd4cdd5c01d11ee",
+  "ZREVRANGE": "r46a607ebca2880de70b9",
+  "ZREVRANGEBYLEX": "rfc2f355901f83dbc6f32",
+  "ZREVRANGEBYSCORE": "re3911909956e43ffcbb7",
+  "ZREVRANK": "r10377ca91782901d471c",
+  "ZSCAN": "rcd25f69d8b71238c4f89",
+  "ZSCORE": "r07b493479fe344b5cf11",
+  "ZUNIONSTORE": "r3582a8e329efcb4b3c35"
+};
+
+/**
+ * Scale Doer class
+ * ==================
+ */
+// External librairies
+// ----------------------------------------------------------------------------
+
+var {
+  sapcontrol_operations: sapcontrol_operations$1,
+  sapctrl_process_func: sapctrl_process_func$1
+} = sapctrl_helpers; // Debug memory leak
+// var heapdump = require('heapdump');
+// TODO : create pool of SOAP connections!
+// Class definition
+// ----------------------------------------------------------------------------
+// Constructor
+
+function ScaleDoer() {
+  // Internal attributes
+  // Kue queue
+  this.queue = null;
+  this.QUEUES = {};
+  this.company = '';
+  this.region = '';
+  this.concurrency_nb = 1; // keeps tracks if SSL keys needs to be resent from Scaler
+
+  this.sending_sslcertifs = {}; // SAP connection retries before considering NOK
+
+  this.conn_retries = {};
+  this.conn_retries_max = 3;
+  this.conn_retries_delay_msec = 40000; // 40 sec
+  // buffer that keeps track of SAP instance to scale (stop / start) with transition state (being stopped status = 2, being started status = 3)
+
+  this.updated_system_instances = {}; // SAP instances limits
+
+  this.min_instance_running = 1;
+  this.max_instance_running = 10;
+  this.kpiname_separator = '_';
+  this.kpi_prefix_sap = 'sap' + this.kpiname_separator;
+  this._sap_statuses = {
+    'green': 'SAPControl-GREEN',
+    'yellow': 'SAPControl-YELLOW',
+    'red': 'SAPControl-RED',
+    'gray': 'SAPControl-GRAY'
+  }; // known errors
+
+  this._errors = {
+    'soap_client_init': 'SOAP client could not be created',
+    'soap_client_getinstance': 'Error getting instance list',
+    'conn_failed': 'Connection to SAP system failed',
+    'ws_not_reachable': 'SAP control WS not reachable',
+    'no_system_conn': 'No SAP system or no system connection active',
+    'no_active_instance': 'No active SAP instance available',
+    'stop_ongoing': 'Stop SAP instance already ongoing',
+    'start_ongoing': 'Start eligible system instance already ongoing',
+    'no_start_candidate': 'No eligible system instance to be started',
+    'min_instances_reached': 'Minimal running instances reached',
+    'max_instances_reached': 'Maximal autorized running instances reached'
+  }; // fault tolerant
+
+  this._resume_on_step = {
+    stop: {
+      begin: 1,
+      counter_updated: 2,
+      sap_stop_triggered: 3,
+      ec2_stop_triggered: 4
+    },
+    start: {
+      begin: 1,
+      counter_updated: 2,
+      ec2_start_triggered: 3,
+      sap_start_triggered: 4
+    }
+  }; // directory of sap systems certificates for sap ctrl authentification
+
+  this.certif_dir = __dirname + '/.keys'; // Other API components
+
+  this.aws_cli = new awsmng(); // Redis client
+
+  this.redis_cli = null; // Pushgateway client
+
+  this.pushgtw_cli = null;
+  this.gateway_creds = null;
+  this.logger = new logger(); // todo: to deactivate in prod
+
+  this.logger.debug(true);
+  this.cronjob = cron.CronJob;
+} // Class definition
+
+
+ScaleDoer.prototype = {
+  Constructor: ScaleDoer,
+  // init : function (redis_config, worker_config, next) {
+  init: function (local_config, next) {
+    var that = this; // Load from company id from config file
+
+    that.company = local_config.company;
+    that.agent = local_config.agent; // App version from config file
+
+    that.version = local_config.version; // App staging from config file
+
+    that.staging = local_config.staging || 'production';
+    that.QUEUES = {
+      'collect_exec': 'COLLECT' + '_' + that.staging + '_' + that.agent,
+      'checkconn_exec': 'CHECK' + '_' + that.agent,
+      'discover_exec': 'DISCOVER' + '_' + that.agent,
+      'webhook_exec': 'DO' + '_' + that.agent
+    };
+    that.gateway_creds = local_config.gateway.credentials; // Load from nb workers from config file
+
+    that.concurrency_nb = local_config.nb_workers; // load redis conf
+
+    that.redis_conf = local_config.db;
+    that.logger.log(that.logger.LOG_LEVEL_INFO, "ScaleDoer init start");
+    that.logger.log(that.logger.LOG_LEVEL_DEBUG, "company:" + that.company + " version:" + that.version + " staging:" + that.staging);
+    async.parallel([// get region
+    function (parallel_cb) {
+      that.get_cloud_region.call(that, parallel_cb);
+    }, // host: 'scaling.worqloads.com',
+    // port: 3333,
+    // key: 'd843eb7ba29c64ae4f541605e1b621262f91c2b89bd8ffeb4cf91e7470b971d2be51531b8aac2308d9f0624357dfed40ffed0f8d7dfbda6a7c240174cfa475d46fdeb20f4f30ae3c',
+    // Initialize queue for engines communications
+    function (parallel_cb) {
+      that.redis_cli = redis.createClient(Object.assign(that.redis_conf, {
+        prefix: 'q',
+        db: 2,
+        password: decrypt(that.redis_conf.key, that.company + that.gateway_creds.replace(':', '')),
+        rename_commands: rdscmds
+      })); // console.log('redis_cli :', that.redis_cli)
+
+      that.redis_cli.on("error", function (err) {
+        that.logger.log(that.logger.LOG_LEVEL_ERROR, 'Oops redis client error:' + err.code + ' - ' + err.command + ' - ' + err.origin);
+      }); // that.redis_cli.on('connect', function () {
+      //   console.log('redis_cli connected')
+      // })
+
+      that.queue = kue.createQueue({
+        prefix: 'q',
+        redis: Object.assign(that.redis_conf, {
+          'auth': decrypt(that.redis_conf.key, that.company + that.gateway_creds.replace(':', '')),
+          'db': local_config.dbindex,
+          'options': {
+            'rename_commands': rdscmds
+          }
+        })
+      }); // console.log("that.queue:", that.queue)
+
+      that.queue.watchStuckJobs(); // Prevent inconsistency if redis connection lost
+
+      that.queue.setMaxListeners(that.concurrency_nb * 2);
+      that.queue.on('error', function (err) {
+        that.logger.log(that.logger.LOG_LEVEL_ERROR, 'Oops redis queue error:' + err.code + ' - ' + err.command + ' - ' + err.origin); // that.logger.log(that.logger.LOG_LEVEL_ERROR, 'Configuration used:', Object.assign(local_config.db, { 'db': local_config.dbindex, 'auth': '****' }))
+      });
+      parallel_cb();
+    }, // create WQL gateway endpoint
+    function (parallel_cb) {
+      that.pushgtw_cli = new pushcli(local_config.gateway.protocole + '://' + (local_config.gateway.credentials ? local_config.gateway.credentials + '@' : '') + local_config.gateway.host + ':' + local_config.gateway.port + '/pshgtw', that.version, that.staging);
+      parallel_cb();
+    }, // check for local SSL key dir existence, create if needed
+    function (parallel_cb) {
+      if (!fs$1.existsSync(that.certif_dir)) {
+        fs$1.mkdirSync(that.certif_dir);
+      }
+
+      parallel_cb();
+    }], function () {
+      that.logger.log(that.logger.LOG_LEVEL_INFO, "ScaleDoer init completed with queues:", that.QUEUES);
+      next.call(that);
+    });
+  },
+  // Delete last pushed metrics in Prometheus without check on retries
+  // param instances = [{instancenr:...., status:...}]
+  deletePrometheus: function (job, entity_id, syst_id, sap_id, instances) {
+    var that = this;
+
+    if (that.conn_retries[syst_id] == undefined) {
+      that.conn_retries[syst_id] = 0;
+    }
+
+    that.logger.log(that.logger.LOG_LEVEL_INFO, "pshgtw:" + syst_id + ": delete '" + job + "' timeserie data, set status=0 'up' timeserie"); //Delete all metrics for jobName & instance
+
+    that.pushgtw_cli.delSerie(job, {
+      instance: syst_id
+    }); // Update SAP Up status
+    // that.pushgtw_cli.pushUpInstance('up', entity_id, syst_id, that.region, sap_id, 0)
+    // Update SAP instances Up statuses
+
+    that.pushgtw_cli.pushUpSAPInstance('up', entity_id, syst_id, that.region, sap_id, instances.map(i => {
+      return Object.assign(i, {
+        status: 0
+      });
+    })); // reset counter
+
+    that.conn_retries[syst_id] = 0;
+  },
+  // create a sap client and provides it to the callback function
+  new_soap_client: function (url, auth, data, cb) {
+    const that = this;
+
+    try {
+      soap.createClient(url + '?wsdl', {
+        returnFault: true
+      }, function (err, client) {
+        if (err || !client) {
+          that.logger.log(that.logger.LOG_LEVEL_DEBUG, "Error connecting to WSDL :" + url + '?wsdl');
+          cb(that._errors.soap_client_init, data);
+        } else {
+          switch (auth.method) {
+            case 0:
+              client.setSecurity(new soap.BasicAuthSecurity(auth.options[0].user, auth.options[0].pwd));
+              break;
+
+            case 1:
+              client.setSecurity(new soap.ClientSSLSecurityPFX(auth.options[1].pfx, null, {
+                rejectUnauthorized: false
+              }));
+              break;
+
+            default:
+              client.setSecurity(new soap.ClientSSLSecurityPFX(auth.options[1].pfx, null, {
+                rejectUnauthorized: false
+              }));
+          }
+
+          client.setEndpoint(url + 'SAPControl.cgi');
+          cb(null, {
+            soapcli: client,
+            payload: data
+          });
+        }
+      });
+    } catch (e) {
+      if (e) {
+        that.logger.log(that.logger.LOG_LEVEL_ERROR, "SOAP client init exception:", e);
+        cb(that._errors.soap_client_init, data);
+      }
+    }
+  },
+  // find sap instances nr + hostname of SAP system (ip, nr)
+  get_sap_instances_nr: function (ip, nr, cb) {
+    const that = this;
+    const url = 'https://' + ip + ':5' + nr + '14';
+
+    try {
+      soap.createClient(url + '/?wsdl', {
+        returnFault: true
+      }, function (err, client) {
+        if (err || !client) {
+          cb(that._errors.soap_client_init, []);
+        } else {
+          client.GetSystemInstanceList({}, function (err, result) {
+            if (!err && result && result.instance && result.instance.item) {
+              let instances_list = result.instance.item.map(x => {
+                let nr = ('' + x.instanceNr).padStart(2, '0');
+                return {
+                  'hostname': x.hostname,
+                  'instancenr': nr,
+                  'features': x.features.split('|'),
+                  'status': x.dispstatus == that._sap_statuses.green ? 1 : x.dispstatus == that._sap_statuses.yellow ? -1 : 0
+                };
+              });
+              cb(null, instances_list);
+            } else {
+              cb(that._errors.soap_client_getinstance, []);
+            }
+          });
+        }
+      });
+    } catch (e) {
+      if (e) {
+        that.logger.log(that.logger.LOG_LEVEL_ERROR, "check_sapcontrol_listening: SOAP client init exception:", e);
+      }
+
+      cb(that._errors.soap_client_getinstance, []);
+    }
+  },
+  // create a sap client and provides it to the callback function
+  check_sapcontrol_listening: function (ip, nr, di_hostname, cb) {
+    const that = this;
+
+    try {
+      let request = http.get('http://' + ip + ':5' + nr + '13/?wsdl', {
+        timeout: 1000
+      }, response => {
+        that.logger.log(that.logger.LOG_LEVEL_DEBUG, ' WSDL of ' + ip + ':' + nr, response.statusCode);
+
+        if (response && response.statusCode == 200) {
+          const url = 'https://' + ip + ':5' + nr + '14';
+          soap.createClient(url + '/?wsdl', {
+            returnFault: true
+          }, function (err, client) {
+            if (err || !client) {
+              cb(false);
+            } else {
+              client.GetSystemInstanceList({}, function (err, result) {
+                if (!err && result && result.instance && result.instance.item) {
+                  cb(result.instance.item.map(x => x.hostname).includes(di_hostname));
+                } else {
+                  cb(false);
+                }
+              }, {
+                timeout: 2000
+              });
+            }
+          });
+        }
+      });
+      request.on('timeout', () => {
+        request.abort();
+      });
+      request.on("error", e => {
+        that.logger.log(that.logger.LOG_LEVEL_DEBUG, ' WSDL checking error of ' + ip + ':' + nr, e);
+        cb(false);
+      });
+    } catch (e) {
+      if (e) {
+        that.logger.log(that.logger.LOG_LEVEL_ERROR, "check_sapcontrol_listening: SOAP client init exception:", e);
+      }
+
+      cb(false);
+    }
+  },
+  // create SSL key onf FS from data provided by scaler
+  update_sending_ssl: function (system_id, pfx_buffer, callback) {
+    const that = this;
+
+    if (system_id) {
+      // look for system_id file = certif
+      fs$1.access(that.certif_dir + '/' + system_id + '.pfx', fs$1.F_OK, err => {
+        if (err) {
+          // certif does not exists at file level
+          if (pfx_buffer) {
+            fs$1.writeFile(that.certif_dir + '/' + system_id + '.pfx', new Buffer.from(JSON.parse(pfx_buffer)), function (err) {
+              that.sending_sslcertifs[system_id] = !!err;
+              callback();
+            });
+          } else {
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, "SSL Keys not provided for " + system_id);
+            that.sending_sslcertifs[system_id] = true;
+            callback('no pfx provided');
+          }
+        } else {
+          that.sending_sslcertifs[system_id] = false;
+          callback();
+        }
+      });
+    } else callback('no system provided');
+  },
+  // - connect to a SAP system using sapcontrol WS and execute function 'execute_in_sap' on all its dialog instances
+  //    execute_in_sap : function( client, all_instances, callback )
+  // - update status for system & instances on prometheus
+  connect_sap: function (job_data, execute_in_sap, cb_next) {
+    var that = this; // to prevent error for self signed certificates of SAP systems
+
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+    that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + job_data.system.syst_id + '} connect sap');
+    async.waterfall([// check system certificate
+    function (cb) {
+      // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'check system certificate')
+      // cb returns nothing
+      that.update_sending_ssl(job_data.system.syst_id, job_data.keys_buff, cb);
+    }, // connect to the entry point instance and provide soapclient
+    function (cb) {
+      // that.logger.log(that.logger.LOG_LEVEL_DEBUG, ' connect to the entry point instance and provide soapclient for :', job_data.system)
+      const http_s = job_data.system.is_encrypted ? {
+        protocol: 'https',
+        port_suffix: '14'
+      } : {
+        protocol: 'http',
+        port_suffix: '13'
+      };
+      const soap_url = http_s.protocol + '://' + (job_data.system.ip_internal || job_data.system.hostname) + ':5' + job_data.system.sn + http_s.port_suffix + '/';
+      that.logger.log(that.logger.LOG_LEVEL_DEBUG, ' connect to the entry point instance and provide soapclient for :', soap_url);
+      that.pushgtw_cli.addInstance(job_data.system.syst_id);
+      that.new_soap_client(soap_url, {
+        method: job_data.system.auth_method,
+        // method is the index of options
+        options: [{
+          user: job_data.system.username,
+          pwd: job_data.system.password
+        }, {
+          pfx: job_data.system.auth_method == 1 && that.certif_dir + '/' + job_data.system.syst_id + '.pfx'
+        }]
+      }, job_data, cb);
+    }, // Get list of instances and check system status
+    function (cli_data, cb) {
+      // that.logger.log(that.logger.LOG_LEVEL_DEBUG, job_data.system.syst_id + ' get list of instances and check system status')
+      cli_data.soapcli.GetSystemInstanceList({}, function (err, result) {
+        if (!err && result && result.instance && result.instance.item) {
+          var instances_list = result.instance.item.map(x => {
+            let nr = ('' + x.instanceNr).padStart(2, '0');
+            let inst_with_ip = job_data.system.instances.find(i => i.instancenr == nr);
+            return {
+              'ip_internal': inst_with_ip && inst_with_ip.ip_internal,
+              'hostname': x.hostname,
+              'instancenr': nr,
+              'features': x.features.split('|'),
+              'status': x.dispstatus == that._sap_statuses.green ? 1 : x.dispstatus == that._sap_statuses.yellow ? -1 : 0
+            };
+          }); // update up status for system, delete if not up
+
+          var syst_status = that.check_system_status(result.instance.item);
+
+          if (syst_status == that._sap_statuses.red || syst_status == that._sap_statuses.gray) {
+            cb(that._errors.conn_failed, cli_data.soapcli);
+          } else {
+            that.pushgtw_cli.pushUpInstance('up', job_data.entity_id, job_data.system.syst_id, that.region, job_data.system.sid, 1);
+            that.conn_retries[job_data.system.syst_id] = 0; // provide list of active instances for KPI collections
+
+            cb(null, instances_list, job_data.system.auth_method, job_data.system.username, job_data.system.password, job_data.system.auth_method == 1 ? that.certif_dir + '/' + job_data.system.syst_id + '.pfx' : null, {
+              'is_encrypted': job_data.system.is_encrypted,
+              'is_direct': job_data.system.is_direct
+            }, job_data);
+          } // })
+
+        } else {
+          cb(that._errors.ws_not_reachable, err && err.address + ' ' + err.port);
+        }
+      });
+    }, // connect to the all instances and execute the requested functions / web methods
+    function (all_instances, auth_method, username, password, pfx_certif, conn, results, cb) {
+      that.logger.log(that.logger.LOG_LEVEL_DEBUG, '{' + job_data.system.syst_id + '} instances:' + all_instances.map(i => i.ip_internal + '|' + i.hostname + '/' + i.instancenr + '/' + i.status).join(', '));
+      var soap_clients = [];
+
+      if (!all_instances || all_instances.filter(x => x.status == 1 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0).length == 0) {
+        that.pushgtw_cli.pushInstance('scale', results.system.syst_id);
+        cb(that._errors.no_active_instance);
+      } else {
+        // loop through running dialog instances
+        async.eachOf(all_instances.filter(x => x.status == 1 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0), function (inst, idx, callback) {
+          const http_s = conn.is_encrypted ? {
+            protocol: 'https',
+            port_suffix: '14'
+          } : {
+            protocol: 'http',
+            port_suffix: '13'
+          };
+          const soap_url = http_s.protocol + '://' + (inst.ip_internal || inst.hostname) + ':5' + inst.instancenr + http_s.port_suffix + '/';
+          that.new_soap_client(soap_url, {
+            method: auth_method,
+            // method is the index of options
+            options: [{
+              user: username,
+              pwd: password
+            }, {
+              pfx: pfx_certif
+            }]
+          }, null, function (soap_err, client) {
+            if (soap_err) {
+              // should not happened as all_instances are up & running SAP Instances
+              // if happens, instances might just have crashed or being stopped
+              that.logger.log(that.logger.LOG_LEVEL_ERROR, '{' + job_data.system.syst_id + '} error connecting to instance: ' + inst.hostname + '/' + inst.instancenr + ':', soap_err); // update var all_instances
+
+              all_instances[idx].status = -1;
+              all_instances[idx] = Object.assign(all_instances[idx], {
+                error: soap_err,
+                occur_date: new Date()
+              });
+              callback();
+            } else {
+              // get IP internal from job.data
+              var inst_from_job = job_data.system.instances.find(i => i.instancenr == inst.instancenr);
+              soap_clients.push({
+                c: client.soapcli,
+                f: inst.features,
+                n: inst.instancenr,
+                h: inst.hostname,
+                i: inst_from_job && inst_from_job && inst_from_job.ip_internal
+              });
+              callback();
+            }
+          });
+        }, function () {
+          // if (err) that.logger.log(that.logger.LOG_LEVEL_ERROR, 'sap connect other error:', err)
+          // update instance status for prometheus
+          // all_instances = SAP instances visible from sapstartsrv GetSystemInstanceList command
+          // need to make sure all instances even with OS down are updated from job_data.system.instances
+          job_data.system.instances.forEach((instance, idx) => {
+            all_instances.forEach(new_instance => {
+              if (instance && instance.instancenr == new_instance.instancenr) {
+                job_data.system.instances[idx] = Object.assign(instance, new_instance);
+
+                if (new_instance.error == undefined && new_instance.status != -1) {
+                  delete job_data.system.instances[idx].error;
+                }
+              } // add new instances
+
+
+              if (job_data.system.instances.map(x => x && x.instancenr).indexOf(new_instance.instancenr) < 0) {
+                job_data.system.instances.push(new_instance);
+              } // set missing/deleted/not running instance status to not running
+
+
+              if (instance && all_instances.map(x => x.instancenr).indexOf(instance.instancenr) < 0) {
+                // delete job_data.system.instances[idx]
+                job_data.system.instances[idx].status = 0;
+                delete job_data.system.instances[idx].error;
+              }
+            });
+          });
+          that.pushgtw_cli.pushUpSAPInstance('up', job_data.entity_id, job_data.system.syst_id, that.region, job_data.system.sid, job_data.system.instances);
+          async.each(soap_clients, (client, async_cb) => {
+            execute_in_sap(client, all_instances, async_cb);
+          }, each_err => {
+            if (each_err) {
+              that.logger.log(that.logger.LOG_LEVEL_ERROR, '{' + job_data.system.syst_id + '} sapcontrol exec operation error:', each_err);
+            }
+
+            that.pushgtw_cli.pushInstance('scale', job_data.system.syst_id);
+            cb(each_err, all_instances);
+          });
+        });
+      }
+    }], function (err, waterfall_res) {
+      if (err) {
+        // err is relating to technical connection to sap system / instance. Not error from SAP system or instance itself.
+        switch (err) {
+          case that._errors.conn_failed:
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + job_data.system.syst_id + '}:', that._errors.conn_failed); // Objective is to alert asap if a system is down
+            // If there is an error connectiong to the system, we retry until the max_retries is reach or connection finally works.
+            // we do not wait for the next execution 5min later
+
+            that.check_failed_conn(waterfall_res, job_data); // use soap client of errorneous conn = waterfall_res
+
+            break;
+
+          case that._errors.no_system_conn:
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + job_data.system.syst_id + '}:', that._errors.no_system_conn); // pushgtw_cli.pushUpInstance and deletePrometheus already called
+
+            break;
+
+          case that._errors.no_active_instance:
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + job_data.system.syst_id + '}:', that._errors.no_active_instance, waterfall_res); // waterfall_res = all instances array
+
+            that.deletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, job_data.system.sid, job_data.system.instances.map(s => {
+              return {
+                'instancenr': s.instancenr,
+                'status': 0
+              };
+            }));
+            break;
+
+          case that._errors.ws_not_reachable:
+            // that.pushgtw_cli.pushUpInstance('up', job_data.entity_id, job_data.system.syst_id, that.region, job_data.system.sid, 0)
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + job_data.system.syst_id + '}:', that._errors.ws_not_reachable, waterfall_res);
+            break;
+
+          default:
+            if (err.errno == 'ETIMEDOUT') {
+              // that.logger.log(that.logger.LOG_LEVEL_ERROR, '>D ETIMEDOUT ' + err.syscall + ' to '+ err.address + ' on port ' + err.port + ' ', waterfall_res)
+              if (waterfall_res === true) {
+                that.deletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, job_data.system.sid, job_data.system.instances.map(s => {
+                  return {
+                    'instancenr': s.instancenr,
+                    'status': 0
+                  };
+                }));
+              }
+            } else {
+              that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + job_data.system.syst_id + '}:', err, waterfall_res); // TBD delete prom data depending on errors
+            }
+
+            break;
+        }
+
+        cb_next(err.code || err.errno || err);
+      } else {
+        // update instance status for prometheus
+        // pushUpSAPInstance already call in waterfall last func
+        // that.pushgtw_cli.pushUpInstance('up', job_data.entity_id, job_data.system.syst_id, that.region, job_data.system.sid, 1) => already called
+        // send back the list instances for update by the scaler scheduler
+        // cb_next(null, { [job_data.system.syst_id]: waterfall_res })
+        cb_next(null, {
+          'sending_sslcertifs': that.sending_sslcertifs[job_data.system.syst_id],
+          'instances': waterfall_res,
+          'syst_id': job_data.system.syst_id
+        });
+      }
+    });
+  },
+  // Called by Scheduler
+  // Consume metrics for SAP (similar to call_sapcontrol) with higher frequency for precise notifications. Do produce Prometheus metrics.
+  collect: function () {
+    var that = this;
+    that.queue.process(that.QUEUES.collect_exec, that.concurrency_nb, function (job, done) {
+      if (job.data.func && job.data.system) {
+        // test if pfx file exists before connecting
+        that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, err => {
+          if (err) {
+            done('missing pfx');
+          } else {
+            // async_cb must not be called with error => to no block the process for other sap instances of the targeted SAP system
+            that.connect_sap(job.data, (client, all_instances, async_cb) => {
+              if (client.f.indexOf(job.data.func.type) >= 0 || job.data.func.type == 'ALL') {
+                that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + job.data.system.syst_id + '} sapcontrol:' + job.data.func.name + ': execution');
+                sapcontrol_operations$1[job.data.func.name].call(client.c, {}, (err, result) => {
+                  if (err) {
+                    that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + job.data.system.syst_id + '} sapcontrol:' + job.data.func.name + ': exec error:' + err.body ? err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1] : err);
+                  }
+
+                  sapctrl_process_func$1.call(that, err, result, job.data.func.name, {
+                    _id: job.data.system.syst_id,
+                    sid: job.data.system.sid
+                  }, {
+                    ip_internal: client.i,
+                    hostname: client.h,
+                    sn: client.n,
+                    features: client.f.join('|')
+                  }, job.data.func.type, job.data.entity_id, job.data.restricted_kpis, job.data.rule_id, async_cb);
+                });
+              } else async_cb();
+            }, done);
+          }
+        });
+      } else {
+        that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + job.data.system.syst_id + '} collect_exec: no data provided');
+        done();
+      }
+    });
+  },
+  // Called by Receiver
+  // Check connections to sap systems, cloud
+  checkconnection: function () {
+    var that = this;
+    let max_rec_execs_find_sap_instances = 2; // call with sap_instances_ip=job.data.sap_instances_ip, limit_execs=2
+    // Recursive func to find SAP system instances among EC2 instances in same VPC as agent
+    // based on successful tests on ip, nr, and hostname
+    // Send back to results to receiver
+    // Run only 2 at max
+
+    function find_sap_instances(vpc_id, limit_execs, sap_instances_ip, instnr_list, done) {
+      if (limit_execs <= 0) {
+        done('System details not found');
+      } else {
+        if (sap_instances_ip.length == 0) {
+          that.aws_cli.discoverEC2Instances(vpc_id, (err, list_ec2) => {
+            // check if delta (= new EC2 instances)
+            // if so, need to update the DB with new ones
+            if (list_ec2 && list_ec2.length > 0) {
+              find_sap_instances(vpc_id, limit_execs - 1, list_ec2, instnr_list, done);
+            } else done('System details not found');
+          });
+        } else {
+          // check targets with combination of IP & NR
+          let combi_ip_nr = [];
+          sap_instances_ip.forEach(i => {
+            instnr_list.forEach(x => {
+              combi_ip_nr.push({
+                ip: i.ip_internal,
+                nr: x.instancenr,
+                hostname: x.hostname,
+                cloud_instance_id: i.instance_id,
+                cloud_instance_type: i.instance_type,
+                status: false
+              });
+            });
+          });
+          that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'Possible combinations of IP nr:', combi_ip_nr);
+          async.eachOf(combi_ip_nr, (elt, idx, cb) => {
+            // check if there is a sapcontrol service responding (EC2 must be up & running) at 'hostname'
+            that.check_sapcontrol_listening(elt.ip, elt.nr, elt.hostname, valid => {
+              combi_ip_nr[idx].status = valid;
+              cb();
+            });
+          }, err => {
+            if (err) {
+              that.logger.log(that.logger.LOG_LEVEL_ERROR, 'Error:', err);
+            }
+
+            that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'Valid SAP IP NR :', combi_ip_nr.filter(x => x.status)); // Reasons to resync ec2 instances in VPC and retry
+            //  - if ec2 instances related to SAP instances are not found at all
+            //  - if number of ec2 instances related to SAP instances are found < nb SAP instances
+
+            let sap_instances_with_ip = instnr_list.map(i => {
+              let found_instance = combi_ip_nr.find(x => x.status && x.hostname == i.hostname && x.nr == i.instancenr);
+
+              if (found_instance) {
+                return Object.assign(i, {
+                  ip_internal: found_instance.ip,
+                  cloud_instance_id: found_instance.cloud_instance_id,
+                  cloud_instance_type: found_instance.cloud_instance_type
+                });
+              }
+            }).filter(i => i.ip_internal);
+
+            if (sap_instances_with_ip.length == 0 || sap_instances_with_ip.length < instnr_list.length) {
+              that.aws_cli.discoverEC2Instances(vpc_id, (err, list_ec2) => {
+                // check if delta (= new EC2 instances)
+                // if so, need to update the DB with new ones
+                if (!list_ec2 || list_ec2.length == 0) {
+                  done('System details not found');
+                } else {
+                  let new_instances_ip = list_ec2.filter(x => !sap_instances_ip.includes(x.ip_internal));
+
+                  if (new_instances_ip.length > 0) {
+                    find_sap_instances(vpc_id, limit_execs - 1, new_instances_ip, instnr_list, done);
+                  } else done('System details not found');
+                }
+              });
+            } else {
+              if (limit_execs == max_rec_execs_find_sap_instances) {
+                done(null, {
+                  'instances': sap_instances_with_ip
+                });
+              } else {
+                // new ec2 since registration for this SAP system
+                done(null, {
+                  'instances': sap_instances_with_ip,
+                  'new_ec2': sap_instances_ip
+                });
+              }
+            }
+          });
+        }
+      }
+    } // 1. triggered by new system saved, to get its instances data 
+
+
+    that.queue.process(that.QUEUES.discover_exec, that.concurrency_nb, function (job, done) {
+      if (job.data.ip != undefined && job.data.nr != undefined && job.data.hostname != undefined && job.data.sap_instances_ip != undefined) {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+        that.get_sap_instances_nr(job.data.ip, job.data.nr, (err, instnr_list) => {
+          if (err) {
+            done(err);
+          } else {
+            try {
+              let vpc_id = fs$1.readFileSync(__dirname + '/.aws_vpc').toString();
+              that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'find_sap_instances params: ', vpc_id, job.data.sap_instances_ip, instnr_list);
+              find_sap_instances(vpc_id, max_rec_execs_find_sap_instances, job.data.sap_instances_ip, instnr_list, done);
+            } catch (e) {
+              that.logger.log(that.logger.LOG_LEVEL_ERROR, 'Exception Unexcepted error:', e);
+              done('Unexcepted error');
+            }
+          }
+        });
+      } else {
+        done();
+      }
+    }); // 2. triggered by check system & instances status
+
+    that.queue.process(that.QUEUES.checkconn_exec, that.concurrency_nb, function (job, done) {
+      if (job.data.type != undefined && job.data.system) {
+        that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + job.data.system.syst_id + '} checkconn_exec system');
+
+        switch (job.data.type) {
+          case 0:
+            // sap system
+            that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, err => {
+              if (err) {
+                done('missing pfx');
+              } else {
+                const soap_timeout_sec = 10000; // add first Dialog Instance from System info
+
+                that.connect_sap(job.data, (client, all_instances, async_cb) => {
+                  // For each instance, check if authorization is OK and get internal ip
+                  const upd_idx = all_instances.findIndex(i => i.instancenr == client.n);
+                  async.parallel({
+                    check: parallel_cb => {
+                      client.c.AccessCheck({
+                        function: 'Start'
+                      }, function (err) {
+                        if (err) {
+                          that.logger.log(that.logger.LOG_LEVEL_ERROR, 'checkconn_exec authorization error for SAP instance:' + client.h + '/' + client.i + '/' + client.n);
+                          all_instances[upd_idx].status = -1;
+                          all_instances[upd_idx] = Object.assign(all_instances[upd_idx], {
+                            error: err.body ? err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1] : err,
+                            occur_date: new Date()
+                          });
+                        }
+
+                        parallel_cb();
+                      }, {
+                        timeout: soap_timeout_sec
+                      });
+                    },
+                    ip: parallel_cb => {
+                      async.waterfall([// get IP from SAP control for Dialog Instances
+                      waterfall_cb => {
+                        client.c.GetAlertTree({}, function (err, result) {
+                          if (!err && result && result.tree) {
+                            const temp_res = result.tree.item.filter(i => result.tree.item[i.parent] && result.tree.item[i.parent].name.trim() == 'Server Configuration' && i.name.trim() == 'IP Address');
+
+                            if (temp_res && temp_res[0] && temp_res[0].description) {
+                              all_instances[upd_idx].ip_internal = temp_res[0].description;
+                              waterfall_cb(null, temp_res[0].description);
+                            }
+                          } else waterfall_cb('No IP ' + err);
+                        });
+                      }, // get ID from cloud API
+                      (ip, waterfall_cb) => {
+                        // get instances ec2 ID + ec2 instance type
+                        that.aws_cli.getEC2ID_Type(ip, ec2_id_type => waterfall_cb(null, ec2_id_type));
+                      }, (cloud_instance_details, waterfall_cb) => {
+                        all_instances[upd_idx].cloud_instance_id = cloud_instance_details.instance_id;
+                        all_instances[upd_idx].cloud_instance_type = cloud_instance_details.instance_type;
+                        waterfall_cb();
+                      }], err => {
+                        if (err) {
+                          that.logger.log(that.logger.LOG_LEVEL_ERROR, 'checkconn_exec error getting SAP instance details (IP, cloud instance ID and type):' + client.h + '/' + client.i + '/' + client.n + ':', err);
+                        }
+
+                        parallel_cb();
+                      });
+                    }
+                  }, function () {
+                    // if (!err) {
+                    //   that.logger.log(that.logger.LOG_LEVEL_MIN, 'checkconn_exec: SAP instance updated OK:' + client.h + '/' + client.i + '/' + client.n)
+                    // }
+                    async_cb();
+                  });
+                }, done);
+              }
+            });
+            break;
+
+          case 1:
+            // aws
+            done();
+            break;
+
+          default:
+            done();
+            break;
+        }
+      } else {
+        that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + job.data.system.syst_id + '} checkconn_exec: no data provided');
+        done();
+      }
+    });
+  },
+  // Called by Receiver
+  // Response to alertmanager msg sent to webhook receiver.
+  // Does not pull metrics but execute task based on metrics values and defined rules
+  // --
+  // todo log start/stop actions
+  scale: function () {
+    const that = this;
+    const _start_server_timeout_error = 0;
+    const _start_server_not_found = 1;
+    const _stop_server_error = 2;
+    const _stop_server_timeout_error = 3;
+    const _stop_server_not_found = 4;
+    const _start_sap_error = 5;
+    const _start_sap_timeout_error = 6;
+    const _stop_sap_error = 7;
+    const _stop_sap_timeout_error = 8;
+    var _scaling_errors = [];
+    _scaling_errors[_start_server_timeout_error] = 'Start EC2 server operation timeout';
+    _scaling_errors[_start_server_not_found] = 'EC2 server to start cannot be found';
+    _scaling_errors[_stop_server_error] = 'EC2 server could not be stopped (but SAP instance successfully stopped)';
+    _scaling_errors[_stop_server_timeout_error] = 'Stop EC2 server operation timeout (but SAP instance successfully stopped)';
+    _scaling_errors[_stop_server_not_found] = 'EC2 server to stop cannot be found';
+    _scaling_errors[_start_sap_error] = 'Start SAP instance operation failed';
+    _scaling_errors[_start_sap_timeout_error] = 'Start SAP instance operation timeout';
+    _scaling_errors[_stop_sap_error] = 'Stop SAP instance operation failed';
+    _scaling_errors[_stop_sap_timeout_error] = 'Stop SAP instance operation timeout'; // check if SAP instance is stopped before stopping the OS
+
+    function check_stop_sap_instance(soap_client, count, wait_sec, sn, serie_cb) {
+      if (count > 0) {
+        setTimeout(function () {
+          soap_client.GetSystemInstanceList({}, function (err, result) {
+            if (!err) {
+              var inst_status = result.instance.item && result.instance.item.filter(i => i.instanceNr == sn);
+
+              if (inst_status && inst_status[0] && inst_status[0].dispstatus == 'SAPControl-GRAY') {
+                serie_cb();
+              } else {
+                check_stop_sap_instance(soap_client, count - 1, wait_sec, sn, serie_cb);
+              }
+            } else {
+              check_stop_sap_instance(soap_client, count - 1, wait_sec, sn, serie_cb); // serie_cb('error geeting SAP instances list ' + err)
+            }
+          });
+        }, wait_sec); // 3 retries with 20sec to valide in 1 min
+      } else serie_cb(_stop_sap_timeout_error);
+    } // check if SAP instance is started
+
+
+    function check_start_sap_instance(soap_client, count, wait_sec, sn, serie_cb) {
+      // todo
+      that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'check_start_sap_instance:', count, wait_sec, sn);
+
+      if (count > 0) {
+        setTimeout(function () {
+          soap_client.GetSystemInstanceList({}, function (err, result) {
+            if (!err) {
+              var inst_status = result.instance.item && result.instance.item.filter(i => ('' + i.instanceNr).padStart(2, '0') == sn + '');
+
+              if (inst_status && inst_status[0] && inst_status[0].dispstatus == that._sap_statuses.green) {
+                serie_cb();
+              } else {
+                check_start_sap_instance(soap_client, count - 1, wait_sec, sn, serie_cb);
+              }
+            } else {
+              // serie_cb('error geeting SAP instances list ' + err)
+              check_start_sap_instance(soap_client, count - 1, wait_sec, sn, serie_cb);
+            }
+          });
+        }, wait_sec); // 3 retries with 20sec to valide in 1 min
+      } else serie_cb(_start_sap_timeout_error);
+    } // check if host OS is started before starting SAP instance
+
+
+    function check_start_ec2_instance(aws_client, count, wait_sec, single_ip, serie_cb) {
+      that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'check_start_ec2_instance:', count, wait_sec, single_ip);
+
+      if (count > 0) {
+        setTimeout(function () {
+          aws_client.isEC2Running(single_ip, function (status) {
+            if (status != undefined && status != null) {
+              if (status) {
+                serie_cb();
+              } else check_start_ec2_instance(aws_client, count - 1, wait_sec, single_ip, serie_cb);
+            } else serie_cb(_start_server_not_found);
+          });
+        }, wait_sec); // 3 retries with 20sec to valide in 1 min
+      } else serie_cb(_start_server_timeout_error);
+    } // check if host OS is stopped 
+
+
+    function check_stop_ec2_instance(aws_client, count, wait_sec, single_ip, serie_cb) {
+      if (count > 0) {
+        setTimeout(function () {
+          aws_client.isEC2Stopped(single_ip, function (status) {
+            if (status != undefined && status != null) {
+              if (status) {
+                serie_cb();
+              } else check_stop_ec2_instance(aws_client, count - 1, wait_sec, single_ip, serie_cb);
+            } else serie_cb(_stop_server_not_found);
+          });
+        }, wait_sec); // 3 retries with 20sec to valide in 1 min
+      } else serie_cb(_stop_server_timeout_error);
+    } // recursive restart SAP Instance
+
+
+    function do_restart_sap(soapcli, curr_system, syst_instance_to_start, index_curr_instance_restart, n_times = 1) {
+      if (n_times > 0) {
+        // status for restart = 3. needed to prevent false error on inconsistency status by USI.
+        // => status for failed start + restart (without resetting status): 0 > 3 > -1 > 0 => inconsistency as prev = new status
+        // => status for failed start + restart (with resetting status): 0 > 3 > 3 > 1|0 => no inconsistency as prev != new status
+        that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].status = 3;
+        sapcontrol_operations$1['RestartInstance'].call(soapcli, {}, err => {
+          if (err !== undefined && err !== null) {
+            if (err.body) {
+              const start_error = err.body.match(/<faultstring>(.*?)<\/faultstring>/) && err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]; // Instance already started
+
+              if (start_error == 'Instance already started') {
+                that.logger.log(that.logger.LOG_LEVEL_MIN, '[COMPLETED] {' + curr_system.syst_id + '} (restart-' + n_times + ') already started:' + curr_system.syst_id + '/' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
+                that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].status = 1;
+                that.save_resume_step(curr_system.syst_id, index_curr_instance_restart, -1);
+              } else {
+                that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + curr_system.syst_id + '} (restart -' + n_times + ') sap instance error:' + start_error);
+                that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].status = -1;
+                that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].error = {
+                  'occur_date': Date.now(),
+                  'msg': _scaling_errors[_start_sap_error] + ':' + start_error
+                };
+                do_restart_sap(soapcli, curr_system, syst_instance_to_start, index_curr_instance_restart, n_times - 1);
+              }
+            } else {
+              that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + curr_system.syst_id + '} (restart -' + n_times + ') sap instance error:', err);
+              that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].status = -1;
+              that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].error = {
+                'occur_date': Date.now(),
+                'msg': _scaling_errors[_start_sap_error]
+              };
+              do_restart_sap(soapcli, curr_system, syst_instance_to_start, index_curr_instance_restart, n_times - 1);
+            }
+          } else {
+            const step_wait_sec = 20;
+            const timeout_wait_sec = 300;
+            const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+            that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (restart -' + n_times + ') waiting for SAP instance to actually start within timeout ' + timeout_wait_sec + ' sec:' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
+            check_start_sap_instance(soapcli, nb_iterations, step_wait_sec * 1000, syst_instance_to_start.instancenr, err => {
+              if (err) {
+                that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].status = -1;
+                that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].error = {
+                  'occur_date': Date.now(),
+                  'msg': _scaling_errors[_start_sap_timeout_error]
+                };
+                that.logger.log(that.logger.LOG_LEVEL_MIN, '[COMPLETED] {' + curr_system.syst_id + '} (restart-' + n_times + ') partially started (EC2:OK, SAP:NOK): ' + curr_system.syst_id + '/' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr + ' error:', _scaling_errors[_start_sap_timeout_error]); // error handling : try restart
+
+                do_restart_sap(soapcli, curr_system, syst_instance_to_start, index_curr_instance_restart, n_times - 1);
+              } else {
+                that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].status = 1;
+                delete that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].error;
+                that.logger.log(that.logger.LOG_LEVEL_MIN, '[COMPLETED] {' + curr_system.syst_id + '} (restart-' + n_times + ') fully started:' + curr_system.syst_id + '/' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
+                that.save_resume_step(curr_system.syst_id, index_curr_instance_restart, -1);
+              }
+            });
+          }
+        }); // end sapcontrol_operations
+      } else {
+        that.logger.log(that.logger.LOG_LEVEL_MIN, '[COMPLETED] {' + curr_system.syst_id + '} (restart-' + n_times + ') all retries completed:' + curr_system.syst_id + '/' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
+        that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].status = -1;
+        that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].error = {
+          'occur_date': Date.now(),
+          'msg': _scaling_errors[_start_sap_timeout_error]
+        }; // send email to notify
+
+        that.save_resume_step(curr_system.syst_id, index_curr_instance_restart, -1);
+      }
+    } // TODO
+    // improvement: can set minimal number of instances instead of 1
+
+
+    function do_stop(d, queue_cb, is_resume_mode = false, resume_step = -1) {
+      // to prevent error for self signed certificates of SAP systems
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+      var alert = d.alert;
+      var curr_system = d.system;
+      var syst_id = alert.labels.instance;
+      var entity_id = alert.labels.entity_id;
+      var instance_to_stop = curr_system.instances.find(i => i.instancenr == alert.labels.sn);
+      const mode_resume = is_resume_mode ? '<-' : '';
+
+      if (that.updated_system_instances[syst_id] == undefined || that.updated_system_instances[syst_id].length == 0) {
+        // important to clone the array to prevent circular dependency with resume_context property
+        that.updated_system_instances[syst_id] = [...curr_system.instances];
+      }
+
+      if (curr_system && instance_to_stop) {
+        that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (stop' + mode_resume + ') requested for instance :' + instance_to_stop.hostname + '/' + instance_to_stop.instancenr + '/' + instance_to_stop.status + ' from alert ' + alert.labels.alertname + ' ' + alert.labels.sn + ' - ' + alert.labels.ip_internal + ' ' + alert.labels.hostname);
+        async.waterfall([// check system certificate at file level, create it if not existing
+        function (cb) {
+          // cb returns nothing
+          that.update_sending_ssl(d.system.syst_id, d.keys_buff, cb);
+        }, // connect to the instance and provide soapclient
+        function (cb) {
+          // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'connect to the entry point instance and provide soapclient')
+          const http_s = {
+            protocol: 'https',
+            port_suffix: '14'
+          };
+          const soap_url = http_s.protocol + '://' + (instance_to_stop.ip_internal || instance_to_stop.hostname) + ':5' + instance_to_stop.instancenr + http_s.port_suffix + '/';
+          that.pushgtw_cli.addInstance(d.system.syst_id);
+          that.new_soap_client(soap_url, {
+            method: 1,
+            // method is the index of options
+            options: [{}, {
+              pfx: that.certif_dir + '/' + d.system.syst_id + '.pfx'
+            }]
+          }, d, cb);
+        }, // Get list of instances and check system status
+        function (cli_data, cb) {
+          if (!cli_data || !cli_data.soapcli) {
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, '[PENDING] {' + curr_system.syst_id + '} (stop' + mode_resume + ') no soap client created for system instance ' + syst_id);
+            async_cb(that._errors.soap_client_init);
+          } else {
+            // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'Get list of instances and check system status')
+            cli_data.soapcli.GetSystemInstanceList({}, function (err, result) {
+              if (!err && result && result.instance && result.instance.item) {
+                // update up status for system, delete if not up
+                var syst_status = that.check_system_status(result.instance.item);
+
+                if (syst_status == that._sap_statuses.red || syst_status == that._sap_statuses.gray) {
+                  cb(that._errors.conn_failed, cli_data.soapcli);
+                } else {
+                  that.pushgtw_cli.pushUpInstance('up', entity_id, d.system.syst_id, that.region, d.system.sid, 1);
+                  that.conn_retries[d.system.syst_id] = 0;
+                  var features_of_instancenr = {};
+                  var all_instances = result.instance.item.map(x => {
+                    return {
+                      'hostname': x.hostname,
+                      'instancenr': ('' + x.instanceNr).padStart(2, '0'),
+                      'features': x.features.split('|'),
+                      'status': x.dispstatus == that._sap_statuses.green ? 1 : x.dispstatus == that._sap_statuses.yellow ? -1 : 0
+                    };
+                  });
+                  that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (stop' + mode_resume + ') - all instances of system:' + all_instances.map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(', '));
+                  all_instances.filter(i => i.status == 1).forEach(i => {
+                    features_of_instancenr[i.instancenr] = i.features.join('/');
+                  }); // skip if min instance is reached
+                  // continue *ONLY* if in resume mode and resume step >= sap_stop_triggered: 3 or ec2_stop_triggered: 4. In this case, we need to finished the EC2 stop operation.
+
+                  if (Object.values(features_of_instancenr).filter(x => x == features_of_instancenr[alert.labels.sn]).length > that.min_instance_running || is_resume_mode && resume_step >= that._resume_on_step.stop.sap_stop_triggered) {
+                    cli_data.payload = Object.assign(cli_data.payload, {
+                      instances: all_instances
+                    });
+                    cb(null, cli_data);
+                  } else {
+                    cb(that._errors.min_instances_reached);
+                  }
+                }
+              } else {
+                cb(that._errors.ws_not_reachable, err && err.address + ' ' + err.port);
+              }
+            });
+          }
+        }, // Get list of instances and check system status
+        function (cli_data, async_cb) {
+          // check if there is not a stop in progress for this instance in normal mode 
+          // OR is in resume mode
+          if (is_resume_mode || that.updated_system_instances[syst_id].filter(i => i.status == 2 && i.instancenr == alert.labels.sn).length == 0) {
+            // Set this instance *only* in stop WIP so it is not considered as active. Prevent from shutting down all AS and trying to shut down same AS from the same alert when the stop takes more time than alert resending
+            // set status == 2 for stop in progress
+            // also init resume_on_step value for fault tolerant (if process gets killed and restarted)
+            var index_curr_instance_stop = that.updated_system_instances[syst_id].map(i => i.instancenr).indexOf(instance_to_stop.instancenr);
+
+            if (index_curr_instance_stop < 0) {
+              index_curr_instance_stop = that.updated_system_instances[syst_id].push(Object.assign({}, instance_to_stop, {
+                status: 2,
+                resume_on_step: that._resume_on_step.stop.begin,
+                resume_context: d
+              })) - 1;
+            } else {
+              that.updated_system_instances[syst_id][index_curr_instance_stop] = Object.assign({}, that.updated_system_instances[syst_id][index_curr_instance_stop], {
+                status: 2,
+                resume_on_step: that._resume_on_step.stop.begin,
+                resume_context: d
+              });
+            }
+
+            that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (stop' + mode_resume + ') update to transition status:' + that.updated_system_instances[syst_id].map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(',')); // call async now to prevent delay of DB update due to waiting for stop operations 
+
+            async_cb();
+            const counter_elt = d.counter.find(c => c.instancenr == alert.labels.sn);
+            const counter_instance = counter_elt ? counter_elt.value : 0; // --- TRIGGER STOP SAP INSTANCE ----
+            // process STOP
+            // Execution in normal mode 'live/on demand' => request by receiver
+            // Execution in resume mode => re run on interrupted step
+            // const is_normal_mode = that.updated_system_instances[syst_id][index_curr_instance_stop].resume_on_step < 0
+
+            that.logger.log(that.logger.LOG_LEVEL_MIN, '[PENDING] {' + syst_id + '} (stop' + mode_resume + ') triggered: ' + alert.labels.alertname + '/' + alert.labels.hostname + '/' + alert.labels.sn + ' (counter=' + parseInt(counter_instance) + 1 + ' entity=' + entity_id + ')');
+            async.series([// increment stop counter
+            function (serie_cb) {
+              if (!is_resume_mode || that.resume_here_on_interruption(syst_id, index_curr_instance_stop, that._resume_on_step.stop.counter_updated)) {
+                that.pushgtw_cli.pushCounter('counter', 'stop', entity_id, syst_id, alert.labels.sn, alert.labels.alertname, parseInt(counter_instance) + 1);
+                that.save_resume_step(syst_id, index_curr_instance_stop, that._resume_on_step.stop.counter_updated);
+              }
+
+              serie_cb();
+            }, // stop sap instance
+            function (serie_cb) {
+              if (!is_resume_mode || that.resume_here_on_interruption(syst_id, index_curr_instance_stop, that._resume_on_step.stop.sap_stop_triggered)) {
+                that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + syst_id + '} (stop' + mode_resume + ') triggered SAP instance:' + alert.labels.ip_internal + '/' + alert.labels.hostname + '/' + alert.labels.sn);
+                sapcontrol_operations$1[d.action.name].call(cli_data.soapcli, {}, err => {
+                  that.save_resume_step(syst_id, index_curr_instance_stop, that._resume_on_step.stop.sap_stop_triggered);
+
+                  if (err) {
+                    serie_cb(_stop_sap_error);
+                  } else {
+                    serie_cb();
+                  }
+                });
+              } else serie_cb();
+            }, // wait for actual stop
+            function (serie_cb) {
+              const step_wait_sec = 20;
+              const timeout_wait_sec = 300;
+              const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+              that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + syst_id + '} (stop' + mode_resume + ') waiting SAP instance to stop before timeout ' + timeout_wait_sec + ' sec: ' + alert.labels.ip_internal + '/' + alert.labels.hostname + '/' + alert.labels.sn);
+              check_stop_sap_instance(cli_data.soapcli, nb_iterations, step_wait_sec * 1000, alert.labels.sn, serie_cb);
+            }, // stop ec2 instance
+            function (serie_cb) {
+              if (!is_resume_mode || that.resume_here_on_interruption(syst_id, index_curr_instance_stop, that._resume_on_step.stop.ec2_stop_triggered)) {
+                that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + syst_id + '} (stop' + mode_resume + ') triggered EC2 instance:' + alert.labels.ip_internal);
+                that.aws_cli.stopEC2(alert.labels.ip_internal, serie_cb);
+                that.save_resume_step(syst_id, index_curr_instance_stop, that._resume_on_step.stop.ec2_stop_triggered);
+              } else serie_cb();
+            }], function (err) {
+              // var temp_updated_instance_idx = that.updated_system_instances[syst_id].findIndex(i => i.instancenr == alert.labels.sn)
+              if (err) {
+                that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + syst_id + '} (stop' + mode_resume + '):', err);
+
+                switch (err) {
+                  case _stop_sap_error:
+                    that.updated_system_instances[syst_id][index_curr_instance_stop].status = -1;
+                    that.updated_system_instances[syst_id][index_curr_instance_stop].error = {
+                      'occur_date': Date.now(),
+                      'msg': _scaling_errors[_stop_sap_error]
+                    };
+                    break;
+
+                  case _scaling_errors[_stop_sap_timeout_error]:
+                    // set value to -1 so Receiver can get knowledge of unsuccessfull operation. unknown instance status
+                    that.updated_system_instances[syst_id][index_curr_instance_stop].status = -1;
+                    that.updated_system_instances[syst_id][index_curr_instance_stop].error = {
+                      'occur_date': Date.now(),
+                      'msg': _scaling_errors[_stop_sap_timeout_error]
+                    };
+                    break;
+
+                  case that.aws_cli._errors.ec2_not_stopped:
+                    that.updated_system_instances[syst_id][index_curr_instance_stop].status = -1;
+                    that.updated_system_instances[syst_id][index_curr_instance_stop].error = {
+                      'occur_date': Date.now(),
+                      'msg': _scaling_errors[_stop_server_error]
+                    };
+                    break;
+                }
+
+                that.save_resume_step(syst_id, index_curr_instance_stop, -1);
+              } else {
+                const step_wait_sec = 20;
+                const timeout_wait_sec = 300;
+                const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+                that.updated_system_instances[syst_id][index_curr_instance_stop].status = 0;
+                check_stop_ec2_instance(that.aws_cli, nb_iterations, step_wait_sec * 1000, alert.labels.ip_internal, err => {
+                  if (err) {
+                    that.logger.log(that.logger.LOG_LEVEL_MIN, '[COMPLETED] {' + syst_id + '} (stop' + mode_resume + ') partially stopped (SAP:OK, EC2:NOK):' + alert.labels.ip_internal + '/' + alert.labels.hostname + '/' + alert.labels.sn + ' error:', _scaling_errors[err]); // TODO send email  start ec2 failed
+
+                    that.updated_system_instances[syst_id][index_curr_instance_stop].error = {
+                      'occur_date': Date.now(),
+                      'msg': _scaling_errors[err]
+                    };
+                  } else {
+                    delete that.updated_system_instances[syst_id][index_curr_instance_stop].error;
+                    that.logger.log(that.logger.LOG_LEVEL_MIN, '[COMPLETED] {' + syst_id + '} (stop' + mode_resume + ') fully stopped:' + alert.labels.ip_internal + '/' + alert.labels.hostname + '/' + alert.labels.sn);
+                  }
+
+                  that.save_resume_step(syst_id, index_curr_instance_stop, -1);
+                });
+              }
+            });
+          } else {
+            that.logger.log(that.logger.LOG_LEVEL_INFO, '[CANCELLED] {' + syst_id + '} (stop' + mode_resume + ') instance is already being stopped');
+            async_cb(that._errors.stop_ongoing);
+          }
+        }], function (waterfall_err) {
+          // waterfall_err is not an error relating to operation execution, it does not involve any change on instance status but rather on business rules
+          if (waterfall_err) {
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, '[CHECKS FAILED] {' + syst_id + '} (stop' + mode_resume + ') on ' + curr_system.ip_internal + '/' + curr_system.sid + ':', waterfall_err);
+
+            switch (waterfall_err) {
+              case that._errors.soap_client_init:
+              case that._errors.conn_failed:
+              case that._errors.ws_not_reachable:
+              case that._errors.min_instances_reached:
+              case that._errors.stop_ongoing:
+              default:
+                queue_cb(waterfall_err);
+                break;
+            }
+          } else {
+            queue_cb(null, {
+              'sending_sslcertifs': that.sending_sslcertifs[curr_system.syst_id + ''],
+              'instances': that.updated_system_instances,
+              'syst_id': curr_system.syst_id // 'error': waterfall_err
+
+            });
+          }
+        });
+      } else {
+        that.logger.log(that.logger.LOG_LEVEL_ERROR, '[CANCELLED] {' + syst_id + '} (stop' + mode_resume + ') no system provided');
+        queue_cb('No system provided');
+      }
+    } // improvement: can set max number of instances instead of const
+
+
+    function do_start(d, queue_cb, is_resume_mode = false, instance_idx = -1) {
+      // to prevent error for self signed certificates of SAP systems
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+      var alert = d.alert;
+      var curr_system = d.system;
+      var syst_id = alert.labels.instance;
+      var entity_id = alert.labels.entity_id;
+      const mode_resume = is_resume_mode ? '<-' : '';
+
+      if (that.updated_system_instances[syst_id] == undefined || that.updated_system_instances[syst_id].length == 0) {
+        // important to clone the array to prevent circular dependency with resume_context property
+        that.updated_system_instances[syst_id] = [...curr_system.instances];
+      }
+
+      if (curr_system) {
+        that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') requested for instance:' + curr_system.ip_internal + '-' + curr_system.sid);
+        async.waterfall([// find the sap instance to start depending on execution mode: normal or resume
+        function (waterfall_cb) {
+          async.parallel({
+            // returns something only in normal mode
+            normal_instance_to_start: parallel_cb => {
+              if (is_resume_mode) parallel_cb();else {
+                async.waterfall([// check no CI instances
+                function (waterfall_cb2) {
+                  // var syst_instances_to_start_candidates = curr_system.instances
+                  // search for stopped (from db perspective) dialog instances (!= msg server)
+                  var syst_instances_to_start_candidates = that.updated_system_instances[syst_id] // search for stopped (from up to date cache) dialog instances (!= msg server)
+                  .filter(x => x.status == 0 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0);
+
+                  if (syst_instances_to_start_candidates && syst_instances_to_start_candidates.length > 0) {
+                    waterfall_cb2();
+                  } else {
+                    that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + curr_system.syst_id + '} (start' + mode_resume + '):' + that._errors.no_start_candidate);
+                    waterfall_cb2(that._errors.no_start_candidate);
+                  }
+                }, // check system certificate
+                function (waterfall_cb2) {
+                  // cb returns nothing
+                  that.update_sending_ssl(d.system.syst_id, d.keys_buff, waterfall_cb2);
+                }, // connect to the entry point instance and provide soapclient
+                function (waterfall_cb2) {
+                  // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'connect to the entry point instance and provide soapclient')
+                  const http_s = d.system.is_encrypted ? {
+                    protocol: 'https',
+                    port_suffix: '14'
+                  } : {
+                    protocol: 'http',
+                    port_suffix: '13'
+                  };
+                  const soap_url = http_s.protocol + '://' + (d.system.ip_internal || d.system.hostname) + ':5' + d.system.sn + http_s.port_suffix + '/';
+                  that.pushgtw_cli.addInstance(d.system.syst_id);
+                  that.new_soap_client(soap_url, {
+                    method: d.system.auth_method,
+                    // method is the index of options
+                    options: [{
+                      user: d.system.username,
+                      pwd: d.system.password
+                    }, {
+                      pfx: d.system.auth_method == 1 && that.certif_dir + '/' + d.system.syst_id + '.pfx'
+                    }]
+                  }, d, waterfall_cb2);
+                }, // Get list of instances and check system status
+                function (cli_data, waterfall_cb2) {
+                  // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'Get list of instances and check system status')
+                  cli_data.soapcli.GetSystemInstanceList({}, function (err, result) {
+                    if (!err && result && result.instance && result.instance.item) {
+                      var instances_list = result.instance.item.map(x => {
+                        return {
+                          'hostname': x.hostname,
+                          'instancenr': ('' + x.instanceNr).padStart(2, '0'),
+                          'features': x.features.split('|'),
+                          'status': x.dispstatus == that._sap_statuses.green ? 1 : x.dispstatus == that._sap_statuses.yellow ? -1 : 0
+                        };
+                      }); // update up status for system, delete if not up
+
+                      var syst_status = that.check_system_status(result.instance.item);
+
+                      if (syst_status == that._sap_statuses.red || syst_status == that._sap_statuses.gray) {
+                        waterfall_cb2(that._errors.conn_failed, cli_data.soapcli);
+                      } else {
+                        that.pushgtw_cli.pushUpInstance('up', entity_id, d.system.syst_id, that.region, d.system.sid, 1);
+                        that.conn_retries[d.system.syst_id] = 0; // provide list of active instances for KPI collections
+
+                        waterfall_cb2(null, instances_list);
+                      }
+                    } else {
+                      waterfall_cb2(that._errors.ws_not_reachable, err && err.address + ' ' + err.port);
+                    }
+                  });
+                }, // check system instances statuses and conditions before triggering start
+                function (all_instances, waterfall_cb2) {
+                  // check if max instances is reached already 
+                  var features_of_instancenr = {};
+                  all_instances.filter(i => i.status == 1).forEach(i => {
+                    features_of_instancenr[i.instancenr] = i.features.join('|');
+                  });
+
+                  if (Object.values(features_of_instancenr).filter(x => !RegExp('MESSAGESERVER').test(x) && !RegExp('ENQUE').test(x)).length < that.max_instance_running) {
+                    waterfall_cb2(null, all_instances);
+                  } else {
+                    waterfall_cb2(that._errors.max_instances_reached);
+                  }
+                }, // check if eligible instance can be started
+                function (all_instances, waterfall_cb2) {
+                  that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') all instances of system:' + all_instances.map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(',')); // var syst_instances_to_start = curr_system.instances
+                  // search for stopped (from db perspective) dialog instances (!= msg server)
+
+                  var syst_instances_to_start = that.updated_system_instances[syst_id] // search for stopped (from up to date cache perspective) dialog instances (!= msg server)
+                  .filter(x => x.status == 0 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0) // search for stopped (from sapctrl res perspective)
+                  .filter(x => all_instances.filter(i => i.status == 0).findIndex(i => i.instancenr == x.instancenr) >= 0 || // os is up, sap instance is down
+                  all_instances.findIndex(i => i.instancenr == x.instancenr) < 0 // os (and sap instance) is down
+                  ); // var syst_instances_to_start = all_instances.filter(x => x.status == 0 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0)
+
+                  that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') candidates instances:' + syst_instances_to_start.map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(','));
+
+                  if (syst_instances_to_start && syst_instances_to_start.length > 0) {
+                    waterfall_cb2(null, syst_instances_to_start[0]);
+                  } else {
+                    waterfall_cb2(that._errors.no_start_candidate);
+                  }
+                }], function (waterfall_err2, syst_instance_to_start) {
+                  // waterfall_err is not an error relating to operation execution, 
+                  // it does not involve any change on instance status but rather on business rules and pre checks
+                  if (waterfall_err2) {
+                    parallel_cb(waterfall_err2); // that.logger.log(that.logger.LOG_LEVEL_ERROR, '[CHECKS FAILED] {' + curr_system.syst_id + '} (start'+mode_resume+') on ' + curr_system.ip_internal + '-' + curr_system.sid + ':', waterfall_err)
+                    // switch (waterfall_err) {
+                    //   case that._errors.soap_client_init:
+                    //   case that._errors.conn_failed:
+                    //   case that._errors.ws_not_reachable:
+                    //   case that._errors.max_instances_reached:
+                    //   case that._errors.no_start_candidate:
+                    //   case that._errors.start_ongoing:
+                    //   default:
+                    //     parallel_cb(waterfall_err)
+                    //     break
+                    // }
+                  } else parallel_cb(null, syst_instance_to_start);
+                });
+              }
+            },
+            // returns something only in resume mode
+            resume_instance_to_start: parallel_cb => {
+              if (is_resume_mode) parallel_cb(null, that.updated_system_instances[syst_id][instance_idx]);else parallel_cb();
+            }
+          }, (err, res) => {
+            waterfall_cb(err, res.normal_instance_to_start || res.resume_instance_to_start);
+          });
+        }, function (syst_instance_to_start, waterfall_cb) {
+          that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') current buffered instances:' + that.updated_system_instances[syst_id].map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(',')); // confirm if syst_instance_to_start (from sapstartsrv) if really a valid candidate by check its status in buffered instances
+          // check if there is not a start in progress for this instance when in normal mode
+          // OR is in resume mode
+
+          if (is_resume_mode || that.updated_system_instances[syst_id].filter(i => i.status == 3
+          /*&& i.instancenr == syst_instance_to_start.instancenr*/
+          ).length == 0) {
+            that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') alert:' + alert.labels.alertname + ' on ' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr); // Set *only* the starting instance in start WIP so it are not considered as active. Other instances are not changed. Prevent from shutting down all AS and trying to shut down same AS from the same alert when the stop takes more time than alert resending
+            // set status == 3 for start in progress
+
+            var index_curr_instance_start = that.updated_system_instances[syst_id].map(i => i.instancenr).indexOf(syst_instance_to_start.instancenr);
+
+            if (index_curr_instance_start < 0) {
+              index_curr_instance_start = that.updated_system_instances[syst_id].push(Object.assign({}, syst_instance_to_start, {
+                status: 3,
+                resume_on_step: that._resume_on_step.start.begin,
+                resume_context: d
+              })) - 1;
+            } else {
+              that.updated_system_instances[syst_id][index_curr_instance_start] = Object.assign({}, that.updated_system_instances[syst_id][index_curr_instance_start], {
+                status: 3,
+                resume_on_step: that._resume_on_step.start.begin,
+                resume_context: d
+              });
+            }
+
+            that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') update to transition status:' + that.updated_system_instances[syst_id].map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(',')); // call async now to prevent delay of DB update due to waiting for stop operations 
+
+            waterfall_cb(); // --- TRIGGER START SAP INSTANCE ----
+
+            const counter_elt = d.counter.find(c => c.instancenr == syst_instance_to_start.instancenr);
+            const counter_instance = counter_elt ? counter_elt.value : 0; // Execution in normal mode 'live/on demand' => request by receiver
+            // Execution in resume mode => re run on interrupted step
+            // const is_normal_mode = that.updated_system_instances[syst_id][index_curr_instance_start].resume_on_step < 0
+
+            that.logger.log(that.logger.LOG_LEVEL_MIN, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') triggered:' + syst_id + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.instancenr + ' (counter=' + (parseInt(counter_instance) + 1) + ' entity=' + entity_id + ')');
+            async.series({
+              // increment start counter
+              incr: function (serie_cb) {
+                if (!is_resume_mode || that.resume_here_on_interruption(syst_id, index_curr_instance_start, that._resume_on_step.start.counter_updated)) {
+                  that.pushgtw_cli.pushCounter('counter', 'start', entity_id, syst_id, syst_instance_to_start.instancenr, alert.labels.alertname, parseInt(counter_instance) + 1);
+                  that.save_resume_step(syst_id, index_curr_instance_start, that._resume_on_step.start.counter_updated);
+                }
+
+                serie_cb();
+              },
+              // Start EC2 host
+              start: function (serie_cb) {
+                if (!is_resume_mode || that.resume_here_on_interruption(syst_id, index_curr_instance_start, that._resume_on_step.start.ec2_start_triggered)) {
+                  that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') trigger EC2 instance:' + syst_instance_to_start.ip_internal);
+                  that.aws_cli.startEC2(syst_instance_to_start.ip_internal, serie_cb);
+                  that.save_resume_step(syst_id, index_curr_instance_start, that._resume_on_step.start.ec2_start_triggered);
+                } else serie_cb();
+              },
+              // Check EC2 status 
+              check: function (serie_cb) {
+                const step_wait_sec = 20;
+                const timeout_wait_sec = 300;
+                const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+                that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') waiting for EC2 instance to actually start within timeout ' + timeout_wait_sec + ' sec:' + syst_instance_to_start.ip_internal);
+                check_start_ec2_instance(that.aws_cli, nb_iterations, step_wait_sec * 1000, syst_instance_to_start.ip_internal, serie_cb);
+              },
+              // Provide soap cli
+              soap: function (serie_cb) {
+                var pfx_certif = null;
+                const http_s = curr_system.is_encrypted ? {
+                  protocol: 'https',
+                  port_suffix: '14'
+                } : {
+                  protocol: 'http',
+                  port_suffix: '13'
+                };
+                var soap_url = http_s.protocol + '://' + (syst_instance_to_start.ip_internal || syst_instance_to_start.hostname) + ':5' + syst_instance_to_start.instancenr + http_s.port_suffix + '/';
+
+                if (curr_system.auth_method == 1) {
+                  pfx_certif = that.certif_dir + '/' + curr_system.syst_id + '.pfx';
+                }
+
+                that.new_soap_client(soap_url, {
+                  method: curr_system.auth_method,
+                  // method is the index of options
+                  options: [{
+                    user: curr_system.username,
+                    pwd: curr_system.password
+                  }, {
+                    pfx: pfx_certif
+                  }]
+                }, {}, serie_cb);
+              }
+            }, function (err, array_res) {
+              var cli_data = array_res.soap; // var temp_updated_instance_idx = that.updated_system_instances[syst_id].findIndex(i => i.instancenr == syst_instance_to_start.instancenr)
+
+              if (err || !cli_data) {
+                that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + curr_system.syst_id + '} (start' + mode_resume + ') error:', err);
+
+                switch (err) {
+                  case that.aws_cli._errors.ec2_not_started:
+                    // from that.aws_cli.startEC2
+                    that.updated_system_instances[syst_id][index_curr_instance_start].status = -1;
+                    that.updated_system_instances[syst_id][index_curr_instance_start].error = {
+                      'occur_date': Date.now(),
+                      'msg': that.aws_cli._errors.ec2_not_started
+                    };
+                    break;
+
+                  case that._errors.soap_client_init:
+                    // from new_soap_client
+                    that.updated_system_instances[syst_id][index_curr_instance_start].status = -1;
+                    that.updated_system_instances[syst_id][index_curr_instance_start].error = {
+                      'occur_date': Date.now(),
+                      'msg': that._errors.soap_client_init
+                    };
+                    break;
+
+                  case _start_server_not_found: // from check_start_ec2_instance
+
+                  case _start_server_timeout_error: // from check_start_ec2_instance
+
+                  default:
+                    // reset status to 0 with error
+                    that.updated_system_instances[syst_id][index_curr_instance_start].status = -1;
+                    that.updated_system_instances[syst_id][index_curr_instance_start].error = {
+                      'occur_date': Date.now(),
+                      'msg': _scaling_errors[err]
+                    };
+                    break;
+                } // remove meta data, not needed anymore
+
+
+                that.save_resume_step(syst_id, index_curr_instance_start, -1);
+              } else {
+                that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') trigger start SAP instance:' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
+                async.series([series_cb => {
+                  if (!is_resume_mode || that.resume_here_on_interruption(syst_id, index_curr_instance_start, that._resume_on_step.start.sap_start_triggered)) {
+                    sapcontrol_operations$1[d.action.name].call(cli_data.soapcli, {}, err => {
+                      that.save_resume_step(syst_id, index_curr_instance_start, that._resume_on_step.start.sap_start_triggered);
+
+                      if (err !== undefined && err !== null) {
+                        if (err.body) {
+                          const start_error = err.body.match(/<faultstring>(.*?)<\/faultstring>/) && err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]; // Instance already started
+
+                          if (start_error == 'Instance already started') {
+                            that.updated_system_instances[syst_id][index_curr_instance_start].status = 1;
+                          } else {
+                            that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + curr_system.syst_id + '} (start' + mode_resume + ') sap instance error:' + start_error);
+                            that.updated_system_instances[syst_id][index_curr_instance_start].status = -1;
+                            that.updated_system_instances[syst_id][index_curr_instance_start].error = {
+                              'occur_date': Date.now(),
+                              'msg': _scaling_errors[_start_sap_error] + ':' + start_error
+                            };
+                          }
+                        } else {
+                          that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + curr_system.syst_id + '} (start' + mode_resume + ') sap instance error:', err);
+                          that.updated_system_instances[syst_id][index_curr_instance_start].status = -1;
+                          that.updated_system_instances[syst_id][index_curr_instance_start].error = {
+                            'occur_date': Date.now(),
+                            'msg': _scaling_errors[_start_sap_error]
+                          };
+                        } // remove meta data, not needed anymore
+
+
+                        that.save_resume_step(syst_id, index_curr_instance_start, -1);
+                        series_cb(err);
+                      } else {
+                        series_cb();
+                      }
+                    }); // end sapcontrol_operations
+                  } else series_cb(); // resume mode, start triggered already
+
+                }, series_cb => {
+                  const step_wait_sec = 20;
+                  const timeout_wait_sec = 300;
+                  const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+                  that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') waiting for SAP instance to actually start within timeout ' + timeout_wait_sec + ' sec:' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
+                  check_start_sap_instance(cli_data.soapcli, nb_iterations, step_wait_sec * 1000, syst_instance_to_start.instancenr, err => {
+                    if (err) {
+                      that.updated_system_instances[syst_id][index_curr_instance_start].status = -1;
+                      that.updated_system_instances[syst_id][index_curr_instance_start].error = {
+                        'occur_date': Date.now(),
+                        'msg': _scaling_errors[_start_sap_timeout_error]
+                      };
+                      that.logger.log(that.logger.LOG_LEVEL_MIN, '[COMPLETED] {' + curr_system.syst_id + '} (start' + mode_resume + ') partially started (EC2:OK, SAP:NOK): ' + syst_id + '/' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr + ' error:', _scaling_errors[_start_sap_timeout_error]); // error handling : try restart
+
+                      do_restart_sap(cli_data.soapcli, curr_system, syst_instance_to_start, index_curr_instance_start, 1);
+                    } else {
+                      that.updated_system_instances[syst_id][index_curr_instance_start].status = 1;
+                      delete that.updated_system_instances[syst_id][index_curr_instance_start].error;
+                      that.logger.log(that.logger.LOG_LEVEL_MIN, '[COMPLETED] {' + curr_system.syst_id + '} (start' + mode_resume + ') fully started:' + syst_id + '/' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
+                      that.save_resume_step(syst_id, index_curr_instance_start, -1);
+                    }
+
+                    series_cb();
+                  });
+                }]);
+              }
+            });
+          } else {
+            waterfall_cb(that._errors.start_ongoing);
+          }
+        }], function (waterfall_err) {
+          // waterfall_err is not an error relating to operation execution, it does not involve any change on instance status but rather on business rules
+          // and pre checks
+          if (waterfall_err) {
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, '[CHECKS FAILED] {' + curr_system.syst_id + '} (start' + mode_resume + ') on ' + curr_system.ip_internal + '-' + curr_system.sid + ':', waterfall_err);
+            queue_cb(waterfall_err); // switch (waterfall_err) {
+            //   case that._errors.soap_client_init:
+            //   case that._errors.conn_failed:
+            //   case that._errors.ws_not_reachable:
+            //   case that._errors.max_instances_reached:
+            //   case that._errors.no_start_candidate:
+            //   case that._errors.start_ongoing:
+            //   default:
+            //     queue_cb(waterfall_err)
+            //     break
+            // }
+          } else {
+            queue_cb(null, {
+              'sending_sslcertifs': that.sending_sslcertifs[curr_system.syst_id + ''],
+              'instances': that.updated_system_instances,
+              'syst_id': curr_system.syst_id // 'error': waterfall_err
+
+            });
+          }
+        });
+      } else {
+        that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {} (start' + mode_resume + '): no system provided');
+        queue_cb('No system provided');
+      }
+    }
+
+    function do_update_scaling_instance(d, queue_cb) {
+      if (that.updated_system_instances[d.syst_id]) {
+        const requested_instance = that.updated_system_instances[d.syst_id].filter(i => i.instancenr == d.instance_nr)[0];
+
+        if (requested_instance) {
+          // remove resume meta data not required on receiver side
+          // delete requested_instance.resume_context
+          // delete requested_instance.resume_on_step
+          that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + d.syst_id + '} (update) :' + requested_instance.hostname + '/' + requested_instance.instancenr + '/' + requested_instance.status); // test if start or stop operation failed or timeout
+
+          if (requested_instance.status == -1) {
+            // the instance is in unknown state. check for system instances status update from sapstartsrv call (if manual restart was performed for instance)
+            async.waterfall([// check system certificate
+            function (waterfall_cb) {
+              // cb returns nothing
+              that.update_sending_ssl(d.syst_id, d.keys_buff, waterfall_cb);
+            }, // connect to the entry point instance and provide soapclient
+            function (waterfall_cb) {
+              // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'connect to the entry point instance and provide soapclient')
+              const http_s = {
+                protocol: 'https',
+                port_suffix: '14'
+              };
+              const soap_url = http_s.protocol + '://' + (requested_instance.ip_internal || requested_instance.hostname) + ':5' + d.instance_nr + http_s.port_suffix + '/';
+              that.new_soap_client(soap_url, {
+                method: 1,
+                // method is the index of options
+                options: [{}, {
+                  pfx: that.certif_dir + '/' + d.syst_id + '.pfx'
+                }]
+              }, d, waterfall_cb);
+            }, // Get list of instances and check system status
+            function (cli_data, waterfall_cb) {
+              // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'Get list of instances and check system status')
+              cli_data.soapcli.GetSystemInstanceList({}, function (err, result) {
+                if (!err && result && result.instance && result.instance.item) {
+                  waterfall_cb(null, result.instance.item.find(x => ('' + x.instanceNr).padStart(2, '0') == d.instance_nr));
+                } else {
+                  waterfall_cb();
+                }
+              });
+            }], (err, updated_instance) => {
+              // queue_cb(null, that.updated_system_instances[d.syst_id].filter(i=>i.instancenr == d.instance_nr)[0])
+              if (err) {
+                queue_cb('Error getting system instance latest status ' + err);
+              } else {
+                queue_cb(null, {
+                  'sending_sslcertifs': that.sending_sslcertifs[d.syst_id + ''],
+                  'instance': updated_instance ? Object.assign(requested_instance, {
+                    status: updated_instance.dispstatus == that._sap_statuses.green ? 1 : updated_instance.dispstatus == that._sap_statuses.yellow ? -1 : 0
+                  }, {
+                    resume_context: null,
+                    resume_on_step: null
+                  }) : Object.assign(requested_instance, {
+                    resume_context: null,
+                    resume_on_step: null
+                  }),
+                  'syst_id': d.syst_id
+                });
+              }
+            });
+          } else {
+            // instance is in transition (stopping or starting)
+            queue_cb(null, {
+              'sending_sslcertifs': that.sending_sslcertifs[d.syst_id + ''],
+              'instance': requested_instance,
+              'syst_id': d.syst_id
+            });
+          }
+        } else {
+          that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + d.syst_id + '} (update) system not indexed:' + d.instance_nr);
+          queue_cb('System instance not indexed');
+        }
+      } else {
+        that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + d.syst_id + '} (update) system not active:' + d.syst_id);
+        queue_cb('System instance not active');
+      }
+    }
+
+    function send_notification(d) {
+      // parameters must have at least one 'endpoint' property. Others param are set in URL 
+      var req_data = null;
+      var req_headers = {};
+      var full_url = d.action.parameters.endpoint;
+
+      switch (d.action.name) {
+        case 'slack':
+          function gen_fields(text, list) {
+            var blocks = [];
+
+            if (list.length > 0) {
+              blocks.push({
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "<https://scaling.worqloads.com|" + text + ">"
+                }
+              });
+              list.forEach(function (alert) {
+                blocks.push({
+                  "type": "section",
+                  "block_id": alert.fingerprint,
+                  "fields": [{
+                    "type": "mrkdwn",
+                    "text": "*Notification*\n" + alert.labels.alertname
+                  }, {
+                    "type": "mrkdwn",
+                    "text": "*System*\n" + alert.labels.sid + (alert.labels.hostname != undefined && alert.labels.hostname != '' ? '@' + alert.labels.hostname : '') + (alert.labels.sn != undefined && alert.labels.sn != '' ? ' [' + alert.labels.sn + ']' : '')
+                  }]
+                });
+              });
+              blocks.push({
+                "type": "divider"
+              });
+            }
+
+            return blocks;
+          }
+
+          req_data = {
+            'text': d.alerts.length + ' notification' + (d.alerts.length > 1 && 's' || '') + '( ' + d.alerts.filter(x => x.status == 'firing'
+            /*&& !x.reminder*/
+            ).length + ' new)',
+            "blocks": gen_fields('New notifications', d.alerts.filter(x => x.status == 'firing'
+            /*&& !x.reminder*/
+            )) // .concat(
+            //   gen_fields('Reminders', d.alerts.filter(x => x.status == 'firing' && x.reminder))
+            // )
+
+          };
+          break;
+
+        case 'email':
+          req_data = Object.assign(d, d.action.parameters); // var action_params = Object.keys(d.action.parameters)
+          // action_params.splice(action_params.indexOf('endpoint'), 1)
+          // action_params.forEach(function (k) {
+          //   full_url += '&' + k + '=' + d.action.parameters[k]
+          // })
+
+          req_headers = {
+            'headers': {
+              'x-api-key': 'ZqDvnKwJhCz69koeSUSB59jIhyDMjHm3RMHyg675'
+            }
+          };
+          break;
+      }
+
+      if (req_data != null) {
+        axios.post(full_url, req_data, req_headers).then(function (response) {
+          that.logger.log(that.logger.LOG_LEVEL_INFO, '[COMPLETED] {' + d.action.name + '} (notif)');
+        }).catch(function (error) {
+          if (error) {
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + d.action.name + '} (notif):', error);
+          }
+        });
+      }
+    }
+
+    async.series([// load scaling buffer from last process stopped for scaling doer only
+    function (series_cb) {
+      that.logger.log(that.logger.LOG_LEVEL_MIN, 'loading resume processing data...');
+      async.waterfall([waterfall_cb => {
+        that.redis_cli.get(that.company, waterfall_cb);
+      }, (buff_instances, waterfall_cb) => {
+        // get last values
+        that.updated_system_instances = JSON.parse(buff_instances) && JSON.parse(buff_instances).root || {}; // reinit
+
+        that.redis_cli.set(that.company, '{"root":{}}', waterfall_cb);
+      }], err => {
+        if (err) {
+          that.logger.log(that.logger.LOG_LEVEL_ERROR, 'redis client get/set error:', err);
+        }
+
+        that.logger.log(that.logger.LOG_LEVEL_MIN, 'loaded from cache :', that.updated_system_instances);
+        series_cb();
+      });
+    }, // resumes interrupted operations
+    function (series_cb) {
+      // if there is something (system, instances) to save...
+      if (that.updated_system_instances && Object.keys(that.updated_system_instances).length > 0) {
+        series_cb();
+        Object.keys(that.updated_system_instances).forEach(syst_key => {
+          async.eachOf(that.updated_system_instances[syst_key], (instance, instance_idx, each_cb) => {
+            if (instance.resume_on_step > 0) {
+              that.logger.log(that.logger.LOG_LEVEL_MIN, 'resuming interrupted scale processing operation:', instance.status);
+
+              switch (instance.status) {
+                case 2:
+                  that.logger.log(that.logger.LOG_LEVEL_MIN, '(resume) stop on:', instance);
+                  each_cb();
+                  do_stop(instance.resume_context, (err, data) => {
+                    if (err) {
+                      that.logger.log(that.logger.LOG_LEVEL_ERROR, '(resume) stop error :', err);
+                    } else {
+                      that.logger.log(that.logger.LOG_LEVEL_DEBUG, '(resume) stop OK:', data);
+                    }
+                  }, true, instance.resume_on_step);
+                  break;
+
+                case 3:
+                  that.logger.log(that.logger.LOG_LEVEL_MIN, '(resume) start on:', instance);
+                  each_cb();
+                  do_start(instance.resume_context, (err, data) => {
+                    if (err) {
+                      that.logger.log(that.logger.LOG_LEVEL_ERROR, '(resume) start error :', err);
+                    } else {
+                      that.logger.log(that.logger.LOG_LEVEL_DEBUG, '(resume) start OK:', data);
+                    }
+                  }, true, instance_idx);
+                  break;
+
+                default:
+                  that.logger.log(that.logger.LOG_LEVEL_ERROR, '(resume) action type not supported:', instance.status);
+                  each_cb();
+                  break;
+              }
+            } else {
+              // remove instance without resume
+              delete that.updated_system_instances[syst_key][instance_idx];
+              each_cb();
+            }
+          }, err => {
+            if (err) that.logger.log(that.logger.LOG_LEVEL_ERROR, '(resume) actions error:', err); // remove undefined instance due to delete
+
+            that.updated_system_instances[syst_key] = that.updated_system_instances[syst_key].filter(i => i != undefined);
+          });
+        });
+      } else series_cb();
+    }, // listen for new kue job requests
+    function (series_cb) {
+      that.queue.process(that.QUEUES.webhook_exec, that.concurrency_nb, function (job, done) {
+        if (job.data.action
+        /*&& job.data.alerts */
+        ) {
+            switch (job.data.action.type) {
+              case 0:
+                // communication
+                send_notification(job.data);
+                done();
+                break;
+
+              case 1:
+                // action
+                let syst_id = job.data.system ? job.data.system.syst_id : job.data.syst_id;
+                that.update_sending_ssl(syst_id, job.data.keys_buff, err => {
+                  if (err) {
+                    done('missing pfx');
+                  } else {
+                    switch (job.data.action.name) {
+                      case 'Stop':
+                        that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'stop action data:', job.data);
+                        if (!job.data.alerts) done();else do_stop(job.data, done);
+                        break;
+
+                      case 'Start':
+                        that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'start action data:', job.data);
+                        if (!job.data.alerts) done();else do_start(job.data, done);
+                        break;
+
+                      case 'UpdateScalingInstance':
+                        do_update_scaling_instance(job.data, done);
+                        break;
+
+                      default:
+                        done();
+                        break;
+                    }
+                  }
+                });
+                break;
+
+              default:
+                that.logger.log(that.logger.LOG_LEVEL_ERROR, 'action type not supported:', job.data.action.type);
+                done();
+                break;
+            }
+          } else {
+          that.logger.log(that.logger.LOG_LEVEL_ERROR, 'no data provided');
+          done();
+        }
+      });
+      series_cb();
+    }]);
+  },
+  get_cloud_region: function (cb) {
+    var that = this;
+    const cp_type = 1; // AWS
+
+    switch (cp_type) {
+      case 0:
+        // AZURE
+        break;
+
+      case 1:
+        // AWS using IMDSv1
+        const meta_data_url = "http://169.254.169.254/latest/meta-data/placement/availability-zone";
+        axios.get(meta_data_url).then(function (region) {
+          if (region.data) {
+            that.logger.log(that.logger.LOG_LEVEL_INFO, 'get_cloud_region ', region.data);
+            that.region = region.data.slice(0, -1); // get region from availability zone
+
+            cb();
+          } else {
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, 'get_cloud_region : no data');
+            cb();
+          }
+        }).catch(function (error) {
+          if (error) {
+            that.logger.log(that.logger.LOG_LEVEL_ERROR, 'get_cloud_region:', error);
+          }
+
+          cb();
+        });
+        break;
+    }
+  },
+  // helper functions
+  // ----------------------------------------------------------------------
+  // check status of SAP system based on its instances status
+  // SAP system is DOWN if CI is down or all DI are down
+  check_system_status: function (instance_items) {
+    var that = this;
+    var di_status_err = [];
+    var ci_down = false;
+
+    for (var j = 0, item_len = instance_items.length; j < item_len; j++) {
+      if (instance_items[j].features.split('|').indexOf('MESSAGESERVER') >= 0 || instance_items[j].features.split('|').indexOf('ENQUE') >= 0) {
+        if (instance_items[j].dispstatus != that._sap_statuses.green) {
+          ci_down = true;
+          break;
+        }
+      } else {
+        di_status_err.push({
+          'instancenr': ('' + instance_items[j].instanceNr).padStart(2, '0'),
+          'status': instance_items[j].dispstatus == that._sap_statuses.green ? 1 : 0
+        });
+      }
+    }
+
+    if (ci_down || di_status_err.reduce((accumulator, currentValue) => accumulator + currentValue, 0) == 0) {
+      return that._sap_statuses.red;
+    }
+
+    return that._sap_statuses.green;
+  },
+  // recursive func to check conn_retries_max times if connection is down before confirmation
+  check_failed_conn: function (soap_client, job_data) {
+    var that = this;
+
+    if (that.conn_retries[job_data.system.syst_id] <= that.conn_retries_max) {
+      setTimeout(function () {
+        soap_client.GetSystemInstanceList({}, function (err, result) {
+          if (err || !result || !result.instance || !result.instance.item) {
+            that.conn_retries[job_data.system.syst_id]++;
+            that.check_failed_conn(soap_client, job_data);
+          } else {
+            var syst_status = that.check_system_status(result.instance.item);
+
+            if (syst_status == that._sap_statuses.red || syst_status == that._sap_statuses.gray) {
+              that.conn_retries[job_data.system.syst_id]++;
+              that.check_failed_conn(soap_client, job_data);
+            } else that.pushgtw_cli.pushUpInstance('up', job_data.entity_id, job_data.system.syst_id, that.region, job_data.system.sid, 1);
+          }
+        });
+      }, 20000); // 3 retries with 20sec to valide in 1 min
+    } else {
+      that.deletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, job_data.system.sid, job_data.system.instances.map(s => {
+        return {
+          'instancenr': s.instancenr,
+          'status': 0
+        };
+      }));
+      that.pushgtw_cli.pushUpInstance('up', job_data.entity_id, job_data.system.syst_id, that.region, job_data.system.sid, 0);
+    }
+  },
+  // (de)activate debug mode
+  debug: function (on_off) {
+    if (this.logger) {
+      this.logger.debug(on_off);
+    }
+  },
+  // add meta data for instance to be able to resume if interrupted
+  save_resume_step: function (syst_id, index, step) {
+    const that = this;
+    const resume_data = step < 0 ? {
+      resume_on_step: step,
+      resume_context: null
+    } : {
+      resume_on_step: step
+    };
+    that.updated_system_instances[syst_id][index] = Object.assign({}, that.updated_system_instances[syst_id][index], resume_data);
+  },
+  resume_here_on_interruption: function (syst_id, index_resume_instance, curr_step) {
+    const that = this;
+
+    if (that.updated_system_instances[syst_id] && that.updated_system_instances[syst_id][index_resume_instance]) {
+      return that.updated_system_instances[syst_id][index_resume_instance].resume_on_step < curr_step;
+    } else return false;
+  },
+
+  // on process exit:
+  // - save the content of if this.updated_system_instances to file to reloading on next start
+  // - clean exit of clients
+  graceful_shutdown() {
+    var that = this; // if there is something (system, instances) to save...
+
+    if (that.updated_system_instances && Object.keys(that.updated_system_instances).length > 0) {
+      // need to save the wip step: to resume interrupted operation
+      that.redis_cli.set(that.company, JSON.stringify({
+        'root': that.updated_system_instances
+      }), err => {
+        if (err) {
+          that.logger.log(that.logger.LOG_LEVEL_ERROR, 'redis client get error:', err);
+        } else {
+          that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'system instances buffer saved');
+        }
+      });
+    } // close kue connection
+
+
+    if (that.queue) that.queue.shutdown(5000, function (err) {
+      that.logger.log(that.logger.LOG_LEVEL_MIN, 'Kue shutdown: ', err || '');
+    }); // close redis connection
+
+    if (that.redis_cli) that.redis_cli.quit(); // file based version
+    // var that = this
+    // // if there is something (system, instances) to save...
+    // if (
+    //   Object.keys(that.updated_system_instances).length > 0 &&
+    //   Object.keys(that.updated_system_instances).map(syst_id => that.updated_system_instances[syst_id].length > 0).reduce((acc, curr) => { return acc && curr })
+    // ) {
+    //   // create or replace file
+    //   fs.writeFile(
+    //     process.cwd() + '/.scaling_instances_in_progress',
+    //     Buffer.from(JSON.stringify(that.updated_system_instances)),
+    //     'binary',
+    //     (err) => {
+    //       if (err) that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] (saving) scaling instances buffer:', err)
+    //       else that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[COMPLETED] (saving) scaling instances buffer:', that.updated_system_instances)
+    //     }
+    //   )
+    // }
+  } // file based version
+  // load_scaling_instances(local_config, callback) {
+  //   var that = this
+  // const file_scaling_instances_in_progress = process.cwd() + '/.scaling_instances_in_progress'
+  // fs.access(file_scaling_instances_in_progress, fs.F_OK, (err) => {
+  //   if (err) {
+  //     if (err) that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] (loading) no access to scaling instances buffer file:', err)
+  //     callback()
+  //   } else {
+  //     fs.readFile(file_scaling_instances_in_progress, (err, data) => {
+  //       if (err) that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] (loading) scaling instances buffer:', err)
+  //       else if (data && data.toString().length > 0) {
+  //         that.updated_system_instances = JSON.parse(data.toString())
+  //         that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[COMPLETED] (loaded) scaling instances buffer:', that.updated_system_instances)
+  //       }
+  //       fs.unlink(file_scaling_instances_in_progress, (err) => {
+  //         if (err) that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] (deleting) scaling instances buffer:', err)
+  //       })
+  //       callback()
+  //     })
+  //   }
+  // })
+  // }
+
+
+};
+/*
+text: d843eb7ba29c64ae4f541605e1b621262f91c2b89bd8ffeb4cf91e7470b971d2be51531b8aac2308d9f0624357dfed40ffed0f8d7dfbda6a7c240174cfa475d46fdeb20f4f30ae3c
+key:  5e7e2a8b6e012a2a77c48e65b6b6c753b449b64d4807
+5e42cd71b3d6cc3c03d57b62
+
+decrypt: d843eb7ba29c64ae4f541605e1b621262f91c2b89bd8ffeb4cf91e7470b971d2be51531b8aac2308d9f0624357dfed40ffed0f8d7dfbda6a7c240174cfa475d46fdeb20f4f30ae3c 
+key: 5e7e2a8b6e012a2a77c48e65b6b6c753b449b64d4807
+*/
+// for redis db
+
+function decrypt(text, key) {
+  var iv = Buffer.from(text.substring(98, text.length - 14), 'hex');
+  var encryptedText = Buffer.from(text.substring(2, text.length - 32 - 14), 'hex');
+  var decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key.substring(0, 32)), iv);
+  var decrypted = decipher.update(encryptedText);
+  return Buffer.concat([decrypted, decipher.final()]).toString();
+} // Export the class
+
+
+var scaledoer = ScaleDoer;
+
+try {
+  var ScaleDoer$1 = scaledoer,
+      fs = fs$1,
+      config_file = __dirname + '/conf.json';
+
+  if (!fs.existsSync(config_file)) {
+    console.error('E missing configuration file', config_file);
+    throw {
+      code: 2
+    };
+  } else {
+    const localconf = JSON.parse(fs.readFileSync(config_file));
+    const myenv = process.env.NODE_ENV || 'production';
+    var collectScaleDoer = new ScaleDoer$1();
+    collectScaleDoer.init(Object.assign(localconf[myenv], {
+      'dbindex': 0
+    }), collectScaleDoer.collect); // dynamic (de)activation of debug mode
+
+    process.on('SIGUSR1', function () {
+      console.log("I switching debug mode ON");
+      collectScaleDoer.debug(true);
+    });
+    process.on('SIGUSR2', function () {
+      console.log("I switching debug mode OFF");
+      collectScaleDoer.debug(false);
+    });
+  }
+} catch (e) {
+  console.error('Exception raised:', e.code || e);
+  process.exit(1);
+}
+
+process.on('exit', function (code) {
+  return console.log('I Scale Doer Collect ! About to exit with code ' + code);
+});
