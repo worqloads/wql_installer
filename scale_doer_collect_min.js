@@ -21,9 +21,10 @@ var awsSdk = _interopDefault(require('aws-sdk'));
  */
 // External librairies
 // ----------------------------------------------------------------------------
-// Class definition
+ // Class definition
 // ----------------------------------------------------------------------------
 // Constructor
+
 
 function PushCli(endpoint, version, staging) {
   // console.log('D PushCli ! Constructor begins');
@@ -40,9 +41,8 @@ function PushCli(endpoint, version, staging) {
 
 PushCli.prototype = {
   Constructor: PushCli,
-
   // Private methods
-  assign_hierarchy(obj, keyPath, value) {
+  assign_hierarchy: function assign_hierarchy(obj, keyPath, value) {
     var lastKeyIndex = keyPath.length - 1;
 
     for (var i = 0; i < lastKeyIndex; ++i) {
@@ -57,9 +57,8 @@ PushCli.prototype = {
 
     obj[keyPath[lastKeyIndex]] = value;
   },
-
-  generateGroupings: function (groupings) {
-    const that = this;
+  generateGroupings: function generateGroupings(groupings) {
+    var that = this;
 
     if (!groupings) {
       return '/version/' + that.version + '/staging/' + that.staging;
@@ -69,10 +68,12 @@ PushCli.prototype = {
       version: that.version,
       staging: that.staging
     });
-    return Object.keys(all_groupings).map(key => `/${encodeURIComponent(key)}/${encodeURIComponent(all_groupings[key])}`).join('');
+    return Object.keys(all_groupings).map(function (key) {
+      return "/".concat(encodeURIComponent(key), "/").concat(encodeURIComponent(all_groupings[key]));
+    }).join('');
   },
   // Init an instance (SAP system)
-  addInstance: function (syst_id) {
+  addInstance: function addInstance(syst_id) {
     // console.log('==== pshgtw addInstance '+syst_id)
     if (!this.metrics_caches[syst_id]) this.metrics_caches[syst_id] = {};
   },
@@ -87,43 +88,56 @@ PushCli.prototype = {
   //   self.pushUpInstance('up', suid, region, sap_id, 0)
   // },
   // Push SAP instance Up state!
-  pushCounter: function (jobname = 'counter', operation, entity_id, syst_id, instancenr, policy_name, value) {
+  pushCounter: function pushCounter() {
+    var jobname = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'counter';
+    var operation = arguments.length > 1 ? arguments[1] : undefined;
+    var entity_id = arguments.length > 2 ? arguments[2] : undefined;
+    var syst_id = arguments.length > 3 ? arguments[3] : undefined;
+    var instancenr = arguments.length > 4 ? arguments[4] : undefined;
+    var policy_name = arguments.length > 5 ? arguments[5] : undefined;
+    var value = arguments.length > 6 ? arguments[6] : undefined;
     var self = this; // console.log(' pushCounter:', operation, entity_id, syst_id, instancenr, policy_name, value)
     // dedicated groupings for counters with system & instances
     // it prevents erasing previous values from other instances when new counter increment for specific counter
 
-    const groupings = {
+    var groupings = {
       instance: entity_id,
       system_id: syst_id,
       instancenr: instancenr
     };
-    const req = '# TYPE counter_' + operation + ' gauge\n';
-    async.series([serie_cb => {
+    var req = '# TYPE counter_' + operation + ' gauge\n';
+    async.series([function (serie_cb) {
       if (value == 1) {
         var init_req = req + 'counter_' + operation + ' {policy_name="' + policy_name + '"} 0\n';
-        axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(groupings), init_req).catch(function (error) {
+        axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(groupings), init_req)["catch"](function (error) {
           if (error) {
             console.error('pushCounter error:', error);
           }
-        }).finally(() => {
-          setTimeout(() => {
+        })["finally"](function () {
+          setTimeout(function () {
             serie_cb();
           }, 25000);
         }); // req += 'counter_' + operation + ' {system_id="' + syst_id + '",policy_name="init",instancenr="' + instancenr + '"} ' + 0 + '\n'
       } else serie_cb();
-    }, serie_cb => {
+    }, function (serie_cb) {
       var upd_req = req + 'counter_' + operation + ' {policy_name="' + policy_name + '"} ' + value + '\n';
-      axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(groupings), upd_req).catch(function (error) {
+      axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(groupings), upd_req)["catch"](function (error) {
         if (error) {
           console.error('pushCounter error:', error);
         }
-      }).finally(() => {
+      })["finally"](function () {
         serie_cb();
       });
     }]);
   },
   // Push SAP system Up state for a specified instance (SAP system)!
-  pushUpInstance: function (jobname = 'up', entity_id, systId, region, sid, status) {
+  pushUpInstance: function pushUpInstance() {
+    var jobname = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'up';
+    var entity_id = arguments.length > 1 ? arguments[1] : undefined;
+    var systId = arguments.length > 2 ? arguments[2] : undefined;
+    var region = arguments.length > 3 ? arguments[3] : undefined;
+    var sid = arguments.length > 4 ? arguments[4] : undefined;
+    var status = arguments.length > 5 ? arguments[5] : undefined;
     var self = this;
     var current_status = self.up_timeseries[systId] && self.up_timeseries[systId]['status_up'] && self.up_timeseries[systId]['status_up'][entity_id + '+' + region + '+' + sid]; // create dynamic object hierarchy
 
@@ -135,13 +149,17 @@ PushCli.prototype = {
       var req = '# TYPE status_up gauge\n' + 'status_up {instance="' + systId + '",entity_id="' + entity_id + '",sid="' + sid + '",cp_region="' + region + '" } ' + status + '\n';
       axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
         instance: systId
-      }), req).catch(function (error) {
+      }), req)["catch"](function (error) {
         console.error('pushUpInstance error:', error);
       });
     }
   },
   // Push scaling status for SAP system for a specified instance (SAP system)!
-  pushUpScaling: function (jobname = 'up', entity_id, systId, status) {
+  pushUpScaling: function pushUpScaling() {
+    var jobname = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'up';
+    var entity_id = arguments.length > 1 ? arguments[1] : undefined;
+    var systId = arguments.length > 2 ? arguments[2] : undefined;
+    var status = arguments.length > 3 ? arguments[3] : undefined;
     var self = this;
     var current_status = self.up_timeseries[systId] && self.up_timeseries[systId]['scaling_up'] && self.up_timeseries[systId]['scaling_up'][entity_id]; // create dynamic object hierarchy
 
@@ -153,16 +171,22 @@ PushCli.prototype = {
       var req = '# TYPE scaling_up gauge\n' + 'scaling_up {instance="' + systId + '",entity_id="' + entity_id + '" } ' + status + '\n';
       axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
         instance: systId
-      }), req).catch(function (error) {
+      }), req)["catch"](function (error) {
         console.error('pushUpScaling error:', error);
       });
     }
   },
   // Push SAP instance Up state!
-  pushUpSAPInstance: function (jobname = 'up', entity_id, systId, region, sid, instances) {
+  pushUpSAPInstance: function pushUpSAPInstance() {
+    var jobname = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'up';
+    var entity_id = arguments.length > 1 ? arguments[1] : undefined;
+    var systId = arguments.length > 2 ? arguments[2] : undefined;
+    var region = arguments.length > 3 ? arguments[3] : undefined;
+    var sid = arguments.length > 4 ? arguments[4] : undefined;
+    var instances = arguments.length > 5 ? arguments[5] : undefined;
     var self = this;
     var req = '';
-    instances.forEach(i => {
+    instances.forEach(function (i) {
       if (self.up_timeseries[systId] && self.up_timeseries[systId]['status_instance_up'] && self.up_timeseries[systId]['status_instance_up'][entity_id + '+' + region + '+' + sid + '+' + i.instancenr] == null) {
         self.assign_hierarchy(self.up_timeseries, [systId, 'status_instance_up', entity_id + '+' + region + '+' + sid + '+' + i.instancenr], i.status);
       }
@@ -173,26 +197,30 @@ PushCli.prototype = {
     if (req != '') {
       axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
         instance: systId
-      }), '# TYPE status_instance_up gauge\n' + req).catch(function (error) {
+      }), '# TYPE status_instance_up gauge\n' + req)["catch"](function (error) {
         console.error('pushUpSAPInstance error:', error);
       });
     }
   },
   // Push KPIs values to the gateway for a specified instance!
-  pushInstance: function (jobname, systId, cb) {
+  pushInstance: function pushInstance(jobname, systId, cb) {
     var self = this; // console.log('==== pshgtw pushInstance '+systId)
 
     if (self.metrics_caches[systId]) {
-      var arr_filter_keys = Object.keys(self.metrics_caches[systId]).filter(x => self.metrics_caches[systId][x].length > 0);
+      var arr_filter_keys = Object.keys(self.metrics_caches[systId]).filter(function (x) {
+        return self.metrics_caches[systId][x].length > 0;
+      });
       async.each(arr_filter_keys, function (kpi_id, callback) {
-        const req = '# TYPE ' + kpi_id + ' gauge\n' + self.metrics_caches[systId][kpi_id].map(x => kpi_id + ' ' + x).join('\n') + '\n'; // console.log("push:",req)
+        var req = '# TYPE ' + kpi_id + ' gauge\n' + self.metrics_caches[systId][kpi_id].map(function (x) {
+          return kpi_id + ' ' + x;
+        }).join('\n') + '\n'; // console.log("push:",req)
 
         axios.post(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
           instance: systId
         }), req).then(function (response) {
           self.metrics_caches[systId][kpi_id] = [];
           callback();
-        }).catch(function (error) {
+        })["catch"](function (error) {
           self.metrics_caches[systId][kpi_id] = [];
           callback(error);
         });
@@ -212,14 +240,16 @@ PushCli.prototype = {
     }
   },
   // Set kpi and lables into caches for futur push
-  set: function (labelsnames, kpiname, value, system_id) {
+  set: function set(labelsnames, kpiname, value, system_id) {
     var self = this;
     var kpi = kpiname.replace(/-|\(|\)|\[|\]|\%|\+|\.|\s/g, '_'); // console.log('==== pshgtw set : '+system_id+' '+kpi+' >> self.metrics_caches[system_id]',self.metrics_caches[system_id])
 
     var kpi_value = value == null ? 0 : isNaN(value) ? Math.round(parseInt(moment(value, 'YYYY/MM/DD hh:mm:ss').format('X'))) : Math.round(parseInt(value));
     if (!self.metrics_caches[system_id][kpi]) self.metrics_caches[system_id][kpi] = []; // Check if KPI with same labels has already been submitting since the last pushInstance
 
-    const kpi_is_set_idx = self.metrics_caches[system_id][kpi].map(x => x.split(' ')[0]).indexOf(labelsnames
+    var kpi_is_set_idx = self.metrics_caches[system_id][kpi].map(function (x) {
+      return x.split(' ')[0];
+    }).indexOf(labelsnames
     /*+' '+kpi_value*/
     );
 
@@ -231,37 +261,37 @@ PushCli.prototype = {
     self.metrics_caches[system_id][kpi].push(labelsnames + ' ' + kpi_value);
   },
   // Delete last pushed metrics in Prometheus if connection to system (suid) is lost for (conn_retries_max) tentatives
-  del: function (jobname, sap_id) {
+  del: function del(jobname, sap_id) {
     var self = this; // curl -X DELETE http://pushgateway.example.org:9091/metrics/job/some_job/instance/some_instance
 
-    axios.delete(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
+    axios["delete"](self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
       instance: sap_id
     })).then(function (response) {}) // .then(function(response){
     //   console.log('del:',response)
     // })
-    .catch(function (error) {
+    ["catch"](function (error) {
       console.error('pshgtw::del::error :', error);
     });
   },
-  delSerie: function (jobname, matching_condition) {
+  delSerie: function delSerie(jobname, matching_condition) {
     var self = this; // curl -X DELETE http://pushgateway.example.org:9091/metrics/job/some_job/instance/some_instance
 
-    axios.delete(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(matching_condition)).then(function (response) {}) // .then(function(response){
+    axios["delete"](self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings(matching_condition)).then(function (response) {}) // .then(function(response){
     //   console.log('del:',response)
     // })
-    .catch(function (error) {
+    ["catch"](function (error) {
       console.error('pshgtw::delSerie::error :', error);
     });
   },
-  delInstance: function (jobname, instance_id) {
+  delInstance: function delInstance(jobname, instance_id) {
     var self = this; // curl -X DELETE http://pushgateway.example.org:9091/metrics/job/some_job/instance/some_instance
 
-    axios.delete(self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
+    axios["delete"](self.gtw_url + '/metrics/job/' + encodeURIComponent(jobname) + self.generateGroupings({
       instance: instance_id
     })).then(function (response) {}) // .then(function(response){
     //   console.log('del:',response)
     // })
-    .catch(function (error) {
+    ["catch"](function (error) {
       console.error('pshgtw::delInstance::error :', error);
     });
   }
@@ -269,110 +299,112 @@ PushCli.prototype = {
 
 var pushcli = PushCli;
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var sapcontrol_operations = {
-  "ABAPGetComponentList": function (arg1, cb) {
+  "ABAPGetComponentList": function ABAPGetComponentList(arg1, cb) {
     this.ABAPGetComponentList(arg1, cb);
   },
-  "GetProcessList": function (arg1, cb) {
+  "GetProcessList": function GetProcessList(arg1, cb) {
     this.GetProcessList(arg1, cb);
   },
-  "GetAlerts": function (arg1, cb) {
+  "GetAlerts": function GetAlerts(arg1, cb) {
     this.GetAlerts(arg1, cb);
   },
-  "GetAlertTree": function (arg1, cb) {
+  "GetAlertTree": function GetAlertTree(arg1, cb) {
     this.GetAlertTree(arg1, cb);
   },
-  "GetEnvironment": function (arg1, cb) {
+  "GetEnvironment": function GetEnvironment(arg1, cb) {
     this.GetEnvironment(arg1, cb);
   },
-  "GetVersionInfo": function (arg1, cb) {
+  "GetVersionInfo": function GetVersionInfo(arg1, cb) {
     this.GetVersionInfo(arg1, cb);
   },
-  "GetQueueStatistic": function (arg1, cb) {
+  "GetQueueStatistic": function GetQueueStatistic(arg1, cb) {
     this.GetQueueStatistic(arg1, cb);
   },
-  "GetInstanceProperties": function (arg1, cb) {
+  "GetInstanceProperties": function GetInstanceProperties(arg1, cb) {
     this.GetInstanceProperties(arg1, cb);
   },
-  "ABAPGetWPTable": function (arg1, cb) {
+  "ABAPGetWPTable": function ABAPGetWPTable(arg1, cb) {
     this.ABAPGetWPTable(arg1, cb);
   },
-  "Start": function (arg1, cb) {
+  "Start": function Start(arg1, cb) {
     this.Start(arg1, cb);
   },
-  "Stop": function (arg1, cb) {
+  "Stop": function Stop(arg1, cb) {
     this.Stop(arg1, cb);
   },
-  "RestartInstance": function (arg1, cb) {
+  "RestartInstance": function RestartInstance(arg1, cb) {
     this.RestartInstance(arg1, cb);
   },
   // "StartSystem": function ( arg1, cb) { this.StartSystem(arg1, cb ) },
   // "StopSystem": function ( arg1, cb) { this.StopSystem(arg1, cb ) },
   // "RestartSystem": function ( arg1, cb) { this.RestartSystem(arg1, cb ) },
-  "GetSystemInstanceList": function (arg1, cb) {
+  "GetSystemInstanceList": function GetSystemInstanceList(arg1, cb) {
     this.GetSystemInstanceList(arg1, cb);
   },
-  "ABAPGetSystemWPTable": function (arg1, cb) {
+  "ABAPGetSystemWPTable": function ABAPGetSystemWPTable(arg1, cb) {
     this.ABAPGetSystemWPTable(arg1, cb);
   },
-  "GetCallstack": function (arg1, cb) {
+  "GetCallstack": function GetCallstack(arg1, cb) {
     this.GetCallstack(arg1, cb);
   },
-  "J2EEGetProcessList2": function (arg1, cb) {
+  "J2EEGetProcessList2": function J2EEGetProcessList2(arg1, cb) {
     this.J2EEGetProcessList2(arg1, cb);
   },
-  "J2EEGetThreadList2": function (arg1, cb) {
+  "J2EEGetThreadList2": function J2EEGetThreadList2(arg1, cb) {
     this.J2EEGetThreadList2(arg1, cb);
   },
-  "J2EEGetWebSessionList": function (arg1, cb) {
+  "J2EEGetWebSessionList": function J2EEGetWebSessionList(arg1, cb) {
     this.J2EEGetWebSessionList(arg1, cb);
   },
-  "J2EEGetCacheStatistic2": function (arg1, cb) {
+  "J2EEGetCacheStatistic2": function J2EEGetCacheStatistic2(arg1, cb) {
     this.J2EEGetCacheStatistic2(arg1, cb);
   },
-  "J2EEGetVMHeapInfo": function (arg1, cb) {
+  "J2EEGetVMHeapInfo": function J2EEGetVMHeapInfo(arg1, cb) {
     this.J2EEGetVMHeapInfo(arg1, cb);
   },
-  "J2EEGetEJBSessionList": function (arg1, cb) {
+  "J2EEGetEJBSessionList": function J2EEGetEJBSessionList(arg1, cb) {
     this.J2EEGetEJBSessionList(arg1, cb);
   },
-  "J2EEGetRemoteObjectList": function (arg1, cb) {
+  "J2EEGetRemoteObjectList": function J2EEGetRemoteObjectList(arg1, cb) {
     this.J2EEGetRemoteObjectList(arg1, cb);
   },
-  "J2EEGetClusterMsgList": function (arg1, cb) {
+  "J2EEGetClusterMsgList": function J2EEGetClusterMsgList(arg1, cb) {
     this.J2EEGetClusterMsgList(arg1, cb);
   },
-  "J2EEGetSharedTableInfo": function (arg1, cb) {
+  "J2EEGetSharedTableInfo": function J2EEGetSharedTableInfo(arg1, cb) {
     this.J2EEGetSharedTableInfo(arg1, cb);
   },
-  "J2EEGetThreadCallStack": function (arg1, cb) {
+  "J2EEGetThreadCallStack": function J2EEGetThreadCallStack(arg1, cb) {
     this.J2EEGetThreadCallStack(arg1, cb);
   },
-  "J2EEGetThreadTaskStack": function (arg1, cb) {
+  "J2EEGetThreadTaskStack": function J2EEGetThreadTaskStack(arg1, cb) {
     this.J2EEGetThreadTaskStack(arg1, cb);
   },
-  "J2EEGetComponentList": function (arg1, cb) {
+  "J2EEGetComponentList": function J2EEGetComponentList(arg1, cb) {
     this.J2EEGetComponentList(arg1, cb);
   },
-  "ICMGetThreadList": function (arg1, cb) {
+  "ICMGetThreadList": function ICMGetThreadList(arg1, cb) {
     this.ICMGetThreadList(arg1, cb);
   },
-  "ICMGetConnectionList": function (arg1, cb) {
+  "ICMGetConnectionList": function ICMGetConnectionList(arg1, cb) {
     this.ICMGetConnectionList(arg1, cb);
   },
-  "ICMGetCacheEntries": function (arg1, cb) {
+  "ICMGetCacheEntries": function ICMGetCacheEntries(arg1, cb) {
     this.ICMGetCacheEntries(arg1, cb);
   },
-  "ICMGetProxyConnectionList": function (arg1, cb) {
+  "ICMGetProxyConnectionList": function ICMGetProxyConnectionList(arg1, cb) {
     this.ICMGetProxyConnectionList(arg1, cb);
   },
-  "WebDispGetServerList": function (arg1, cb) {
+  "WebDispGetServerList": function WebDispGetServerList(arg1, cb) {
     this.WebDispGetServerList(arg1, cb);
   },
-  "EnqGetLockTable": function (arg1, cb) {
+  "EnqGetLockTable": function EnqGetLockTable(arg1, cb) {
     this.EnqGetLockTable(arg1, cb);
   },
-  "EnqGetStatistic": function (arg1, cb) {
+  "EnqGetStatistic": function EnqGetStatistic(arg1, cb) {
     this.EnqGetStatistic(arg1, cb);
   }
 }; // f = function name
@@ -401,22 +433,22 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
         var parents_name = [];
         var end_nodes = [];
         var tmp_nodes = [];
-        const mte_separator = that.kpiname_separator; // '_'
+        var mte_separator = that.kpiname_separator; // '_'
         // const inactive_state = 'SAPControl-GRAY'
 
         if (result.tree && result.tree.item) {
-          result.tree.item.forEach(element => {
+          result.tree.item.forEach(function (element) {
             if (element.parent > parent) {
               parents_name.push({
                 idx: element.parent,
                 name: result.tree.item[element.parent].name,
                 status: result.tree.item[element.parent].ActualValue
               });
-              const v = element.description.split(' '); // support values with 2 kpis: ex "Size:11280 in 	Used:11232"
+              var v = element.description.split(' '); // support values with 2 kpis: ex "Size:11280 in 	Used:11232"
 
               if (v[0].indexOf(':') > 0) {
-                v.forEach(pair => {
-                  const vv = pair.split(':');
+                v.forEach(function (pair) {
+                  var vv = pair.split(':');
 
                   if (vv.length == 2 && vv[1].match(/[0-9]+(\.[0-9]+)?/g)
                   /* && element.ActualValue != inactive_state */
@@ -432,7 +464,7 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
                 if (v[0].match(/[0-9]+(\.[0-9]+)?/g)
                 /* && element.ActualValue != inactive_state */
                 ) {
-                    tmp_nodes = tmp_nodes.concat([create_node(parents_name, mte_separator, element, [v.reduce((acc, cur) => {
+                    tmp_nodes = tmp_nodes.concat([create_node(parents_name, mte_separator, element, [v.reduce(function (acc, cur) {
                       return cur.match(/[0-9]+(\.[0-9]+)?/g) ? acc + cur : acc;
                     }, ''), v[v.length - 1].replace(/\s|[0-9]/g, '', t)] // to support both "12121 23132" => "1212123132" and "1221 MB"
                     )]);
@@ -443,13 +475,13 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
 
               parent = element.parent;
             } else if (element.parent == parent) {
-              const v = element.description.split(' ');
+              var _v = element.description.split(' ');
 
-              if (v[0].indexOf(':') > 0) {
+              if (_v[0].indexOf(':') > 0) {
                 // console.log( "2. MULTIPLE VALUES :", v)
                 // support values with 2 kpis: ex "Size:11280 in 	Used:11232"
-                v.forEach(pair => {
-                  const vv = pair.split(':');
+                _v.forEach(function (pair) {
+                  var vv = pair.split(':');
 
                   if (vv.length == 2 && vv[1].match(/[0-9]+(\.[0-9]+)?/g)
                   /* && element.ActualValue != inactive_state */
@@ -461,12 +493,12 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
                 });
               } else {
                 // create only valid nodes (that only contains numbers)
-                if (v[0].match(/[0-9]+(\.[0-9]+)?/g)
+                if (_v[0].match(/[0-9]+(\.[0-9]+)?/g)
                 /* && element.ActualValue != inactive_state */
                 ) {
-                    tmp_nodes = tmp_nodes.concat([create_node(parents_name, mte_separator, element, [v.reduce((acc, cur) => {
+                    tmp_nodes = tmp_nodes.concat([create_node(parents_name, mte_separator, element, [_v.reduce(function (acc, cur) {
                       return cur.match(/[0-9]+(\.[0-9]+)?/g) ? acc + cur : acc;
-                    }, ''), v[v.length - 1].replace(/\s|[0-9]/g, '', t)] // to support both "12121 23132" => "1212123132" and "1221 MB"
+                    }, ''), _v[_v.length - 1].replace(/\s|[0-9]/g, '', t)] // to support both "12121 23132" => "1212123132" and "1221 MB"
                     )]);
                   }
               }
@@ -487,7 +519,7 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
           // end_nodes/*.filter(x=>x.is_valid)*/.forEach(e => console.log(e))
 
           if (!restricted_kpis || restricted_kpis.length == 0) {
-            end_nodes.forEach(e => {
+            end_nodes.forEach(function (e) {
               if (e) {
                 // original worqloads version
                 // var labels = 'instance="'+syst._id+'",sid="'+ syst.sid+'",category="'+ e.category+'",type="'+ e.type+'",entity_id="'+ entity_id+'"'//,hostname="'+ instance.hostname+'"'
@@ -506,7 +538,7 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
               }
             });
           } else {
-            end_nodes.forEach(e => {
+            end_nodes.forEach(function (e) {
               if (e) {
                 var kpi_name = def_kpi_name(that.kpi_prefix_sap, mte_separator, e);
 
@@ -541,11 +573,11 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
       case 'ABAPGetWPTable':
         // ~= SM50 = current instance
         // console.log('Result of (' + f + '@' + syst.sid + ')= ', result.workprocess.item);
-        const types = ['dia', 'upd', 'up2', 'enq', 'btc', 'spo'];
-        const statuses = ['wait', 'hold', 'run', 'stop', 'ended', 'new', 'down'];
+        var types = ['dia', 'upd', 'up2', 'enq', 'btc', 'spo'];
+        var statuses = ['wait', 'hold', 'run', 'stop', 'ended', 'new', 'down'];
         var res = {};
 
-        const def_kpi_name_ABAPGetWPTable = function (t, elt_Status) {
+        var def_kpi_name_ABAPGetWPTable = function def_kpi_name_ABAPGetWPTable(t, elt_Status) {
           if (t.toUpperCase() != 'ALL') {
             return that.kpi_prefix_sap + t.toLowerCase() + '_workprocess_' + elt_Status + '__nb';
           } else {
@@ -554,18 +586,14 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
         }; // init kpi values
 
 
-        types.forEach(ty => {
-          statuses.forEach(s => {
-            res[def_kpi_name_ABAPGetWPTable(t, s)] = res[def_kpi_name_ABAPGetWPTable(t, s)] ? Object.assign({}, res[def_kpi_name_ABAPGetWPTable(t, s)], {
-              [ty]: 0
-            }) : {
-              [ty]: 0
-            };
+        types.forEach(function (ty) {
+          statuses.forEach(function (s) {
+            res[def_kpi_name_ABAPGetWPTable(t, s)] = res[def_kpi_name_ABAPGetWPTable(t, s)] ? Object.assign({}, res[def_kpi_name_ABAPGetWPTable(t, s)], _defineProperty({}, ty, 0)) : _defineProperty({}, ty, 0);
           });
         });
 
         if (result.workprocess && result.workprocess.item) {
-          result.workprocess.item.forEach(i => {
+          result.workprocess.item.forEach(function (i) {
             if (res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())] && res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())][i.Typ.toLowerCase()] != undefined) {
               res[def_kpi_name_ABAPGetWPTable(t, i.Status.toLowerCase())][i.Typ.toLowerCase()]++;
             } else {
@@ -580,16 +608,16 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
         if (instance.ip_internal != undefined) labels += ',ip_internal="' + instance.ip_internal + '"';
         if (instance.sn != undefined) labels += ',sn="' + instance.sn + '"';
         if (rule_id != undefined) labels += ',rule_id="' + rule_id + '"';
-        Object.keys(res).forEach(k => {
+        Object.keys(res).forEach(function (k) {
           if (!restricted_kpis || restricted_kpis.length == 0) {
-            types.forEach(ty => {
+            types.forEach(function (ty) {
               that.pushgtw_cli.set('{' + labels + ',workproces="' + ty + '"}', k, // kpi name
               res[k][ty], // value
               syst._id);
             });
           } else {
             if (restricted_kpis.indexOf(k) >= 0) {
-              types.forEach(ty => {
+              types.forEach(function (ty) {
                 that.pushgtw_cli.set('{' + labels + ',workproces="' + ty + '"}', k, // kpi name
                 res[k][ty], // value
                 syst._id);
@@ -608,7 +636,7 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
 
       case 'EnqGetStatistic':
         // console.log('Result of (' + f + '@' + syst.sid + ')= ', result);
-        const def_kpi_name_EnqGetStatistic = function (t) {
+        var def_kpi_name_EnqGetStatistic = function def_kpi_name_EnqGetStatistic(t) {
           if (t.toLowerCase().match(/.*time$/)) {
             return that.kpi_prefix_sap + 'enqueue_' + t.toLowerCase().replace(/[^a-zA-Z0-9]/g, '_') + '__sec';
           } else {
@@ -623,7 +651,7 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
         if (instance.ip_internal != undefined) labels += ',ip_internal="' + instance.ip_internal + '"';
         if (instance.sn != undefined) labels += ',sn="' + instance.sn + '"';
         if (rule_id != undefined) labels += ',rule_id="' + rule_id + '"';
-        Object.keys(result).forEach(key => {
+        Object.keys(result).forEach(function (key) {
           // console.log(' >>> ' + def_kpi_name_EnqGetStatistic(key) + ' : '+result[key])
           that.pushgtw_cli.set('{' + labels + '}', def_kpi_name_EnqGetStatistic(key), // kpi name
           result[key], // value
@@ -734,7 +762,7 @@ var sapctrl_process_func = function (err, result, f, syst, instance, t, entity_i
   }
 };
 
-const def_kpi_name = function (kpi_prefix_sap, mte_separator, elt) {
+var def_kpi_name = function def_kpi_name(kpi_prefix_sap, mte_separator, elt) {
   var new_unit = elt.unit.replace(/\%/g, 'percent').replace(/\//g, '_per_').replace(/\W+/g, '').toLowerCase();
   if (new_unit == '') new_unit = 'nb'; // if (t.toUpperCase() != 'ALL') {
   //   // undefinedabap_CPUundefinedCPU_Utilization__percent
@@ -745,7 +773,7 @@ const def_kpi_name = function (kpi_prefix_sap, mte_separator, elt) {
 }; // Function to create the node
 
 
-const create_node = function (p, sep, e, v, t) {
+var create_node = function create_node(p, sep, e, v, t) {
   var res = {
     value: isNaN(v[0].replace(/\s/g, '')) ? 0 : Math.round(parseInt(v[0].replace(/\s/g, ''))),
     type: t,
@@ -777,13 +805,17 @@ const create_node = function (p, sep, e, v, t) {
                 default:
                   return Object.assign(res, {
                     category: p[Math.max(p.length - 2, 1)].name,
-                    kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+                    kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(function (x) {
+                      return x.name;
+                    }).join(sep) + sep + e.name
                   });
               }
             } else {
               return Object.assign(res, {
                 category: p[Math.max(p.length - 2, 1)].name,
-                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(function (x) {
+                  return x.name;
+                }).join(sep) + sep + e.name
               });
             }
 
@@ -791,7 +823,7 @@ const create_node = function (p, sep, e, v, t) {
             if (p.length >= 4) {
               switch (p[2].name) {
                 case 'Space management':
-                  const dbf = p[4].name.split('/').pop();
+                  var dbf = p[4].name.split('/').pop();
                   return Object.assign(res, {
                     database: p[3].name.split(':')[1],
                     db_datafile: dbf,
@@ -817,13 +849,17 @@ const create_node = function (p, sep, e, v, t) {
                 default:
                   return Object.assign(res, {
                     category: p[Math.max(p.length - 2, 1)].name,
-                    kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+                    kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(function (x) {
+                      return x.name;
+                    }).join(sep) + sep + e.name
                   });
               }
             } else {
               return Object.assign(res, {
                 category: p[Math.max(p.length - 2, 1)].name,
-                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(function (x) {
+                  return x.name;
+                }).join(sep) + sep + e.name
               });
             }
 
@@ -833,7 +869,9 @@ const create_node = function (p, sep, e, v, t) {
             if (v[0].match(/^([0-9]|\s)+(\.[0-9]+)?$/g)) {
               return Object.assign(res, {
                 category: p[1].name,
-                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(function (x) {
+                  return x.name;
+                }).join(sep) + sep + e.name
               });
             }
 
@@ -843,19 +881,25 @@ const create_node = function (p, sep, e, v, t) {
             if (p.length >= 3 && p[2].name == 'ICM') {
               return Object.assign(res, {
                 category: 'R3Services',
-                kpi: p.slice(Math.max(p.length - 2, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+                kpi: p.slice(Math.max(p.length - 2, 0), p.length).map(function (x) {
+                  return x.name;
+                }).join(sep) + sep + e.name
               });
             } else {
               return Object.assign(res, {
                 category: 'R3Services',
-                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+                kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(function (x) {
+                  return x.name;
+                }).join(sep) + sep + e.name
               });
             }
 
           default:
             return Object.assign(res, {
               category: p[Math.max(p.length - 2, 1)].name,
-              kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(x => x.name).join(sep) + sep + e.name
+              kpi: p.slice(Math.max(p.length - 1, 0), p.length).map(function (x) {
+                return x.name;
+              }).join(sep) + sep + e.name
             });
         }
       }
@@ -869,8 +913,8 @@ const create_node = function (p, sep, e, v, t) {
 };
 
 var sapctrl_helpers = {
-  sapcontrol_operations: sapcontrol_operations,
-  sapctrl_process_func: sapctrl_process_func
+	sapcontrol_operations: sapcontrol_operations,
+	sapctrl_process_func: sapctrl_process_func
 };
 
 /**
@@ -879,7 +923,7 @@ var sapctrl_helpers = {
  */
 // External librairies
 // ----------------------------------------------------------------------------   
-// , axios = require('axios')
+ // , axios = require('axios')
 // , fs = require('fs')
 // , moment = require('moment')
 // Internal librairies
@@ -887,6 +931,7 @@ var sapctrl_helpers = {
 // Class definition
 // ----------------------------------------------------------------------------
 // Constructor
+
 
 function AWSMng() {
   // console.log('D AWSMng! Constructor begins ')
@@ -924,7 +969,7 @@ AWSMng.prototype = {
   //   }
   // list EC2 instances in same VPC
   // get list of EC2 instances private IP, instance-type, instance-id from subnet & instancetype
-  discoverEC2Instances: function (vpc_id, callback) {
+  discoverEC2Instances: function discoverEC2Instances(vpc_id, callback) {
     var that = this;
     async.waterfall([function (waterfall_cb) {
       console.log("discoverEC2Instances filter:", vpc_id);
@@ -936,8 +981,8 @@ AWSMng.prototype = {
       }, waterfall_cb);
     }, function (ec2s, waterfall_cb) {
       if (ec2s && ec2s.Reservations) {
-        let list_private_props = ec2s.Reservations.reduce((r_acc, r_curr) => {
-          return r_acc.concat(r_curr.Instances.reduce((i_acc, i_curr) => {
+        var list_private_props = ec2s.Reservations.reduce(function (r_acc, r_curr) {
+          return r_acc.concat(r_curr.Instances.reduce(function (i_acc, i_curr) {
             i_acc.push({
               "vpc_id": vpc_id,
               "ip_internal": i_curr.PrivateIpAddress,
@@ -953,21 +998,21 @@ AWSMng.prototype = {
         waterfall_cb('nothing found');
       }
     }, function (list_props, waterfall_cb) {
-      async.eachOf(list_props, (prop, idx, each_cb) => {
-        let request = http.get('http://' + prop.ip_internal + ':1128/SAPHostControl/?wsdl', {
+      async.eachOf(list_props, function (prop, idx, each_cb) {
+        var request = http.get('http://' + prop.ip_internal + ':1128/SAPHostControl/?wsdl', {
           timeout: 1000
-        }, response => {
+        }, function (response) {
           if (response && response.statusCode == 200) {
             list_props[idx].is_sap = true;
             each_cb();
           }
         });
         request.on('timeout', request.abort);
-        request.on("error", e => {
+        request.on("error", function (e) {
           // console.error('error:', e)
           each_cb();
         });
-      }, err => {
+      }, function (err) {
         waterfall_cb(null, list_props);
       });
     }], function (err, list_private_props) {
@@ -981,7 +1026,7 @@ AWSMng.prototype = {
     });
   },
   // get list of EC2 instances private IP, instance-type, instance-id from subnet & instancetype
-  getEC2PrivateProps: function (filters, callback) {
+  getEC2PrivateProps: function getEC2PrivateProps(filters, callback) {
     var self = this;
     async.waterfall([function (waterfall_cb) {
       self.ec2.describeInstances({
@@ -999,8 +1044,8 @@ AWSMng.prototype = {
       // if (ec2s && ec2s.Reservations && ec2.Reservations[0] && ec2.Reservations[0].Instances && ec2.Reservations[0].Instances[0]) {
       //     waterfall_cb(null, ec2.Reservations[0].Instances[0].InstanceId)
       if (ec2s && ec2s.Reservations) {
-        let list_private_props = ec2s.Reservations.reduce((r_acc, r_curr) => {
-          return r_acc.concat(r_curr.Instances.reduce((i_acc, i_curr) => {
+        var list_private_props = ec2s.Reservations.reduce(function (r_acc, r_curr) {
+          return r_acc.concat(r_curr.Instances.reduce(function (i_acc, i_curr) {
             i_acc.push({
               "ip_internal": i_curr.PrivateIpAddress,
               "cloud_instance_id": i_curr.InstanceId,
@@ -1022,18 +1067,22 @@ AWSMng.prototype = {
       }
     });
   },
-  isEC2sRunning: function (ips, callback) {
+  isEC2sRunning: function isEC2sRunning(ips, callback) {
     var self = this;
     async.waterfall([function (waterfall_cb) {
       // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeInstanceStatus-property
       self.ec2.describeInstanceStatus({
         // InstanceIds: ids
-        InstanceIds: Object.keys(self.mappings_ip_id).filter(key_ip => ips.indexOf(key_ip) >= 0).map(key => self.mappings_ip_id[key]),
+        InstanceIds: Object.keys(self.mappings_ip_id).filter(function (key_ip) {
+          return ips.indexOf(key_ip) >= 0;
+        }).map(function (key) {
+          return self.mappings_ip_id[key];
+        }),
         IncludeAllInstances: true
       }, waterfall_cb);
     }, function (inst_statuses, waterfall_cb) {
       var res_statuses = {};
-      inst_statuses.InstanceStatuses.forEach(status => {
+      inst_statuses.InstanceStatuses.forEach(function (status) {
         res_statuses[status.InstanceId] = status.InstanceState.Code == 16 // 0 : pending, 16 : running, 32 : shutting-down, 48 : terminated, 64 : stopping, 80 : stopped
         && status.InstanceStatus.Status == "ok" && status.SystemStatus.Status == "ok";
       });
@@ -1046,9 +1095,9 @@ AWSMng.prototype = {
       callback(list_instance_status);
     });
   },
-  isEC2Running: function (ip, callback) {
+  isEC2Running: function isEC2Running(ip, callback) {
     var self = this;
-    self.getEC2ID(ip, ec2id => {
+    self.getEC2ID(ip, function (ec2id) {
       if (ec2id) {
         self.isEC2RunningFromID(ec2id, callback);
       } else {
@@ -1057,7 +1106,7 @@ AWSMng.prototype = {
       }
     });
   },
-  isEC2RunningFromID: function (ec2id, callback) {
+  isEC2RunningFromID: function isEC2RunningFromID(ec2id, callback) {
     var self = this;
     async.waterfall([function (waterfall_cb) {
       // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeInstanceStatus-property
@@ -1081,9 +1130,9 @@ AWSMng.prototype = {
       callback(instance_status);
     });
   },
-  isEC2Stopped: function (ip, callback) {
+  isEC2Stopped: function isEC2Stopped(ip, callback) {
     var self = this;
-    self.getEC2ID(ip, ec2id => {
+    self.getEC2ID(ip, function (ec2id) {
       if (ec2id) {
         self.isEC2StoppedFromID(ec2id, callback);
       } else {
@@ -1092,7 +1141,7 @@ AWSMng.prototype = {
       }
     });
   },
-  isEC2StoppedFromID: function (ec2id, callback) {
+  isEC2StoppedFromID: function isEC2StoppedFromID(ec2id, callback) {
     var self = this;
     async.waterfall([function (waterfall_cb) {
       // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeInstanceStatus-property
@@ -1116,7 +1165,7 @@ AWSMng.prototype = {
     });
   },
   // get single ec2 instance from IP
-  getEC2ID: function (new_ip, callback) {
+  getEC2ID: function getEC2ID(new_ip, callback) {
     var self = this;
 
     if (Object.keys(self.mappings_ip_id).indexOf(new_ip) < 0) {
@@ -1148,7 +1197,7 @@ AWSMng.prototype = {
   },
   // get ec2 instance id & instance type
   // save them in buffer for future quickier accesses
-  getEC2ID_Type: function (new_ip, callback) {
+  getEC2ID_Type: function getEC2ID_Type(new_ip, callback) {
     var self = this;
     async.waterfall([function (waterfall_cb) {
       self.ec2.describeInstances({
@@ -1176,18 +1225,18 @@ AWSMng.prototype = {
       }
     });
   },
-  stopEC2: function (ip, callback) {
+  stopEC2: function stopEC2(ip, callback) {
     var self = this; // check first if ec2 instance is already stopped => nothing to do
 
-    self.getEC2ID(ip, ec2id => {
+    self.getEC2ID(ip, function (ec2id) {
       if (ec2id) {
-        self.isEC2StoppedFromID(ec2id, is_stopped => {
+        self.isEC2StoppedFromID(ec2id, function (is_stopped) {
           if (is_stopped) {
             callback();
           } else {
             self.ec2.stopInstances({
               InstanceIds: [ec2id]
-            }, err => {
+            }, function (err) {
               if (err) {
                 console.error(self._errors.ec2_not_stopped, err); // if ec2 is already stopped, do not consider it as error
 
@@ -1199,17 +1248,17 @@ AWSMng.prototype = {
       } else callback(self._errors.ec2_not_stopped);
     });
   },
-  startEC2: function (ip, callback) {
+  startEC2: function startEC2(ip, callback) {
     var self = this;
-    self.getEC2ID(ip, ec2id => {
+    self.getEC2ID(ip, function (ec2id) {
       if (ec2id) {
-        self.isEC2RunningFromID(ec2id, is_running => {
+        self.isEC2RunningFromID(ec2id, function (is_running) {
           if (is_running) {
             callback();
           } else {
             self.ec2.startInstances({
               InstanceIds: [ec2id]
-            }, err => {
+            }, function (err) {
               if (err) {
                 console.error(self._errors.ec2_not_started, err);
                 callback(self._errors.ec2_not_started);
@@ -1424,7 +1473,8 @@ var awsmng = AWSMng;
 // Class definition
 // ----------------------------------------------------------------------------
 // Constructor
-function Logger(global_log_level = 1) {
+function Logger() {
+  var global_log_level = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
   this.global_log_level = global_log_level;
   this.__DEBUG__ = false;
   this.LOG_LEVEL_ERROR = 0;
@@ -1441,7 +1491,7 @@ Logger.prototype = {
   Constructor: Logger,
   // msg_lvl: number 0,1,2
   // msg: string, object,...
-  log: function (msg_lvl) {
+  log: function log(msg_lvl) {
     var self = this;
 
     function _prefix(lvl) {
@@ -1473,7 +1523,7 @@ Logger.prototype = {
       console.log.apply(null, Array.prototype.slice.call(arguments));
     }
   },
-  debug: function (on_off) {
+  debug: function debug(on_off) {
     console.log("I switching debug mode " + on_off ? 'ON' : 'OFF');
     this.__DEBUG__ = on_off;
   }
@@ -1684,22 +1734,32 @@ var rdscmds = {
   "ZUNIONSTORE": "r3582a8e329efcb4b3c35"
 };
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 /**
  * Scale Doer class
  * ==================
  */
 // External librairies
 // ----------------------------------------------------------------------------
-
-var {
-  sapcontrol_operations: sapcontrol_operations$1,
-  sapctrl_process_func: sapctrl_process_func$1
-} = sapctrl_helpers; // Debug memory leak
+var sapcontrol_operations$1 = sapctrl_helpers.sapcontrol_operations,
+    sapctrl_process_func$1 = sapctrl_helpers.sapctrl_process_func; // Debug memory leak
 // var heapdump = require('heapdump');
 // TODO : create pool of SOAP connections!
 // Class definition
 // ----------------------------------------------------------------------------
 // Constructor
+
 
 function ScaleDoer() {
   // Internal attributes
@@ -1777,7 +1837,7 @@ function ScaleDoer() {
 ScaleDoer.prototype = {
   Constructor: ScaleDoer,
   // init : function (redis_config, worker_config, next) {
-  init: function (local_config, next) {
+  init: function init(local_config, next) {
     var that = this; // Load from company id from config file
 
     that.company = local_config.company;
@@ -1856,7 +1916,7 @@ ScaleDoer.prototype = {
   },
   // Delete last pushed metrics in Prometheus without check on retries
   // param instances = [{instancenr:...., status:...}]
-  deletePrometheus: function (job, entity_id, syst_id, sap_id, instances) {
+  deletePrometheus: function deletePrometheus(job, entity_id, syst_id, sap_id, instances) {
     var that = this;
 
     if (that.conn_retries[syst_id] == undefined) {
@@ -1871,7 +1931,7 @@ ScaleDoer.prototype = {
     // that.pushgtw_cli.pushUpInstance('up', entity_id, syst_id, that.region, sap_id, 0)
     // Update SAP instances Up statuses
 
-    that.pushgtw_cli.pushUpSAPInstance('up', entity_id, syst_id, that.region, sap_id, instances.map(i => {
+    that.pushgtw_cli.pushUpSAPInstance('up', entity_id, syst_id, that.region, sap_id, instances.map(function (i) {
       return Object.assign(i, {
         status: 0
       });
@@ -1880,8 +1940,8 @@ ScaleDoer.prototype = {
     that.conn_retries[syst_id] = 0;
   },
   // create a sap client and provides it to the callback function
-  new_soap_client: function (url, auth, data, cb) {
-    const that = this;
+  new_soap_client: function new_soap_client(url, auth, data, cb) {
+    var that = this;
 
     try {
       soap.createClient(url + '?wsdl', {
@@ -1923,9 +1983,9 @@ ScaleDoer.prototype = {
     }
   },
   // find sap instances nr + hostname of SAP system (ip, nr)
-  get_sap_instances_nr: function (ip, nr, cb) {
-    const that = this;
-    const url = 'https://' + ip + ':5' + nr + '14';
+  get_sap_instances_nr: function get_sap_instances_nr(ip, nr, cb) {
+    var that = this;
+    var url = 'https://' + ip + ':5' + nr + '14';
 
     try {
       soap.createClient(url + '/?wsdl', {
@@ -1936,8 +1996,8 @@ ScaleDoer.prototype = {
         } else {
           client.GetSystemInstanceList({}, function (err, result) {
             if (!err && result && result.instance && result.instance.item) {
-              let instances_list = result.instance.item.map(x => {
-                let nr = ('' + x.instanceNr).padStart(2, '0');
+              var instances_list = result.instance.item.map(function (x) {
+                var nr = ('' + x.instanceNr).padStart(2, '0');
                 return {
                   'hostname': x.hostname,
                   'instancenr': nr,
@@ -1961,17 +2021,17 @@ ScaleDoer.prototype = {
     }
   },
   // create a sap client and provides it to the callback function
-  check_sapcontrol_listening: function (ip, nr, di_hostname, cb) {
-    const that = this;
+  check_sapcontrol_listening: function check_sapcontrol_listening(ip, nr, di_hostname, cb) {
+    var that = this;
 
     try {
-      let request = http.get('http://' + ip + ':5' + nr + '13/?wsdl', {
+      var request = http.get('http://' + ip + ':5' + nr + '13/?wsdl', {
         timeout: 1000
-      }, response => {
+      }, function (response) {
         that.logger.log(that.logger.LOG_LEVEL_DEBUG, ' WSDL of ' + ip + ':' + nr, response.statusCode);
 
         if (response && response.statusCode == 200) {
-          const url = 'https://' + ip + ':5' + nr + '14';
+          var url = 'https://' + ip + ':5' + nr + '14';
           soap.createClient(url + '/?wsdl', {
             returnFault: true
           }, function (err, client) {
@@ -1980,7 +2040,9 @@ ScaleDoer.prototype = {
             } else {
               client.GetSystemInstanceList({}, function (err, result) {
                 if (!err && result && result.instance && result.instance.item) {
-                  cb(result.instance.item.map(x => x.hostname).includes(di_hostname));
+                  cb(result.instance.item.map(function (x) {
+                    return x.hostname;
+                  }).includes(di_hostname));
                 } else {
                   cb(false);
                 }
@@ -1991,10 +2053,10 @@ ScaleDoer.prototype = {
           });
         }
       });
-      request.on('timeout', () => {
+      request.on('timeout', function () {
         request.abort();
       });
-      request.on("error", e => {
+      request.on("error", function (e) {
         that.logger.log(that.logger.LOG_LEVEL_DEBUG, ' WSDL checking error of ' + ip + ':' + nr, e);
         cb(false);
       });
@@ -2007,12 +2069,12 @@ ScaleDoer.prototype = {
     }
   },
   // create SSL key onf FS from data provided by scaler
-  update_sending_ssl: function (system_id, pfx_buffer, callback) {
-    const that = this;
+  update_sending_ssl: function update_sending_ssl(system_id, pfx_buffer, callback) {
+    var that = this;
 
     if (system_id) {
       // look for system_id file = certif
-      fs$1.access(that.certif_dir + '/' + system_id + '.pfx', fs$1.F_OK, err => {
+      fs$1.access(that.certif_dir + '/' + system_id + '.pfx', fs$1.F_OK, function (err) {
         if (err) {
           // certif does not exists at file level
           if (pfx_buffer) {
@@ -2035,7 +2097,7 @@ ScaleDoer.prototype = {
   // - connect to a SAP system using sapcontrol WS and execute function 'execute_in_sap' on all its dialog instances
   //    execute_in_sap : function( client, all_instances, callback )
   // - update status for system & instances on prometheus
-  connect_sap: function (job_data, execute_in_sap, cb_next) {
+  connect_sap: function connect_sap(job_data, execute_in_sap, cb_next) {
     var that = this; // to prevent error for self signed certificates of SAP systems
 
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -2048,14 +2110,14 @@ ScaleDoer.prototype = {
     }, // connect to the entry point instance and provide soapclient
     function (cb) {
       // that.logger.log(that.logger.LOG_LEVEL_DEBUG, ' connect to the entry point instance and provide soapclient for :', job_data.system)
-      const http_s = job_data.system.is_encrypted ? {
+      var http_s = job_data.system.is_encrypted ? {
         protocol: 'https',
         port_suffix: '14'
       } : {
         protocol: 'http',
         port_suffix: '13'
       };
-      const soap_url = http_s.protocol + '://' + (job_data.system.ip_internal || job_data.system.hostname) + ':5' + job_data.system.sn + http_s.port_suffix + '/';
+      var soap_url = http_s.protocol + '://' + (job_data.system.ip_internal || job_data.system.hostname) + ':5' + job_data.system.sn + http_s.port_suffix + '/';
       that.logger.log(that.logger.LOG_LEVEL_DEBUG, ' connect to the entry point instance and provide soapclient for :', soap_url);
       that.pushgtw_cli.addInstance(job_data.system.syst_id);
       that.new_soap_client(soap_url, {
@@ -2073,9 +2135,11 @@ ScaleDoer.prototype = {
       // that.logger.log(that.logger.LOG_LEVEL_DEBUG, job_data.system.syst_id + ' get list of instances and check system status')
       cli_data.soapcli.GetSystemInstanceList({}, function (err, result) {
         if (!err && result && result.instance && result.instance.item) {
-          var instances_list = result.instance.item.map(x => {
-            let nr = ('' + x.instanceNr).padStart(2, '0');
-            let inst_with_ip = job_data.system.instances.find(i => i.instancenr == nr);
+          var instances_list = result.instance.item.map(function (x) {
+            var nr = ('' + x.instanceNr).padStart(2, '0');
+            var inst_with_ip = job_data.system.instances.find(function (i) {
+              return i.instancenr == nr;
+            });
             return {
               'ip_internal': inst_with_ip && inst_with_ip.ip_internal,
               'hostname': x.hostname,
@@ -2105,23 +2169,29 @@ ScaleDoer.prototype = {
       });
     }, // connect to the all instances and execute the requested functions / web methods
     function (all_instances, auth_method, username, password, pfx_certif, conn, results, cb) {
-      that.logger.log(that.logger.LOG_LEVEL_DEBUG, '{' + job_data.system.syst_id + '} instances:' + all_instances.map(i => i.ip_internal + '|' + i.hostname + '/' + i.instancenr + '/' + i.status).join(', '));
+      that.logger.log(that.logger.LOG_LEVEL_DEBUG, '{' + job_data.system.syst_id + '} instances:' + all_instances.map(function (i) {
+        return i.ip_internal + '|' + i.hostname + '/' + i.instancenr + '/' + i.status;
+      }).join(', '));
       var soap_clients = [];
 
-      if (!all_instances || all_instances.filter(x => x.status == 1 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0).length == 0) {
+      if (!all_instances || all_instances.filter(function (x) {
+        return x.status == 1 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0;
+      }).length == 0) {
         that.pushgtw_cli.pushInstance('scale', results.system.syst_id);
         cb(that._errors.no_active_instance);
       } else {
         // loop through running dialog instances
-        async.eachOf(all_instances.filter(x => x.status == 1 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0), function (inst, idx, callback) {
-          const http_s = conn.is_encrypted ? {
+        async.eachOf(all_instances.filter(function (x) {
+          return x.status == 1 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0;
+        }), function (inst, idx, callback) {
+          var http_s = conn.is_encrypted ? {
             protocol: 'https',
             port_suffix: '14'
           } : {
             protocol: 'http',
             port_suffix: '13'
           };
-          const soap_url = http_s.protocol + '://' + (inst.ip_internal || inst.hostname) + ':5' + inst.instancenr + http_s.port_suffix + '/';
+          var soap_url = http_s.protocol + '://' + (inst.ip_internal || inst.hostname) + ':5' + inst.instancenr + http_s.port_suffix + '/';
           that.new_soap_client(soap_url, {
             method: auth_method,
             // method is the index of options
@@ -2145,7 +2215,9 @@ ScaleDoer.prototype = {
               callback();
             } else {
               // get IP internal from job.data
-              var inst_from_job = job_data.system.instances.find(i => i.instancenr == inst.instancenr);
+              var inst_from_job = job_data.system.instances.find(function (i) {
+                return i.instancenr == inst.instancenr;
+              });
               soap_clients.push({
                 c: client.soapcli,
                 f: inst.features,
@@ -2161,8 +2233,8 @@ ScaleDoer.prototype = {
           // update instance status for prometheus
           // all_instances = SAP instances visible from sapstartsrv GetSystemInstanceList command
           // need to make sure all instances even with OS down are updated from job_data.system.instances
-          job_data.system.instances.forEach((instance, idx) => {
-            all_instances.forEach(new_instance => {
+          job_data.system.instances.forEach(function (instance, idx) {
+            all_instances.forEach(function (new_instance) {
               if (instance && instance.instancenr == new_instance.instancenr) {
                 job_data.system.instances[idx] = Object.assign(instance, new_instance);
 
@@ -2172,12 +2244,16 @@ ScaleDoer.prototype = {
               } // add new instances
 
 
-              if (job_data.system.instances.map(x => x && x.instancenr).indexOf(new_instance.instancenr) < 0) {
+              if (job_data.system.instances.map(function (x) {
+                return x && x.instancenr;
+              }).indexOf(new_instance.instancenr) < 0) {
                 job_data.system.instances.push(new_instance);
               } // set missing/deleted/not running instance status to not running
 
 
-              if (instance && all_instances.map(x => x.instancenr).indexOf(instance.instancenr) < 0) {
+              if (instance && all_instances.map(function (x) {
+                return x.instancenr;
+              }).indexOf(instance.instancenr) < 0) {
                 // delete job_data.system.instances[idx]
                 job_data.system.instances[idx].status = 0;
                 delete job_data.system.instances[idx].error;
@@ -2185,9 +2261,9 @@ ScaleDoer.prototype = {
             });
           });
           that.pushgtw_cli.pushUpSAPInstance('up', job_data.entity_id, job_data.system.syst_id, that.region, job_data.system.sid, job_data.system.instances);
-          async.each(soap_clients, (client, async_cb) => {
+          async.each(soap_clients, function (client, async_cb) {
             execute_in_sap(client, all_instances, async_cb);
-          }, each_err => {
+          }, function (each_err) {
             if (each_err) {
               that.logger.log(that.logger.LOG_LEVEL_ERROR, '{' + job_data.system.syst_id + '} sapcontrol exec operation error:', each_err);
             }
@@ -2218,7 +2294,7 @@ ScaleDoer.prototype = {
           case that._errors.no_active_instance:
             that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + job_data.system.syst_id + '}:', that._errors.no_active_instance, waterfall_res); // waterfall_res = all instances array
 
-            that.deletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, job_data.system.sid, job_data.system.instances.map(s => {
+            that.deletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, job_data.system.sid, job_data.system.instances.map(function (s) {
               return {
                 'instancenr': s.instancenr,
                 'status': 0
@@ -2235,7 +2311,7 @@ ScaleDoer.prototype = {
             if (err.errno == 'ETIMEDOUT') {
               // that.logger.log(that.logger.LOG_LEVEL_ERROR, '>D ETIMEDOUT ' + err.syscall + ' to '+ err.address + ' on port ' + err.port + ' ', waterfall_res)
               if (waterfall_res === true) {
-                that.deletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, job_data.system.sid, job_data.system.instances.map(s => {
+                that.deletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, job_data.system.sid, job_data.system.instances.map(function (s) {
                   return {
                     'instancenr': s.instancenr,
                     'status': 0
@@ -2266,20 +2342,20 @@ ScaleDoer.prototype = {
   },
   // Called by Scheduler
   // Consume metrics for SAP (similar to call_sapcontrol) with higher frequency for precise notifications. Do produce Prometheus metrics.
-  collect: function () {
+  collect: function collect() {
     var that = this;
     that.queue.process(that.QUEUES.collect_exec, that.concurrency_nb, function (job, done) {
       if (job.data.func && job.data.system) {
         // test if pfx file exists before connecting
-        that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, err => {
+        that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, function (err) {
           if (err) {
             done('missing pfx');
           } else {
             // async_cb must not be called with error => to no block the process for other sap instances of the targeted SAP system
-            that.connect_sap(job.data, (client, all_instances, async_cb) => {
+            that.connect_sap(job.data, function (client, all_instances, async_cb) {
               if (client.f.indexOf(job.data.func.type) >= 0 || job.data.func.type == 'ALL') {
                 that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + job.data.system.syst_id + '} sapcontrol:' + job.data.func.name + ': execution');
-                sapcontrol_operations$1[job.data.func.name].call(client.c, {}, (err, result) => {
+                sapcontrol_operations$1[job.data.func.name].call(client.c, {}, function (err, result) {
                   if (err) {
                     that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + job.data.system.syst_id + '} sapcontrol:' + job.data.func.name + ': exec error:' + err.body ? err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1] : err);
                   }
@@ -2306,9 +2382,9 @@ ScaleDoer.prototype = {
   },
   // Called by Receiver
   // Check connections to sap systems, cloud
-  checkconnection: function () {
+  checkconnection: function checkconnection() {
     var that = this;
-    let max_rec_execs_find_sap_instances = 2; // call with sap_instances_ip=job.data.sap_instances_ip, limit_execs=2
+    var max_rec_execs_find_sap_instances = 2; // call with sap_instances_ip=job.data.sap_instances_ip, limit_execs=2
     // Recursive func to find SAP system instances among EC2 instances in same VPC as agent
     // based on successful tests on ip, nr, and hostname
     // Send back to results to receiver
@@ -2319,7 +2395,7 @@ ScaleDoer.prototype = {
         done('System details not found');
       } else {
         if (sap_instances_ip.length == 0) {
-          that.aws_cli.discoverEC2Instances(vpc_id, (err, list_ec2) => {
+          that.aws_cli.discoverEC2Instances(vpc_id, function (err, list_ec2) {
             // check if delta (= new EC2 instances)
             // if so, need to update the DB with new ones
             if (list_ec2 && list_ec2.length > 0) {
@@ -2328,9 +2404,9 @@ ScaleDoer.prototype = {
           });
         } else {
           // check targets with combination of IP & NR
-          let combi_ip_nr = [];
-          sap_instances_ip.forEach(i => {
-            instnr_list.forEach(x => {
+          var combi_ip_nr = [];
+          sap_instances_ip.forEach(function (i) {
+            instnr_list.forEach(function (x) {
               combi_ip_nr.push({
                 ip: i.ip_internal,
                 nr: x.instancenr,
@@ -2342,23 +2418,27 @@ ScaleDoer.prototype = {
             });
           });
           that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'Possible combinations of IP nr:', combi_ip_nr);
-          async.eachOf(combi_ip_nr, (elt, idx, cb) => {
+          async.eachOf(combi_ip_nr, function (elt, idx, cb) {
             // check if there is a sapcontrol service responding (EC2 must be up & running) at 'hostname'
-            that.check_sapcontrol_listening(elt.ip, elt.nr, elt.hostname, valid => {
+            that.check_sapcontrol_listening(elt.ip, elt.nr, elt.hostname, function (valid) {
               combi_ip_nr[idx].status = valid;
               cb();
             });
-          }, err => {
+          }, function (err) {
             if (err) {
               that.logger.log(that.logger.LOG_LEVEL_ERROR, 'Error:', err);
             }
 
-            that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'Valid SAP IP NR :', combi_ip_nr.filter(x => x.status)); // Reasons to resync ec2 instances in VPC and retry
+            that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'Valid SAP IP NR :', combi_ip_nr.filter(function (x) {
+              return x.status;
+            })); // Reasons to resync ec2 instances in VPC and retry
             //  - if ec2 instances related to SAP instances are not found at all
             //  - if number of ec2 instances related to SAP instances are found < nb SAP instances
 
-            let sap_instances_with_ip = instnr_list.map(i => {
-              let found_instance = combi_ip_nr.find(x => x.status && x.hostname == i.hostname && x.nr == i.instancenr);
+            var sap_instances_with_ip = instnr_list.map(function (i) {
+              var found_instance = combi_ip_nr.find(function (x) {
+                return x.status && x.hostname == i.hostname && x.nr == i.instancenr;
+              });
 
               if (found_instance) {
                 return Object.assign(i, {
@@ -2367,16 +2447,20 @@ ScaleDoer.prototype = {
                   cloud_instance_type: found_instance.cloud_instance_type
                 });
               }
-            }).filter(i => i.ip_internal);
+            }).filter(function (i) {
+              return i.ip_internal;
+            });
 
             if (sap_instances_with_ip.length == 0 || sap_instances_with_ip.length < instnr_list.length) {
-              that.aws_cli.discoverEC2Instances(vpc_id, (err, list_ec2) => {
+              that.aws_cli.discoverEC2Instances(vpc_id, function (err, list_ec2) {
                 // check if delta (= new EC2 instances)
                 // if so, need to update the DB with new ones
                 if (!list_ec2 || list_ec2.length == 0) {
                   done('System details not found');
                 } else {
-                  let new_instances_ip = list_ec2.filter(x => !sap_instances_ip.includes(x.ip_internal));
+                  var new_instances_ip = list_ec2.filter(function (x) {
+                    return !sap_instances_ip.includes(x.ip_internal);
+                  });
 
                   if (new_instances_ip.length > 0) {
                     find_sap_instances(vpc_id, limit_execs - 1, new_instances_ip, instnr_list, done);
@@ -2405,12 +2489,12 @@ ScaleDoer.prototype = {
     that.queue.process(that.QUEUES.discover_exec, that.concurrency_nb, function (job, done) {
       if (job.data.ip != undefined && job.data.nr != undefined && job.data.hostname != undefined && job.data.sap_instances_ip != undefined) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-        that.get_sap_instances_nr(job.data.ip, job.data.nr, (err, instnr_list) => {
+        that.get_sap_instances_nr(job.data.ip, job.data.nr, function (err, instnr_list) {
           if (err) {
             done(err);
           } else {
             try {
-              let vpc_id = fs$1.readFileSync(__dirname + '/.aws_vpc').toString();
+              var vpc_id = fs$1.readFileSync(__dirname + '/.aws_vpc').toString();
               that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'find_sap_instances params: ', vpc_id, job.data.sap_instances_ip, instnr_list);
               find_sap_instances(vpc_id, max_rec_execs_find_sap_instances, job.data.sap_instances_ip, instnr_list, done);
             } catch (e) {
@@ -2431,19 +2515,21 @@ ScaleDoer.prototype = {
         switch (job.data.type) {
           case 0:
             // sap system
-            that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, err => {
+            that.update_sending_ssl(job.data.system.syst_id, job.data.keys_buff, function (err) {
               if (err) {
                 done('missing pfx');
               } else {
-                const soap_timeout_sec = 10000; // add first Dialog Instance from System info
+                var soap_timeout_sec = 10000; // add first Dialog Instance from System info
 
-                that.connect_sap(job.data, (client, all_instances, async_cb) => {
+                that.connect_sap(job.data, function (client, all_instances, async_cb) {
                   // For each instance, check if authorization is OK and get internal ip
-                  const upd_idx = all_instances.findIndex(i => i.instancenr == client.n);
+                  var upd_idx = all_instances.findIndex(function (i) {
+                    return i.instancenr == client.n;
+                  });
                   async.parallel({
-                    check: parallel_cb => {
+                    check: function check(parallel_cb) {
                       client.c.AccessCheck({
-                        function: 'Start'
+                        "function": 'Start'
                       }, function (err) {
                         if (err) {
                           that.logger.log(that.logger.LOG_LEVEL_ERROR, 'checkconn_exec authorization error for SAP instance:' + client.h + '/' + client.i + '/' + client.n);
@@ -2459,12 +2545,14 @@ ScaleDoer.prototype = {
                         timeout: soap_timeout_sec
                       });
                     },
-                    ip: parallel_cb => {
+                    ip: function ip(parallel_cb) {
                       async.waterfall([// get IP from SAP control for Dialog Instances
-                      waterfall_cb => {
+                      function (waterfall_cb) {
                         client.c.GetAlertTree({}, function (err, result) {
                           if (!err && result && result.tree) {
-                            const temp_res = result.tree.item.filter(i => result.tree.item[i.parent] && result.tree.item[i.parent].name.trim() == 'Server Configuration' && i.name.trim() == 'IP Address');
+                            var temp_res = result.tree.item.filter(function (i) {
+                              return result.tree.item[i.parent] && result.tree.item[i.parent].name.trim() == 'Server Configuration' && i.name.trim() == 'IP Address';
+                            });
 
                             if (temp_res && temp_res[0] && temp_res[0].description) {
                               all_instances[upd_idx].ip_internal = temp_res[0].description;
@@ -2473,14 +2561,16 @@ ScaleDoer.prototype = {
                           } else waterfall_cb('No IP ' + err);
                         });
                       }, // get ID from cloud API
-                      (ip, waterfall_cb) => {
+                      function (ip, waterfall_cb) {
                         // get instances ec2 ID + ec2 instance type
-                        that.aws_cli.getEC2ID_Type(ip, ec2_id_type => waterfall_cb(null, ec2_id_type));
-                      }, (cloud_instance_details, waterfall_cb) => {
+                        that.aws_cli.getEC2ID_Type(ip, function (ec2_id_type) {
+                          return waterfall_cb(null, ec2_id_type);
+                        });
+                      }, function (cloud_instance_details, waterfall_cb) {
                         all_instances[upd_idx].cloud_instance_id = cloud_instance_details.instance_id;
                         all_instances[upd_idx].cloud_instance_type = cloud_instance_details.instance_type;
                         waterfall_cb();
-                      }], err => {
+                      }], function (err) {
                         if (err) {
                           that.logger.log(that.logger.LOG_LEVEL_ERROR, 'checkconn_exec error getting SAP instance details (IP, cloud instance ID and type):' + client.h + '/' + client.i + '/' + client.n + ':', err);
                         }
@@ -2519,17 +2609,17 @@ ScaleDoer.prototype = {
   // Does not pull metrics but execute task based on metrics values and defined rules
   // --
   // todo log start/stop actions
-  scale: function () {
-    const that = this;
-    const _start_server_timeout_error = 0;
-    const _start_server_not_found = 1;
-    const _stop_server_error = 2;
-    const _stop_server_timeout_error = 3;
-    const _stop_server_not_found = 4;
-    const _start_sap_error = 5;
-    const _start_sap_timeout_error = 6;
-    const _stop_sap_error = 7;
-    const _stop_sap_timeout_error = 8;
+  scale: function scale() {
+    var that = this;
+    var _start_server_timeout_error = 0;
+    var _start_server_not_found = 1;
+    var _stop_server_error = 2;
+    var _stop_server_timeout_error = 3;
+    var _stop_server_not_found = 4;
+    var _start_sap_error = 5;
+    var _start_sap_timeout_error = 6;
+    var _stop_sap_error = 7;
+    var _stop_sap_timeout_error = 8;
     var _scaling_errors = [];
     _scaling_errors[_start_server_timeout_error] = 'Start EC2 server operation timeout';
     _scaling_errors[_start_server_not_found] = 'EC2 server to start cannot be found';
@@ -2546,7 +2636,9 @@ ScaleDoer.prototype = {
         setTimeout(function () {
           soap_client.GetSystemInstanceList({}, function (err, result) {
             if (!err) {
-              var inst_status = result.instance.item && result.instance.item.filter(i => i.instanceNr == sn);
+              var inst_status = result.instance.item && result.instance.item.filter(function (i) {
+                return i.instanceNr == sn;
+              });
 
               if (inst_status && inst_status[0] && inst_status[0].dispstatus == 'SAPControl-GRAY') {
                 serie_cb();
@@ -2570,7 +2662,9 @@ ScaleDoer.prototype = {
         setTimeout(function () {
           soap_client.GetSystemInstanceList({}, function (err, result) {
             if (!err) {
-              var inst_status = result.instance.item && result.instance.item.filter(i => ('' + i.instanceNr).padStart(2, '0') == sn + '');
+              var inst_status = result.instance.item && result.instance.item.filter(function (i) {
+                return ('' + i.instanceNr).padStart(2, '0') == sn + '';
+              });
 
               if (inst_status && inst_status[0] && inst_status[0].dispstatus == that._sap_statuses.green) {
                 serie_cb();
@@ -2619,16 +2713,18 @@ ScaleDoer.prototype = {
     } // recursive restart SAP Instance
 
 
-    function do_restart_sap(soapcli, curr_system, syst_instance_to_start, index_curr_instance_restart, n_times = 1) {
+    function do_restart_sap(soapcli, curr_system, syst_instance_to_start, index_curr_instance_restart) {
+      var n_times = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
+
       if (n_times > 0) {
         // status for restart = 3. needed to prevent false error on inconsistency status by USI.
         // => status for failed start + restart (without resetting status): 0 > 3 > -1 > 0 => inconsistency as prev = new status
         // => status for failed start + restart (with resetting status): 0 > 3 > 3 > 1|0 => no inconsistency as prev != new status
         that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].status = 3;
-        sapcontrol_operations$1['RestartInstance'].call(soapcli, {}, err => {
+        sapcontrol_operations$1['RestartInstance'].call(soapcli, {}, function (err) {
           if (err !== undefined && err !== null) {
             if (err.body) {
-              const start_error = err.body.match(/<faultstring>(.*?)<\/faultstring>/) && err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]; // Instance already started
+              var start_error = err.body.match(/<faultstring>(.*?)<\/faultstring>/) && err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]; // Instance already started
 
               if (start_error == 'Instance already started') {
                 that.logger.log(that.logger.LOG_LEVEL_MIN, '[COMPLETED] {' + curr_system.syst_id + '} (restart-' + n_times + ') already started:' + curr_system.syst_id + '/' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
@@ -2653,11 +2749,11 @@ ScaleDoer.prototype = {
               do_restart_sap(soapcli, curr_system, syst_instance_to_start, index_curr_instance_restart, n_times - 1);
             }
           } else {
-            const step_wait_sec = 20;
-            const timeout_wait_sec = 300;
-            const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+            var step_wait_sec = 20;
+            var timeout_wait_sec = 300;
+            var nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
             that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (restart -' + n_times + ') waiting for SAP instance to actually start within timeout ' + timeout_wait_sec + ' sec:' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
-            check_start_sap_instance(soapcli, nb_iterations, step_wait_sec * 1000, syst_instance_to_start.instancenr, err => {
+            check_start_sap_instance(soapcli, nb_iterations, step_wait_sec * 1000, syst_instance_to_start.instancenr, function (err) {
               if (err) {
                 that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].status = -1;
                 that.updated_system_instances[curr_system.syst_id][index_curr_instance_restart].error = {
@@ -2690,19 +2786,23 @@ ScaleDoer.prototype = {
     // improvement: can set minimal number of instances instead of 1
 
 
-    function do_stop(d, queue_cb, is_resume_mode = false, resume_step = -1) {
+    function do_stop(d, queue_cb) {
+      var is_resume_mode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var resume_step = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;
       // to prevent error for self signed certificates of SAP systems
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
       var alert = d.alert;
       var curr_system = d.system;
       var syst_id = alert.labels.instance;
       var entity_id = alert.labels.entity_id;
-      var instance_to_stop = curr_system.instances.find(i => i.instancenr == alert.labels.sn);
-      const mode_resume = is_resume_mode ? '<-' : '';
+      var instance_to_stop = curr_system.instances.find(function (i) {
+        return i.instancenr == alert.labels.sn;
+      });
+      var mode_resume = is_resume_mode ? '<-' : '';
 
       if (that.updated_system_instances[syst_id] == undefined || that.updated_system_instances[syst_id].length == 0) {
         // important to clone the array to prevent circular dependency with resume_context property
-        that.updated_system_instances[syst_id] = [...curr_system.instances];
+        that.updated_system_instances[syst_id] = _toConsumableArray(curr_system.instances);
       }
 
       if (curr_system && instance_to_stop) {
@@ -2714,11 +2814,11 @@ ScaleDoer.prototype = {
         }, // connect to the instance and provide soapclient
         function (cb) {
           // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'connect to the entry point instance and provide soapclient')
-          const http_s = {
+          var http_s = {
             protocol: 'https',
             port_suffix: '14'
           };
-          const soap_url = http_s.protocol + '://' + (instance_to_stop.ip_internal || instance_to_stop.hostname) + ':5' + instance_to_stop.instancenr + http_s.port_suffix + '/';
+          var soap_url = http_s.protocol + '://' + (instance_to_stop.ip_internal || instance_to_stop.hostname) + ':5' + instance_to_stop.instancenr + http_s.port_suffix + '/';
           that.pushgtw_cli.addInstance(d.system.syst_id);
           that.new_soap_client(soap_url, {
             method: 1,
@@ -2745,7 +2845,7 @@ ScaleDoer.prototype = {
                   that.pushgtw_cli.pushUpInstance('up', entity_id, d.system.syst_id, that.region, d.system.sid, 1);
                   that.conn_retries[d.system.syst_id] = 0;
                   var features_of_instancenr = {};
-                  var all_instances = result.instance.item.map(x => {
+                  var all_instances = result.instance.item.map(function (x) {
                     return {
                       'hostname': x.hostname,
                       'instancenr': ('' + x.instanceNr).padStart(2, '0'),
@@ -2753,13 +2853,19 @@ ScaleDoer.prototype = {
                       'status': x.dispstatus == that._sap_statuses.green ? 1 : x.dispstatus == that._sap_statuses.yellow ? -1 : 0
                     };
                   });
-                  that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (stop' + mode_resume + ') - all instances of system:' + all_instances.map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(', '));
-                  all_instances.filter(i => i.status == 1).forEach(i => {
+                  that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (stop' + mode_resume + ') - all instances of system:' + all_instances.map(function (i) {
+                    return i.hostname + '/' + i.instancenr + '/' + i.status;
+                  }).join(', '));
+                  all_instances.filter(function (i) {
+                    return i.status == 1;
+                  }).forEach(function (i) {
                     features_of_instancenr[i.instancenr] = i.features.join('/');
                   }); // skip if min instance is reached
                   // continue *ONLY* if in resume mode and resume step >= sap_stop_triggered: 3 or ec2_stop_triggered: 4. In this case, we need to finished the EC2 stop operation.
 
-                  if (Object.values(features_of_instancenr).filter(x => x == features_of_instancenr[alert.labels.sn]).length > that.min_instance_running || is_resume_mode && resume_step >= that._resume_on_step.stop.sap_stop_triggered) {
+                  if (Object.values(features_of_instancenr).filter(function (x) {
+                    return x == features_of_instancenr[alert.labels.sn];
+                  }).length > that.min_instance_running || is_resume_mode && resume_step >= that._resume_on_step.stop.sap_stop_triggered) {
                     cli_data.payload = Object.assign(cli_data.payload, {
                       instances: all_instances
                     });
@@ -2777,11 +2883,15 @@ ScaleDoer.prototype = {
         function (cli_data, async_cb) {
           // check if there is not a stop in progress for this instance in normal mode 
           // OR is in resume mode
-          if (is_resume_mode || that.updated_system_instances[syst_id].filter(i => i.status == 2 && i.instancenr == alert.labels.sn).length == 0) {
+          if (is_resume_mode || that.updated_system_instances[syst_id].filter(function (i) {
+            return i.status == 2 && i.instancenr == alert.labels.sn;
+          }).length == 0) {
             // Set this instance *only* in stop WIP so it is not considered as active. Prevent from shutting down all AS and trying to shut down same AS from the same alert when the stop takes more time than alert resending
             // set status == 2 for stop in progress
             // also init resume_on_step value for fault tolerant (if process gets killed and restarted)
-            var index_curr_instance_stop = that.updated_system_instances[syst_id].map(i => i.instancenr).indexOf(instance_to_stop.instancenr);
+            var index_curr_instance_stop = that.updated_system_instances[syst_id].map(function (i) {
+              return i.instancenr;
+            }).indexOf(instance_to_stop.instancenr);
 
             if (index_curr_instance_stop < 0) {
               index_curr_instance_stop = that.updated_system_instances[syst_id].push(Object.assign({}, instance_to_stop, {
@@ -2797,11 +2907,15 @@ ScaleDoer.prototype = {
               });
             }
 
-            that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (stop' + mode_resume + ') update to transition status:' + that.updated_system_instances[syst_id].map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(',')); // call async now to prevent delay of DB update due to waiting for stop operations 
+            that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (stop' + mode_resume + ') update to transition status:' + that.updated_system_instances[syst_id].map(function (i) {
+              return i.hostname + '/' + i.instancenr + '/' + i.status;
+            }).join(',')); // call async now to prevent delay of DB update due to waiting for stop operations 
 
             async_cb();
-            const counter_elt = d.counter.find(c => c.instancenr == alert.labels.sn);
-            const counter_instance = counter_elt ? counter_elt.value : 0; // --- TRIGGER STOP SAP INSTANCE ----
+            var counter_elt = d.counter.find(function (c) {
+              return c.instancenr == alert.labels.sn;
+            });
+            var counter_instance = counter_elt ? counter_elt.value : 0; // --- TRIGGER STOP SAP INSTANCE ----
             // process STOP
             // Execution in normal mode 'live/on demand' => request by receiver
             // Execution in resume mode => re run on interrupted step
@@ -2820,7 +2934,7 @@ ScaleDoer.prototype = {
             function (serie_cb) {
               if (!is_resume_mode || that.resume_here_on_interruption(syst_id, index_curr_instance_stop, that._resume_on_step.stop.sap_stop_triggered)) {
                 that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + syst_id + '} (stop' + mode_resume + ') triggered SAP instance:' + alert.labels.ip_internal + '/' + alert.labels.hostname + '/' + alert.labels.sn);
-                sapcontrol_operations$1[d.action.name].call(cli_data.soapcli, {}, err => {
+                sapcontrol_operations$1[d.action.name].call(cli_data.soapcli, {}, function (err) {
                   that.save_resume_step(syst_id, index_curr_instance_stop, that._resume_on_step.stop.sap_stop_triggered);
 
                   if (err) {
@@ -2832,9 +2946,9 @@ ScaleDoer.prototype = {
               } else serie_cb();
             }, // wait for actual stop
             function (serie_cb) {
-              const step_wait_sec = 20;
-              const timeout_wait_sec = 300;
-              const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+              var step_wait_sec = 20;
+              var timeout_wait_sec = 300;
+              var nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
               that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + syst_id + '} (stop' + mode_resume + ') waiting SAP instance to stop before timeout ' + timeout_wait_sec + ' sec: ' + alert.labels.ip_internal + '/' + alert.labels.hostname + '/' + alert.labels.sn);
               check_stop_sap_instance(cli_data.soapcli, nb_iterations, step_wait_sec * 1000, alert.labels.sn, serie_cb);
             }, // stop ec2 instance
@@ -2878,11 +2992,11 @@ ScaleDoer.prototype = {
 
                 that.save_resume_step(syst_id, index_curr_instance_stop, -1);
               } else {
-                const step_wait_sec = 20;
-                const timeout_wait_sec = 300;
-                const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+                var step_wait_sec = 20;
+                var timeout_wait_sec = 300;
+                var nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
                 that.updated_system_instances[syst_id][index_curr_instance_stop].status = 0;
-                check_stop_ec2_instance(that.aws_cli, nb_iterations, step_wait_sec * 1000, alert.labels.ip_internal, err => {
+                check_stop_ec2_instance(that.aws_cli, nb_iterations, step_wait_sec * 1000, alert.labels.ip_internal, function (err) {
                   if (err) {
                     that.logger.log(that.logger.LOG_LEVEL_MIN, '[COMPLETED] {' + syst_id + '} (stop' + mode_resume + ') partially stopped (SAP:OK, EC2:NOK):' + alert.labels.ip_internal + '/' + alert.labels.hostname + '/' + alert.labels.sn + ' error:', _scaling_errors[err]); // TODO send email  start ec2 failed
 
@@ -2934,18 +3048,20 @@ ScaleDoer.prototype = {
     } // improvement: can set max number of instances instead of const
 
 
-    function do_start(d, queue_cb, is_resume_mode = false, instance_idx = -1) {
+    function do_start(d, queue_cb) {
+      var is_resume_mode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var instance_idx = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;
       // to prevent error for self signed certificates of SAP systems
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
       var alert = d.alert;
       var curr_system = d.system;
       var syst_id = alert.labels.instance;
       var entity_id = alert.labels.entity_id;
-      const mode_resume = is_resume_mode ? '<-' : '';
+      var mode_resume = is_resume_mode ? '<-' : '';
 
       if (that.updated_system_instances[syst_id] == undefined || that.updated_system_instances[syst_id].length == 0) {
         // important to clone the array to prevent circular dependency with resume_context property
-        that.updated_system_instances[syst_id] = [...curr_system.instances];
+        that.updated_system_instances[syst_id] = _toConsumableArray(curr_system.instances);
       }
 
       if (curr_system) {
@@ -2954,14 +3070,16 @@ ScaleDoer.prototype = {
         function (waterfall_cb) {
           async.parallel({
             // returns something only in normal mode
-            normal_instance_to_start: parallel_cb => {
+            normal_instance_to_start: function normal_instance_to_start(parallel_cb) {
               if (is_resume_mode) parallel_cb();else {
                 async.waterfall([// check no CI instances
                 function (waterfall_cb2) {
                   // var syst_instances_to_start_candidates = curr_system.instances
                   // search for stopped (from db perspective) dialog instances (!= msg server)
                   var syst_instances_to_start_candidates = that.updated_system_instances[syst_id] // search for stopped (from up to date cache) dialog instances (!= msg server)
-                  .filter(x => x.status == 0 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0);
+                  .filter(function (x) {
+                    return x.status == 0 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0;
+                  });
 
                   if (syst_instances_to_start_candidates && syst_instances_to_start_candidates.length > 0) {
                     waterfall_cb2();
@@ -2976,14 +3094,14 @@ ScaleDoer.prototype = {
                 }, // connect to the entry point instance and provide soapclient
                 function (waterfall_cb2) {
                   // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'connect to the entry point instance and provide soapclient')
-                  const http_s = d.system.is_encrypted ? {
+                  var http_s = d.system.is_encrypted ? {
                     protocol: 'https',
                     port_suffix: '14'
                   } : {
                     protocol: 'http',
                     port_suffix: '13'
                   };
-                  const soap_url = http_s.protocol + '://' + (d.system.ip_internal || d.system.hostname) + ':5' + d.system.sn + http_s.port_suffix + '/';
+                  var soap_url = http_s.protocol + '://' + (d.system.ip_internal || d.system.hostname) + ':5' + d.system.sn + http_s.port_suffix + '/';
                   that.pushgtw_cli.addInstance(d.system.syst_id);
                   that.new_soap_client(soap_url, {
                     method: d.system.auth_method,
@@ -3000,7 +3118,7 @@ ScaleDoer.prototype = {
                   // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'Get list of instances and check system status')
                   cli_data.soapcli.GetSystemInstanceList({}, function (err, result) {
                     if (!err && result && result.instance && result.instance.item) {
-                      var instances_list = result.instance.item.map(x => {
+                      var instances_list = result.instance.item.map(function (x) {
                         return {
                           'hostname': x.hostname,
                           'instancenr': ('' + x.instanceNr).padStart(2, '0'),
@@ -3027,27 +3145,45 @@ ScaleDoer.prototype = {
                 function (all_instances, waterfall_cb2) {
                   // check if max instances is reached already 
                   var features_of_instancenr = {};
-                  all_instances.filter(i => i.status == 1).forEach(i => {
+                  all_instances.filter(function (i) {
+                    return i.status == 1;
+                  }).forEach(function (i) {
                     features_of_instancenr[i.instancenr] = i.features.join('|');
                   });
 
-                  if (Object.values(features_of_instancenr).filter(x => !RegExp('MESSAGESERVER').test(x) && !RegExp('ENQUE').test(x)).length < that.max_instance_running) {
+                  if (Object.values(features_of_instancenr).filter(function (x) {
+                    return !RegExp('MESSAGESERVER').test(x) && !RegExp('ENQUE').test(x);
+                  }).length < that.max_instance_running) {
                     waterfall_cb2(null, all_instances);
                   } else {
                     waterfall_cb2(that._errors.max_instances_reached);
                   }
                 }, // check if eligible instance can be started
                 function (all_instances, waterfall_cb2) {
-                  that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') all instances of system:' + all_instances.map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(',')); // var syst_instances_to_start = curr_system.instances
+                  that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') all instances of system:' + all_instances.map(function (i) {
+                    return i.hostname + '/' + i.instancenr + '/' + i.status;
+                  }).join(',')); // var syst_instances_to_start = curr_system.instances
                   // search for stopped (from db perspective) dialog instances (!= msg server)
 
                   var syst_instances_to_start = that.updated_system_instances[syst_id] // search for stopped (from up to date cache perspective) dialog instances (!= msg server)
-                  .filter(x => x.status == 0 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0) // search for stopped (from sapctrl res perspective)
-                  .filter(x => all_instances.filter(i => i.status == 0).findIndex(i => i.instancenr == x.instancenr) >= 0 || // os is up, sap instance is down
-                  all_instances.findIndex(i => i.instancenr == x.instancenr) < 0 // os (and sap instance) is down
+                  .filter(function (x) {
+                    return x.status == 0 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0;
+                  }) // search for stopped (from sapctrl res perspective)
+                  .filter(function (x) {
+                    return all_instances.filter(function (i) {
+                      return i.status == 0;
+                    }).findIndex(function (i) {
+                      return i.instancenr == x.instancenr;
+                    }) >= 0 || // os is up, sap instance is down
+                    all_instances.findIndex(function (i) {
+                      return i.instancenr == x.instancenr;
+                    }) < 0;
+                  } // os (and sap instance) is down
                   ); // var syst_instances_to_start = all_instances.filter(x => x.status == 0 && x.features.indexOf('MESSAGESERVER') < 0 && x.features.indexOf('ENQUE') < 0)
 
-                  that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') candidates instances:' + syst_instances_to_start.map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(','));
+                  that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') candidates instances:' + syst_instances_to_start.map(function (i) {
+                    return i.hostname + '/' + i.instancenr + '/' + i.status;
+                  }).join(','));
 
                   if (syst_instances_to_start && syst_instances_to_start.length > 0) {
                     waterfall_cb2(null, syst_instances_to_start[0]);
@@ -3075,24 +3211,30 @@ ScaleDoer.prototype = {
               }
             },
             // returns something only in resume mode
-            resume_instance_to_start: parallel_cb => {
+            resume_instance_to_start: function resume_instance_to_start(parallel_cb) {
               if (is_resume_mode) parallel_cb(null, that.updated_system_instances[syst_id][instance_idx]);else parallel_cb();
             }
-          }, (err, res) => {
+          }, function (err, res) {
             waterfall_cb(err, res.normal_instance_to_start || res.resume_instance_to_start);
           });
         }, function (syst_instance_to_start, waterfall_cb) {
-          that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') current buffered instances:' + that.updated_system_instances[syst_id].map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(',')); // confirm if syst_instance_to_start (from sapstartsrv) if really a valid candidate by check its status in buffered instances
+          that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') current buffered instances:' + that.updated_system_instances[syst_id].map(function (i) {
+            return i.hostname + '/' + i.instancenr + '/' + i.status;
+          }).join(',')); // confirm if syst_instance_to_start (from sapstartsrv) if really a valid candidate by check its status in buffered instances
           // check if there is not a start in progress for this instance when in normal mode
           // OR is in resume mode
 
-          if (is_resume_mode || that.updated_system_instances[syst_id].filter(i => i.status == 3
+          if (is_resume_mode || that.updated_system_instances[syst_id].filter(function (i) {
+            return i.status == 3;
+          }
           /*&& i.instancenr == syst_instance_to_start.instancenr*/
           ).length == 0) {
             that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') alert:' + alert.labels.alertname + ' on ' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr); // Set *only* the starting instance in start WIP so it are not considered as active. Other instances are not changed. Prevent from shutting down all AS and trying to shut down same AS from the same alert when the stop takes more time than alert resending
             // set status == 3 for start in progress
 
-            var index_curr_instance_start = that.updated_system_instances[syst_id].map(i => i.instancenr).indexOf(syst_instance_to_start.instancenr);
+            var index_curr_instance_start = that.updated_system_instances[syst_id].map(function (i) {
+              return i.instancenr;
+            }).indexOf(syst_instance_to_start.instancenr);
 
             if (index_curr_instance_start < 0) {
               index_curr_instance_start = that.updated_system_instances[syst_id].push(Object.assign({}, syst_instance_to_start, {
@@ -3108,19 +3250,23 @@ ScaleDoer.prototype = {
               });
             }
 
-            that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') update to transition status:' + that.updated_system_instances[syst_id].map(i => i.hostname + '/' + i.instancenr + '/' + i.status).join(',')); // call async now to prevent delay of DB update due to waiting for stop operations 
+            that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') update to transition status:' + that.updated_system_instances[syst_id].map(function (i) {
+              return i.hostname + '/' + i.instancenr + '/' + i.status;
+            }).join(',')); // call async now to prevent delay of DB update due to waiting for stop operations 
 
             waterfall_cb(); // --- TRIGGER START SAP INSTANCE ----
 
-            const counter_elt = d.counter.find(c => c.instancenr == syst_instance_to_start.instancenr);
-            const counter_instance = counter_elt ? counter_elt.value : 0; // Execution in normal mode 'live/on demand' => request by receiver
+            var counter_elt = d.counter.find(function (c) {
+              return c.instancenr == syst_instance_to_start.instancenr;
+            });
+            var counter_instance = counter_elt ? counter_elt.value : 0; // Execution in normal mode 'live/on demand' => request by receiver
             // Execution in resume mode => re run on interrupted step
             // const is_normal_mode = that.updated_system_instances[syst_id][index_curr_instance_start].resume_on_step < 0
 
             that.logger.log(that.logger.LOG_LEVEL_MIN, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') triggered:' + syst_id + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.instancenr + ' (counter=' + (parseInt(counter_instance) + 1) + ' entity=' + entity_id + ')');
             async.series({
               // increment start counter
-              incr: function (serie_cb) {
+              incr: function incr(serie_cb) {
                 if (!is_resume_mode || that.resume_here_on_interruption(syst_id, index_curr_instance_start, that._resume_on_step.start.counter_updated)) {
                   that.pushgtw_cli.pushCounter('counter', 'start', entity_id, syst_id, syst_instance_to_start.instancenr, alert.labels.alertname, parseInt(counter_instance) + 1);
                   that.save_resume_step(syst_id, index_curr_instance_start, that._resume_on_step.start.counter_updated);
@@ -3129,7 +3275,7 @@ ScaleDoer.prototype = {
                 serie_cb();
               },
               // Start EC2 host
-              start: function (serie_cb) {
+              start: function start(serie_cb) {
                 if (!is_resume_mode || that.resume_here_on_interruption(syst_id, index_curr_instance_start, that._resume_on_step.start.ec2_start_triggered)) {
                   that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') trigger EC2 instance:' + syst_instance_to_start.ip_internal);
                   that.aws_cli.startEC2(syst_instance_to_start.ip_internal, serie_cb);
@@ -3137,17 +3283,17 @@ ScaleDoer.prototype = {
                 } else serie_cb();
               },
               // Check EC2 status 
-              check: function (serie_cb) {
-                const step_wait_sec = 20;
-                const timeout_wait_sec = 300;
-                const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+              check: function check(serie_cb) {
+                var step_wait_sec = 20;
+                var timeout_wait_sec = 300;
+                var nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
                 that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') waiting for EC2 instance to actually start within timeout ' + timeout_wait_sec + ' sec:' + syst_instance_to_start.ip_internal);
                 check_start_ec2_instance(that.aws_cli, nb_iterations, step_wait_sec * 1000, syst_instance_to_start.ip_internal, serie_cb);
               },
               // Provide soap cli
-              soap: function (serie_cb) {
+              soap: function soap(serie_cb) {
                 var pfx_certif = null;
-                const http_s = curr_system.is_encrypted ? {
+                var http_s = curr_system.is_encrypted ? {
                   protocol: 'https',
                   port_suffix: '14'
                 } : {
@@ -3214,14 +3360,14 @@ ScaleDoer.prototype = {
                 that.save_resume_step(syst_id, index_curr_instance_start, -1);
               } else {
                 that.logger.log(that.logger.LOG_LEVEL_INFO, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') trigger start SAP instance:' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
-                async.series([series_cb => {
+                async.series([function (series_cb) {
                   if (!is_resume_mode || that.resume_here_on_interruption(syst_id, index_curr_instance_start, that._resume_on_step.start.sap_start_triggered)) {
-                    sapcontrol_operations$1[d.action.name].call(cli_data.soapcli, {}, err => {
+                    sapcontrol_operations$1[d.action.name].call(cli_data.soapcli, {}, function (err) {
                       that.save_resume_step(syst_id, index_curr_instance_start, that._resume_on_step.start.sap_start_triggered);
 
                       if (err !== undefined && err !== null) {
                         if (err.body) {
-                          const start_error = err.body.match(/<faultstring>(.*?)<\/faultstring>/) && err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]; // Instance already started
+                          var start_error = err.body.match(/<faultstring>(.*?)<\/faultstring>/) && err.body.match(/<faultstring>(.*?)<\/faultstring>/)[1]; // Instance already started
 
                           if (start_error == 'Instance already started') {
                             that.updated_system_instances[syst_id][index_curr_instance_start].status = 1;
@@ -3251,12 +3397,12 @@ ScaleDoer.prototype = {
                     }); // end sapcontrol_operations
                   } else series_cb(); // resume mode, start triggered already
 
-                }, series_cb => {
-                  const step_wait_sec = 20;
-                  const timeout_wait_sec = 300;
-                  const nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
+                }, function (series_cb) {
+                  var step_wait_sec = 20;
+                  var timeout_wait_sec = 300;
+                  var nb_iterations = Math.ceil(timeout_wait_sec / step_wait_sec);
                   that.logger.log(that.logger.LOG_LEVEL_DEBUG, '[PENDING] {' + curr_system.syst_id + '} (start' + mode_resume + ') waiting for SAP instance to actually start within timeout ' + timeout_wait_sec + ' sec:' + syst_instance_to_start.hostname + '/' + syst_instance_to_start.ip_internal + '/' + syst_instance_to_start.instancenr);
-                  check_start_sap_instance(cli_data.soapcli, nb_iterations, step_wait_sec * 1000, syst_instance_to_start.instancenr, err => {
+                  check_start_sap_instance(cli_data.soapcli, nb_iterations, step_wait_sec * 1000, syst_instance_to_start.instancenr, function (err) {
                     if (err) {
                       that.updated_system_instances[syst_id][index_curr_instance_start].status = -1;
                       that.updated_system_instances[syst_id][index_curr_instance_start].error = {
@@ -3314,7 +3460,9 @@ ScaleDoer.prototype = {
 
     function do_update_scaling_instance(d, queue_cb) {
       if (that.updated_system_instances[d.syst_id]) {
-        const requested_instance = that.updated_system_instances[d.syst_id].filter(i => i.instancenr == d.instance_nr)[0];
+        var requested_instance = that.updated_system_instances[d.syst_id].filter(function (i) {
+          return i.instancenr == d.instance_nr;
+        })[0];
 
         if (requested_instance) {
           // remove resume meta data not required on receiver side
@@ -3331,11 +3479,11 @@ ScaleDoer.prototype = {
             }, // connect to the entry point instance and provide soapclient
             function (waterfall_cb) {
               // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'connect to the entry point instance and provide soapclient')
-              const http_s = {
+              var http_s = {
                 protocol: 'https',
                 port_suffix: '14'
               };
-              const soap_url = http_s.protocol + '://' + (requested_instance.ip_internal || requested_instance.hostname) + ':5' + d.instance_nr + http_s.port_suffix + '/';
+              var soap_url = http_s.protocol + '://' + (requested_instance.ip_internal || requested_instance.hostname) + ':5' + d.instance_nr + http_s.port_suffix + '/';
               that.new_soap_client(soap_url, {
                 method: 1,
                 // method is the index of options
@@ -3348,12 +3496,14 @@ ScaleDoer.prototype = {
               // that.logger.log(that.logger.LOG_LEVEL_DEBUG, 'Get list of instances and check system status')
               cli_data.soapcli.GetSystemInstanceList({}, function (err, result) {
                 if (!err && result && result.instance && result.instance.item) {
-                  waterfall_cb(null, result.instance.item.find(x => ('' + x.instanceNr).padStart(2, '0') == d.instance_nr));
+                  waterfall_cb(null, result.instance.item.find(function (x) {
+                    return ('' + x.instanceNr).padStart(2, '0') == d.instance_nr;
+                  }));
                 } else {
                   waterfall_cb();
                 }
               });
-            }], (err, updated_instance) => {
+            }], function (err, updated_instance) {
               // queue_cb(null, that.updated_system_instances[d.syst_id].filter(i=>i.instancenr == d.instance_nr)[0])
               if (err) {
                 queue_cb('Error getting system instance latest status ' + err);
@@ -3399,7 +3549,7 @@ ScaleDoer.prototype = {
 
       switch (d.action.name) {
         case 'slack':
-          function gen_fields(text, list) {
+          var gen_fields = function gen_fields(text, list) {
             var blocks = [];
 
             if (list.length > 0) {
@@ -3429,13 +3579,17 @@ ScaleDoer.prototype = {
             }
 
             return blocks;
-          }
+          };
 
           req_data = {
-            'text': d.alerts.length + ' notification' + (d.alerts.length > 1 && 's' || '') + '( ' + d.alerts.filter(x => x.status == 'firing'
+            'text': d.alerts.length + ' notification' + (d.alerts.length > 1 && 's' || '') + '( ' + d.alerts.filter(function (x) {
+              return x.status == 'firing';
+            }
             /*&& !x.reminder*/
             ).length + ' new)',
-            "blocks": gen_fields('New notifications', d.alerts.filter(x => x.status == 'firing'
+            "blocks": gen_fields('New notifications', d.alerts.filter(function (x) {
+              return x.status == 'firing';
+            }
             /*&& !x.reminder*/
             )) // .concat(
             //   gen_fields('Reminders', d.alerts.filter(x => x.status == 'firing' && x.reminder))
@@ -3462,7 +3616,7 @@ ScaleDoer.prototype = {
       if (req_data != null) {
         axios.post(full_url, req_data, req_headers).then(function (response) {
           that.logger.log(that.logger.LOG_LEVEL_INFO, '[COMPLETED] {' + d.action.name + '} (notif)');
-        }).catch(function (error) {
+        })["catch"](function (error) {
           if (error) {
             that.logger.log(that.logger.LOG_LEVEL_ERROR, '[FAILED] {' + d.action.name + '} (notif):', error);
           }
@@ -3473,14 +3627,14 @@ ScaleDoer.prototype = {
     async.series([// load scaling buffer from last process stopped for scaling doer only
     function (series_cb) {
       that.logger.log(that.logger.LOG_LEVEL_MIN, 'loading resume processing data...');
-      async.waterfall([waterfall_cb => {
+      async.waterfall([function (waterfall_cb) {
         that.redis_cli.get(that.company, waterfall_cb);
-      }, (buff_instances, waterfall_cb) => {
+      }, function (buff_instances, waterfall_cb) {
         // get last values
         that.updated_system_instances = JSON.parse(buff_instances) && JSON.parse(buff_instances).root || {}; // reinit
 
         that.redis_cli.set(that.company, '{"root":{}}', waterfall_cb);
-      }], err => {
+      }], function (err) {
         if (err) {
           that.logger.log(that.logger.LOG_LEVEL_ERROR, 'redis client get/set error:', err);
         }
@@ -3493,8 +3647,8 @@ ScaleDoer.prototype = {
       // if there is something (system, instances) to save...
       if (that.updated_system_instances && Object.keys(that.updated_system_instances).length > 0) {
         series_cb();
-        Object.keys(that.updated_system_instances).forEach(syst_key => {
-          async.eachOf(that.updated_system_instances[syst_key], (instance, instance_idx, each_cb) => {
+        Object.keys(that.updated_system_instances).forEach(function (syst_key) {
+          async.eachOf(that.updated_system_instances[syst_key], function (instance, instance_idx, each_cb) {
             if (instance.resume_on_step > 0) {
               that.logger.log(that.logger.LOG_LEVEL_MIN, 'resuming interrupted scale processing operation:', instance.status);
 
@@ -3502,7 +3656,7 @@ ScaleDoer.prototype = {
                 case 2:
                   that.logger.log(that.logger.LOG_LEVEL_MIN, '(resume) stop on:', instance);
                   each_cb();
-                  do_stop(instance.resume_context, (err, data) => {
+                  do_stop(instance.resume_context, function (err, data) {
                     if (err) {
                       that.logger.log(that.logger.LOG_LEVEL_ERROR, '(resume) stop error :', err);
                     } else {
@@ -3514,7 +3668,7 @@ ScaleDoer.prototype = {
                 case 3:
                   that.logger.log(that.logger.LOG_LEVEL_MIN, '(resume) start on:', instance);
                   each_cb();
-                  do_start(instance.resume_context, (err, data) => {
+                  do_start(instance.resume_context, function (err, data) {
                     if (err) {
                       that.logger.log(that.logger.LOG_LEVEL_ERROR, '(resume) start error :', err);
                     } else {
@@ -3533,10 +3687,12 @@ ScaleDoer.prototype = {
               delete that.updated_system_instances[syst_key][instance_idx];
               each_cb();
             }
-          }, err => {
+          }, function (err) {
             if (err) that.logger.log(that.logger.LOG_LEVEL_ERROR, '(resume) actions error:', err); // remove undefined instance due to delete
 
-            that.updated_system_instances[syst_key] = that.updated_system_instances[syst_key].filter(i => i != undefined);
+            that.updated_system_instances[syst_key] = that.updated_system_instances[syst_key].filter(function (i) {
+              return i != undefined;
+            });
           });
         });
       } else series_cb();
@@ -3555,8 +3711,8 @@ ScaleDoer.prototype = {
 
               case 1:
                 // action
-                let syst_id = job.data.system ? job.data.system.syst_id : job.data.syst_id;
-                that.update_sending_ssl(syst_id, job.data.keys_buff, err => {
+                var syst_id = job.data.system ? job.data.system.syst_id : job.data.syst_id;
+                that.update_sending_ssl(syst_id, job.data.keys_buff, function (err) {
                   if (err) {
                     done('missing pfx');
                   } else {
@@ -3596,9 +3752,9 @@ ScaleDoer.prototype = {
       series_cb();
     }]);
   },
-  get_cloud_region: function (cb) {
+  get_cloud_region: function get_cloud_region(cb) {
     var that = this;
-    const cp_type = 1; // AWS
+    var cp_type = 1; // AWS
 
     switch (cp_type) {
       case 0:
@@ -3607,7 +3763,7 @@ ScaleDoer.prototype = {
 
       case 1:
         // AWS using IMDSv1
-        const meta_data_url = "http://169.254.169.254/latest/meta-data/placement/availability-zone";
+        var meta_data_url = "http://169.254.169.254/latest/meta-data/placement/availability-zone";
         axios.get(meta_data_url).then(function (region) {
           if (region.data) {
             that.logger.log(that.logger.LOG_LEVEL_INFO, 'get_cloud_region ', region.data);
@@ -3618,7 +3774,7 @@ ScaleDoer.prototype = {
             that.logger.log(that.logger.LOG_LEVEL_ERROR, 'get_cloud_region : no data');
             cb();
           }
-        }).catch(function (error) {
+        })["catch"](function (error) {
           if (error) {
             that.logger.log(that.logger.LOG_LEVEL_ERROR, 'get_cloud_region:', error);
           }
@@ -3632,7 +3788,7 @@ ScaleDoer.prototype = {
   // ----------------------------------------------------------------------
   // check status of SAP system based on its instances status
   // SAP system is DOWN if CI is down or all DI are down
-  check_system_status: function (instance_items) {
+  check_system_status: function check_system_status(instance_items) {
     var that = this;
     var di_status_err = [];
     var ci_down = false;
@@ -3651,14 +3807,16 @@ ScaleDoer.prototype = {
       }
     }
 
-    if (ci_down || di_status_err.reduce((accumulator, currentValue) => accumulator + currentValue, 0) == 0) {
+    if (ci_down || di_status_err.reduce(function (accumulator, currentValue) {
+      return accumulator + currentValue;
+    }, 0) == 0) {
       return that._sap_statuses.red;
     }
 
     return that._sap_statuses.green;
   },
   // recursive func to check conn_retries_max times if connection is down before confirmation
-  check_failed_conn: function (soap_client, job_data) {
+  check_failed_conn: function check_failed_conn(soap_client, job_data) {
     var that = this;
 
     if (that.conn_retries[job_data.system.syst_id] <= that.conn_retries_max) {
@@ -3678,7 +3836,7 @@ ScaleDoer.prototype = {
         });
       }, 20000); // 3 retries with 20sec to valide in 1 min
     } else {
-      that.deletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, job_data.system.sid, job_data.system.instances.map(s => {
+      that.deletePrometheus('scale', job_data.entity_id, job_data.system.syst_id, job_data.system.sid, job_data.system.instances.map(function (s) {
         return {
           'instancenr': s.instancenr,
           'status': 0
@@ -3688,15 +3846,15 @@ ScaleDoer.prototype = {
     }
   },
   // (de)activate debug mode
-  debug: function (on_off) {
+  debug: function debug(on_off) {
     if (this.logger) {
       this.logger.debug(on_off);
     }
   },
   // add meta data for instance to be able to resume if interrupted
-  save_resume_step: function (syst_id, index, step) {
-    const that = this;
-    const resume_data = step < 0 ? {
+  save_resume_step: function save_resume_step(syst_id, index, step) {
+    var that = this;
+    var resume_data = step < 0 ? {
       resume_on_step: step,
       resume_context: null
     } : {
@@ -3704,25 +3862,24 @@ ScaleDoer.prototype = {
     };
     that.updated_system_instances[syst_id][index] = Object.assign({}, that.updated_system_instances[syst_id][index], resume_data);
   },
-  resume_here_on_interruption: function (syst_id, index_resume_instance, curr_step) {
-    const that = this;
+  resume_here_on_interruption: function resume_here_on_interruption(syst_id, index_resume_instance, curr_step) {
+    var that = this;
 
     if (that.updated_system_instances[syst_id] && that.updated_system_instances[syst_id][index_resume_instance]) {
       return that.updated_system_instances[syst_id][index_resume_instance].resume_on_step < curr_step;
     } else return false;
   },
-
   // on process exit:
   // - save the content of if this.updated_system_instances to file to reloading on next start
   // - clean exit of clients
-  graceful_shutdown() {
+  graceful_shutdown: function graceful_shutdown() {
     var that = this; // if there is something (system, instances) to save...
 
     if (that.updated_system_instances && Object.keys(that.updated_system_instances).length > 0) {
       // need to save the wip step: to resume interrupted operation
       that.redis_cli.set(that.company, JSON.stringify({
         'root': that.updated_system_instances
-      }), err => {
+      }), function (err) {
         if (err) {
           that.logger.log(that.logger.LOG_LEVEL_ERROR, 'redis client get error:', err);
         } else {
@@ -3778,7 +3935,6 @@ ScaleDoer.prototype = {
   // })
   // }
 
-
 };
 /*
 text: d843eb7ba29c64ae4f541605e1b621262f91c2b89bd8ffeb4cf91e7470b971d2be51531b8aac2308d9f0624357dfed40ffed0f8d7dfbda6a7c240174cfa475d46fdeb20f4f30ae3c
@@ -3795,7 +3951,7 @@ function decrypt(text, key) {
   var encryptedText = Buffer.from(text.substring(2, text.length - 32 - 14), 'hex');
   var decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key.substring(0, 32)), iv);
   var decrypted = decipher.update(encryptedText);
-  return Buffer.concat([decrypted, decipher.final()]).toString();
+  return Buffer.concat([decrypted, decipher["final"]()]).toString();
 } // Export the class
 
 
@@ -3812,8 +3968,8 @@ try {
       code: 2
     };
   } else {
-    const localconf = JSON.parse(fs.readFileSync(config_file));
-    const myenv = process.env.NODE_ENV || 'production';
+    var localconf = JSON.parse(fs.readFileSync(config_file));
+    var myenv = process.env.NODE_ENV || 'production';
     var collectScaleDoer = new ScaleDoer$1();
     collectScaleDoer.init(Object.assign(localconf[myenv], {
       'dbindex': 0
