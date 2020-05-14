@@ -47,8 +47,6 @@ for i in "$@"; do
         ;;
     esac
 done
-echo "WQL_VERSION  = ${WQL_VERSION}"
-echo "WQL_AGENT    = ${WQL_AGENT}"
 
 [[ ${WQL_VERSION} =~ v[0-9]+\.[0-9]+\.[0-9]+ && ${WQL_AGENT} =~ [0-9A-Fa-f]{24} ]] || (echo "Error: incorrect parameters"  && exit 1)
 
@@ -66,15 +64,18 @@ wql_user=`whoami`
 # todo supported distrib (redhat), and archi (64bits)
 # ####################################################
 
-yum -q list installed git &>/dev/null || (echo "Error: Missing packages" && exit 2)
-if [[ -f ${app_folder}/conf.json && \
-   -f ${app_folder}/.aws_region && \
-   -f ${app_folder}/.aws_instanceid && \
-   -f ${app_folder}/.aws_vpc && \
-   -f ${app_folder}/.aws_instancetype && \
-   -f ${app_folder}/.aws_hostname && \
-   -f ${app_folder}/.aws_ip ]]; then
-   echo "Error: Missing configuration file"
+echo "WQL_VERSION  = ${WQL_VERSION}"    &>> ${log_file}
+echo "WQL_AGENT    = ${WQL_AGENT}"      &>> ${log_file}
+
+yum -q list installed git &>/dev/null || (echo "Error: Missing packages" &>> ${log_file} && exit 2)
+if [[ ! -f ${scaler_folder}/conf.json || \
+   ! -f ${scaler_folder}/.aws_region || \
+   ! -f ${scaler_folder}/.aws_instanceid || \
+   ! -f ${scaler_folder}/.aws_vpc || \
+   ! -f ${scaler_folder}/.aws_instancetype || \
+   ! -f ${scaler_folder}/.aws_hostname || \
+   ! -f ${scaler_folder}/.aws_ip ]]; then
+   echo "Error: Missing configuration file" &>> ${log_file}
    exit 3
 fi
 
@@ -82,8 +83,8 @@ fi
 # ####################################################
 
 #clear
-sudo rm -rf ${installer_folder}
-mkdir -p ${backup_folder}
+sudo rm -rf ${installer_folder}                                                                     &>> ${log_file}
+mkdir -p ${backup_folder}                                                                           &>> ${log_file}
 git clone https://github.com/worqloads/wql_installer.git $installer_folder                          &>> ${log_file}
 
 cd ${installer_folder}
@@ -93,17 +94,23 @@ sudo chown -R $wql_user:$wql_user ${app_folder}                                 
 
 cd ${scaler_folder}
 mv ${scaler_folder}/scaler*min.js ${backup_folder}/                                                &>> ${log_file}
-mv ${installer_folder}/scaler*min.js ${scaler_folder}/                                              &>> ${log_file}
+mv ${installer_folder}/scaler*min.js ${scaler_folder}/                                             &>> ${log_file}
 cp -r ${installer_folder}/node_modules/* ${scaler_folder}/node_modules/                            &>> ${log_file}
 pm2 save                                                                                           &>> ${log_file}
-pm2 restart all  --update-env                                                                      &>> ${log_file}
 pm2 list                                                                                           &>> ${log_file}
+
 # update version in conf file
-sed -i -E "s/\"version\":\s\"v[0-9]+\.[0-9]+\.[0-9]+\"/\"version\": \"${WQL_VERSION}\"/" ${app_folder}/conf.json &>> ${log_file}
-cat ${app_folder}/conf.json                                                                        &>> ${log_file}
+sed -i -E "s/\"version\":\s\"v[0-9]+\.[0-9]+\.[0-9]+\"/\"version\": \"${WQL_VERSION}\"/" ${scaler_folder}/conf.json &>> ${log_file}
+cat ${scaler_folder}/conf.json                                                                     &>> ${log_file}
 
 # report new version to web app
-curl -d "{\"agent\": ${WQL_AGENT}, \"version\": ${WQL_VERSION} }" -H "Content-Type: application/json" -X POST https://scaling.worqloads.com/updates/done &>> ${log_file}
+curl -d "{\"agent\": \"${WQL_AGENT}\", \"version\": \"${WQL_VERSION}\" }" -H "Content-Type: application/json" -X POST https://scaling.worqloads.com/updates/done &>> ${log_file}
+# curl -d "{\"agent\": \"ddd\", \"version\": \"111\" }" -H "Content-Type: application/json" -X POST https://scaling.worqloads.com/updates/done
 rm -rf ${installer_folder}                                                                         &>> ${log_file}
 
-# curl -d "{\"agent\": \"ddd\", \"version\": \"111\" }" -H "Content-Type: application/json" -X POST https://scaling.worqloads.com/updates
+pm2 restart scaler_collect_min --update-env                                                        &>> ${log_file}
+pm2 restart scaler_mon_min --update-env                                                            &>> ${log_file}
+pm2 restart scaler_scale_min --update-env                                                          &>> ${log_file}
+pm2 restart scaler_sync_min --update-env                                                           &>> ${log_file}
+pm2 restart scaler_update_min --update-env                                                         &>> ${log_file}
+pm2 list                                                                                           &>> ${log_file}
