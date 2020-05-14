@@ -92,17 +92,12 @@ sudo npm install                                                                
 sudo chown -R $wql_user:$wql_user ${app_folder}                                                     &>> ${log_file}
 
 cd ${scaler_folder}
-pm2 stop scaler_check_min      &>> ${log_file} || echo ''
-pm2 stop scaler_collect_min    &>> ${log_file} || echo ''
-pm2 stop scaler_scale_min      &>> ${log_file} || echo ''
-pm2 stop scaler_update_min     &>> ${log_file} || echo ''
-mv ${scaler_folder}/scale*min.js ${backup_folder}/                                                 &>> ${log_file}
+mv ${scaler_folder}/scaler*min.js ${backup_folder}/                                                &>> ${log_file}
 mv ${installer_folder}/scale*min.js ${scaler_folder}/                                              &>> ${log_file}
 cp -r ${installer_folder}/node_modules/* ${scaler_folder}/node_modules/                            &>> ${log_file}
-pm2 restart all                                                                                    &>> ${log_file}
+pm2 restart all  --update-env                                                                      &>> ${log_file}
 pm2 list                                                                                           &>> ${log_file}
-pm2 logs all                                                                                       &>> ${log_file}
-pm2 save                                                                                           &>> ${log_file}
+#pm2 save                                                                                           &>> ${log_file}
 # update version in conf file
 sed -i -E "s/\"version\":\s\"v[0-9]+\.[0-9]+\.[0-9]+\"/\"version\": \"${WQL_VERSION}\"/" ${app_folder}/conf.json &>> ${log_file}
 cat ${app_folder}/conf.json                                                                        &>> ${log_file}

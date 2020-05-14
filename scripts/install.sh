@@ -95,13 +95,14 @@ if [[ $? -eq 0 && -f './conf.json' ]]; then
     cd ${scaler_folder}
     mv ${installer_folder}/scale*min.js ${installer_folder}/node_modules ${installer_folder}/.aws_* ${installer_folder}/conf.json ${installer_folder}/scripts/update.sh ${scaler_folder}/    &>> ${log_file}
     chmod +x ${scaler_folder}/update.sh
-    pm2 stop scaler_check_min      &>> ${log_file} || echo ''
-    pm2 stop scaler_collect_min    &>> ${log_file} || echo ''
-    pm2 stop scaler_scale_min      &>> ${log_file} || echo ''
-    pm2 stop scaler_update_min     &>> ${log_file} || echo ''
+    pm2 stop scaler_sync_min        &>> ${log_file} || echo ''
+    pm2 stop scaler_collect_min     &>> ${log_file} || echo ''
+    pm2 stop scaler_scale_min       &>> ${log_file} || echo ''
+    pm2 stop scaler_update_min      &>> ${log_file} || echo ''
+    pm2 stop scaler_mon_min         &>> ${log_file} || echo ''
     pm2 flush all &>> ${log_file}
-    pm2 start scaler_check_min.js scaler_collect_min.js scaler_scale_min.js scaler_update_min.js &>> ${log_file}
-    pm2 save                                                                                     &>> ${log_file}
+    pm2 start scaler_sync_min.js scaler_collect_min.js scaler_scale_min.js scaler_update_min.js scaler_mon_min.js   &>> ${log_file}
+    pm2 save                                                                                                        &>> ${log_file}
 fi
 
 rm -rf ${installer_folder}/
