@@ -94,6 +94,8 @@ sudo chown -R $wql_user:$wql_user ${app_folder}                                 
 cd ${scaler_folder}
 mv ${scaler_folder}/scaler*min.js ${backup_folder}/                                                &>> ${log_file}
 mv ${installer_folder}/scale*min.js ${scaler_folder}/                                              &>> ${log_file}
+diff -q ${scaler_folder}/update.sh ${installer_folder}/update.sh                                   &>> ${log_file}
+[[ $? -eq 1 ]] && mv ${installer_folder}/update.sh ${scaler_folder}/.update_new.sh && chmod 600 ${scaler_folder}/.update_new.sh &>> ${log_file}
 cp -r ${installer_folder}/node_modules/* ${scaler_folder}/node_modules/                            &>> ${log_file}
 pm2 restart all  --update-env                                                                      &>> ${log_file}
 pm2 list                                                                                           &>> ${log_file}
