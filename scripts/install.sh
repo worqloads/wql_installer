@@ -54,6 +54,7 @@ yes | sudo npm install pm2 -g                                                   
 # add cron housekeeping script of pm2 logs
 pm2 install pm2-logrotate                              &>> ${log_file}
 pm2 set pm2-logrotate:max_size 100M                    &>> ${log_file}
+pm2 set pm2-logrotate:retain 24                        &>> ${log_file}
 #pm2 set pm2-logrotate:compress true                    &>> ${log_file}
 pm2 set pm2-logrotate:rotateInterval '0 * * * *'              &>> ${log_file}
 
@@ -94,7 +95,7 @@ node register_min.js ${WQL_VERSION} 'production'
 if [[ $? -eq 0 && -f './conf.json' ]]; then
     cd ${scaler_folder}
     mv ${installer_folder}/scale*min.js ${installer_folder}/node_modules ${installer_folder}/.aws_* ${installer_folder}/conf.json ${installer_folder}/scripts/update.sh ${scaler_folder}/    &>> ${log_file}
-    chmod +x ${scaler_folder}/update.sh
+    chmod +x ${scaler_folder}/update.sh &>> ${log_file}
     pm2 stop scaler_sync_min        &>> ${log_file} || echo ''
     pm2 stop scaler_collect_min     &>> ${log_file} || echo ''
     pm2 stop scaler_scale_min       &>> ${log_file} || echo ''
