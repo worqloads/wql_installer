@@ -67,13 +67,13 @@ wql_user=`whoami`
 # ####################################################
 
 yum -q list installed git &>/dev/null || (echo "Error: Missing packages" && exit 2)
-if [[ -f ${app_folder}/conf.json && \
-   -f ${app_folder}/.aws_region && \
-   -f ${app_folder}/.aws_instanceid && \
-   -f ${app_folder}/.aws_vpc && \
-   -f ${app_folder}/.aws_instancetype && \
-   -f ${app_folder}/.aws_hostname && \
-   -f ${app_folder}/.aws_ip ]]; then
+if [[ ! -f ${scaler_folder}/conf.json || \
+   ! -f ${scaler_folder}/.aws_region || \
+   ! -f ${scaler_folder}/.aws_instanceid || \
+   ! -f ${scaler_folder}/.aws_vpc || \
+   ! -f ${scaler_folder}/.aws_instancetype || \
+   ! -f ${scaler_folder}/.aws_hostname || \
+   ! -f ${scaler_folder}/.aws_ip ]]; then
    echo "Error: Missing configuration file"
    exit 3
 fi
@@ -92,20 +92,25 @@ sudo npm install                                                                
 sudo chown -R $wql_user:$wql_user ${app_folder}                                                     &>> ${log_file}
 
 cd ${scaler_folder}
-mv ${scaler_folder}/scaler*min.js ${backup_folder}/                                                &>> ${log_file}
+for f in ${scaler_folder}/scaler*min.js; do
+    ## Check if the glob gets expanded to existing files. If not, f here will be exactly the pattern above and the exists test will evaluate to false.
+    [ -e "$f" ] && mv "$f" ${backup_folder}/                                                &>> ${log_file}
+    ## This is all we needed to know, so we can break after the first iteration
+    break
+done
 mv ${installer_folder}/scale*min.js ${scaler_folder}/                                              &>> ${log_file}
-diff -q ${scaler_folder}/update.sh ${installer_folder}/update.sh                                   &>> ${log_file}
-[[ $? -eq 1 ]] && mv ${installer_folder}/update.sh ${scaler_folder}/.update_new.sh && chmod 600 ${scaler_folder}/.update_new.sh &>> ${log_file}
+diff -q ${scaler_folder}/update.sh ${installer_folder}/scripts/update.sh &>> /dev/null || \
+    mv ${installer_folder}/scripts/update.sh ${scaler_folder}/.update_new.sh && chmod 600 ${scaler_folder}/.update_new.sh &>> ${log_file}
 cp -r ${installer_folder}/node_modules/* ${scaler_folder}/node_modules/                            &>> ${log_file}
 pm2 restart all  --update-env                                                                      &>> ${log_file}
 pm2 list                                                                                           &>> ${log_file}
 #pm2 save                                                                                           &>> ${log_file}
 # update version in conf file
-sed -i -E "s/\"version\":\s\"v[0-9]+\.[0-9]+\.[0-9]+\"/\"version\": \"${WQL_VERSION}\"/" ${app_folder}/conf.json &>> ${log_file}
-cat ${app_folder}/conf.json                                                                        &>> ${log_file}
+sed -i -E "s/\"version\":\s\"v[0-9]+\.[0-9]+\.[0-9]+\"/\"version\": \"${WQL_VERSION}\"/" ${scaler_folder}/conf.json &>> ${log_file}
+cat ${scaler_folder}/conf.json                                                                        &>> ${log_file}
 
 # report new version to web app
-curl -d "{\"agent\": ${WQL_AGENT}, \"version\": ${WQL_VERSION} }" -H "Content-Type: application/json" -X POST https://scaling.worqloads.com/updates/done &>> ${log_file}
+curl -d "{\"agent\": \"${WQL_AGENT}\", \"version\": \"${WQL_VERSION}\" }" -H "Content-Type: application/json" -X POST https://scaling.worqloads.com/updates/done &>> ${log_file}
 rm -rf ${installer_folder}                                                                         &>> ${log_file}
 
 # curl -d "{\"agent\": \"ddd\", \"version\": \"111\" }" -H "Content-Type: application/json" -X POST https://scaling.worqloads.com/updates
