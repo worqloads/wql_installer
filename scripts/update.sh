@@ -100,7 +100,8 @@ for f in ${scaler_folder}/scaler*min.js; do
 done
 mv ${installer_folder}/scale*min.js ${scaler_folder}/                                              &>> ${log_file}
 diff -q ${scaler_folder}/update.sh ${installer_folder}/scripts/update.sh &>> /dev/null || \
-    mv ${installer_folder}/scripts/update.sh ${scaler_folder}/.update_new.sh && chmod 600 ${scaler_folder}/.update_new.sh &>> ${log_file}
+    mv ${installer_folder}/scripts/update.sh ${scaler_folder}/.update_new.sh                       &>> ${log_file}
+[[ -f ${scaler_folder}/.update_new.sh ]] && chmod 600 ${scaler_folder}/.update_new.sh              &>> ${log_file}
 cp -r ${installer_folder}/node_modules/* ${scaler_folder}/node_modules/                            &>> ${log_file}
 pm2 restart all  --update-env                                                                      &>> ${log_file}
 pm2 list                                                                                           &>> ${log_file}

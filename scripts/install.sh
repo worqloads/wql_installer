@@ -51,11 +51,17 @@ yes | sudo npm install pm2 -g                                                   
 [[ -d ~/.npm ]] && sudo chown -R $wql_user:$wql_user ~/.npm                                         &>> ${log_file}
 [[ -d ~/.config ]] && sudo chown -R $wql_user:$wql_user ~/.config                                   &>> ${log_file}
 
+cd ~/.pm2
+pm2 ecosystem
+/home/ec2-user/ecosystem.config.js
+
+# pm2 as startup
+sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u ${wql_user} --hp /home/${wql_user}
+
 # add cron housekeeping script of pm2 logs
 pm2 install pm2-logrotate                              &>> ${log_file}
 pm2 set pm2-logrotate:max_size 100M                    &>> ${log_file}
 pm2 set pm2-logrotate:retain 24                        &>> ${log_file}
-#pm2 set pm2-logrotate:compress true                    &>> ${log_file}
 pm2 set pm2-logrotate:rotateInterval '0 * * * *'              &>> ${log_file}
 
 # if $scaler_folder already exists, do a backup
